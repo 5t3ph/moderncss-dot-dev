@@ -15,6 +15,8 @@ exports.handler = async (event, context, callback) => {
         url: item.url,
         description: item.description,
         tags: item.tag_list.join(", "),
+        body: item.body_markdown,
+        date: item.published_at,
       }));
     }
     callback(null, {
