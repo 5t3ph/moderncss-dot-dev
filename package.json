@@ -1,0 +1,44 @@
+{
+  "name": "moderncss-dot-dev",
+  "version": "0.1.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "scss": "node-sass sass/style.scss css/style.css",
+    "css": "postcss css/*.css -u autoprefixer cssnano -r -m",
+    "watch:eleventy": "eleventy --serve",
+    "watch:sass": "node-sass --watch sass -o css",
+    "develop": "npm run scss ; npm run watch:sass & npm run watch:eleventy",
+    "build": "npm run scss ; npm run css ; eleventy",
+    "lint": "stylelint 'sass/**/*.scss' 'sass/**/**/*.scss' 'sass/**/**/**/*.scss'",
+    "lint:fix": "stylelint --fix 'sass/**/*.scss' 'sass/**/**/*.scss' 'sass/**/**/**/*.scss'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/5t3ph/moderncss-dot-dev.git"
+  },
+  "keywords": [],
+  "author": "5t3ph",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/5t3ph/moderncss-dot-dev/issues"
+  },
+  "homepage": "https://moderncss.dev",
+  "devDependencies": {
+    "@11ty/eleventy": "^0.10.0",
+    "autoprefixer": "^9.5.0",
+    "cssnano": "^4.1.10",
+    "node-fetch": "^2.6.0",
+    "node-sass": "^4.11.0",
+    "postcss-cli": "^7.1.0",
+    "stylelint": "^13.3.3",
+    "stylelint-config-prettier": "^8.0.1",
+    "stylelint-config-standard": "^20.0.0",
+    "stylelint-order": "^4.0.0",
+    "stylelint-scss": "^3.9.3",
+    "stylelint-selector-bem-pattern": "^2.1.0"
+  },
+  "browserslist": [
+    "last 2 versions"
+  ]
+}

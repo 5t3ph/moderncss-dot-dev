@@ -1,0 +1,53 @@
+---
+pagination:
+  data: postdata
+  size: 1
+  alias: post
+  addAllPagesToCollections: true
+permalink: /{{ post.title | slug }}/
+tags: posts
+---
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Modern CSS</title>
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>👩‍💻</text></svg>"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="/css/style.css"
+      rel="stylesheet" 
+    />
+  </head>
+
+  <body>
+
+  <header class="tdbc-hero tdbc-section tdbc-background--light tdbc-text-align-left">
+      <div class="tdbc-container tdbc-content-maxlength">
+        <h1 class="tdbc-ink--secondary tdbc-mb-none">{{ post.title }}</h1>
+      </div>
+    </header>
+    <main class="tdbc-container">
+      <p>{{ post.description }}</p>
+      <a href="{{ post.url }}" class="tdbc-button tdbc-button--small">Read Post</a>
+    </main>
+    <footer class="tdbc-section tdbc-background--secondary">
+      <div class="tdbc-container tdbc-text-align-center">
+        <p class="tdbc-ink--light">
+        &copy; 
+        <script type="text/javascript">
+          document.write(new Date().getFullYear());
+        </script> <a href="https://thinkdobecreate.com">ThinkDoBeCreate - Stephanie Eckles</a>
+        </p>
+      </div>
+    </footer>
+	</body>
+	</html>
