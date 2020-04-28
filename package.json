@@ -27,6 +27,7 @@
   "devDependencies": {
     "@11ty/eleventy": "^0.10.0",
     "autoprefixer": "^9.5.0",
+    "axios": "^0.19.2",
     "cssnano": "^4.1.10",
     "node-fetch": "^2.6.0",
     "node-sass": "^4.11.0",
