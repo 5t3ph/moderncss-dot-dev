@@ -20,15 +20,15 @@
   </head>
 
   <body>
-
   <header class="tdbc-hero tdbc-section tdbc-background--light tdbc-text-align-left">
       <div class="tdbc-container tdbc-content-maxlength">
-        <h1 class="tdbc-ink--secondary tdbc-mb-none">Just Released: Minimal Sass / HTML Template Site</h1>
+        <h1 class="tdbc-ink--secondary tdbc-mb-none">{{ post.title }}</h1>
       </div>
     </header>
     <main class="tdbc-container">
-      <p>Over the weekend, I boosted my existing html-sass-jumpstart repo to a more easily customizable and us...</p>
-      <a href="https://dev.to/5t3ph/just-released-minimal-sass-html-template-site-8d2" class="tdbc-button tdbc-button--small">Read Post</a>
+      {{ body | safe }}
+      <p>{{ post.description }}</p>
+      <a href="{{ post.url }}" class="tdbc-button tdbc-button--small">Read Post</a>
     </main>
     <footer class="tdbc-section tdbc-background--secondary">
       <div class="tdbc-container tdbc-text-align-center">

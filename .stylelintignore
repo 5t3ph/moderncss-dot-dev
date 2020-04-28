@@ -1,5 +1,5 @@
 **/node_modules
 _reset.scss
 _typography.scss
-.site/
-_includes/style.css
+public/
+src/css/

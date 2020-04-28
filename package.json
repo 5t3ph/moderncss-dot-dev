@@ -4,14 +4,14 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "scss": "node-sass sass/style.scss css/style.css",
-    "css": "postcss css/*.css -u autoprefixer cssnano -r -m",
+    "scss": "node-sass src/sass/style.scss src/css/style.css",
+    "css": "postcss src/css/*.css -u autoprefixer cssnano -r -m",
     "watch:eleventy": "eleventy --serve",
-    "watch:sass": "node-sass --watch sass -o css",
+    "watch:sass": "node-sass --watch src/sass -o src/css",
     "develop": "npm run scss ; npm run watch:sass & npm run watch:eleventy",
     "build": "npm run scss ; npm run css ; eleventy",
-    "lint": "stylelint 'sass/**/*.scss' 'sass/**/**/*.scss' 'sass/**/**/**/*.scss'",
-    "lint:fix": "stylelint --fix 'sass/**/*.scss' 'sass/**/**/*.scss' 'sass/**/**/**/*.scss'"
+    "lint": "stylelint 'src/sass/**/*.scss' 'src/sass/**/**/*.scss' 'src/sass/**/**/**/*.scss'",
+    "lint:fix": "stylelint --fix 'src/sass/**/*.scss' 'src/sass/**/**/*.scss' 'src/sass/**/**/**/*.scss'"
   },
   "repository": {
     "type": "git",

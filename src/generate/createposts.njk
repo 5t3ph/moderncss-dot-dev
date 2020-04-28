@@ -1,0 +1,11 @@
+---
+pagination:
+  data: postdata
+  size: 1
+  alias: post
+  addAllPagesToCollections: true
+permalink: "/{{ post.title | slug }}/"
+tags: posts 
+layout: post 
+---
+{{ post.description | safe }} 

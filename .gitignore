@@ -1,7 +1,14 @@
-.sass-cache
-.sass-cache/*
-*.scssc
-*.log
-.htaccess
-node_modules/
-.site/
+# dependencies installed by npm
+node_modules
+
+# build artefacts
+public
+src/css
+
+# secrets and errors
+.env
+.log
+
+# macOS related files
+.DS_Store
+
