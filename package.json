@@ -8,8 +8,8 @@
     "css": "postcss src/css/*.css -u autoprefixer cssnano -r -m",
     "watch:eleventy": "eleventy --serve",
     "watch:sass": "node-sass --watch src/sass -o src/css",
-    "develop": "npm run scss ; npm run watch:sass & npm run watch:eleventy",
-    "build": "npm run scss ; npm run css ; eleventy",
+    "develop": "ELEVENTY_ENV=dev npm run scss ; npm run watch:sass & npm run watch:eleventy",
+    "build": "ELEVENTY_ENV=prod npm run scss ; npm run css ; eleventy",
     "lint": "stylelint 'src/sass/**/*.scss' 'src/sass/**/**/*.scss' 'src/sass/**/**/**/*.scss'",
     "lint:fix": "stylelint --fix 'src/sass/**/*.scss' 'src/sass/**/**/*.scss' 'src/sass/**/**/**/*.scss'"
   },
