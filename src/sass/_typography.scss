@@ -14,6 +14,10 @@ h1,
   font-size: $tdbc-h1-font-size;
 }
 
+h1 span {
+  display: block;
+}
+
 h2,
 .tdbc-h2 {
   font-size: $tdbc-h2-font-size;
