@@ -19,6 +19,10 @@ h2,
   font-size: $tdbc-h2-font-size;
 }
 
+article > h2 {
+  color: tdbc-color(secondary);
+}
+
 h3,
 .tdbc-h3 {
   font-size: $tdbc-h3-font-size;
@@ -39,6 +43,16 @@ p {
   margin: 0 0 1rem;
 }
 
+article * {
+  + h2 {
+    margin-top: 4rem;
+  }
+
+  + h3 {
+    margin-top: 2rem;
+  }
+}
+
 article > ul > li + li {
   margin-top: 1rem;
 }
@@ -51,31 +65,13 @@ a:not(.tdbc-button) {
   color: $tdbc-link-color;
 }
 
-pre,
-code {
-  font-family: "Courier New", Courier, monospace;
-  font-size: 0.85em;
-  font-weight: bold;
-}
-
-code {
+code:not([class*="language"]) {
   display: inline-block;
   padding: 0 0.15em;
   background-color: tdbc-color(light);
   color: tdbc-color(#{gray});
   border: 1px solid scale-color(tdbc-color(#{gray}), $lightness: 50%);
   border-radius: 2px;
-}
-
-pre {
-  margin: 0;
-  display: inline-block;
-
-  code {
-    display: block;
-    padding: 0 1rem;
-    white-space: pre-wrap;
-  }
 }
 
 .tdbc-lead {
@@ -88,4 +84,16 @@ pre {
 .tdbc-list-unstyled {
   list-style: none;
   padding: 0;
+}
+
+blockquote {
+  border-left: 2px solid tdbc-color(primary);
+  margin: 0 1rem 3rem;
+  padding: 0.5rem;
+  background-color: rgba(white, 0.8);
+  color: tdbc-color(primary);
+
+  *:last-child {
+    margin-bottom: 0;
+  }
 }

@@ -2,10 +2,12 @@
 pagination:
   data: devposts
   size: 1
-  alias: post
+  alias: post 
   addAllPagesToCollections: true
 permalink: "/{{ post.title | slug }}/"
 tags: posts 
-layout: post 
+layout: post
+templateEngineOverride: md, njk 
 ---
-{{ post.body | markdownify | safe }} 
+
+{{ post.body | safe }}

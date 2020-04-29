@@ -85,3 +85,20 @@ ul.tdbc-column-container {
     align-items: center;
   }
 }
+
+// stylelint-disable-next-line
+hr {
+  max-width: 10ch;
+  margin: 2rem auto;
+}
+
+// stylelint-disable-next-line
+.cp_embed_wrapper {
+  height: 50vh;
+  margin: 2rem 0;
+
+  // stylelint-disable-next-line
+  iframe {
+    height: 100%;
+  }
+}
