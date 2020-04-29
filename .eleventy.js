@@ -16,6 +16,8 @@ module.exports = function (eleventyConfig) {
     });
   });
 
+  eleventyConfig.addShortcode("year", () => `${new Date().getFullYear()}`);
+
   return {
     passthroughFileCopy: true,
     dir: {
