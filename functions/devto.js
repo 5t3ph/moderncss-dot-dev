@@ -12,7 +12,7 @@ exports.handler = async (event, context, callback) => {
     // Grab the items and re-format to the fields we want
     if (data.length) {
       response = data.map((item) => {
-        if (item.description.contains(seriesText)) {
+        if (item.description.includes(seriesText)) {
           return {
             title: item.title,
             url: item.url,
