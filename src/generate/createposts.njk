@@ -8,4 +8,4 @@ permalink: "/{{ post.title | slug }}/"
 tags: posts 
 layout: post 
 ---
-{{ post.description | safe }} 
+{{ post.body | markdownify | safe }} 

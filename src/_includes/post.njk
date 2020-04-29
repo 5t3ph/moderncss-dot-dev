@@ -26,9 +26,8 @@
       </div>
     </header>
     <main class="tdbc-container">
-      {{ body | safe }}
-      <p>{{ post.description }}</p>
-      <a href="{{ post.url }}" class="tdbc-button tdbc-button--small">Read Post</a>
+      <article class="tdbc-mx-auto">{{ content | safe }}</article>
+      {# <a href="{{ post.url }}" class="tdbc-button tdbc-button--small">Read Post</a> #}
     </main>
     <footer class="tdbc-section tdbc-background--secondary">
       <div class="tdbc-container tdbc-text-align-center">

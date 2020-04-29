@@ -1,4 +1,6 @@
 const slugify = require("slugify");
+const MarkdownIt = require("markdown-it");
+const md = new MarkdownIt();
 
 module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy("./src/css");
@@ -9,6 +11,10 @@ module.exports = function (eleventyConfig) {
       replacement: "-",
       remove: /[*+~.·,()'"`´%!?¿:@\/]/g,
     });
+  });
+
+  eleventyConfig.addFilter("markdownify", (str) => {
+    return md.render(str);
   });
 
   return {
