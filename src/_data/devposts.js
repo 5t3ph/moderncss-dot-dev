@@ -30,9 +30,25 @@ const parseDevMd = (md) => {
 
     content = md.replace(m[0], result);
   }
-
-  // return md.replace(regex, '{% $1 "$2" %}');
   return content;
+};
+
+const getExcerpt = (md) => {
+  // Remove MD links
+  const linksRE = /\[(.+)\]\((.+)\)/gm;
+  let content = md.replace(linksRE, "$1");
+
+  // Convert bullets to comma list
+  const listStartRE = /(:\s-\s)/gm;
+  content = content.replace(listStartRE, ": ");
+  const listItemRE = /(?<!:)(\s-\s)/gm;
+  content = content.replace(listItemRE, "; ");
+
+  // Remove intro blockquote
+  const regex = /> _(.*)_\./;
+  content = content.replace(regex, "").trim();
+
+  return content.substr(0, content.lastIndexOf(" ", 120)) + "...";
 };
 
 module.exports = async () => {
@@ -51,7 +67,7 @@ module.exports = async () => {
       body: parseDevMd(item.body_markdown),
       date: item.published_at,
       episode: index,
-      description: item.description,
+      description: getExcerpt(item.body_markdown),
     }));
   }
   return response;
