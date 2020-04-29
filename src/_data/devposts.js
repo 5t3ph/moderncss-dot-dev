@@ -1,9 +1,26 @@
 const axios = require("axios");
+require("dotenv").config();
+
+const apiRoot = "https://dev.to/api/articles/me/published?per_page=100";
 
 module.exports = async () => {
-  const apiPosts = await axios.get(
-    "https://moderncss-dot-dev.netlify.app/.netlify/functions/devto",
-  );
+  const { data } = await axios.get(apiRoot, { headers: { "api-key": process.env.DEVTO } });
 
-  return apiPosts.data;
+  let response = [];
+  const seriesText = "modern CSS";
+
+  // Grab the items and re-format to the fields we want
+  if (data.length) {
+    const series = data.filter((item) => item.description.includes(seriesText));
+
+    response = series.map((item) => ({
+      title: item.title,
+      url: item.url,
+      description: item.description,
+      tags: item.tag_list.join(", "),
+      body: item.body_markdown,
+      date: item.published_at,
+    }));
+  }
+  return response;
 };
