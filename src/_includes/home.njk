@@ -16,7 +16,7 @@ layout: base.njk
     <main class="tdbc-series-container">
       <ul class="tdbc-column-container">
       {%- for post in collections.posts -%}
-        <li class="tdbc-card">
+        <li class="tdbc-card index{{ loop.index0 + 1 }}">
           <div class="tdbc-card__content" data-episode="{{ post.data.post.episode }}">
             <a href="{{ post.url }}" class="tdbc-card__title">{{ post.data.post.title }}</a>
             <p>{{ post.data.post.description }}</p>
@@ -25,3 +25,11 @@ layout: base.njk
       {%- endfor -%}
       </ul> 
     </main>
+
+{% set js %}
+  {% include "peekaboo.js" %}
+{% endset %}
+<script>
+  {{ js | jsmin | safe }}
+</script>
+    

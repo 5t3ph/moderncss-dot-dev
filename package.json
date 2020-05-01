@@ -39,7 +39,8 @@
     "stylelint-config-standard": "^20.0.0",
     "stylelint-order": "^4.0.0",
     "stylelint-scss": "^3.9.3",
-    "stylelint-selector-bem-pattern": "^2.1.0"
+    "stylelint-selector-bem-pattern": "^2.1.0",
+    "terser": "^4.6.13"
   },
   "browserslist": [
     "last 2 versions"

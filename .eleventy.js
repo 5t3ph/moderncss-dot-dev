@@ -1,3 +1,5 @@
+const Terser = require("terser");
+
 const { DateTime } = require("luxon");
 
 const slugify = require("slugify");
@@ -16,6 +18,16 @@ module.exports = function (eleventyConfig) {
       replacement: "-",
       remove: /[*+~.·,()'"`´%!?¿:@\/]/g,
     });
+  });
+
+  eleventyConfig.addFilter("jsmin", function (code) {
+    let minified = Terser.minify(code);
+    if (minified.error) {
+      console.log("Terser error: ", minified.error);
+      return code;
+    }
+
+    return minified.code;
   });
 
   eleventyConfig.addShortcode("year", () => `${new Date().getFullYear()}`);
