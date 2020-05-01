@@ -1,3 +1,18 @@
+.tdbc-logo-m {
+  position: relative;
+  font-family: Kanit, serif;
+  font-weight: 800;
+
+  &::before {
+    background-color: tdbc-color(background-alt);
+    transform: rotate(45deg) translateX(-20%);
+    content: "";
+    position: absolute;
+    padding: 70%;
+    z-index: -1;
+  }
+}
+
 $tdbc-typography-variants: h1, h2, h3, h4;
 
 @each $type in $tdbc-typography-variants {
@@ -9,8 +24,7 @@ $tdbc-typography-variants: h1, h2, h3, h4;
   }
 }
 
-h1,
-.tdbc-h1 {
+h1 {
   font-family: Kanit, serif;
   font-weight: 800;
   font-size: $tdbc-h1-font-size;
@@ -35,21 +49,6 @@ h1 .tdbc-logo-m {
   padding-bottom: 0.1em;
 }
 
-.tdbc-logo-m {
-  position: relative;
-  font-family: Kanit, serif;
-  font-weight: 800;
-
-  &::before {
-    background-color: tdbc-color(background-alt);
-    transform: rotate(45deg) translateX(-20%);
-    content: "";
-    position: absolute;
-    padding: 70%;
-    z-index: -1;
-  }
-}
-
 @supports (background-clip: text) or (-webkit-background-clip: text) {
   h1 .tdbc-logo-m {
     background: linear-gradient(30deg, tdbc-color(secondary) 30%, tdbc-color(primary) 70%);
@@ -59,8 +58,7 @@ h1 .tdbc-logo-m {
   }
 }
 
-h2,
-.tdbc-h2 {
+h2 {
   font-size: $tdbc-h2-font-size;
 }
 
@@ -79,8 +77,7 @@ h3,
   letter-spacing: 0.05em;
 }
 
-h4,
-.tdbc-h4 {
+h4 {
   font-size: $tdbc-h4-font-size;
   color: $tdbc-color-gray;
 }
@@ -156,11 +153,6 @@ code:not([class*="language"]) {
     width: 100%;
     background: $tdbc-gradient;
   }
-}
-
-.tdbc-list-unstyled {
-  list-style: none;
-  padding: 0;
 }
 
 blockquote {

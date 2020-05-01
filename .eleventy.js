@@ -6,7 +6,9 @@ const syntaxHighlight = require("@11ty/eleventy-plugin-syntaxhighlight");
 module.exports = function (eleventyConfig) {
   eleventyConfig.addPlugin(syntaxHighlight);
 
-  eleventyConfig.addPassthroughCopy("./src/css");
+  eleventyConfig.addWatchTarget("./src/sass/");
+
+  eleventyConfig.addPassthroughCopy("*.css");
 
   eleventyConfig.addFilter("slug", (str) => {
     return slugify(str, {

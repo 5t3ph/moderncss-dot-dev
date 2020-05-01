@@ -7,6 +7,7 @@ body {
   color: $tdbc-color-body;
   font-family: $tdbc-font-family;
 
+  // stylelint-disable-next-line selector-max-type
   &::before {
     height: 0.5rem;
     background: $tdbc-gradient;
@@ -55,20 +56,6 @@ article {
   }
 }
 
-.tdbc-section {
-  width: 100%;
-
-  &--padded {
-    padding-top: 10vh;
-    padding-bottom: 10vh;
-  }
-
-  // stylelint-disable-next-line selector-max-universal
-  *:last-child {
-    margin-bottom: 0;
-  }
-}
-
 .tdbc-hero {
   display: grid;
   min-height: 40vh;
@@ -79,30 +66,15 @@ article {
 }
 
 .tdbc-row {
-  display: grid;
-  grid-gap: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
 
-  @media (min-width: 60em) {
-    grid-auto-flow: column;
-    grid-auto-columns: max-content;
-  }
-
-  &--flex {
-    display: flex;
-    flex-wrap: wrap;
-
-    > * {
-      margin-left: 0.5rem;
-      margin-right: 0.5rem;
-    }
-  }
-
-  &--center-content {
-    justify-content: center;
-  }
-
-  &--center-alignitems {
-    align-items: center;
+  // stylelint-disable-next-line selector-max-universal
+  > * {
+    margin-right: 0.5rem;
+    margin-left: 0.5rem;
   }
 }
 
