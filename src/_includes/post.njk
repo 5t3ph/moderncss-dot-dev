@@ -1,41 +1,29 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{{ post.title }} | Modern CSS</title>
-    <meta name="description" content="{{ post.description }}"/>
-    <link
-      rel="icon"
-      href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>👩‍💻</text></svg>"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      href="/css/style.css" 
-      rel="stylesheet" 
-    />
-  </head>
-
-  <body>
-  <header class="tdbc-hero tdbc-section tdbc-background--light tdbc-text-align-left">
+---
+layout: base.njk
+---
+  <div class="tdbc-section tdbc-nav">
+    <a href="/" class="tdbc-logo-m">M</a>
+  </div>
+  <header class="tdbc-hero tdbc-section tdbc-text-align-center">
       <div class="tdbc-container tdbc-content-maxlength">
-        <h1 class="tdbc-ink--secondary tdbc-mb-none">{{ post.title }}</h1>
+        <h1 class="tdbc-ink--primary tdbc-mb-none">{{ post.title }}</h1>
+        <p class="tdbc-lead tdbc-ink--gray tdbc-mt-md"><span>Originally posted {{ post.date | postDate }} on <a href="{{ post.url }}">DEV</a></span></p>
       </div>
     </header>
     <main class="tdbc-container">
       <article class="tdbc-mx-auto">{{ content | safe }}</article>
-      {# <a href="{{ post.url }}" class="tdbc-button tdbc-button--small">Read Post</a> #}
     </main>
-    <footer class="tdbc-section tdbc-background--secondary">
-      <div class="tdbc-container tdbc-text-align-center">
-        <p class="tdbc-ink--light">
-        &copy; {% year %} <a href="https://thinkdobecreate.com">ThinkDoBeCreate - Stephanie Eckles</a>
-        </p>
-      </div>
-    </footer>
-    <script async src="https://static.codepen.io/assets/embed/ei.js"></script>
-	</body>
-	</html>
+    <aside aria-labelledby="next" class="tdbc-series-container tdbc-series-container--postpage tdbc-text-align-center">
+    <h2 id="next" class="tdbc-ink--secondary">What to Read Next</h2>
+    <a href="/" class="tdbc-button">Browse the whole series</a>
+    <ul class="tdbc-column-container tdbc-column-container--postpage tdbc-mt-lg">
+      {%- for post in collections.posts | randomLimit(4, page.url) -%}
+        <li class="tdbc-card">
+          <div class="tdbc-card__content" data-episode="{{ post.data.post.episode }}">
+          <a href="{{ post.url }}" class="tdbc-card__title {% peekaboo loop.index0 %}">{{ post.data.post.title }}</a>
+            <p>{{ post.data.post.description }}</p>
+          </div>
+        </li>
+      {%- endfor -%}
+      </ul> 
+    </aside>

@@ -1,5 +1,5 @@
 .tdbc-content-maxlength {
-  max-width: 80ch;
+  max-width: 60em;
 }
 
 $tdbc-alignments: left, center, right !default;
@@ -28,7 +28,7 @@ $tdbc-alignments: left, center, right !default;
     color: tdbc-color(#{$key});
   }
 
-  .tdbc-ink--#{$key} > a:not(.tdbc-button) {
+  .tdbc-ink--#{$key} a:not(.tdbc-button) {
     color: inherit;
   }
 }

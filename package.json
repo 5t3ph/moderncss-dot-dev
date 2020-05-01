@@ -44,5 +44,8 @@
   },
   "browserslist": [
     "last 2 versions"
-  ]
+  ],
+  "dependencies": {
+    "luxon": "^1.23.0"
+  }
 }
