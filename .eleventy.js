@@ -1,5 +1,5 @@
 const Terser = require("terser");
-
+const emojiRegex = require("emoji-regex");
 const { DateTime } = require("luxon");
 
 const slugify = require("slugify");
@@ -14,7 +14,11 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy("./src/favicon.png");
 
   eleventyConfig.addFilter("slug", (str) => {
-    return slugify(str, {
+    const regex = emojiRegex();
+    // Remove Emoji first
+    let string = str.replace(regex, "");
+
+    return slugify(string, {
       lower: true,
       replacement: "-",
       remove: /[*+~.·,()'"`´%!?¿:@\/]/g,
