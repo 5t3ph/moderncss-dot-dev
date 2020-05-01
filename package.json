@@ -10,9 +10,7 @@
     "watch:eleventy": "eleventy --serve",
     "watch:sass": "node-sass --watch src/sass -o public/css",
     "develop": "ELEVENTY_ENV=dev npm run scss ; npm run watch:sass & npm run watch:eleventy & npm run screenshot",
-    "prebuild": "npm run scss",
-    "build": "ELEVENTY_ENV=prod eleventy & npm run css",
-    "postbuild": "npm run screenshot",
+    "build": "ELEVENTY_ENV=prod npm run scss && eleventy & npm run css && npm run screenshot",
     "lint": "stylelint 'src/sass/**/*.scss' 'src/sass/**/**/*.scss' 'src/sass/**/**/**/*.scss'",
     "lint:fix": "stylelint --fix 'src/sass/**/*.scss' 'src/sass/**/**/*.scss' 'src/sass/**/**/**/*.scss'",
     "screenshot": "node functions/images.js"
