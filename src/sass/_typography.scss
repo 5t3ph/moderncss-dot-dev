@@ -28,6 +28,7 @@ h1 {
   font-family: Kanit, serif;
   font-weight: 800;
   font-size: $tdbc-h1-font-size;
+  font-size: calc(1.75rem + 2.3 * ((100vw - 320px) / 300));
   font-size: clamp(1.75rem, 5vw, $tdbc-h1-font-size);
   letter-spacing: 0.04em;
   line-height: 1.1;
@@ -72,6 +73,7 @@ h3,
 }
 
 .tdbc-hero .tdbc-h3 {
+  font-size: calc(1.125rem + 0.875 * ((100vw - 320px) / 100));
   font-size: clamp(1.125rem, 3vw, $tdbc-h3-font-size);
   margin-left: 0.15em;
   letter-spacing: 0.05em;
@@ -130,7 +132,8 @@ code:not([class*="language"]) {
 }
 
 .tdbc-lead {
-  font-size: $tdbc-lead-font-size;
+  font-size: calc(1.125rem + 0.275 * ((100vw - 320px) / 100));
+  font-size: clamp(1.125rem, 3vw, $tdbc-lead-font-size);
   letter-spacing: 0.01em;
   margin-bottom: 1em;
   line-height: 1.3;

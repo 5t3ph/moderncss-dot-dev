@@ -24,6 +24,14 @@ main.tdbc-container {
 
 footer {
   margin-top: auto;
+
+  p {
+    line-height: 1.1;
+
+    @media (max-width: 445px) {
+      margin-bottom: 1rem !important;
+    }
+  }
 }
 
 article {
