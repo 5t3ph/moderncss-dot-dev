@@ -1,44 +1,23 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Modern CSS Solutions</title>
-    <meta name="description" content="A series examining modern CSS solutions to problems Stephanie Eckles, a seasoned frontend developer, has been solving for 13+ years."/>
-    <link
-      rel="icon"
-      href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>👩‍💻</text></svg>"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      href="css/style.css"
-      rel="stylesheet" 
-    />
-  </head>
-
-  <body>
-
-  <header class="tdbc-hero tdbc-section tdbc-background--light tdbc-text-align-left">
+---
+description: 'A series examining modern CSS solutions to problems Stephanie Eckles, a seasoned frontend developer, has been solving for 13+ years.'
+layout: base.njk
+---
+  <header class="tdbc-hero tdbc-hero--home tdbc-text-align-left">
       <div class="tdbc-container">
-        <h1 class="tdbc-ink--secondary tdbc-mb-none">Modern CSS Solutions
-        <span class="tdbc-h3 tdbc-ink--primary">
-          <em>for Old CSS Problems</em>
-        </span>
+        <h1 class="tdbc-ink--primary tdbc-mb-none"><span class="tdbc-logo-m">M</span>odern CSS Solutions
+          <em class="tdbc-h3 tdbc-ink--secondary">for Old CSS Problems</em>
         </h1>
         
-        <h2 class="tdbc-lead tdbc-ink--secondary tdbc-mt-md">
-          A series by <a href="https://twitter.com/5t3ph">@5t3ph</a>
+        <h2 class="tdbc-lead tdbc-ink--gray tdbc-mt-md">
+          <span>A series by <a href="https://dev.to/5t3ph">Stephanie Eckles</a></span>
         </h2>
       </div>
     </header>
-    <main class="tdbc-container">
+    <main class="tdbc-series-container">
       <ul class="tdbc-column-container">
       {%- for post in collections.posts -%}
-        <li class="tdbc-card">
-          <div class="tdbc-card__content">
+        <li class="tdbc-card index{{ loop.index0 + 1 }}">
+          <div class="tdbc-card__content" data-episode="{{ post.data.post.episode }}">
             <a href="{{ post.url }}" class="tdbc-card__title">{{ post.data.post.title }}</a>
             <p>{{ post.data.post.description }}</p>
           </div>
@@ -46,12 +25,11 @@
       {%- endfor -%}
       </ul> 
     </main>
-    <footer class="tdbc-section tdbc-background--secondary">
-      <div class="tdbc-container tdbc-text-align-center">
-        <p class="tdbc-ink--light">
-        &copy; {% year %} <a href="https://thinkdobecreate.com">ThinkDoBeCreate - Stephanie Eckles</a>
-        </p>
-      </div>
-    </footer>
-	</body>
-	</html>
+
+{% set js %}
+  {% include "peekaboo.js" %}
+{% endset %}
+<script>
+  {{ js | jsmin | safe }}
+</script>
+    

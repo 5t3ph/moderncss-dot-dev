@@ -1,5 +1,5 @@
 .tdbc-content-maxlength {
-  max-width: 80ch;
+  max-width: 60em;
 }
 
 $tdbc-alignments: left, center, right !default;
@@ -28,7 +28,7 @@ $tdbc-alignments: left, center, right !default;
     color: tdbc-color(#{$key});
   }
 
-  .tdbc-ink--#{$key} > a:not(.tdbc-button) {
+  .tdbc-ink--#{$key} a:not(.tdbc-button) {
     color: inherit;
   }
 }
@@ -39,17 +39,12 @@ $tdbc-alignments: left, center, right !default;
 }
 
 @each $key, $unit in $tdbc-spacing {
-  .tdbc-my-#{$key} {
-    margin-top: $unit;
-    margin-bottom: $unit;
-  }
-
   .tdbc-mt-#{$key} {
     margin-top: $unit;
   }
 }
 
-$tdbc-spacing-sides: t, b, x, y;
+$tdbc-spacing-sides: b;
 
 @each $side in $tdbc-spacing-sides {
   .tdbc-m#{$side}-none {

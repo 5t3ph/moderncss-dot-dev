@@ -6,17 +6,32 @@ body {
   background-color: tdbc-color(background);
   color: $tdbc-color-body;
   font-family: $tdbc-font-family;
+
+  // stylelint-disable-next-line selector-max-type
+  &::before {
+    height: 0.5rem;
+    background: $tdbc-gradient;
+    content: "";
+  }
 }
 
 // stylelint-disable selector-max-type, selector-no-qualifying-type
 main,
 main.tdbc-container {
-  padding-top: 5vh;
+  padding-top: 0;
   padding-bottom: 5vh;
 }
 
 footer {
   margin-top: auto;
+
+  p {
+    line-height: 1.1;
+
+    @media (max-width: 445px) {
+      margin-bottom: 1rem !important;
+    }
+  }
 }
 
 article {
@@ -36,26 +51,16 @@ article {
 .tdbc-column-container {
   display: grid;
   justify-items: center;
+  padding-left: 0;
   grid-gap: 2em;
   grid-template-columns: repeat(auto-fit, minmax(30ch, 1fr));
-}
 
-// stylelint-disable-next-line selector-no-qualifying-type, selector-max-type
-ul.tdbc-column-container {
-  padding-left: 0;
-}
-
-.tdbc-section {
-  width: 100%;
-
-  &--padded {
-    padding-top: 10vh;
-    padding-bottom: 10vh;
-  }
-
-  // stylelint-disable-next-line selector-max-universal
-  *:last-child {
-    margin-bottom: 0;
+  @media (min-width: 700px) and (max-width: 1446px) {
+    &--postpage {
+      .tdbc-card:last-child {
+        grid-column-start: 2;
+      }
+    }
   }
 }
 
@@ -69,27 +74,46 @@ ul.tdbc-column-container {
 }
 
 .tdbc-row {
-  display: grid;
-  grid-gap: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
 
-  @media (min-width: 80ch) {
-    grid-auto-flow: column;
-    grid-auto-columns: max-content;
+  // stylelint-disable-next-line selector-max-universal
+  > * {
+    margin-right: 0.5rem;
+    margin-left: 0.5rem;
   }
+}
 
-  &--center-content {
-    justify-content: center;
-  }
+.tdbc-series-container {
+  margin-right: 8vw;
+  margin-bottom: 10vh;
+  margin-left: 8vw;
 
-  &--center-alignitems {
-    align-items: center;
+  &--postpage {
+    position: relative;
+    padding-top: 4rem;
+
+    &::before {
+      position: absolute;
+      top: 0;
+      right: 0;
+      left: 0;
+      height: 3px;
+      background: $tdbc-gradient;
+      content: "";
+    }
   }
 }
 
 // stylelint-disable-next-line
 hr {
-  max-width: 10ch;
-  margin: 2rem auto;
+  max-width: 10rem;
+  height: 1px;
+  margin: 3rem auto;
+  border: none;
+  background: $tdbc-gradient;
 }
 
 // stylelint-disable-next-line

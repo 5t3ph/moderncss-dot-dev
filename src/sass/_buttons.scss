@@ -3,14 +3,15 @@
   align-items: center;
   align-self: start;
   justify-content: center;
-  min-width: 120px;
-  min-height: 48px;
-  padding: 0 1.5em;
+  min-width: 10rem;
+  min-height: 4rem;
+  padding: 0.1em 1.5em 0;
   transition: 180ms all ease-in-out;
-  border-radius: $tdbc-border-radius/2;
+  border-radius: 1em;
   background-color: tdbc-color(primary);
-  color: #fff;
-  font-size: 1.125rem;
+  color: tdbc-color(background);
+  font-size: 1.3rem;
+  font-weight: $tdbc-strong-font-weight;
   line-height: 1.1;
   text-align: center;
   text-decoration: none;
@@ -19,52 +20,17 @@
 
   &:focus {
     outline: none;
-    box-shadow: 0 0 0 3px scale-color(tdbc-color(primary), $lightness: -30%);
+    box-shadow: 0 0 0 3px #fff;
   }
 
   &--small {
     min-height: 34px;
-    padding: 0.25em 0.75em;
-    font-size: 1rem;
-  }
-
-  &--center {
-    align-self: center;
-    margin-right: auto;
-    margin-left: auto;
-  }
-
-  &__icon {
-    width: 1.5em;
-    height: 1.5em;
-    margin-right: 0.25em;
-
-    &--end {
-      margin-right: 0;
-      margin-left: 0.25em;
-    }
-
-    // stylelint-disable-next-line  selector-max-type
-    svg {
-      width: 100%;
-      height: 100%;
-      fill: currentColor;
-    }
-  }
-
-  &-outlined {
-    border: 2px solid tdbc-color(primary);
-    background-color: transparent;
-    color: tdbc-color(primary);
-
-    &:hover,
-    &:focus {
-      background-color: scale-color(tdbc-color(primary), $lightness: 80%);
-    }
+    padding: 0.3em 0.75em 0.25em;
+    font-size: 1.125rem;
   }
 
   @each $key in $tdbc-button-variants {
-    $color: tdbc-color(#{$key});
+    $color: tdbc-color($key);
 
     @if ($key != "primary") {
       &--#{$key} {
@@ -78,27 +44,50 @@
           box-shadow: 0 0 0 3px scale-color($color, $lightness: -30%);
         }
       }
+    }
+  }
+}
 
-      &-outlined--#{$key} {
-        border-color: scale-color($color, $lightness: 30%, $saturation: 15%);
-        color: $color;
+.tdbc-icon-button {
+  display: inline-flex;
+  position: relative;
+  width: 1em;
+  height: 1em;
+  padding: 0;
+  border: none;
+  background: transparent;
+  font-size: 1.5rem;
+  cursor: pointer;
 
-        &:focus {
-          box-shadow: 0 0 0 3px scale-color($color, $lightness: -30%);
-        }
+  // stylelint-disable-next-line selector-max-type
+  svg {
+    flex-shrink: 0;
+    width: 100%;
+    height: 100%;
+    fill: currentColor;
+    opacity: 0.7;
+  }
 
-        @if ($key == "light") {
-          &:hover,
-          &:focus {
-            background-color: rgba($color, 0.15);
-          }
-        } @else {
-          &:hover,
-          &:focus {
-            background-color: scale-color($color, $lightness: 90%);
-          }
-        }
-      }
+  &:focus,
+  &:hover {
+    outline: none;
+
+    // stylelint-disable-next-line selector-max-type
+    svg {
+      opacity: 1;
+    }
+  }
+
+  &:focus {
+    &::after {
+      position: absolute;
+      top: -0.3em;
+      right: -0.3em;
+      bottom: -0.3em;
+      left: -0.3em;
+      border: 1px solid currentColor;
+      border-radius: 50%;
+      content: "";
     }
   }
 }
