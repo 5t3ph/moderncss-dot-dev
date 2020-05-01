@@ -3,6 +3,7 @@ const fs = require("fs");
 const path = require("path");
 
 (async () => {
+  console.log("Starting social images...");
   const browser = await chromium.puppeteer.launch({
     args: chromium.args,
     executablePath: await chromium.executablePath,
@@ -56,4 +57,5 @@ const path = require("path");
   }
 
   await browser.close();
+  console.log("Social images complete!");
 })();
