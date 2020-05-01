@@ -4,6 +4,10 @@ node_modules
 # build artefacts
 public
 src/css
+functions/posts.json
+functions/template.html
+src/img/*
+!src/img/home.png
 
 # secrets and errors
 .env

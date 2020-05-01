@@ -1,0 +1,11 @@
+---
+permalink: functions/posts.json
+permalinkBypassOutputDir: true
+---
+[{% for post in collections.posts %}
+	{
+   "title":"{{post.data.post.title | jsonTitle}}",
+   "slug":"{{post.url | removeSlashes}}",
+   "episode":"{{ post.data.post.episode }}"
+	}{% if forloop.last == false %},{% endif %}
+{% endfor %}]
