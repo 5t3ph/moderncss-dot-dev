@@ -11,6 +11,7 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addWatchTarget("./src/sass/");
 
   eleventyConfig.addPassthroughCopy("*.css");
+  eleventyConfig.addPassthroughCopy("./src/favicon.png");
 
   eleventyConfig.addFilter("slug", (str) => {
     return slugify(str, {
