@@ -6,7 +6,6 @@ $tdbc-skew: 10deg;
   flex-direction: column;
   width: 100%;
   transform: skewY(-$tdbc-skew);
-  transition: 270ms all ease-in-out;
   border-radius: $tdbc-border-radius;
   background-color: tdbc-color(background-alt);
   box-shadow: 0 3px 5px rgba(0, 0, 0, 0.18);
