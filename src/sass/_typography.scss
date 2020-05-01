@@ -66,8 +66,8 @@ h1 .tdbc-logo-m {
 
 h2 {
   font-size: $tdbc-h2-font-size;
-  font-size: calc(1.45rem + 5 * ((100vw - 320px) / 300));
-  font-size: clamp(1.45rem, 3vw, $tdbc-h2-font-size);
+  font-size: calc(2rem + 6 * ((100vw - 320px) / 300));
+  font-size: clamp(1.75rem, 5vw, $tdbc-h2-font-size);
 }
 
 article > h2 {
@@ -76,7 +76,8 @@ article > h2 {
 
 h3,
 .tdbc-h3 {
-  font-size: $tdbc-h3-font-size;
+  font-size: calc(1.5rem + 0.875 * ((100vw - 320px) / 300));
+  font-size: clamp(1.5rem, 3vw, $tdbc-h3-font-size);
 }
 
 .tdbc-hero .tdbc-h3 {
@@ -84,6 +85,10 @@ h3,
   font-size: clamp(1.125rem, 3vw, $tdbc-h3-font-size);
   margin-left: 0.15em;
   letter-spacing: 0.05em;
+}
+
+article > h3 {
+  color: tdbc-color(primary);
 }
 
 h4 {
@@ -166,13 +171,36 @@ code:not([class*="language"]) {
 }
 
 blockquote {
-  margin: 0 auto 3rem;
-  padding: 0.5rem 1.5rem;
-  color: tdbc-color(primary);
-  text-align: center;
-  max-width: 60ch;
+  &:first-child {
+    margin: 0 auto 3rem;
+    color: tdbc-color(primary);
+    text-align: center;
+    max-width: 60ch;
+  }
+
+  color: tdbc-color(gray);
+  margin: 3rem 0;
   letter-spacing: 0.02em;
+  padding: 0.5rem 1.5rem;
   line-height: 1.2;
+
+  &:not(:first-child) {
+    position: relative;
+
+    em {
+      color: #fff;
+    }
+
+    &::before {
+      position: absolute;
+      width: 2px;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      background: $tdbc-gradient;
+      content: "";
+    }
+  }
 
   *:last-child {
     margin-bottom: 0;
