@@ -32,6 +32,11 @@ h1 {
   font-size: clamp(1.75rem, 5vw, $tdbc-h1-font-size);
   letter-spacing: 0.04em;
   line-height: 1.1;
+
+  &.tdbc-mlg {
+    font-size: calc(2.5rem + 2.3 * ((100vw - 320px) / 300));
+    font-size: clamp(1.75rem, 5vw, $tdbc-h1-font-size);
+  }
 }
 
 .tdbc-hero--home h1 {
@@ -61,6 +66,8 @@ h1 .tdbc-logo-m {
 
 h2 {
   font-size: $tdbc-h2-font-size;
+  font-size: calc(1.45rem + 5 * ((100vw - 320px) / 300));
+  font-size: clamp(1.45rem, 3vw, $tdbc-h2-font-size);
 }
 
 article > h2 {
