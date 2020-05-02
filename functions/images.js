@@ -34,7 +34,7 @@ const path = require("path");
   });
 
   // Create an og-images directory in the public folder
-  const dir = path.resolve(__dirname, "../src/img");
+  const dir = path.resolve(__dirname, "../public/img");
   if (!fs.existsSync(dir)) fs.mkdirSync(dir);
 
   // Go over all the posts
@@ -48,7 +48,7 @@ const path = require("path");
       episode.innerHTML = post.episode;
     }, post);
 
-    console.log(`${post.title} - ${dir}/${post.slug}.png`);
+    console.log(`Image: ${post.slug}.png`);
 
     // Save a screenshot to public/img/slug-of-post.jpeg
     await page.screenshot({
