@@ -42,10 +42,6 @@ module.exports = function (eleventyConfig) {
     return title;
   });
 
-  eleventyConfig.addFilter("removeSlashes", (url) => {
-    return url.substring(1).slice(0, -1);
-  });
-
   eleventyConfig.addShortcode("year", () => `${new Date().getFullYear()}`);
 
   eleventyConfig.addShortcode("peekaboo", (index) => {
