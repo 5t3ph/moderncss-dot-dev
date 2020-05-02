@@ -1,3 +1,3 @@
 module.exports = {
-  url: process.env.DEPLOY_URL,
+  url: process.env.URL,
 };
