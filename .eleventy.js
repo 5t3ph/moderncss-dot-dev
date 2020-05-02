@@ -10,7 +10,8 @@ module.exports = function (eleventyConfig) {
 
   eleventyConfig.addWatchTarget("./src/sass/");
 
-  eleventyConfig.addPassthroughCopy("*.css");
+  eleventyConfig.addPassthroughCopy("./src/css");
+  eleventyConfig.addPassthroughCopy("./src/img");
   eleventyConfig.addPassthroughCopy("./src/favicon.png");
 
   eleventyConfig.addFilter("slug", (str) => {
@@ -25,7 +26,7 @@ module.exports = function (eleventyConfig) {
     });
   });
 
-  eleventyConfig.addFilter("jsmin", function (code) {
+  eleventyConfig.addFilter("jsmin", (code) => {
     let minified = Terser.minify(code);
     if (minified.error) {
       console.log("Terser error: ", minified.error);
@@ -33,6 +34,16 @@ module.exports = function (eleventyConfig) {
     }
 
     return minified.code;
+  });
+
+  eleventyConfig.addFilter("jsonTitle", (str) => {
+    let title = str.replace(/((.*)\s(.*)\s(.*))$/g, "$2&nbsp;$3&nbsp;$4");
+    title = title.replace(/"(.*)"/g, '\\"$1\\"');
+    return title;
+  });
+
+  eleventyConfig.addFilter("removeSlashes", (url) => {
+    return url.substring(1).slice(0, -1);
   });
 
   eleventyConfig.addShortcode("year", () => `${new Date().getFullYear()}`);

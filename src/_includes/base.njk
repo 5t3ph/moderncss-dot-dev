@@ -14,6 +14,13 @@
       href="{{ '/css/style.css' | url }}"
       rel="stylesheet" 
     />
+    {% if page.url == '/' %}
+      <meta property="og:image" content="{{ site.url }}/img/home.png" />
+      <meta name="twitter:image" content="{{ site.url }}/img/home.png" />
+    {% else %}
+      <meta property="og:image" content="{{ site.url }}/img/{{ post.title | slug }}.png" />
+      <meta name="twitter:image" content="{{ site.url }}/img/{{ post.title | slug }}.png" />
+    {% endif %}
   </head>
   <body>
   {{ content | safe }}

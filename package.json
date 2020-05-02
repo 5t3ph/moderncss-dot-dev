@@ -4,14 +4,15 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "scss": "node-sass src/sass/style.scss public/css/style.css",
-    "css": "postcss public/css/*.css -u autoprefixer cssnano -r -m",
+    "scss": "node-sass src/sass/style.scss src/css/style.css",
+    "css": "postcss src/css/*.css -u autoprefixer cssnano -r -m",
     "watch:eleventy": "eleventy --serve",
     "watch:sass": "node-sass --watch src/sass -o public/css",
-    "develop": "ELEVENTY_ENV=dev npm run scss ; npm run watch:sass & npm run watch:eleventy",
-    "build": "ELEVENTY_ENV=prod npm run scss ; eleventy ; npm run css",
+    "develop": "ELEVENTY_ENV=dev npm run scss ; npm run watch:sass & npm run watch:eleventy & npm run screenshot",
+    "build": "ELEVENTY_ENV=prod npm run scss ; eleventy ; npm run css ; npm run screenshot",
     "lint": "stylelint 'src/sass/**/*.scss' 'src/sass/**/**/*.scss' 'src/sass/**/**/**/*.scss'",
-    "lint:fix": "stylelint --fix 'src/sass/**/*.scss' 'src/sass/**/**/*.scss' 'src/sass/**/**/**/*.scss'"
+    "lint:fix": "stylelint --fix 'src/sass/**/*.scss' 'src/sass/**/**/*.scss' 'src/sass/**/**/**/*.scss'",
+    "screenshot": "node functions/images.js"
   },
   "repository": {
     "type": "git",
@@ -35,6 +36,7 @@
     "node-fetch": "^2.6.0",
     "node-sass": "^4.11.0",
     "postcss-cli": "^7.1.0",
+    "puppeteer": "^3.0.2",
     "stylelint": "^13.3.3",
     "stylelint-config-prettier": "^8.0.1",
     "stylelint-config-standard": "^20.0.0",
@@ -47,6 +49,8 @@
     "last 2 versions"
   ],
   "dependencies": {
-    "luxon": "^1.23.0"
+    "chrome-aws-lambda": "^2.1.1",
+    "luxon": "^1.23.0",
+    "puppeteer-core": "^3.0.2"
   }
 }
