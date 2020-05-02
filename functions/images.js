@@ -4,6 +4,12 @@ const path = require("path");
 
 (async () => {
   console.log("Starting social images...");
+
+  await chromium.font("https://fonts.gstatic.com/s/kanit/v5/nKKU-Go6G5tXcr4yPRWnVaFrNlJz.woff2");
+  await chromium.font(
+    "https://fonts.gstatic.com/s/baloo2/v1/wXKuE3kTposypRyd76v_Fe0KmF0xvdjqjw.woff2",
+  );
+
   const browser = await chromium.puppeteer.launch({
     args: chromium.args,
     executablePath: await chromium.executablePath,
