@@ -16,7 +16,7 @@
     />
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:creator" content="@5t3ph">
-    <meta name="twitter:title" content="{{ post.title }}">
+    <meta name="twitter:title" content="{% if post.title %}{{ post.title }}{% else %}Modern CSS Solutions{% endif %}">
     <meta name="twitter:description" content="{% if description %}{{ description }}{% else %}{{ post.description }}{% endif %}">
 
     {% if page.url == '/' %}
