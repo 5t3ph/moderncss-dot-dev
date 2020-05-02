@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "scss": "node-sass src/sass/style.scss public/css/style.css",
-    "css": "postcss public/css/*.css -u autoprefixer cssnano -r -m",
+    "scss": "node-sass src/sass/style.scss src/css/style.css",
+    "css": "postcss src/css/*.css -u autoprefixer cssnano -r -m",
     "watch:eleventy": "eleventy --serve",
     "watch:sass": "node-sass --watch src/sass -o public/css",
     "develop": "ELEVENTY_ENV=dev npm run scss ; npm run watch:sass & npm run watch:eleventy & npm run screenshot",
