@@ -15,7 +15,7 @@ layout: base.njk
     </header>
     <main class="tdbc-series-container">
       <ul class="tdbc-column-container">
-      {%- for post in collections.posts -%}
+      {%- for post in collections.sortByDate -%}  
         <li class="tdbc-card index{{ loop.index0 + 1 }}">
           <div class="tdbc-card__content" data-episode="{{ post.data.post.episode }}">
             <a href="{{ post.url }}" class="tdbc-card__title">{{ post.data.post.title }}</a>

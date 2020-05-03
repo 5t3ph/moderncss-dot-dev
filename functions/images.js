@@ -26,7 +26,7 @@ const path = require("path");
 
   // Render html
   await page.setContent(html, {
-    waitUntil: ["domcontentloaded"],
+    waitUntil: ["networkidle0"],
   });
 
   // Wait until the document is fully rendered

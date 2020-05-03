@@ -36,6 +36,12 @@ module.exports = function (eleventyConfig) {
     return minified.code;
   });
 
+  eleventyConfig.addCollection("sortByDate", function (collection) {
+    return collection.getFilteredByTag("posts").sort((a, b) => {
+      return b.data.post.episode - a.data.post.episode;
+    });
+  });
+
   eleventyConfig.addFilter("jsonTitle", (str) => {
     let title = str.replace(/((.*)\s(.*)\s(.*))$/g, "$2&nbsp;$3&nbsp;$4");
     title = title.replace(/"(.*)"/g, '\\"$1\\"');
