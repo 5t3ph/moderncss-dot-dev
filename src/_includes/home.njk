@@ -15,8 +15,11 @@ layout: base.njk
   </header>
   <main class="tdbc-series-container"> 
     <ul class="tdbc-column-container">
-    {%- for post in collections.sortByDate -%}  
-      <li class="tdbc-card index{{ loop.index0 + 1 }}">
+    {%- for post in collections.sortByDate -%}
+      {% if loop.index0 === 0 %}
+        {% upcomingTopic post.data.post.episode %}
+      {% endif %}
+      <li class="tdbc-card tdbc-episode index{{ loop.index0 + 1 }}">
         <div class="tdbc-card__content" data-episode="{{ post.data.post.episode }}">
           <a href="{{ post.url }}" class="tdbc-card__title">{{ post.data.post.title }}</a>
           <p>{{ post.data.post.description }}</p>
@@ -39,7 +42,7 @@ layout: base.njk
     </li>
     <li class="tdbc-flex-container">
       <h3>HTML / Sass Jumpstart</h3>
-      <p>node-sass powered, includes stylelint and prettier, and autoprefix upon build. Develop script includes hot-reload via browsersync. Themeable and scalable.</p>
+      <p>node-sass powered, includes stylelint and prettier, and autoprefix upon build. Develop script includes hot-reload via browsersync. Themeable and&nbsp;scalable.</p>
       <div class="tdbc-row tdbc-mt-auto">
         <a href="https://github.com/5t3ph/html-sass-jumpstart/generate" class="tdbc-button tdbc-button--small">Generate Repo</a>
         <a href="https://5t3ph.github.io/html-sass-jumpstart/"><small>View Docs</small></a>

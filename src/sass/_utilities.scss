@@ -53,6 +53,11 @@ $tdbc-alignments: left, center, right !default;
   margin-left: auto;
 }
 
+.tdbc-my-auto {
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
 .tdbc-px {
   padding-right: 1rem;
   padding-left: 1rem;

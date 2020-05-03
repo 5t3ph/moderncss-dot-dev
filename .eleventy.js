@@ -1,9 +1,9 @@
 const Terser = require("terser");
 const emojiRegex = require("emoji-regex");
 const { DateTime } = require("luxon");
-
 const slugify = require("slugify");
 const syntaxHighlight = require("@11ty/eleventy-plugin-syntaxhighlight");
+const topics = require("./src/_data/topics");
 
 module.exports = function (eleventyConfig) {
   eleventyConfig.addPlugin(syntaxHighlight);
@@ -55,6 +55,21 @@ module.exports = function (eleventyConfig) {
     if (randomIndex === index) {
       return "tdbc-peekaboo";
     }
+    return "";
+  });
+
+  eleventyConfig.addShortcode("upcomingTopic", (index) => {
+    const nextIndex = index + 1;
+    const nextTopic = topics[nextIndex];
+
+    if (nextTopic !== undefined) {
+      return `<li class="tdbc-card tdbc-card--teaser">
+          <div class="tdbc-card__content tdbc-text-align-center">
+            <span class="tdbc-lead tdbc-my-auto">Upcoming Topic: <br/><span class="tdbc-h3 tdbc-ink--secondary">${nextTopic}</span></span>
+          </div>
+        </li>`;
+    }
+
     return "";
   });
 
