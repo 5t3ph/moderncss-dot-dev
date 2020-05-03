@@ -148,6 +148,8 @@ $tdbc-skew: 10deg;
     box-shadow: none;
 
     .tdbc-card__content {
+      padding-top: 5vh;
+
       &:after {
         background-color: transparent;
       }
