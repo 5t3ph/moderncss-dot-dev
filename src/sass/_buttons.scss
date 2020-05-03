@@ -29,6 +29,17 @@
     font-size: 1.125rem;
   }
 
+  &-outlined {
+    border: 2px solid tdbc-color(primary);
+    background-color: transparent;
+    color: tdbc-color(primary);
+
+    &:hover,
+    &:focus {
+      background-color: scale-color(tdbc-color(primary), $lightness: 80%);
+    }
+  }
+
   @each $key in $tdbc-button-variants {
     $color: tdbc-color($key);
 
@@ -44,10 +55,37 @@
           box-shadow: 0 0 0 3px scale-color($color, $lightness: -30%);
         }
       }
+
+      &-outlined--#{$key} {
+        border-color: scale-color($color, $lightness: 30%, $saturation: 15%);
+        color: $color;
+
+        &:focus {
+          box-shadow: 0 0 0 3px scale-color($color, $lightness: -30%);
+        }
+
+        @if ($key == "light") {
+          &:hover,
+          &:focus {
+            background-color: rgba($color, 0.15);
+          }
+        } @else {
+          &:hover,
+          &:focus {
+            background-color: scale-color($color, $lightness: 90%);
+          }
+        }
+      }
     }
+  }
+
+  &__icon {
+    margin-right: 0.25em;
+    font-size: 1.25em !important;
   }
 }
 
+.tdbc-button__icon,
 .tdbc-icon-button {
   display: inline-flex;
   position: relative;
@@ -64,6 +102,11 @@
     flex-shrink: 0;
     width: 100%;
     height: 100%;
+  }
+}
+
+.tdbc-icon-button {
+  svg {
     fill: currentColor;
     opacity: 0.7;
   }

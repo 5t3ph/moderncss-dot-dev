@@ -25,12 +25,19 @@ main.tdbc-container {
 footer {
   margin-top: 4rem;
 
+  .tdbc-container {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+
   p {
     line-height: 1.1;
+  }
 
-    @media (max-width: 445px) {
-      margin-bottom: 1rem !important;
-    }
+  p,
+  p + span {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
   }
 }
 
@@ -39,6 +46,7 @@ article {
 }
 // stylelint-enable
 
+// stylelint-disable-next-line no-descending-specificity
 .tdbc-container {
   display: flex;
   flex-direction: column;

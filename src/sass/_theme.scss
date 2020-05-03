@@ -51,7 +51,7 @@ $tdbc-ink-colors: primary, secondary, gray, light !default;
 // Add/remove to selectively generate `background` (text color) classes
 $tdbc-background-colors: secondary !default;
 
-$tdbc-button-variants: primary !default;
+$tdbc-button-variants: primary, light !default;
 $tdbc-border-radius: 4px !default;
 
 $tdbc-font-family: "Baloo 2", sans-serif;
