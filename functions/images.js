@@ -5,11 +5,6 @@ const path = require("path");
 (async () => {
   console.log("Starting social images...");
 
-  await chromium.font("https://fonts.gstatic.com/s/kanit/v5/nKKU-Go6G5tXcr4yPRWnVaFrNlJz.woff2");
-  await chromium.font(
-    "https://fonts.gstatic.com/s/baloo2/v1/wXKuE3kTposypRyd76v_Fe0KmF0xvdjqjw.woff2",
-  );
-
   const browser = await chromium.puppeteer.launch({
     args: chromium.args,
     executablePath: await chromium.executablePath,
@@ -24,7 +19,7 @@ const path = require("path");
   // Get generated post json
   const posts = require("./posts.json");
 
-  // Render html
+  // Render html, wait for 0 network connections to ensure webfonts downloaded
   await page.setContent(html, {
     waitUntil: ["networkidle0"],
   });
@@ -32,14 +27,14 @@ const path = require("path");
   // Wait until the document is fully rendered
   await page.evaluateHandle("document.fonts.ready");
 
-  // Set the viewport to your preferred og:image size
+  // Set the viewport to your preferred image size
   await page.setViewport({
     width: 600,
     height: 315,
     deviceScaleFactor: 2,
   });
 
-  // Create an og-images directory in the public folder
+  // Create an `img` directory in the public folder
   const dir = path.resolve(__dirname, "../public/img");
   if (!fs.existsSync(dir)) fs.mkdirSync(dir);
 
@@ -50,13 +45,14 @@ const path = require("path");
       const title = document.querySelector("h1");
       title.innerHTML = post.title;
 
+      // Add episode number
       const episode = document.querySelector(".episode");
       episode.innerHTML = post.episode;
     }, post);
 
     console.log(`Image: ${post.slug}.png`);
 
-    // Save a screenshot to public/img/slug-of-post.jpeg
+    // Save a screenshot to public/img/slug-of-post.png
     await page.screenshot({
       path: `${dir}/${post.slug}.png`,
       type: "png",
