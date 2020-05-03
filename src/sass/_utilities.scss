@@ -2,6 +2,21 @@
   max-width: 60em;
 }
 
+.tdbc-gradient-border {
+  position: relative;
+  padding-top: 4rem;
+
+  &::before {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    height: 3px;
+    background: $tdbc-gradient;
+    content: "";
+  }
+}
+
 $tdbc-alignments: left, center, right !default;
 
 @each $alignment in $tdbc-alignments {
@@ -38,9 +53,19 @@ $tdbc-alignments: left, center, right !default;
   margin-left: auto;
 }
 
+.tdbc-my-auto {
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.tdbc-px {
+  padding-right: 1rem;
+  padding-left: 1rem;
+}
+
 @each $key, $unit in $tdbc-spacing {
   .tdbc-mt-#{$key} {
-    margin-top: $unit;
+    margin-top: #{$unit};
   }
 }
 

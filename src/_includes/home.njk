@@ -12,20 +12,44 @@ layout: base.njk
           <span>A series by <a href="https://dev.to/5t3ph">Stephanie Eckles</a></span>
         </h2>
       </div>
-    </header>
-    <main class="tdbc-series-container">
-      <ul class="tdbc-column-container">
-      {%- for post in collections.sortByDate -%}  
-        <li class="tdbc-card index{{ loop.index0 + 1 }}">
-          <div class="tdbc-card__content" data-episode="{{ post.data.post.episode }}">
-            <a href="{{ post.url }}" class="tdbc-card__title">{{ post.data.post.title }}</a>
-            <p>{{ post.data.post.description }}</p>
-          </div>
-        </li>
-      {%- endfor -%}
-      </ul> 
-    </main>
+  </header>
+  <main class="tdbc-series-container"> 
+    <ul class="tdbc-column-container">
+    {%- for post in collections.sortByDate -%}
+      {% if loop.index0 === 0 %}
+        {% upcomingTopic post.data.post.episode %}
+      {% endif %}
+      <li class="tdbc-card tdbc-episode index{{ loop.index0 + 1 }}">
+        <div class="tdbc-card__content" data-episode="{{ post.data.post.episode }}">
+          <a href="{{ post.url }}" class="tdbc-card__title">{{ post.data.post.title }}</a>
+          <p>{{ post.data.post.description }}</p>
+        </div>
+      </li>
+    {%- endfor -%}
+    </ul> 
+  </main>
 
+  <aside aria-labelledby="resources" class="tdbc-content-maxlength tdbc-mx-auto tdbc-px tdbc-text-align-center tdbc-gradient-border">
+  <h2 id="resources" class="tdbc-ink--secondary">Additional Resources</h2>
+  <ul class="tdbc-column-container tdbc-column-container--gap-lg">
+    <li class="tdbc-flex-container">
+      <h3>Learn Web Development</h3>
+      <p>Go from zero to website launch - no prior development experience required! Through this series of 4-14 minute videos, you will learn the essentials of web development.</p>
+      <div class="tdbc-row tdbc-mt-auto">
+        <a href="https://dev.to/5t3ph/learn-how-to-make-a-website-set-up-your-coding-environment-2oeo" class="tdbc-button tdbc-button--small">Start Now</a>
+        <a href="https://thinkdobecreate.com/learnwebdev"><small>Learn More</small></a>
+      </div>
+    </li>
+    <li class="tdbc-flex-container">
+      <h3>HTML / Sass Jumpstart</h3>
+      <p>node-sass powered, includes stylelint and prettier, and autoprefix upon build. Develop script includes hot-reload via browsersync. Themeable and&nbsp;scalable.</p>
+      <div class="tdbc-row tdbc-mt-auto">
+        <a href="https://github.com/5t3ph/html-sass-jumpstart/generate" class="tdbc-button tdbc-button--small">Generate Repo</a>
+        <a href="https://5t3ph.github.io/html-sass-jumpstart/"><small>View Docs</small></a>
+      </div>
+    </li>
+  </ul>
+  </aside>
 {% set js %}
   {% include "peekaboo.js" %}
 {% endset %}
