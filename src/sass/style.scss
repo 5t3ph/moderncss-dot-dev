@@ -4,6 +4,7 @@
   font-weight: 800;
   src: local("Kanit ExtraBold"), local("Kanit-ExtraBold"),
     url("../fonts/kanit-v5-latin-800.woff2") format("woff2");
+  font-display: swap;
 }
 
 @font-face {
@@ -12,6 +13,7 @@
   font-weight: normal;
   src: local("Baloo 2 Regular"), local("Baloo-2-Regular"),
     url("../fonts/baloo-2-v1-latin-regular.woff2") format("woff2");
+  font-display: swap;
 }
 
 @font-face {
@@ -20,6 +22,7 @@
   font-weight: 800;
   src: local("Baloo 2 Medium"), local("Baloo-2-Medium"),
     url("../fonts/baloo-2-v1-latin-500.woff2") format("woff2");
+  font-display: swap;
 }
 
 @import "theme";

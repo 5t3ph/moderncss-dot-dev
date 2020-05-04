@@ -12,11 +12,11 @@
   command = "AWS_LAMBDA_FUNCTION_NAME=trickpuppeteer npm run build"
 
   [[headers]]
-    for = "*.js"
+    for = "/**/*.js"
     [headers.values]
       cache-control = '''
       max-age=86400
-    for = "*.woff2"
+    for = "/fonts/*.woff2"
     [headers.values]
       cache-control = '''
       max-age=31536000
