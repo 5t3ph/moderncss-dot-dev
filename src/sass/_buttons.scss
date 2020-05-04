@@ -40,6 +40,7 @@
     }
   }
 
+  // stylelint-disable max-nesting-depth
   @each $key in $tdbc-button-variants {
     $color: tdbc-color($key);
 
@@ -78,9 +79,11 @@
       }
     }
   }
+  // stylelint-enable
 
   &__icon {
     margin-right: 0.25em;
+    // stylelint-disable-next-line
     font-size: 1.25em !important;
   }
 }
@@ -106,6 +109,7 @@
 }
 
 .tdbc-icon-button {
+  // stylelint-disable-next-line selector-max-type
   svg {
     fill: currentColor;
     opacity: 0.7;

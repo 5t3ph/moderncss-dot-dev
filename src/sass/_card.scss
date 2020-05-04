@@ -31,7 +31,7 @@ $tdbc-skew: 10deg;
     z-index: 1;
   }
 
-  /* stylelint-disable selector-max-type, selector-no-qualifying-type */
+  /* stylelint-disable selector-max-type, selector-no-qualifying-type, selector-max-specificity */
   a.tdbc-card__title {
     position: relative;
     color: tdbc-color(primary);
@@ -150,13 +150,13 @@ $tdbc-skew: 10deg;
     .tdbc-card__content {
       padding-top: 5vh;
 
-      &:after {
+      &::after {
         background-color: transparent;
       }
     }
 
-    &:before,
-    &:after {
+    &::before,
+    &::after {
       background: none;
     }
   }

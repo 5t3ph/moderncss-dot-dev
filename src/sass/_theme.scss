@@ -54,7 +54,9 @@ $tdbc-background-colors: secondary !default;
 $tdbc-button-variants: primary, light !default;
 $tdbc-border-radius: 4px !default;
 
-$tdbc-font-family: "Baloo 2", sans-serif;
+// stylelint-disable value-keyword-case
+$tdbc-font-family: "Baloo 2", "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue",
+  Helvetica, Arial, "Lucida Grande", sans-serif;
 $tdbc-strong-font-weight: 500 !default;
 $tdbc-h1-font-size: 4.2rem !default;
 $tdbc-h2-font-size: 3.15rem !default;

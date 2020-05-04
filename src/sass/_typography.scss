@@ -25,7 +25,7 @@ $tdbc-typography-variants: h1, h2, h3, h4;
 }
 
 h1 {
-  font-family: Kanit, serif;
+  font-family: Kanit, Haettenschweiler, "Arial Narrow Bold", Impact, sans-serif;
   font-weight: 800;
   font-size: $tdbc-h1-font-size;
   font-size: calc(1.75rem + 2.3 * ((100vw - 320px) / 300));
