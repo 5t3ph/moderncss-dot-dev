@@ -6,7 +6,7 @@ eleventyExcludeFromCollections: true
 <feed xmlns="http://www.w3.org/2005/Atom">
 	<title>Modern CSS Solutions for Old CSS Problems</title>
 	<subtitle>A series examining modern CSS solutions to problems Stephanie Eckles, a seasoned frontend developer, has been solving for 13+ years.</subtitle>
-	{% set absoluteUrl %}{{ '/feed/feed.xml' | url | absoluteUrl(site.url) }}{% endset %}
+	{% set absoluteUrl %}{{ '/feed/' | url | absoluteUrl(site.url) }}{% endset %}
 	<link href="{{ absoluteUrl }}" rel="self"/>
 	<link href="{{ site.url }}"/>
 	<updated>{{ collections.sortByDate | rssLastUpdatedDate }}</updated>
