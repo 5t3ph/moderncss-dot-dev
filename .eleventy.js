@@ -3,10 +3,12 @@ const emojiRegex = require("emoji-regex");
 const { DateTime } = require("luxon");
 const slugify = require("slugify");
 const syntaxHighlight = require("@11ty/eleventy-plugin-syntaxhighlight");
+const pluginRss = require("@11ty/eleventy-plugin-rss");
 const topics = require("./src/_data/topics");
 
 module.exports = function (eleventyConfig) {
   eleventyConfig.addPlugin(syntaxHighlight);
+  eleventyConfig.addPlugin(pluginRss);
 
   eleventyConfig.addWatchTarget("./src/sass/");
 
@@ -75,7 +77,35 @@ module.exports = function (eleventyConfig) {
   });
 
   eleventyConfig.addFilter("postDate", (dateObj) => {
-    return DateTime.fromISO(dateObj, { zone: "America/Chicago" }).toLocaleString(DateTime.DATE_MED);
+    return DateTime.fromISO(dateObj, {
+      zone: "America/Chicago",
+    }).toLocaleString(DateTime.DATE_MED);
+  });
+
+  eleventyConfig.addFilter("postRssDate", (dateObj) => {
+    return DateTime.fromISO(dateObj).toISO({
+      includeOffset: true,
+      suppressMilliseconds: true,
+    });
+  });
+
+  eleventyConfig.addNunjucksFilter("rssLastUpdatedDate", (collection) => {
+    if (!collection || !collection.length) {
+      throw new Error("Collection is empty in rssLastUpdatedDate filter.");
+    }
+
+    // Newest date in the collection
+    return DateTime.fromISO(collection[0].data.post.date).toISO({
+      includeOffset: true,
+      suppressMilliseconds: true,
+    });
+  });
+
+  // https://html.spec.whatwg.org/multipage/common-microsyntaxes.html#valid-date-string
+  eleventyConfig.addFilter("htmlDateString", (dateObj) => {
+    return DateTime.fromISO(dateObj, {
+      zone: "utc",
+    }).toFormat("yyyy-LL-dd");
   });
 
   eleventyConfig.addFilter("randomLimit", (arr, limit, currPage) => {

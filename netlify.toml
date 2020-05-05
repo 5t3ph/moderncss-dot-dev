@@ -10,3 +10,8 @@
 
   # Default build command.
   command = "AWS_LAMBDA_FUNCTION_NAME=trickpuppeteer npm run build"
+
+  [[redirects]]
+    from = "/feed/"
+    to = "/feed/feed.xml"
+    status = 200
