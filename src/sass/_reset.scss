@@ -65,3 +65,8 @@ select {
     scroll-behavior: initial;
   }
 }
+
+::selection {
+  background: tdbc-color(yellow);
+  color: tdbc-color(background-alt);
+}
