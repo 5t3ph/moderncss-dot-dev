@@ -4,7 +4,7 @@
   align-self: start;
   justify-content: center;
   min-width: 10rem;
-  min-height: 4rem;
+  min-height: 44px;
   padding: 0.1em 1.5em 0;
   transition: 180ms all ease-in-out;
   border-radius: 1em;
@@ -24,7 +24,6 @@
   }
 
   &--small {
-    min-height: 34px;
     padding: 0.3em 0.75em 0.25em;
     font-size: 1.125rem;
   }

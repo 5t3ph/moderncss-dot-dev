@@ -39,12 +39,36 @@ footer {
     padding-top: 1rem;
     padding-bottom: 1rem;
   }
+
+  @media (max-width: 445px) {
+    .tdbc-button {
+      margin-top: 1rem;
+    }
+  }
 }
 
 article {
   max-width: 80ch;
 }
 // stylelint-enable
+
+.tdbc-postpage {
+  position: relative;
+
+  &::before {
+    position: absolute;
+    top: 0;
+    left: calc(50% - 20vw);
+    width: 1ch;
+    transform: translateX(-60%);
+    color: tdbc-color(background-alt);
+    font-family: $tdbc-headline-font-family;
+    font-size: 30rem;
+    line-height: 0.5;
+    content: attr(data-episode);
+    z-index: -1;
+  }
+}
 
 // stylelint-disable-next-line no-descending-specificity
 .tdbc-container {

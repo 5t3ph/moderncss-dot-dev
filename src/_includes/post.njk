@@ -10,7 +10,7 @@ layout: base.njk
         <p class="tdbc-lead tdbc-ink--gray tdbc-mt-md"><span>Originally posted {{ post.date | postDate }} on <a href="{{ post.url }}">DEV</a></span></p>
       </div>
     </header>
-    <main class="tdbc-container">
+    <main class="tdbc-container tdbc-postpage" data-episode="{{ post.episode }}">
       <article class="tdbc-mx-auto">{{ content | safe }}</article>
     </main>
     <aside aria-labelledby="next" class="tdbc-series-container tdbc-series-container--postpage tdbc-text-align-center tdbc-gradient-border">

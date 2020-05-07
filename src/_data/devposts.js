@@ -4,13 +4,16 @@ require("dotenv").config();
 const apiRoot = "https://dev.to/api/articles/me/published?per_page=100";
 
 const parseDevMd = (md) => {
-  const regex = /{% (\w+) (.*) %}/gm;
-
   let content = md;
 
-  while ((m = regex.exec(md)) !== null) {
-    if (m.index === regex.lastIndex) {
-      regex.lastIndex++;
+  const siteBug = /\. Visit \[Mod(.*)resources/m;
+  content = content.replace(siteBug, "");
+
+  const liquidTags = /{% (\w+) (.*) %}/gm;
+
+  while ((m = liquidTags.exec(md)) !== null) {
+    if (m.index === liquidTags.lastIndex) {
+      liquidTags.lastIndex++;
     }
 
     const type = m[1];
