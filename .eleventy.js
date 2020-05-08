@@ -108,6 +108,12 @@ module.exports = function (eleventyConfig) {
     }).toFormat("yyyy-LL-dd");
   });
 
+  eleventyConfig.addFilter("encodeTweet", (str) => {
+    return `${encodeURIComponent(str)}%0D${encodeURIComponent(
+      "Shared from ModernCSS.dev | By @5t3ph",
+    )}%0D%0D`;
+  });
+
   eleventyConfig.addFilter("randomLimit", (arr, limit, currPage) => {
     const pageArr = arr.filter((page) => page.url !== currPage);
     pageArr.sort(() => {

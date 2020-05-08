@@ -29,13 +29,14 @@
   }
 
   &-outlined {
-    border: 2px solid tdbc-color(primary);
+    border: 2px solid tdbc-color(blue);
     background-color: transparent;
-    color: tdbc-color(primary);
+    color: tdbc-color(blue);
 
     &:hover,
     &:focus {
-      background-color: scale-color(tdbc-color(primary), $lightness: 80%);
+      background-color: scale-color(tdbc-color(blue), $lightness: 80%);
+      color: scale-color(tdbc-color(blue), $lightness: -30%);
     }
   }
 
