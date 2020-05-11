@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{% if post.title %}{{ post.title }} | {% endif %}Modern CSS Solutions</title>
     <meta name="description" content="{% if description %}{{ description }}{% else %}{{ post.description }}{% endif %}"/>
+    <link rel="author" href="{{ site.url }}/humans.txt" />
     <link
       rel="icon"
       href="{{ '/favicon.png' | url }}"
