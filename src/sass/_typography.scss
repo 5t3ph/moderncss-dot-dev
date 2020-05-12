@@ -127,6 +127,18 @@ article > ul > li + li {
   margin-top: 1rem;
 }
 
+.tdbc-anchor {
+  text-decoration: none;
+  opacity: 0.6;
+  font-size: 0.8em;
+  vertical-align: top;
+  margin-left: 0.25em;
+
+  &:hover {
+    opacity: 1;
+  }
+}
+
 strong {
   font-weight: $tdbc-strong-font-weight;
 }

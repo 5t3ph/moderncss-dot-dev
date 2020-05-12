@@ -69,11 +69,13 @@
           &:hover,
           &:focus {
             background-color: rgba($color, 0.15);
+            color: $color;
           }
         } @else {
           &:hover,
           &:focus {
             background-color: scale-color($color, $lightness: 90%);
+            color: $color;
           }
         }
       }

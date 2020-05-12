@@ -34,6 +34,8 @@
     "cssnano": "^4.1.10",
     "dotenv": "^8.2.0",
     "emoji-regex": "^9.0.0",
+    "markdown-it": "^10.0.0",
+    "markdown-it-anchor": "^5.2.7",
     "node-fetch": "^2.6.0",
     "node-sass": "^4.11.0",
     "postcss-cli": "^7.1.0",
