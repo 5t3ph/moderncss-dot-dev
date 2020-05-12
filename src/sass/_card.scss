@@ -34,7 +34,10 @@ $tdbc-skew: 10deg;
   /* stylelint-disable selector-max-type, selector-no-qualifying-type, selector-max-specificity */
   a.tdbc-card__title {
     position: relative;
-    color: tdbc-color(primary);
+
+    &:not([class*="tdbc-ink"]) {
+      color: tdbc-color(primary);
+    }
 
     &:focus {
       outline: none;
@@ -138,7 +141,8 @@ $tdbc-skew: 10deg;
 
   img:first-child {
     object-fit: cover;
-    max-height: 10em;
+    max-height: 5em;
+    border-radius: 50%;
   }
   // stylelint-enable
 
@@ -158,6 +162,31 @@ $tdbc-skew: 10deg;
     &::before,
     &::after {
       background: none;
+    }
+  }
+}
+
+.tdbc-card--text {
+  .tdbc-card__content {
+    margin: 0;
+
+    img,
+    p,
+    a,
+    footer {
+      z-index: 1;
+    }
+
+    img {
+      margin: 0 auto 2rem;
+    }
+
+    footer {
+      margin-top: 0;
+
+      cite {
+        font-size: 0.8em;
+      }
     }
   }
 }

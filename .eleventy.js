@@ -5,6 +5,8 @@ const slugify = require("slugify");
 const syntaxHighlight = require("@11ty/eleventy-plugin-syntaxhighlight");
 const pluginRss = require("@11ty/eleventy-plugin-rss");
 const topics = require("./src/_data/topics");
+const markdownIt = require("markdown-it");
+const markdownItAnchor = require("markdown-it-anchor");
 
 module.exports = function (eleventyConfig) {
   eleventyConfig.addPlugin(syntaxHighlight);
@@ -77,6 +79,29 @@ module.exports = function (eleventyConfig) {
     return "";
   });
 
+  eleventyConfig.addShortcode("review", (index) => {
+    let review = index !== "random" && reviews[index];
+
+    if (index === "random") {
+      const randomIndex = Math.floor(Math.random() * reviews.length);
+      review = reviews[randomIndex];
+    }
+
+    if (review !== undefined) {
+      return `<li class="tdbc-card tdbc-card--text">
+          <blockquote class="tdbc-card__content tdbc-text-align-center">
+            <img src="${review.avatar}" alt="${review.name}" />
+            <p class="tdbc-ink--secondary">${review.quote}</p>
+            <footer>
+              <cite class"tdbc-ink--gray">&mdash; <a href="${review.source}">${review.name}</a></cite>
+            </footer>
+          </blockquote>
+        </li>`;
+    }
+
+    return "";
+  });
+
   eleventyConfig.addFilter("postDate", (dateObj) => {
     return DateTime.fromISO(dateObj, {
       zone: "America/Chicago",
@@ -122,6 +147,18 @@ module.exports = function (eleventyConfig) {
     });
     return pageArr.slice(0, limit);
   });
+
+  /* Markdown Overrides */
+  let markdownLibrary = markdownIt({
+    html: true,
+  }).use(markdownItAnchor, {
+    permalink: true,
+    permalinkClass: "tdbc-anchor",
+    permalinkSymbol: "#",
+    // permalinkBefore: true,
+    permalinkSpace: false,
+  });
+  eleventyConfig.setLibrary("md", markdownLibrary);
 
   return {
     passthroughFileCopy: true,
