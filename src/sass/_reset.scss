@@ -23,16 +23,17 @@ h6 {
 
 html {
   scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 
 /* Set core body defaults */
 body {
   min-height: 100vh;
-  scroll-behavior: smooth;
-  font-family: sans-serif;
+  font-family: $tdbc-font-family;
   font-size: 100%;
   line-height: 1.5;
   text-rendering: optimizeSpeed;
+  overflow-x: hidden;
 }
 
 /* Make images easier to work with */
