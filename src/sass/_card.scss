@@ -33,8 +33,6 @@ $tdbc-skew: 10deg;
 
   /* stylelint-disable selector-max-type, selector-no-qualifying-type, selector-max-specificity */
   a.tdbc-card__title {
-    position: relative;
-
     &:not([class*="tdbc-ink"]) {
       color: tdbc-color(primary);
     }
@@ -44,14 +42,31 @@ $tdbc-skew: 10deg;
     }
 
     &.tdbc-peekaboo {
+      display: grid;
+      grid-template-areas: "title";
+
+      span,
       &::before {
-        position: absolute;
-        top: -1.25em;
+        grid-area: title;
+      }
+
+      &::before {
+        position: relative;
+        margin-top: -1.25em;
         color: tdbc-color(gray);
         font-size: 0.9rem;
         text-transform: uppercase;
         content: "Pick me!";
       }
+    }
+
+    &::after {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      content: "";
     }
   }
 

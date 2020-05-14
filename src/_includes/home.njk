@@ -41,7 +41,7 @@ layout: base.njk
       {% endif %}
       <li class="tdbc-card tdbc-episode index{{ loop.index0 + 1 }}">
         <div class="tdbc-card__content" data-episode="{{ post.data.post.episode }}">
-          <a href="{{ post.url }}" class="tdbc-card__title">{{ post.data.post.title }}</a>
+          <a href="{{ post.url }}" class="tdbc-card__title"><span>{{ post.data.post.title }}</span></a>
           <p>{{ post.data.post.description }}</p>
         </div>
       </li>
