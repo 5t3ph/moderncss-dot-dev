@@ -13,7 +13,9 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addPlugin(pluginRss);
 
   eleventyConfig.addWatchTarget("./src/sass/");
+  // eleventyConfig.addWatchTarget("./src/demos/");
 
+  // eleventyConfig.addPassthroughCopy("./src/demos");
   eleventyConfig.addPassthroughCopy("./src/css");
   eleventyConfig.addPassthroughCopy("./src/fonts");
   eleventyConfig.addPassthroughCopy("./src/img");
@@ -155,7 +157,6 @@ module.exports = function (eleventyConfig) {
     permalink: true,
     permalinkClass: "tdbc-anchor",
     permalinkSymbol: "#",
-    // permalinkBefore: true,
     permalinkSpace: false,
   });
   eleventyConfig.setLibrary("md", markdownLibrary);

@@ -1,0 +1,50 @@
+// stylelint-disable selector-class-pattern
+
+@import "theme";
+
+.demo {
+  margin-bottom: 2rem;
+  border: 2px dashed tdbc-color(blue);
+  border-radius: 8px;
+  font-size: $tdbc-h3-font-size;
+
+  > * {
+    outline: 1px dotted tdbc-color(yellow);
+  }
+}
+
+.gridvh {
+  display: grid;
+  height: 30vh;
+}
+
+.gridpc {
+  place-content: center;
+}
+
+.gridpi {
+  place-items: center;
+}
+
+.flexvh {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 30vh;
+}
+
+.flexcolumn {
+  flex-direction: column;
+}
+
+.gridafc {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(10ch, 1fr));
+
+  &--fw {
+    width: 100%;
+  }
+}

@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{% if post.title %}{{ post.title }} | {% endif %}Modern CSS Solutions</title>
+    <title>{% if post.title %}{{ post.title }} | {% endif %}{% if title %}{{ title }} | {% endif %}Modern CSS Solutions</title>
     <meta name="description" content="{% if description %}{{ description }}{% else %}{{ post.description }}{% endif %}"/>
     <link rel="author" href="{{ site.url }}/humans.txt" />
     <link
@@ -14,17 +14,24 @@
       href="{{ '/css/style.css' | url }}"
       rel="stylesheet" 
     />
+    {% if stylesheet %}
+    {% set css = '/css/' + stylesheet  + '.css' %}
+    <link
+      href="{{ css | url }}"
+      rel="stylesheet" 
+    />
+    {% endif %}
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:creator" content="@5t3ph">
-    <meta name="twitter:title" content="{% if post.title %}{{ post.title }}{% else %}Modern CSS Solutions{% endif %}">
+    <meta name="twitter:title" content="{% if post.title %}{{ post.title }}{% elseif title %}{{ title }}{% else %}Modern CSS Solutions{% endif %}">
     <meta name="twitter:description" content="{% if description %}{{ description }}{% else %}{{ post.description }}{% endif %}">
 
     {% if page.url == '/' %}
       <meta property="og:image" content="{{ site.url }}/img/home.png" />
       <meta name="twitter:image" content="{{ site.url }}/img/home.png" />
     {% else %}
-      <meta property="og:image" content="{{ site.url }}/img/{{ post.title | slug }}.png" />
-      <meta name="twitter:image" content="{{ site.url }}/img/{{ post.title | slug }}.png" />
+      <meta property="og:image" content="{{ site.url }}/img/{% if post.title %}{{ post.title | slug }}{% else %}{{ title | slug }}{% endif %}.png" />
+      <meta name="twitter:image" content="{{ site.url }}/img/{% if post.title %}{{ post.title | slug }}{% else %}{{ title | slug }}{% endif %}.png" />
     {% endif %}
     <link rel="alternate" type="application/rss+xml" title="RSS Feed for ModernCSS.dev" href="/feed/" />
   </head>
