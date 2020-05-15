@@ -13,6 +13,12 @@ module.exports = () => {
       quote: "This is excellent.",
     },
     {
+      name: "Smashing Magazine",
+      avatar: "https://pbs.twimg.com/profile_images/1242374315703664641/qIJwxb3i_400x400.jpg",
+      source: "https://twitter.com/smashingmag/status/1261319412944121856",
+      quote: "A brilliant practical overview",
+    },
+    {
       name: "Lynn Fisher (@lynnandtonic)",
       avatar: "https://pbs.twimg.com/profile_images/477556215401025537/zH_q0-_s_400x400.png",
       source: "https://twitter.com/lynnandtonic/status/1260950561576247296",
