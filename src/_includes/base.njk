@@ -19,6 +19,8 @@
     <meta name="twitter:title" content="{% if post.title %}{{ post.title }}{% else %}Modern CSS Solutions{% endif %}">
     <meta name="twitter:description" content="{% if description %}{{ description }}{% else %}{{ post.description }}{% endif %}">
 
+    <meta name="og:title" content="{% if post.title %}{{ post.title }}{% else %}Modern CSS Solutions{% endif %}">
+    <meta name="og:description" content="{% if description %}{{ description }}{% else %}{{ post.description }}{% endif %}">
     {% if page.url == '/' %}
       <meta property="og:image" content="{{ site.url }}/img/home.png" />
       <meta name="twitter:image" content="{{ site.url }}/img/home.png" />
