@@ -16,8 +16,11 @@ const path = require("path");
   // Load html from template
   const html = fs.readFileSync(path.resolve(__dirname, "./template.html")).toString();
 
-  // Get generated post json
+  // Get generated data json
   const posts = require("./posts.json");
+  const pages = require("./pages.json");
+
+  const data = posts.concat(pages);
 
   // Render html, wait for 0 network connections to ensure webfonts downloaded
   await page.setContent(html, {
@@ -39,15 +42,19 @@ const path = require("path");
   if (!fs.existsSync(dir)) fs.mkdirSync(dir);
 
   // Go over all the posts
-  for (const post of posts) {
+  for (const post of data) {
     // Update the H1 element with the post title
     await page.evaluate((post) => {
       const title = document.querySelector("h1");
       title.innerHTML = post.title;
 
-      // Add episode number
-      const episode = document.querySelector(".episode");
-      episode.innerHTML = post.episode;
+      const meta = document.querySelector(".meta");
+      if (post.episode) {
+        // Add episode number
+        meta.innerHTML = `Series Episode # ${post.episode}`;
+      } else {
+        meta.innerHTML = "Written by Stephanie Eckles";
+      }
     }, post);
 
     console.log(`Image: ${post.slug}.png`);

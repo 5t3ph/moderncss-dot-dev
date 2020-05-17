@@ -23,6 +23,10 @@ main.tdbc-container {
 footer {
   margin-top: 4rem;
 
+  &.tdbc-background--secondary {
+    background-color: scale-color(tdbc-color(secondary), $lightness: -18%, $saturation: -10%);
+  }
+
   .tdbc-container {
     padding-top: 0;
     padding-bottom: 0;

@@ -155,8 +155,14 @@ module.exports = function (eleventyConfig) {
     permalink: true,
     permalinkClass: "tdbc-anchor",
     permalinkSymbol: "#",
-    // permalinkBefore: true,
     permalinkSpace: false,
+    level: [1, 2, 3],
+    slugify: (s) =>
+      s
+        .trim()
+        .toLowerCase()
+        .replace(/[\s*+~.·,'"`´%!?¿:@\/]/g, "-")
+        .replace(/[()]/g, ""),
   });
   eleventyConfig.setLibrary("md", markdownLibrary);
 
