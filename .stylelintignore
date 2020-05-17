@@ -5,3 +5,4 @@ _prism.scss
 public/
 src/css/
 functions/template.html
+*.md

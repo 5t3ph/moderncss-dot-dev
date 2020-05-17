@@ -4,8 +4,8 @@ node_modules
 # build artefacts
 public
 src/css
-functions/posts.json
-functions/template.html
+functions/*.json
+functions/*.html
 src/img/*
 !src/img/home.png
 

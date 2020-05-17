@@ -1,8 +1,25 @@
-// stylelint-disable selector-class-pattern
+// stylelint-disable selector-class-pattern, selector-max-universal, selector-max-type
 
 @import "theme";
 
+main ol:first-of-type {
+  color: tdbc-color(blue);
+
+  li {
+    font-size: 1.5rem;
+
+    a {
+      color: tdbc-color(gray);
+    }
+
+    + li {
+      margin-top: 1rem;
+    }
+  }
+}
+
 .demo {
+  min-height: 30vh;
   margin-bottom: 2rem;
   border: 2px dashed tdbc-color(blue);
   border-radius: 8px;
@@ -13,9 +30,8 @@
   }
 }
 
-.gridvh {
+.grid {
   display: grid;
-  height: 30vh;
 }
 
 .gridpc {
@@ -26,25 +42,95 @@
   place-items: center;
 }
 
+.gridv {
+  align-content: center;
+}
+
+.gridh {
+  justify-content: center;
+}
+
+.gridx {
+  grid-auto-flow: column;
+}
+
+.flex {
+  display: flex;
+}
+
 .flexvh {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 30vh;
 }
 
 .flexcolumn {
   flex-direction: column;
 }
 
+.flexv {
+  align-items: center;
+}
+
+.flexh {
+  justify-content: center;
+}
+
+.flexhy {
+  align-items: center;
+}
+
+.flexvy {
+  justify-content: center;
+}
+
+.ma {
+  margin: auto;
+}
+
+.max {
+  max-width: 15ch;
+}
+
 .gridafc {
-  list-style: none;
+  display: grid;
   margin: 0;
   padding: 0;
-  display: grid;
   grid-template-columns: repeat(auto-fit, minmax(10ch, 1fr));
+  list-style: none;
 
   &--fw {
     width: 100%;
+  }
+}
+
+.blocky {
+  position: relative;
+
+  > * {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+}
+
+.blockh {
+  position: relative;
+
+  > * {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}
+
+.blockvh {
+  position: relative;
+
+  > * {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
   }
 }
