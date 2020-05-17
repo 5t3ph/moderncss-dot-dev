@@ -1,6 +1,6 @@
 ---
 title: "The Complete Guide to Centering in CSS"
-description: "Description"
+description: "Learn how to finally solve the mystery of centering in CSS using grid, flexbox, and classic block element layout."
 permalink: "/complete-guide-to-centering-in-css/"
 stylesheet: "centering"
 layout: demo.njk
