@@ -161,8 +161,8 @@ module.exports = function (eleventyConfig) {
       s
         .trim()
         .toLowerCase()
-        .replace(/[\s*+~.·,'"`´%!?¿:@\/]/g, "-")
-        .replace(/[()]/g, ""),
+        .replace(/[\s+~\/]/g, "-")
+        .replace(/[().`,%·'"!?¿:@*]/g, ""),
   });
   eleventyConfig.setLibrary("md", markdownLibrary);
 
