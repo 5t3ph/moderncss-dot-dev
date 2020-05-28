@@ -19,6 +19,12 @@ module.exports = () => {
       quote: "A brilliant practical overview",
     },
     {
+      name: "Ali Spittel (@aspittel)",
+      avatar: "https://pbs.twimg.com/profile_images/1253288185674809344/alkamt7b_400x400.jpg",
+      source: "https://twitter.com/ASpittel/status/1264923866205425668",
+      quote: "Moderncss.dev is unreal good! So impressed by it!!!",
+    },
+    {
       name: "Lynn Fisher (@lynnandtonic)",
       avatar: "https://pbs.twimg.com/profile_images/477556215401025537/zH_q0-_s_400x400.png",
       source: "https://twitter.com/lynnandtonic/status/1260950561576247296",
