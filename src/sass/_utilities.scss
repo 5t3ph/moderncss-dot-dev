@@ -17,6 +17,17 @@
   }
 }
 
+.tdbc-list-unstyled {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  // stylelint-disable-next-line selector-max-type
+  li {
+    margin: 0.5rem;
+  }
+}
+
 $tdbc-alignments: left, center, right !default;
 
 @each $alignment in $tdbc-alignments {

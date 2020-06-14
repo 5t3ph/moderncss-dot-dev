@@ -43,5 +43,11 @@ module.exports = () => {
       source: "https://twitter.com/SingaporeCSS/status/1260748569494994950",
       quote: "y'all should bookmark this and check back regularly 💙",
     },
+    {
+      name: "Ryan Boone",
+      avatar: "https://pbs.twimg.com/profile_images/1161080756069916672/Zj_5a5x9_400x400.jpg",
+      source: "https://twitter.com/therealboone/status/1271203891896561668",
+      quote: "This has become one of my favorite resources as of late.",
+    },
   ]);
 };

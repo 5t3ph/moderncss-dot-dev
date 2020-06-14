@@ -178,6 +178,11 @@ $tdbc-skew: 10deg;
     &::after {
       background: none;
     }
+
+    @media (max-width: 704px) {
+      grid-row-start: 2;
+      min-height: 30vh;
+    }
   }
 }
 
