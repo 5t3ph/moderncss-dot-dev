@@ -141,6 +141,7 @@ article > ul > li + li {
 
 strong {
   font-weight: $tdbc-strong-font-weight;
+  color: scale-color(tdbc-color(grey), $lightness: -8%);
 }
 
 a:not(.tdbc-button) {
