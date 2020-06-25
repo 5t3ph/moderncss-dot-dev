@@ -20,6 +20,10 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy("./src/favicon.png");
   eleventyConfig.addPassthroughCopy("./src/robots.txt");
 
+  eleventyConfig.addCollection("snippets", function (collectionApi) {
+    return collectionApi.getFilteredByGlob("./src/snippets/*.md");
+  });
+
   eleventyConfig.addFilter("slug", (str) => {
     const regex = emojiRegex();
     // Remove Emoji first

@@ -1,0 +1,27 @@
+---
+layout: base.njk
+---
+
+<nav class="tdbc-nav">
+  <a href="/" class="tdbc-logo-m">M</a>
+</nav>
+<header class="tdbc-hero tdbc-text-align-center">
+  <div class="tdbc-container tdbc-content-maxlength">
+    <h1 class="tdbc-ink--primary tdbc-mb-none tdbc-mlg">{{ title }}</h1>
+    <p class="tdbc-lead tdbc-ink--gray tdbc-mt-md">
+      [figure out description here]
+    </p>
+  </div>
+</header>
+<main class="tdbc-container tdbc-postpage">
+  <!-- Some time of filtering? At least to snippet "tag" pages, enhance later -->
+  <ul>
+    {%- for snippet in collections.snippets -%}
+    <li>
+      <a href="{{ snippet.url }}">{{ snippet.data.title }}</a>
+      <p>{{ snippet.data.description }}</p>
+      <!-- join list of tags -->
+    </li>
+    {%- endfor -%}
+  </ul>
+</main>
