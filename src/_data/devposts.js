@@ -35,6 +35,10 @@ const parseDevMd = (md) => {
       result = `<a href="${m[2]}" class="tdbc-button tdbc-button--small">View post</a>`;
     }
 
+    if (type === "twitter") {
+      result = `<a href="https://twitter.com/5t3ph/status/${m[2]}" class="tdbc-button tdbc-button--small">View tweet</a>`;
+    }
+
     content = content.replace(m[0], result);
   }
   return content;
