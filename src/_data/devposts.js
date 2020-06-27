@@ -59,9 +59,13 @@ const getExcerpt = (md) => {
   const regex = /> _(.*)_\./;
   content = content.replace(regex, "").trim();
 
-  // Convert to em tags
+  // Remove italic formatting
   const em = /_(.*)_/gm;
-  content = content.replace(em, "<em>$1</em>").trim();
+  content = content.replace(em, "$1").trim();
+
+  // Remove blockquote start
+  const bq = /\s>/gm;
+  content = content.replace(bq, "").trim();
 
   return content.substr(0, content.lastIndexOf(" ", 120)) + "...";
 };
