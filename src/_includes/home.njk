@@ -28,9 +28,16 @@ layout: base.njk
         {% upcomingTopic post.data.post.episode %}
       {% endif %}
       {% if loop.index0 === 4 %}
-        {% review 0 %}
+      <li class="tdbc-card tdbc-card--teaser tdbc-card--ad">
+        <div class="tdbc-card__content tdbc-text-align-center">
+          <script async type="text/javascript" src="//cdn.carbonads.com/carbon.js?serve=CE7I52QE&placement=moderncssdev" id="_carbonads_js"></script>
+        </div>
+      </li>
       {% endif %}
       {% if loop.index0 === 8 %}
+        {% review 0 %}
+      {% endif %}
+      {% if loop.index0 === 12 %}
         <li class="tdbc-card tdbc-card--text">
           <div class="tdbc-card__content tdbc-text-align-center tdbc-my-auto">
             <a href="https://www.buymeacoffee.com/moderncss" class="tdbc-ink--secondary tdbc-card__title">Support this Series</a>
