@@ -8,7 +8,7 @@ module.exports = () => {
     },
     {
       name: "Chris Heilmann",
-      avatar: "https://pbs.twimg.com/profile_images/1666904408/codepo8_400x400.png",
+      avatar: "https://pbs.twimg.com/profile_images/1268171639331737602/M7kMlBuB_400x400.jpg",
       source: "https://twitter.com/codepo8/status/1259869074944901127",
       quote: "This is excellent.",
     },
@@ -20,7 +20,7 @@ module.exports = () => {
     },
     {
       name: "Ali Spittel (@aspittel)",
-      avatar: "https://pbs.twimg.com/profile_images/1253288185674809344/alkamt7b_400x400.jpg",
+      avatar: "https://pbs.twimg.com/profile_images/1273315516887838720/pTF-DgbL_400x400.jpg",
       source: "https://twitter.com/ASpittel/status/1264923866205425668",
       quote: "Moderncss.dev is unreal good! So impressed by it!!!",
     },
