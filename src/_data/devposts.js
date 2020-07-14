@@ -9,6 +9,16 @@ const parseDevMd = (md) => {
   const siteBug = /\. Visit \[Mod(.*)resources/m;
   content = content.replace(siteBug, "");
 
+  const carbonAd = /---/m;
+  content = content.replace(
+    carbonAd,
+    `<div class="tdbc-card tdbc-card--teaser tdbc-card--ad">
+	<div class="tdbc-card__content">
+		<script async type="text/javascript" src="//cdn.carbonads.com/carbon.js?serve=CE7I52QE&placement=moderncssdev" id="_carbonads_js"></script>
+	</div>
+</div>`,
+  );
+
   const liquidTags = /{% (\w+) (.*) %}/gm;
 
   while ((m = liquidTags.exec(md)) !== null) {
