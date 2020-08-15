@@ -1,6 +1,6 @@
 # Modern CSS Solutions for Old CSS Problems
 
-## A series by [Stephanie Eckles](https://dev.to/5t3ph)
+## A series by [Stephanie Eckles](https://thinkdobecreate.com/)
 
 Right now, it's essentially using DEV as a headless CMS to feed posts directly. But I'd love to expand it to additional resources, so stay tuned!
 
@@ -12,8 +12,8 @@ Right now, it's essentially using DEV as a headless CMS to feed posts directly. 
 - [IFTTT](https://ifttt.com/) - watches RSS feed to ping Netlify webhook to republish site when new DEV post published
 - one single teensy JS function for a bit of delight on the main page
 - 3.4kb CSS, Gzipped
-- [Speed index](https://www.webpagetest.org/result/200501_RF_05d14156c269dc86fe877e905d3bb798/) - 0.702s
-- Lighthouse score - just shy of perfect 💯due to Google Web fonts which I'm going to resolve soon!
+- [Speed index](https://www.webpagetest.org/result/200815_36_7dc8a6b9634c6fd4f76d5ef79ce0a818/) - 0.803s
+- Lighthouse score - 💯
 
 ## Feedback welcome!
 
