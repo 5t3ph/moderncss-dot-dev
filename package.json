@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "scss": "node-sass src/sass -o src/css",
-    "css": "postcss public/css/*.css -u autoprefixer cssnano -r -m",
+    "css": "AUTOPREFIXER_GRID=autoplace postcss public/css/*.css -u autoprefixer cssnano -r -m",
     "watch:eleventy": "eleventy --serve",
     "watch:sass": "node-sass --watch src/sass -o src/css",
     "develop": "ELEVENTY_ENV=dev npm run scss ; npm run watch:sass & npm run watch:eleventy",
