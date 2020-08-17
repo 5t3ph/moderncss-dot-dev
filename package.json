@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "scss": "node-sass src/sass -o src/css",
-    "css": "postcss src/css/*.css -u autoprefixer cssnano -r -m",
+    "css": "postcss public/css/*.css -u autoprefixer cssnano -r -m",
     "watch:eleventy": "eleventy --serve",
     "watch:sass": "node-sass --watch src/sass -o src/css",
     "develop": "ELEVENTY_ENV=dev npm run scss ; npm run watch:sass & npm run watch:eleventy",
@@ -49,6 +49,8 @@
     "terser": "^4.7.0"
   },
   "browserslist": [
+    "defaults",
+    "not dead",
     "last 2 versions"
   ],
   "dependencies": {
