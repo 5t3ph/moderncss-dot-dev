@@ -1,3 +1,5 @@
 module.exports = {
-  22: "CSS Shapes",
+  21: "CSS Shapes",
+  22: "Borders",
+  23: "Dealing with Data",
 };
