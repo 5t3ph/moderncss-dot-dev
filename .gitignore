@@ -6,8 +6,6 @@ public
 src/css
 functions/*.json
 functions/*.html
-src/img/*
-!src/img/home.png
 
 # secrets and errors
 .env
