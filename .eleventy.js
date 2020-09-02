@@ -90,7 +90,7 @@ module.exports = function (eleventyConfig) {
     if (review !== undefined) {
       return `<li class="tdbc-card tdbc-card--text">
           <blockquote class="tdbc-card__content tdbc-text-align-center">
-            <img src="${review.avatar}" alt="${review.name}" />
+            <img src="/img/avatars/${review.avatar}.jpg" alt="${review.name}" />
             <p class="tdbc-ink--secondary">${review.quote}</p>
             <footer>
               <cite class"tdbc-ink--gray">&mdash; <a href="${review.source}">${review.name}</a></cite>
