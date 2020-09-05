@@ -1,5 +1,7 @@
 module.exports = {
-  21: "CSS Shapes",
-  22: "Borders",
-  23: "Dealing with Data",
+  21: "Accessible Color Palettes",
+  22: "CSS Shapes",
+  23: "Borders",
+  24: "Dealing with Data",
+  25: "Responsive Images",
 };
