@@ -4,12 +4,13 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "scss": "node-sass src/sass -o src/css",
-    "css": "postcss public/css/*.css -u autoprefixer cssnano -r -m",
+    "build:sass": "sass src/sass:src/css",
+    "build:eleventy": "eleventy",
+    "build:css": "postcss public/css/*.css -u autoprefixer cssnano -r -m",
+    "watch:sass": "sass --watch src/sass:src/css",
     "watch:eleventy": "eleventy --serve",
-    "watch:sass": "node-sass --watch src/sass -o src/css",
-    "develop": "ELEVENTY_ENV=dev npm run scss ; npm run watch:sass & npm run watch:eleventy",
-    "build": "ELEVENTY_ENV=prod npm run scss ; eleventy ; npm run css ; npm run screenshot",
+    "start": "ELEVENTY_ENV=dev npm-run-all build:sass --parallel watch:*",
+    "build": "ELEVENTY_ENV=prod npm-run-all build:* screenshot",
     "lint": "stylelint 'src/sass/**/*.scss' 'src/sass/**/**/*.scss' 'src/sass/**/**/**/*.scss'",
     "lint:fix": "stylelint --fix 'src/sass/**/*.scss' 'src/sass/**/**/*.scss' 'src/sass/**/**/**/*.scss'",
     "screenshot": "node functions/images.js"
@@ -27,26 +28,27 @@
   "homepage": "https://moderncss.dev",
   "devDependencies": {
     "@11ty/eleventy": "^0.11.0",
-    "@11ty/eleventy-plugin-rss": "^1.0.7",
+    "@11ty/eleventy-plugin-rss": "^1.0.9",
     "@11ty/eleventy-plugin-syntaxhighlight": "^3.0.1",
-    "autoprefixer": "^9.8.0",
-    "axios": "^0.19.2",
+    "autoprefixer": "^9.8.6",
+    "axios": "^0.20.0",
     "cssnano": "^4.1.10",
     "dotenv": "^8.2.0",
     "emoji-regex": "^9.0.0",
     "markdown-it": "^11.0.0",
     "markdown-it-anchor": "^5.3.0",
-    "node-fetch": "^2.6.0",
-    "node-sass": "^4.14.1",
-    "postcss-cli": "^7.1.0",
-    "puppeteer": "^3.3.0",
-    "stylelint": "^13.6.0",
-    "stylelint-config-prettier": "^8.0.1",
+    "node-fetch": "^2.6.1",
+    "npm-run-all": "^4.1.5",
+    "postcss-cli": "^7.1.2",
+    "puppeteer": "^5.3.0",
+    "sass": "^1.26.10",
+    "stylelint": "^13.7.1",
+    "stylelint-config-prettier": "^8.0.2",
     "stylelint-config-standard": "^20.0.0",
     "stylelint-order": "^4.1.0",
-    "stylelint-scss": "^3.17.2",
+    "stylelint-scss": "^3.18.0",
     "stylelint-selector-bem-pattern": "^2.1.0",
-    "terser": "^4.7.0"
+    "terser": "^5.3.1"
   },
   "browserslist": [
     "defaults",
@@ -54,8 +56,8 @@
     "last 2 versions"
   ],
   "dependencies": {
-    "chrome-aws-lambda": "^3.1.1",
-    "luxon": "^1.24.1",
-    "puppeteer-core": "^3.3.0"
+    "chrome-aws-lambda": "^5.2.1",
+    "luxon": "^1.25.0",
+    "puppeteer-core": "^5.3.0"
   }
 }

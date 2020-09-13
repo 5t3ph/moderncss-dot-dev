@@ -11,9 +11,9 @@ $tdbc-brand-colors: (
 $tdbc-extended-colors: map-merge(
   $tdbc-brand-colors,
   (
-    yellow: #dedf40,
-    green: #62cb5c,
-    blue: #00bbcb,
+    "yellow": #dedf40,
+    "green": #62cb5c,
+    "blue": #00bbcb,
   )
 );
 
@@ -23,12 +23,12 @@ $tdbc-color-gray: mix(#f9f9f9, $tdbc-color-body, 70%) !default;
 $tdbc-colors: map-merge(
   $tdbc-extended-colors,
   (
-    text: $tdbc-color-body,
-    background: $tdbc-color-background,
-    background-alt: $tdbc-color-background-alt,
-    light: #fff,
-    dark: rgba(black, 0.87),
-    gray: $tdbc-color-gray,
+    "text": $tdbc-color-body,
+    "background": $tdbc-color-background,
+    "background-alt": $tdbc-color-background-alt,
+    "light": #fff,
+    "dark": rgba(black, 0.87),
+    "gray": $tdbc-color-gray,
   )
 );
 
@@ -38,20 +38,20 @@ $tdbc-colors: map-merge(
 
 $tdbc-gradient: linear-gradient(
   30deg,
-  tdbc-color(secondary) 10%,
-  tdbc-color(yellow) 25%,
-  tdbc-color(green) 50%,
-  tdbc-color(blue) 75%,
-  tdbc-color(primary) 90%
+  tdbc-color("secondary") 10%,
+  tdbc-color("yellow") 25%,
+  tdbc-color("green") 50%,
+  tdbc-color("blue") 75%,
+  tdbc-color("primary") 90%
 );
 
 // Add/remove to selectively generate `ink` (text color) classes
-$tdbc-ink-colors: primary, secondary, gray, light !default;
+$tdbc-ink-colors: "primary", "secondary", "gray", "light" !default;
 
 // Add/remove to selectively generate `background` (text color) classes
-$tdbc-background-colors: secondary !default;
+$tdbc-background-colors: "secondary" !default;
 
-$tdbc-button-variants: primary, light !default;
+$tdbc-button-variants: "primary", "light" !default;
 $tdbc-border-radius: 4px !default;
 
 // stylelint-disable value-keyword-case

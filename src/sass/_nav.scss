@@ -3,7 +3,7 @@
   place-items: center;
 
   .tdbc-logo-m {
-    color: tdbc-color(background-alt);
+    color: tdbc-color("background-alt");
     font-size: 3rem;
     line-height: 1;
     text-decoration: none;
@@ -14,7 +14,7 @@
       animation: gradient 15s linear infinite;
       animation-direction: alternate;
       transform: rotate(45deg) translateX(-45%);
-      border: 2px solid tdbc-color(background-alt);
+      border: 2px solid tdbc-color("background-alt");
       background: $tdbc-gradient;
       background-size: 1000% 100%;
     }
@@ -23,7 +23,7 @@
       outline: none;
 
       &::before {
-        box-shadow: 0 0 0 4px tdbc-color(secondary);
+        box-shadow: 0 0 0 4px tdbc-color("secondary");
       }
     }
   }

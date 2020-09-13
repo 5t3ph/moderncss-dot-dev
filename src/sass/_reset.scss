@@ -69,6 +69,6 @@ select {
 }
 
 ::selection {
-  background: tdbc-color(yellow);
-  color: tdbc-color(background-alt);
+  background: tdbc-color("yellow");
+  color: tdbc-color("background-alt");
 }

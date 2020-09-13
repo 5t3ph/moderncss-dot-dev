@@ -2,7 +2,7 @@
 body {
   display: flex;
   flex-direction: column;
-  background-color: tdbc-color(background);
+  background-color: tdbc-color("background");
   color: $tdbc-color-body;
 
   // stylelint-disable-next-line selector-max-type
@@ -24,7 +24,7 @@ footer {
   margin-top: 4rem;
 
   &.tdbc-background--secondary {
-    background-color: scale-color(tdbc-color(secondary), $lightness: -18%, $saturation: -10%);
+    background-color: scale-color(tdbc-color("secondary"), $lightness: -18%, $saturation: -10%);
   }
 
   .tdbc-container {
@@ -63,7 +63,7 @@ article {
     left: calc(50% - 20vw);
     width: 1ch;
     transform: translateX(-60%);
-    color: tdbc-color(background-alt);
+    color: tdbc-color("background-alt");
     font-family: $tdbc-headline-font-family;
     font-size: 30rem;
     line-height: 0.5;

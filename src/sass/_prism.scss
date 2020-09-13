@@ -6,7 +6,7 @@
 
 code[class*="language-"],
 pre[class*="language-"] {
-  color: tdbc-color(gray);
+  color: tdbc-color("gray");
   background: none;
   font-family: Consolas, Monaco, "Andale Mono", "Ubuntu Mono", monospace;
   text-align: left;
@@ -30,7 +30,7 @@ pre[class*="language-"] {
 
 :not(pre) > code[class*="language-"],
 pre[class*="language-"] {
-  background: tdbc-color(background-alt);
+  background: tdbc-color("background-alt");
 }
 
 /* Inline code */
@@ -48,7 +48,7 @@ pre[class*="language-"] {
 }
 
 .token.punctuation {
-  color: tdbc-color(gray);
+  color: tdbc-color("gray");
 }
 
 .token.property,
@@ -56,12 +56,12 @@ pre[class*="language-"] {
 .token.constant,
 .token.symbol,
 .token.deleted {
-  color: tdbc-color(blue);
+  color: tdbc-color("blue");
 }
 
 .token.boolean,
 .token.number {
-  color: tdbc-color(green);
+  color: tdbc-color("green");
 }
 
 .token.selector,
@@ -70,7 +70,7 @@ pre[class*="language-"] {
 .token.char,
 .token.builtin,
 .token.inserted {
-  color: tdbc-color(primary);
+  color: tdbc-color("primary");
 }
 
 .token.operator,
@@ -80,25 +80,25 @@ pre[class*="language-"] {
 .language-scss .token.string,
 .style .token.string,
 .token.variable {
-  color: tdbc-color(secondary);
+  color: tdbc-color("secondary");
 }
 
 .token.function {
-  color: tdbc-color(green);
+  color: tdbc-color("green");
 }
 
 .token.atrule,
 .token.attr-value {
-  color: scale-color(tdbc-color(primary), $lightness: 50%);
+  color: scale-color(tdbc-color("primary"), $lightness: 50%);
 }
 
 .token.keyword {
-  color: tdbc-color(blue);
+  color: tdbc-color("blue");
 }
 
 .token.regex,
 .token.important {
-  color: tdbc-color(yellow);
+  color: tdbc-color("yellow");
 }
 
 .token.important,

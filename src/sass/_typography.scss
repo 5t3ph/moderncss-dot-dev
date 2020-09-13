@@ -4,7 +4,7 @@
   font-weight: 800;
 
   &::before {
-    background-color: tdbc-color(background-alt);
+    background-color: tdbc-color("background-alt");
     transform: rotate(45deg) translateX(-20%);
     content: "";
     position: absolute;
@@ -57,7 +57,7 @@ h1 .tdbc-logo-m {
 
 @supports (background-clip: text) or (-webkit-background-clip: text) {
   h1 .tdbc-logo-m {
-    background: linear-gradient(30deg, tdbc-color(secondary) 30%, tdbc-color(primary) 70%);
+    background: linear-gradient(30deg, tdbc-color("secondary") 30%, tdbc-color("primary") 70%);
     background-clip: text;
     -webkit-background-clip: text;
     color: transparent !important;
@@ -71,7 +71,7 @@ h2 {
 }
 
 article > h2 {
-  color: tdbc-color(secondary);
+  color: tdbc-color("secondary");
 }
 
 h3,
@@ -88,7 +88,7 @@ h3,
 }
 
 article > h3 {
-  color: tdbc-color(primary);
+  color: tdbc-color("primary");
 }
 
 h4 {
@@ -141,17 +141,17 @@ article > ul > li + li {
 
 strong {
   font-weight: $tdbc-strong-font-weight;
-  color: scale-color(tdbc-color(grey), $lightness: -8%);
+  color: scale-color(tdbc-color("gray"), $lightness: -8%);
 }
 
 a:not(.tdbc-button) {
-  color: tdbc-color(blue);
+  color: tdbc-color("blue");
 }
 
 code:not([class*="language"]) {
   display: inline-block;
   padding: 0 0.15em;
-  color: tdbc-color(secondary);
+  color: tdbc-color("secondary");
   font-family: Consolas, Monaco, "Andale Mono", "Ubuntu Mono", monospace;
   font-size: 0.85em;
 }
@@ -186,12 +186,12 @@ code:not([class*="language"]) {
 blockquote {
   &:first-child {
     margin: 0 auto 3rem;
-    color: tdbc-color(primary);
+    color: tdbc-color("primary");
     text-align: center;
     max-width: 60ch;
   }
 
-  color: tdbc-color(gray);
+  color: tdbc-color("gray");
   margin: 3rem 0;
   letter-spacing: 0.02em;
   padding: 0.5rem 1.5rem;
