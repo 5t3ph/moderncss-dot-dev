@@ -198,20 +198,14 @@ blockquote {
   line-height: 1.2;
 
   &:not(:first-child) {
+    --tdbc-gradient-angle: to bottom;
+
     position: relative;
+    border-left: 2px solid;
+    border-image: $tdbc-gradient 1;
 
     em {
       color: #fff;
-    }
-
-    &::before {
-      position: absolute;
-      width: 2px;
-      left: 0;
-      top: 0;
-      bottom: 0;
-      background: $tdbc-gradient;
-      content: "";
     }
   }
 

@@ -37,7 +37,7 @@ $tdbc-colors: map-merge(
 }
 
 $tdbc-gradient: linear-gradient(
-  30deg,
+  var(--tdbc-gradient-angle),
   tdbc-color("secondary") 10%,
   tdbc-color("yellow") 25%,
   tdbc-color("green") 50%,

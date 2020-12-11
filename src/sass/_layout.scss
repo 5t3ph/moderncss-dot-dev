@@ -1,19 +1,20 @@
 // stylelint-disable-next-line selector-max-type
 body {
+  --tdbc-gradient-angle: to right;
+
   display: flex;
   flex-direction: column;
+  border-top: 0.5rem solid;
   background-color: tdbc-color("background");
   color: $tdbc-color-body;
-
-  // stylelint-disable-next-line selector-max-type
-  &::before {
-    height: 0.5rem;
-    background: $tdbc-gradient;
-    content: "";
-  }
+  border-image: $tdbc-gradient 1;
 }
 
 // stylelint-disable selector-max-type, selector-no-qualifying-type
+main {
+  --tdbc-gradient-angle: 30deg;
+}
+
 main,
 main.tdbc-container {
   padding-top: 0;

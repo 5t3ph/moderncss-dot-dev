@@ -5,16 +5,8 @@
 .tdbc-gradient-border {
   position: relative;
   padding-top: 4rem;
-
-  &::before {
-    position: absolute;
-    top: 0;
-    right: 0;
-    left: 0;
-    height: 3px;
-    background: $tdbc-gradient;
-    content: "";
-  }
+  border-top: 3px solid;
+  border-image: $tdbc-gradient 1;
 }
 
 .tdbc-list-unstyled {
