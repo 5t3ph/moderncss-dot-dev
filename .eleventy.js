@@ -2,14 +2,12 @@ const Terser = require("terser");
 const emojiRegex = require("emoji-regex");
 const { DateTime } = require("luxon");
 const slugify = require("slugify");
-const syntaxHighlight = require("@11ty/eleventy-plugin-syntaxhighlight");
 const pluginRss = require("@11ty/eleventy-plugin-rss");
 const topics = require("./src/_data/topics");
 const markdownIt = require("markdown-it");
 const markdownItAnchor = require("markdown-it-anchor");
 
 module.exports = function (eleventyConfig) {
-  eleventyConfig.addPlugin(syntaxHighlight);
   eleventyConfig.addPlugin(pluginRss);
 
   eleventyConfig.addWatchTarget("./src/sass/");
