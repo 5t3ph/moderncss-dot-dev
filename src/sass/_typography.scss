@@ -201,7 +201,9 @@ blockquote {
     --tdbc-gradient-angle: to bottom;
 
     position: relative;
-    border-left: 2px solid;
+    border-style: solid;
+    border-width: 0;
+    border-left-width: 2px;
     border-image: $tdbc-gradient 1;
 
     em {

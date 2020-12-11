@@ -4,7 +4,9 @@ body {
 
   display: flex;
   flex-direction: column;
-  border-top: 0.5rem solid;
+  border-width: 0;
+  border-top-width: 0.5rem;
+  border-style: solid;
   background-color: tdbc-color("background");
   color: $tdbc-color-body;
   border-image: $tdbc-gradient 1;

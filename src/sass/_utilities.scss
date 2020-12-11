@@ -5,7 +5,9 @@
 .tdbc-gradient-border {
   position: relative;
   padding-top: 4rem;
-  border-top: 3px solid;
+  border-width: 0;
+  border-top-width: 3px;
+  border-style: solid;
   border-image: $tdbc-gradient 1;
 }
 
