@@ -33,6 +33,7 @@
     <link rel="dns-prefetch" href="https://plausible.io">
     {% if 'moderncss' in site.url %}
     <script async defer data-domain="moderncss.dev" src="https://plausible.io/js/plausible.outbound-links.js"></script>
+    <script>window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }</script>
     {% endif %}
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:creator" content="@5t3ph">
@@ -53,7 +54,7 @@
   <body>
   {{ content | safe }}
   {% include "blm.njk" %}
-    <footer class="tdbc-background--secondary">
+    <footer id="site-footer" class="tdbc-background--secondary">
       <div class="tdbc-container tdbc-text-align-center">
       <div class="tdbc-row tdbc-ink--light tdbc-mx-auto">
         <p class="tdbc-mb-none">
@@ -123,5 +124,20 @@
     {%- if page.url != '/' %}
     <script async src="https://static.codepen.io/assets/embed/ei.js"></script>
     {% endif -%}
+
+    <script>
+      let endPage = false;
+      const intersectionObserver = new IntersectionObserver((entries) => {
+        if (entries[0].intersectionRatio <= 0) return;
+        if (endPage) return;
+        console.log('endPage');
+
+        const endEvent = () => endPage = true;
+        plausible('End of Article', {callback: endEvent});
+      }, {
+        threshold: .1
+      });
+      intersectionObserver.observe(document.querySelector('[aria-labelledby="next"]'));
+    </script>
 	</body>
 	</html>
