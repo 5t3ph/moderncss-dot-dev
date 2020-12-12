@@ -29,6 +29,11 @@
     <link rel="dns-prefetch" href="https://cdn4.buysellads.net">
     <link rel="preconnect" href="https://static.codepen.io">
     <link rel="dns-prefetch" href="https://static.codepen.io">
+    <link rel="preconnect" href="https://plausible.io">
+    <link rel="dns-prefetch" href="https://plausible.io">
+    {% if 'moderncss' in site.url %}
+    <script async defer data-domain="moderncss.dev" src="https://plausible.io/js/plausible.js"></script>
+    {% endif %}
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:creator" content="@5t3ph">
     <meta name="twitter:title" content="{% if post.title %}{{ post.title }}{% elseif title %}{{ title }}{% else %}Modern CSS Solutions{% endif %}">
