@@ -20,7 +20,10 @@ layout: base.njk
     </div>
   </header>
   <main class="tdbc-container tdbc-postpage" data-episode="{{ post.episode }}">
-    <article class="tdbc-mx-auto">{{ content | safe }}</article>
+    <article class="tdbc-mx-auto">
+    <span class="halfway"></span>
+    {{ content | safe }}
+    </article>
     <ul class="tdbc-row tdbc-list-unstyled tdbc-mt-md">
     <li>
     <a href="https://twitter.com/intent/tweet?original_referer={{ page.url | url | absoluteUrl(site.url) }}&text={{ post.title | encodeTweet }}&tw_p=tweetbutton&url={{ page.url | url | absoluteUrl(site.url) }}" class="tdbc-button tdbc-button-outlined tdbc-button--small">Tweet this article</a>

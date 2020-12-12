@@ -148,6 +148,10 @@ module.exports = function (eleventyConfig) {
     return pageArr.slice(0, limit);
   });
 
+  eleventyConfig.addFilter("stripFilename", (file) => {
+    return file.replace(/\.[^/.]+$/, "");
+  });
+
   /* Markdown Overrides */
   let markdownLibrary = markdownIt({
     html: true,

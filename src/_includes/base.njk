@@ -125,19 +125,32 @@
     <script async src="https://static.codepen.io/assets/embed/ei.js"></script>
     {% endif -%}
 
-    <script>
-      let endPage = false;
-      const intersectionObserver = new IntersectionObserver((entries) => {
-        if (entries[0].intersectionRatio <= 0) return;
-        if (endPage) return;
-        console.log('endPage');
+    {% set layoutName %}{{ layout | stripFilename }}{% endset %}
 
-        const endEvent = () => endPage = true;
-        plausible('End of Article', {callback: endEvent});
+    {% if layoutName == 'post' %}
+    <script>
+    if ('IntersectionObserver' in window) {
+      const endPageObserver = new IntersectionObserver((entries) => {
+        if (entries[0].intersectionRatio <= 0) return;
+        endPageObserver.unobserve(entries[0].target);
+        {%- if 'moderncss' in site.url %}
+        plausible('End of Article');
+        {% endif %}
       }, {
         threshold: .1
       });
-      intersectionObserver.observe(document.querySelector('[aria-labelledby="next"]'));
+      endPageObserver.observe(document.querySelector('[aria-labelledby="next"]'));
+
+      const halfwaypointObserver = new IntersectionObserver((entries) => {
+        if (entries[0].intersectionRatio <= 0) return;
+        halfwaypointObserver.unobserve(entries[0].target);
+        {%- if 'moderncss' in site.url %}
+        plausible('Halfway Point');
+        {% endif %}
+      });
+      halfwaypointObserver.observe(document.querySelector('.halfway'));
+    }
     </script>
+    {% endif %}
 	</body>
 	</html>
