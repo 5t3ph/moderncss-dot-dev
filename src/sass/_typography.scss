@@ -77,7 +77,7 @@ article > h2 {
 h3,
 .tdbc-h3 {
   font-size: calc(1.5rem + 0.875 * ((100vw - 320px) / 300));
-  font-size: clamp(1.5rem, 3vw, $tdbc-h3-font-size);
+  font-size: clamp(1.55rem, 3vw, $tdbc-h3-font-size);
 }
 
 .tdbc-hero .tdbc-h3 {
