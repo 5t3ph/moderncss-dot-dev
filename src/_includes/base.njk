@@ -136,11 +136,39 @@
 
         let ttr = entries[0].time;
         ttr = ttr / 1000;
-        ttr = Math.round(ttr / 60 / 0.25) * 0.25;
+        ttr = Math.round(ttr / 60);
+
+        let bucket = '';
+        switch (true) {
+          case (ttr < 1):
+            bucket = '< 1';
+            break;
+          case (ttr >= 1 && ttr < 2):
+            bucket = '1-2';
+            break;
+          case (ttr >= 2 && ttr < 3):
+            bucket = '2-3';
+            break;
+          case (ttr >= 3 && ttr < 5):
+            bucket = '3-5';
+            break;
+          case (ttr >= 5 && ttr < 10):
+            bucket = '5-10';
+            break;
+          case (ttr >= 10 && ttr < 15):
+            bucket = '10-15';
+            break;
+          case (ttr >= 20 && ttr < 30):
+            bucket = '20-30';
+            break;
+          default:
+            bucket = '30+';
+            break;
+        }
 
         {%- if 'moderncss' in site.url %}
         plausible('End of Article');
-        plausible('Time to Read', {props: {minutes: ttr}})
+        plausible('Time to Read', { props: { Bucket: bucket } });
         {% endif %}
       }, {
         threshold: .1
