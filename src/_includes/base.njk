@@ -133,8 +133,10 @@
       const endPageObserver = new IntersectionObserver((entries) => {
         if (entries[0].intersectionRatio <= 0) return;
         endPageObserver.unobserve(entries[0].target);
+        const ttr = (Math.ceil((entries[0].time/1000))/60).toFixed(2);
         {%- if 'moderncss' in site.url %}
         plausible('End of Article');
+        plausible('Time To Read', {props: {minutes: ttr}})
         {% endif %}
       }, {
         threshold: .1
