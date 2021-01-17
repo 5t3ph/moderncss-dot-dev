@@ -136,7 +136,7 @@
         const ttr = Math.round(((Math.round((entries[0].time/1000))/60))/.25)*0.25;
         {%- if 'moderncss' in site.url %}
         plausible('End of Article');
-        plausible('Time To Read', {props: {minutes: ttr}})
+        plausible('Time to Read', {props: {minutes: ttr}})
         {% endif %}
       }, {
         threshold: .1
