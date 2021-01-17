@@ -133,7 +133,11 @@
       const endPageObserver = new IntersectionObserver((entries) => {
         if (entries[0].intersectionRatio <= 0) return;
         endPageObserver.unobserve(entries[0].target);
-        const ttr = Math.round(((Math.round((entries[0].time/1000))/60))/.25)*0.25;
+
+        let ttr = entries[0].time;
+        ttr = ttr / 1000;
+        ttr = Math.round(ttr / 60 / 0.25) * 0.25;
+
         {%- if 'moderncss' in site.url %}
         plausible('End of Article');
         plausible('Time to Read', {props: {minutes: ttr}})
@@ -141,7 +145,7 @@
       }, {
         threshold: .1
       });
-      endPageObserver.observe(document.querySelector('[aria-labelledby="next"]'));
+      endPageObserver.observe(document.querySelector('article > :last-child'));
 
       const halfwaypointObserver = new IntersectionObserver((entries) => {
         if (entries[0].intersectionRatio <= 0) return;
