@@ -1,3 +1,4 @@
+{%- set layoutName %}{{ layout | stripFilename }}{% endset -%}
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -53,7 +54,7 @@
   </head>
   <body>
   {{ content | safe }}
-  {% include "blm.njk" %}
+  {% if layoutName != 'topics' %}{% include "blm.njk" %}{% endif %}
     <footer id="site-footer" class="tdbc-background--secondary">
       <div class="tdbc-container tdbc-text-align-center">
       <div class="tdbc-row tdbc-ink--light tdbc-mx-auto">
@@ -124,8 +125,6 @@
     {%- if page.url != '/' %}
     <script async src="https://static.codepen.io/assets/embed/ei.js"></script>
     {% endif -%}
-
-    {% set layoutName %}{{ layout | stripFilename }}{% endset %}
 
     {% if layoutName == 'post' %}
     <script>

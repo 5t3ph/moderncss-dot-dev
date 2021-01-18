@@ -5,6 +5,8 @@ pagination:
   alias: post 
   addAllPagesToCollections: true
 permalink: "/{{ post.title | slug }}/"
+eleventyComputed:
+  topics: {{ post.topics }}
 tags: posts 
 layout: post
 templateEngineOverride: md, njk 

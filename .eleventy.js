@@ -4,7 +4,7 @@ const { DateTime } = require("luxon");
 const slugify = require("slugify");
 const syntaxHighlight = require("@11ty/eleventy-plugin-syntaxhighlight");
 const pluginRss = require("@11ty/eleventy-plugin-rss");
-const topics = require("./src/_data/topics");
+const upcoming = require("./src/_data/upcoming");
 const markdownIt = require("markdown-it");
 const markdownItAnchor = require("markdown-it-anchor");
 
@@ -48,6 +48,22 @@ module.exports = function (eleventyConfig) {
     });
   });
 
+  eleventyConfig.addCollection("allTopics", function (collection) {
+    const allTopics = collection.getFilteredByTag("posts").filter((post) => {
+      const postTopics = post.data.post.topics;
+
+      return postTopics;
+    });
+
+    return allTopics;
+  });
+
+  eleventyConfig.addFilter("topic", function (arr, topic) {
+    return arr.filter((item) => {
+      return item.data.post.topics && item.data.post.topics.includes(topic);
+    });
+  });
+
   eleventyConfig.addFilter("jsonTitle", (str) => {
     let title = str.replace(/((.*)\s(.*)\s(.*))$/g, "$2&nbsp;$3&nbsp;$4");
     title = title.replace(/"(.*)"/g, '\\"$1\\"');
@@ -66,7 +82,7 @@ module.exports = function (eleventyConfig) {
 
   eleventyConfig.addShortcode("upcomingTopic", (index) => {
     const nextIndex = index + 1;
-    const nextTopic = topics[nextIndex];
+    const nextTopic = upcoming[nextIndex];
 
     if (nextTopic !== undefined) {
       return `<li class="tdbc-card tdbc-card--teaser">

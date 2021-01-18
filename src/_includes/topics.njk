@@ -1,0 +1,14 @@
+---
+layout: "page.njk"
+templateEngineOverride: "njk,md"
+---
+
+{% for topic in topics %}
+{% set hasPosts %}{{ collections.allTopics | topic(topic) | length }}{% endset %}
+{% if hasPosts > 0 %}
+## {{ topic }}
+  {% for post in collections.allTopics | topic(topic) %}
+  - [{{ post.data.post.title }}]({{ post.url }})
+  {% endfor %} 
+{% endif %}
+{% endfor %}
