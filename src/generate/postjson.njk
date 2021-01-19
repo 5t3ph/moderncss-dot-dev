@@ -8,5 +8,5 @@ eleventyExcludeFromCollections: true
    "title":"{{post.data.post.title | jsonTitle}}",
    "slug":"{{post.data.post.title | slug}}",
    "episode":"{{ post.data.post.episode }}"
-	}{% if forloop.last == false %},{% endif %}
+	}{% if loop.last == false %},{% endif %}
 {% endfor %}]
