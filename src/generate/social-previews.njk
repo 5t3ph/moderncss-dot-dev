@@ -15,6 +15,23 @@ eleventyExcludeFromCollections: true
     <!-- feed it through our cssmin filter to minify -->
     <style>
       {{ css | safe }}
+      header.tdbc-hero h1 {
+        padding-left: 6vw;
+        padding-right: 6vw;
+        font-size: 2.25rem;
+      }
+      .tdbc-nav {
+        grid-template-columns: 1fr;
+      }
+      header .tdbc-container {
+        display: flex;
+        flex-direction: column;
+        min-height: calc(100vh - 6rem);
+      }
+      .tdbc-hero .tdbc-lead {
+        margin-top: auto;
+        margin-bottom: 0;
+      }
     </style>
 </head>
 <body>
