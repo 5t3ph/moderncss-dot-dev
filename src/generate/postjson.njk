@@ -5,8 +5,8 @@ eleventyExcludeFromCollections: true
 ---
 [{% for post in collections.posts %}
 	{
-   "title":"{{post.data.post.title | jsonTitle}}",
+   "title":"{{post.data.post.title | jsonTitle | safe}}",
    "slug":"{{post.data.post.title | slug}}",
    "episode":"{{ post.data.post.episode }}"
-	}{% if forloop.last == false %},{% endif %}
+	}{% if loop.last == false %},{% endif %}
 {% endfor %}]

@@ -1,7 +1,18 @@
-module.exports = {
-  24: "CSS Selectors - Part 1",
-  25: "CSS Selectors - Part 2",
-  26: "Developing for Imperfect",
-  27: "Modals",
-  28: "Media",
-};
+module.exports = [
+  "Accessibility",
+  "Animation",
+  "Buttons",
+  "Container Queries",
+  "Custom Properties",
+  "Design",
+  "Flexbox",
+  "Forms",
+  "Grid",
+  "Images",
+  "Layout",
+  "Pseudo Elements",
+  "Responsive Design",
+  "Resources",
+  "Selectors",
+  "Typography",
+];

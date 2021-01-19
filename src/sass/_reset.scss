@@ -22,7 +22,10 @@ h6 {
 }
 
 html {
-  scroll-behavior: smooth;
+  &:focus-within {
+    scroll-behavior: smooth;
+  }
+
   overflow-x: hidden;
 }
 
@@ -44,14 +47,6 @@ img {
   border-radius: 4px;
   border: 1px solid #ddd;
   margin: 2rem auto;
-}
-
-/* Inherit fonts for inputs and buttons */
-input,
-button,
-textarea,
-select {
-  font: inherit;
 }
 
 /* Remove all animations and transitions for people that prefer not to see them */

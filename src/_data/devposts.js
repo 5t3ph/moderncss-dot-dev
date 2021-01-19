@@ -77,6 +77,10 @@ const getExcerpt = (md) => {
   const bq = /\s>/gm;
   content = content.replace(bq, "").trim();
 
+  // Remove tags comment
+  const tags = /<!-- \[(.+?)\] -->/gm;
+  content = content.replace(tags, "").trim();
+
   return content.substr(0, content.lastIndexOf(" ", 120)) + "...";
 };
 
@@ -93,14 +97,17 @@ module.exports = async () => {
 
     response = series.map((item, index) => {
       const episode = index === seriesLength ? index : seriesLength - index;
+      const markdown = item.body_markdown;
+      let topics = markdown.match(/<!-- \[(.+?)\] -->/);
 
       return {
         title: item.title,
         url: item.url,
-        body: parseDevMd(item.body_markdown),
+        body: parseDevMd(markdown),
         date: item.published_at,
         episode: episode,
-        description: getExcerpt(item.body_markdown),
+        description: getExcerpt(markdown),
+        topics: topics ? topics[1].split(", ") : false,
       };
     });
   }

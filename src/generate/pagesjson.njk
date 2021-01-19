@@ -5,7 +5,7 @@ eleventyExcludeFromCollections: true
 ---
 [{% for pages in collections.pages %}
 	{
-   "title":"{{ pages.data.title | jsonTitle}}",
+   "title":"{{ pages.data.title | jsonTitle | safe}}",
    "slug":"{{ pages.data.title | slug}}"
-	}{% if forloop.last == false %},{% endif %}
+	}{% if loop.last == false %},{% endif %}
 {% endfor %}] 

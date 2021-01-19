@@ -144,8 +144,35 @@ strong {
   color: scale-color(tdbc-color("gray"), $lightness: -8%);
 }
 
-a:not(.tdbc-button) {
+a:not([class*="button"]) {
   color: tdbc-color("blue");
+  text-underline-offset: 0.06em;
+  text-decoration-skip-ink: auto;
+
+  &:focus {
+    outline: 1px solid currentColor;
+    outline-offset: 0.15em;
+  }
+
+  article & {
+    &,
+    code {
+      text-decoration-color: scale-color(tdbc-color("blue"), $lightness: -25%);
+      text-decoration-thickness: 0.15rem;
+    }
+
+    &:visited {
+      color: tdbc-color("primary");
+      text-decoration-color: tdbc-color("primary");
+    }
+  }
+
+  code {
+    font-size: 0.83em;
+    padding: 0;
+    color: currentColor;
+    text-decoration: underline;
+  }
 }
 
 code:not([class*="language"]) {
