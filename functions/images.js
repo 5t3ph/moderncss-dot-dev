@@ -52,6 +52,8 @@ const path = require("path");
       if (post.episode) {
         // Add episode number
         meta.innerHTML = `Series Episode #${post.episode}`;
+      } else if (post.description) {
+        meta.innerHTML = post.description;
       } else {
         meta.innerHTML = "Written by Stephanie Eckles";
       }
