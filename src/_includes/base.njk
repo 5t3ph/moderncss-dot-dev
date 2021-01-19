@@ -185,5 +185,25 @@
     }
     </script>
     {% endif %}
+    {% if layoutName == 'topics' %}
+    <script>
+    const topicLinks = document.querySelectorAll('article a');
+    
+    topicLinks.forEach(function(link) {
+      link.addEventListener('click', function(e) {
+      {% if 'moderncss' in site.url %}
+        e.preventDefault();
+        const topic = e.target.parentNode.parentNode.previousElementSibling.innerText.replace('#', '');
+        plausible('Choose Topic', {
+          props: { Article: link.innerText, Topic: topic },
+        });
+        setTimeout(function() {
+          window.location = link.href;
+        }, 150);
+      {% endif %}
+      })
+    });
+    </script>
+    {% endif %}
 	</body>
 	</html>
