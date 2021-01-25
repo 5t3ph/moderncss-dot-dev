@@ -207,7 +207,7 @@ rules:
     - visibility
     - will-change
     - z-index
-  declaration-property-unit-whitelist:
+  declaration-property-unit-allowed-list:
     font-size:
       - "rem"
       - "px"
@@ -246,7 +246,7 @@ rules:
   # http://vanseodesign.com/css/sass-mixin-or-extend/
   # Besides performance, @extend actually *changes* the selector precedence by creating a compound
   # selector, which can lead to ambiguous results.
-  at-rule-blacklist:
+  at-rule-disallowed-list:
     - extend
   # Extremely useful for typos, and anything emergent can be ignored by this rule
   property-no-unknown:
@@ -279,7 +279,7 @@ rules:
   function-url-no-scheme-relative: true
   # TODO: and FIXME: warnings are super useful because they remind us that we should address these
   # within our codebase
-  comment-word-blacklist:
+  comment-word-disallowed-list:
     - - /^TODO:/
       - /^FIXME:/
     - severity: warning
