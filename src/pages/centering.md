@@ -26,6 +26,12 @@ date: "2020-05-17"
    - [X Centering for Block Elements](#x-centering-for-block-elements)
    - [X Centering for Dynamically Positioned Elements](#x-centering-for-dynamically-positioned-elements)
 
+<div class="tdbc-card tdbc-card--teaser tdbc-card--ad">
+	<div class="tdbc-card__content">
+		<script async type="text/javascript" src="//cdn.carbonads.com/carbon.js?serve=CE7I52QE&placement=moderncssdev" id="_carbonads_js"></script>
+	</div>
+</div>
+
 ## Vertically and Horizontally (XY)
 
 The holy grail: vertical and horizontal centering, aka centering along both the `x-axis` and the `y-axis`.
