@@ -20,7 +20,7 @@ layout: base.njk
   <main class="tdbc-container tdbc-postpage" data-episode="{{ post.episode }}">
     <article class="tdbc-mx-auto">
     <span class="halfway"></span>
-    {{ content | safe }}
+    {{ content | addTeaser | safe }}
     </article>
     <ul class="tdbc-row tdbc-list-unstyled tdbc-mt-md">
     <li>

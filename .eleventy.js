@@ -70,6 +70,15 @@ module.exports = function (eleventyConfig) {
     return title;
   });
 
+  eleventyConfig.addFilter("addTeaser", (content) => {
+    const position = content.lastIndexOf("</p>", 5200);
+    const pre = content.slice(0, position);
+    const post = content.substring(position, content.length);
+    const teaser = `<blockquote class="promo"><p><em>Hey there!</em> Early bird registration is available for my upcoming July workshop with Smashing Conference - <a href="">Level-Up With Modern CSS</a></p></blockquote>`;
+
+    return `${pre}${teaser}${post}`;
+  });
+
   eleventyConfig.addShortcode("year", () => `${new Date().getFullYear()}`);
 
   eleventyConfig.addShortcode("peekaboo", (index) => {
