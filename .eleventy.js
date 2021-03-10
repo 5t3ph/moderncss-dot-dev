@@ -74,7 +74,7 @@ module.exports = function (eleventyConfig) {
     const position = content.lastIndexOf("</p>", 5200);
     const pre = content.slice(0, position);
     const post = content.substring(position, content.length);
-    const teaser = `<blockquote class="promo"><p><em>Hey there!</em> Early bird registration is available for my upcoming July workshop with Smashing Conference - <a href="">Level-Up With Modern CSS</a></p></blockquote>`;
+    const teaser = `<blockquote class="promo"><p><em>Hey there!</em> Early bird registration is available for my upcoming July workshop with Smashing Conference - <a href="https://smashingconf.com/online-workshops/workshops/stephanie-eckles">Level-Up With Modern CSS</a></p></blockquote>`;
 
     return `${pre}${teaser}${post}`;
   });
