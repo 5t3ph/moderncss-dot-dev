@@ -25,9 +25,11 @@ form {
   input,
   textarea {
     padding: 0 0.5em;
-    border: 2px solid tdbc-color("text");
+    border: 2px solid;
     border-radius: 4px;
     background-color: tdbc-color("background-alt");
+    color: tdbc-color("text");
+    font: inherit;
     // stylelint-disable-next-line
     font-size: max(16px, 1.125rem);
 
