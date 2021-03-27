@@ -134,9 +134,7 @@ module.exports = function (eleventyConfig) {
   });
 
   eleventyConfig.addFilter("postDate", (dateObj) => {
-    return DateTime.fromJSDate(dateObj, {
-      zone: "UTC",
-    }).toLocaleString(DateTime.DATE_MED);
+    return DateTime.fromJSDate(dateObj).toLocaleString(DateTime.DATE_MED);
   });
 
   // https://html.spec.whatwg.org/multipage/common-microsyntaxes.html#valid-date-string
