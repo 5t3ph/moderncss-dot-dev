@@ -135,14 +135,14 @@ module.exports = function (eleventyConfig) {
 
   eleventyConfig.addFilter("postDate", (dateObj) => {
     return DateTime.fromJSDate(dateObj, {
-      zone: "utc",
+      zone: "UTC",
     }).toLocaleString(DateTime.DATE_MED);
   });
 
   // https://html.spec.whatwg.org/multipage/common-microsyntaxes.html#valid-date-string
   eleventyConfig.addFilter("htmlDateString", (dateObj) => {
     return DateTime.fromISO(dateObj, {
-      zone: "utc",
+      zone: "UTC",
     }).toFormat("yyyy-LL-dd");
   });
 
