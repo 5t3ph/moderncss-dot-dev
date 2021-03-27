@@ -1,0 +1,61 @@
+// stylelint-disable selector-max-type
+form {
+  display: grid;
+  margin-top: 2rem;
+  grid-gap: 1rem;
+  justify-items: start;
+}
+
+.tdbc-form-group {
+  display: grid;
+  width: 100%;
+  grid-gap: 0.25em;
+
+  + .tdbc-form-group,
+  + .tdbc-button {
+    margin-top: 1em;
+  }
+
+  label {
+    width: fit-content;
+    font-size: 1.35rem;
+    line-height: 1;
+  }
+
+  input,
+  textarea {
+    padding: 0 0.5em;
+    border: 2px solid;
+    border-radius: 4px;
+    background-color: tdbc-color("background-alt");
+    color: tdbc-color("text");
+    font: inherit;
+    // stylelint-disable-next-line
+    font-size: max(16px, 1.125rem);
+
+    $tdbc-outline-offset: max(2px, 0.08em);
+    $tdbc-outline-style: solid;
+    $tdbc-outline-color: tdbc-color("text");
+
+    &:focus {
+      outline: max(2px, 0.08em) $tdbc-outline-style $tdbc-outline-color;
+      outline-offset: $tdbc-outline-offset;
+    }
+
+    @supports selector(:focus-visible) {
+      &:focus {
+        outline: none;
+      }
+
+      &:focus-visible {
+        outline: max(2px, 0.08em) $tdbc-outline-style $tdbc-outline-color;
+        outline-offset: $tdbc-outline-offset;
+      }
+    }
+  }
+
+  // stylelint-disable-next-line no-descending-specificity
+  input {
+    min-height: 35px;
+  }
+}

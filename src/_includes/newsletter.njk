@@ -1,0 +1,18 @@
+<div>
+  <h2>CSS Tips & Front-End Resources</h2>
+  <p class="tdbc-lead tdbc-ink--primary">Join my newsletter for updates, tips, and resources!</p>
+</div>
+<form name="newsletter" action="/success" class="form" method="POST" netlify-honeypot="bot-field" data-netlify="true">
+	<p hidden>
+		<label>Don’t fill this out if you're human: <input name="bot-field" /></label>
+	</p>
+  <div class="tdbc-form-group">
+    <label for="first_name">First Name</label>
+    <input type="text" id="first_name" name="first_name" class="form-field">
+  </div>
+  <div class="tdbc-form-group">
+    <label for="email">Email</label>
+    <input required type="text" id="email" name="email" class="form-field">
+  </div>
+  <button class="tdbc-button" type="submit">Sign Up</button>
+</form>

@@ -68,6 +68,11 @@ $tdbc-alignments: left, center, right !default;
   padding-left: 1rem;
 }
 
+.tdbc-py-none {
+  padding-top: none;
+  padding-bottom: none;
+}
+
 @each $key, $unit in $tdbc-spacing {
   .tdbc-mt-#{$key} {
     margin-top: #{$unit};

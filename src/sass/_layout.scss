@@ -113,6 +113,12 @@ article {
   padding-top: 10vh;
   padding-bottom: 10vh;
   text-align: center;
+
+  .tdbc-page-newsletter & {
+    min-height: auto;
+    padding-top: 5vh;
+    padding-bottom: 5vh;
+  }
 }
 
 .tdbc-row {
@@ -166,4 +172,17 @@ hr {
   width: 1px;
   height: 1px;
   pointer-events: none;
+}
+
+// stylelint-disable selector-max-type
+.tdbc-page-newsletter,
+.tdbc-page-success,
+.tdbc-page-confirmation {
+  h2 {
+    max-width: 15ch;
+  }
+
+  > footer {
+    margin-top: auto;
+  }
 }

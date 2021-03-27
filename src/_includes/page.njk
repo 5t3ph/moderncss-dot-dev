@@ -5,6 +5,7 @@ layout: base.njk
   <header class="tdbc-hero tdbc-text-align-center">
     <div class="tdbc-container tdbc-content-maxlength">
       <h1 class="tdbc-ink--primary tdbc-mb-none tdbc-mlg">{{ title }}</h1>
+      {% if not landingPage %}
       <p class="tdbc-lead tdbc-ink--gray tdbc-mt-md">
       <small class="tdbc-row">
         All tutorials written by Stephanie Eckles <a href="https://twitter.com/5t3ph/" class="tdbc-icon-button" aria-label="Twitter">
@@ -15,6 +16,7 @@ layout: base.njk
         </svg>
       </a>
       </small></span></p> 
+      {% endif %}
     </div>
   </header>
   <main class="tdbc-container tdbc-postpage">
