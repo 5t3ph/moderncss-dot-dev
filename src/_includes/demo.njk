@@ -27,9 +27,9 @@ layout: base.njk
   <ul class="tdbc-column-container tdbc-column-container--postpage tdbc-mt-lg">
     {%- for post in collections.posts | randomLimit(3, page.url) -%}
       <li class="tdbc-card">
-        <div class="tdbc-card__content" data-episode="{{ post.data.post.episode }}">
-        <a href="{{ post.url }}" class="tdbc-card__title {% peekaboo loop.index0 %}"><span>{{ post.data.post.title }}</span></a>
-          <p>{{ post.data.post.description }}</p>
+        <div class="tdbc-card__content" data-episode="{{ post.data.episode }}">
+        <a href="{{ post.url }}" class="tdbc-card__title {% peekaboo loop.index0 %}"><span>{{ post.data.title }}</span></a>
+          <p>{{ post.data.description }}</p>
         </div>
       </li>
       {% if loop.index0 === 1 %}

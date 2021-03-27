@@ -4,8 +4,8 @@ layout: base.njk
   {% include "nav.njk" %}
   <header class="tdbc-hero tdbc-text-align-center">
     <div class="tdbc-container tdbc-content-maxlength">
-      <h1 class="tdbc-ink--primary tdbc-mb-none tdbc-mlg">{{ post.title }}</h1>
-      <p class="tdbc-lead tdbc-ink--gray tdbc-mt-md"><span><span>Originally posted {{ post.date | postDate }} on <a href="{{ post.url }}">DEV</a></span>
+      <h1 class="tdbc-ink--primary tdbc-mb-none tdbc-mlg">{{ title }}</h1>
+      <p class="tdbc-lead tdbc-ink--gray tdbc-mt-md"><span><span>Posted {{ date | postDate }}</span>
       <small class="tdbc-row">
         Written by Stephanie Eckles <a href="https://twitter.com/5t3ph/" class="tdbc-icon-button" aria-label="Twitter">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 26 28" aria-hidden="true">
@@ -17,19 +17,14 @@ layout: base.njk
       </small></span></p>
     </div>
   </header>
-  <main class="tdbc-container tdbc-postpage" data-episode="{{ post.episode }}">
+  <main class="tdbc-container tdbc-postpage" data-episode="{{ episode }}">
     <article class="tdbc-mx-auto">
     <span class="halfway"></span>
     {{ content | addTeaser | safe }}
     </article>
-    <ul class="tdbc-row tdbc-list-unstyled tdbc-mt-md">
-    <li>
-    <a href="https://twitter.com/intent/tweet?original_referer={{ page.url | url | absoluteUrl(site.url) }}&text={{ post.title | encodeTweet }}&tw_p=tweetbutton&url={{ page.url | url | absoluteUrl(site.url) }}" class="tdbc-button tdbc-button-outlined tdbc-button--small">Tweet this article</a>
-    </li>
-    <li>
-    <a href="{{ post.url }}" class="tdbc-button tdbc-button-outlined tdbc-button--small">Boost on DEV</a>
-    </li>
-    </ul>
+    <div class="tdbc-row tdbc-mt-md">
+    <a href="https://twitter.com/intent/tweet?original_referer={{ page.url | url | absoluteUrl(site.url) }}&text={{ title | encodeTweet }}&tw_p=tweetbutton&url={{ page.url | url | absoluteUrl(site.url) }}" class="tdbc-button tdbc-button-outlined tdbc-button--small">Tweet this article</a>
+    </div>
   </main>
   <aside aria-labelledby="next" class="tdbc-series-container tdbc-series-container--postpage tdbc-text-align-center tdbc-gradient-border tdbc-mt-md">
   <h2 id="next" class="tdbc-ink--secondary">What to Read Next</h2>
@@ -37,9 +32,9 @@ layout: base.njk
   <ul class="tdbc-column-container tdbc-column-container--postpage tdbc-mt-lg">
     {%- for post in collections.posts | randomLimit(3, page.url) -%}
       <li class="tdbc-card">
-        <div class="tdbc-card__content" data-episode="{{ post.data.post.episode }}">
-        <a href="{{ post.url }}" class="tdbc-card__title {% peekaboo loop.index0 %}"><span>{{ post.data.post.title }}</span></a>
-          <p>{{ post.data.post.description }}</p>
+        <div class="tdbc-card__content" data-episode="{{ post.data.episode }}">
+        <a href="{{ url }}" class="tdbc-card__title {% peekaboo loop.index0 %}"><span>{{ post.data.title }}</span></a>
+          <p>{{ post.data.description }}</p>
         </div>
       </li>
       {% if loop.index0 === 1 %}

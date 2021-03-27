@@ -1,4 +1,4 @@
-// stylelint-disable-next-line selector-max-type
+// stylelint-disable selector-max-type, selector-no-qualifying-type
 body {
   --tdbc-gradient-angle: to right;
 
@@ -12,7 +12,6 @@ body {
   border-image: $tdbc-gradient 1;
 }
 
-// stylelint-disable selector-max-type, selector-no-qualifying-type
 main {
   --tdbc-gradient-angle: 30deg;
 }
@@ -54,6 +53,10 @@ footer {
 
 article {
   max-width: 80ch;
+}
+
+[id] {
+  scroll-margin-top: 2em;
 }
 // stylelint-enable
 

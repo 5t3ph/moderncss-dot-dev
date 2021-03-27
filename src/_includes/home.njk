@@ -27,7 +27,7 @@ layout: base.njk
     <ul class="tdbc-column-container">
     {%- for post in collections.sortByDate -%}
       {% if loop.index0 === 0 %}
-        {% upcomingTopic post.data.post.episode %}
+        {% upcomingTopic post.data.episode %}
       {% endif %}
       {% if loop.index0 === 1 %}
         <li class="tdbc-card tdbc-card--text">
@@ -76,9 +76,9 @@ layout: base.njk
         </li>
       {% endif %}
       <li class="tdbc-card tdbc-episode index{{ loop.index0 + 1 }}">
-        <div class="tdbc-card__content" data-episode="{{ post.data.post.episode }}">
-          <a href="{{ post.url }}" class="tdbc-card__title"><span>{{ post.data.post.title }}</span></a>
-          <p>{{ post.data.post.description | safe }}</p>
+        <div class="tdbc-card__content" data-episode="{{ post.data.episode }}">
+          <a href="{{ post.url }}" class="tdbc-card__title"><span>{{ post.data.title }}</span></a>
+          <p>{{ post.data.description | safe }}</p>
         </div>
       </li>
     {%- endfor -%}

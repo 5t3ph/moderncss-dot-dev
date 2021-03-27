@@ -9,7 +9,7 @@ eleventyExcludeFromCollections: true
 	{% set absoluteUrl %}{{ '/feed/' | url | absoluteUrl(site.url) }}{% endset %}
 	<link href="{{ absoluteUrl }}" rel="self"/>
 	<link href="{{ site.url }}"/>
-	<updated>{{ collections.sortByDate | rssLastUpdatedDate }}</updated>
+	<updated>{{ collections.sortByDate | getNewestCollectionItemDate | dateToRfc3339 }}</updated>
 	<id>{{ site.url }}</id>
 	<author>
 		<name>Stephanie Eckles</name>
@@ -17,9 +17,9 @@ eleventyExcludeFromCollections: true
 	{%- for post in collections.sortByDate %}
 	{% set absolutePostUrl %}{{ post.url | url | absoluteUrl(site.url) }}{% endset %}
 	<entry>
-		<title>{{ post.data.post.title  }}</title>
+		<title>{{ post.data.title  }}</title>
 		<link href="{{ absolutePostUrl }}"/>
-		<updated>{{ post.data.post.date | postRssDate }}</updated>
+		<updated>{{ post.data.date | dateToRfc3339 }}</updated>
 		<id>{{ absolutePostUrl }}</id>
 		<content type="html">{{ post.templateContent | htmlToAbsoluteUrls(absolutePostUrl) }}</content>
 	</entry>
