@@ -90,6 +90,8 @@ Or whatever you'd prefer as a width value to create space for the grid columns.
 	</ul>
 </div>
 
+{% newsletterPromo %}
+
 ### XY Flexbox Solution
 
 Alternatively, you can use the very slightly more verbose Flexbox version:

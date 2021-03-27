@@ -8,7 +8,7 @@ templateEngineOverride: "njk,md"
 {% if hasPosts > 0 %}
 ## {{ topic }}
 {% for post in collections.allTopics | topic(topic) -%}
-- [{{ post.data.post.title }}]({{ post.url }})
+- [{{ post.data.title }}]({{ post.url }})
 {% endfor -%} 
 {% endif %}
 {% endfor %}

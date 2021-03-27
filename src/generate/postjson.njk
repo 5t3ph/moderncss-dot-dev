@@ -4,9 +4,9 @@ permalinkBypassOutputDir: true
 eleventyExcludeFromCollections: true
 ---
 [{% for post in collections.posts %}
-	{
-   "title":"{{post.data.post.title | jsonTitle | safe}}",
-   "slug":"{{post.data.post.title | slug}}",
-   "episode":"{{ post.data.post.episode }}"
-	}{% if loop.last == false %},{% endif %}
+   {
+      "title":"{{post.data.title | jsonTitle | safe}}",
+      "slug":"{{post.data.title | slug}}",
+      "episode":"{{ post.data.episode }}"
+   }{% if loop.last == false %},{% endif -%}
 {% endfor %}]

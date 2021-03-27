@@ -13,7 +13,7 @@ CodePen: @5t3ph
 DEV: @5t3ph
 
 /* SITE */
-Last update: {{ collections.sortByDate | rssLastUpdatedDate | htmlDateString }}
+Last update: {{ collections.sortByDate | getNewestCollectionItemDate | dateToRfc3339 | htmlDateString }}
 Language: English
 Components: HTML5, Sass
 IDE: VSCode
