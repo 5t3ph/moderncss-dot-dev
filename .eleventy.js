@@ -1,5 +1,6 @@
 const Terser = require("terser");
 const { DateTime } = require("luxon");
+const slugify = require("slugify");
 const syntaxHighlight = require("@11ty/eleventy-plugin-syntaxhighlight");
 const pluginRss = require("@11ty/eleventy-plugin-rss");
 const upcoming = require("./src/_data/upcoming");
@@ -36,6 +37,15 @@ module.exports = function (eleventyConfig) {
 
   eleventyConfig.addCollection("allTopics", function (collection) {
     return collection.getFilteredByTag("posts").filter((post) => post.data.topics);
+  });
+
+  eleventyConfig.addFilter("slug", (str) => {
+    return slugify(str, {
+      lower: true,
+      strict: true,
+      replacement: "-",
+      remove: /["]/g,
+    });
   });
 
   eleventyConfig.addFilter("topic", function (arr, topic) {
