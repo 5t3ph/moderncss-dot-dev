@@ -260,7 +260,7 @@ rules:
   # In general, we should not be modifying elements within our components, since we can't
   # predict the use cases in which users would add a certain type of element into a component.
   selector-max-type:
-    - 0
+    - 1
     - ignoreTypes:
         - /fieldset/
         - /img/

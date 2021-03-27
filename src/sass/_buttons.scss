@@ -1,3 +1,8 @@
+// stylelint-disable-next-line
+button {
+  font: inherit;
+}
+
 .tdbc-button {
   display: inline-flex;
   align-items: center;
@@ -7,6 +12,7 @@
   min-height: 44px;
   padding: 0.1em 1.5em 0;
   transition: 180ms all ease-in-out;
+  border: none;
   border-radius: 1em;
   background-color: tdbc-color("primary");
   color: tdbc-color("background");
