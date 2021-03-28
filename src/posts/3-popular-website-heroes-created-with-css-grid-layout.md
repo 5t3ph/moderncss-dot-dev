@@ -7,8 +7,6 @@ templateEngineOverride: njk, md
 date: 2020-07-02
 ---
 
-> _This is the sixteenth post in a series examining modern CSS solutions to problems I've been solving over the last 13+ years of being a frontend developer_.
-
 This episode explores creating website heroes - aka "headers" - with one of my favorite ways to use CSS grid layout: by turning it into a canvas.
 
 {% carbonAd %}

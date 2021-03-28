@@ -7,8 +7,6 @@ templateEngineOverride: njk, md
 date: 2020-11-15
 ---
 
-> _This is episode #22 in a series examining modern CSS solutions to problems I've been solving over the last 13+ years of being a frontend developer_.
-
 Modern CSS - and modern browser support - provides us three excellent methods to create pure, basic CSS shapes. In this tutorial, we will examine how to create CSS triangles using:
 
 - borders

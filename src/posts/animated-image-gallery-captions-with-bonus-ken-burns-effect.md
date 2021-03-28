@@ -7,8 +7,6 @@ templateEngineOverride: njk, md
 date: 2020-04-21
 ---
 
-> _This is the sixth post in a series examining modern CSS solutions to problems I've been solving over the last 13+ years of being a frontend developer_.
-
 This technique explores using:
 
 - `object-fit` for responsive image scaling

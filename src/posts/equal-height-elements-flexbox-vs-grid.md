@@ -7,8 +7,6 @@ templateEngineOverride: njk, md
 date: 2020-04-09
 ---
 
-> _This is the second post in a series examining modern CSS solutions to problems I've been solving over the last 13+ years of being a frontend developer_.
-
 Once upon a time (approximately 2013), I wrote a jQuery plugin to calculate equal height columns. It ensured that the very specific scenario of a row with three columns would keep the content boxes equal height no matter the length of the content they contained. The dominant layout method at the time - floats - did not handle this problem.
 
 {% carbonAd %}

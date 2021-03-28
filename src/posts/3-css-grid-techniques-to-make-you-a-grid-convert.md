@@ -7,8 +7,6 @@ templateEngineOverride: njk, md
 date: 2020-06-27
 ---
 
-> _This is the fifteenth post in a series examining modern CSS solutions to problems I've been solving over the last 13+ years of being a frontend developer_.
-
 CSS grid layout can feel daunting. In fact, I avoided it for several years and was a _diehard_ flexbox fan.
 
 Then I found the following 3 powerful properties/techniques in grid that completely changed my tune.

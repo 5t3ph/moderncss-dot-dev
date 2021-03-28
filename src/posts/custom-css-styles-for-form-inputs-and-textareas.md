@@ -7,8 +7,6 @@ templateEngineOverride: njk, md
 date: 2020-08-31
 ---
 
-> _This is episode #21 in a series examining modern CSS solutions to problems I've been solving over the last 13+ years of being a frontend developer_.
-
 We're going to create custom form input and textarea styles that have a near-identical appearance across the top browsers. We'll specifically style the input types of `text`, `date`, and `file`, and style the `readonly` and `disabled` states.
 
 Read on to learn how to:

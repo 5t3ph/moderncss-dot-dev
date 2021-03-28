@@ -7,8 +7,6 @@ templateEngineOverride: njk, md
 date: 2020-05-13
 ---
 
-> _This is the tenth post in a series examining modern CSS solutions to problems I've been solving over the last 13+ years of being a frontend developer_.
-
 This guide will build on the previous episode ["CSS Button Styling Guide"](https://moderncss.dev/css-button-styling-guide/) to explore the use case of icon buttons. We'll cover icon + text as well as icon-only buttons.
 
 {% carbonAd %}

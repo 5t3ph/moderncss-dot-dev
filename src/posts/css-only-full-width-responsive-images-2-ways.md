@@ -7,8 +7,6 @@ templateEngineOverride: njk, md
 date: 2020-04-14
 ---
 
-> _This is the third post in a series examining modern CSS solutions to problems I've been solving over the last 13+ years of being a frontend developer_.
-
 In the not to distant past when jQuery was King of the Mountain and CSS3 was still worth being designated as such, the most popular tool for responsive background images was the [Backstretch jQuery plugin](https://www.jquery-backstretch.com/).
 
 I used this plugin on ~30 sites prior to the following property becoming more supported (aka IE < 9 dropping in total market share):

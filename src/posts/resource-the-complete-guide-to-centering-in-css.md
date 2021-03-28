@@ -7,8 +7,6 @@ templateEngineOverride: njk, md
 date: 2020-05-17
 ---
 
-> _This is the eleventh post in a series examining modern CSS solutions to problems I've been solving over the last 13+ years of being a frontend developer_.
-
 How could I write a series called "Modern CSS Solutions _to old CSS problems_" without covering the classic question:
 
 > "How do I center a div?"

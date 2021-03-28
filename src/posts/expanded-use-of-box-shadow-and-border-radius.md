@@ -7,8 +7,6 @@ templateEngineOverride: njk, md
 date: 2020-06-21
 ---
 
-> _This is the fourteenth post in a series examining modern CSS solutions to problems I've been solving over the last 13+ years of being a frontend developer_.
-
 This episode will explore expanded usage of `box-shadow` and `border-radius` and conclude with a landing page demo using these properties to enhance the image presentation.
 
 You will learn:

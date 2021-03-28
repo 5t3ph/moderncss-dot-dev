@@ -7,8 +7,6 @@ templateEngineOverride: njk, md
 date: 2020-07-14
 ---
 
-> _This is the eighteenth post in a series examining modern CSS solutions to problems I've been solving over the last 13+ years of being a frontend developer_.
-
 Using a combination of the following properties, we can create custom, cross-browser, theme-able, scalable radio buttons in pure CSS:
 
 - `currentColor` for theme-ability

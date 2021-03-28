@@ -7,8 +7,6 @@ templateEngineOverride: njk, md
 date: 2020-05-07
 ---
 
-> _This is the ninth post in a series examining modern CSS solutions to problems I've been solving over the last 13+ years of being a frontend developer_.
-
 This guide will explore the ins and outs of styling an accessible, extensible button appearance for both link and button elements.
 
 Topics covered include:

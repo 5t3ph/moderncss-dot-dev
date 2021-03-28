@@ -7,8 +7,6 @@ templateEngineOverride: njk, md
 date: 2020-05-03
 ---
 
-> _This is the eighth post in a series examining modern CSS solutions to problems I've been solving over the last 13+ years of being a frontend developer_.
-
 Let's create simplified responsive grid systems using both CSS grid and flexbox and ditch the bulk of 12-column grid systems from heavy frameworks.
 
 If you haven't really looked into grid, or rely on frameworks to think about flexbox for you, this will help you level up your understanding 🚀

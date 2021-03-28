@@ -7,8 +7,6 @@ templateEngineOverride: njk, md
 date: 2020-12-30
 ---
 
-> _This is episode #25 in a series examining modern CSS solutions to problems I've been solving over the last 13+ years of being a frontend developer_.
-
 [Continuing from part one](https://moderncss.dev/guide-to-advanced-css-selectors-part-one/), this episode will focus on the advanced CSS selectors categorized as pseudo classes and pseudo elements and practical applications for each. We'll especially try to make sense of the syntax for `nth-child`.
 
 ## Part Two (this article):

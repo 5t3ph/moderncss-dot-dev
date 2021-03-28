@@ -7,8 +7,6 @@ templateEngineOverride: njk, md
 date: 2020-12-11
 ---
 
-> _This is episode #23 in a series examining modern CSS solutions to problems I've been solving over the last 13+ years of being a frontend developer_.
-
 When it comes to CSS, sometimes a `border` is not really a `border`.
 
 In this episode, we'll cover the differences between:

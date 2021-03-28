@@ -7,8 +7,6 @@ templateEngineOverride: njk, md
 date: 2020-06-11
 ---
 
-> _This is the thirteenth post in a series examining modern CSS solutions to problems I've been solving over the last 13+ years of being a frontend developer_.
-
 True container queries are a much asked for CSS feature that would be a complement to media queries but be placed on container elements instead of the viewport.
 
 > [Here's Miriam Suzanne's container queries proposal](https://gist.github.com/mirisuzanne/748169312f110d6246e092945673b16e) which is [being prototyped in Chromium](https://bugs.chromium.org/p/chromium/issues/detail?id=1145970)

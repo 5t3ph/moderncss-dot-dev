@@ -7,8 +7,6 @@ templateEngineOverride: njk, md
 date: 2020-08-15
 ---
 
-> _This is episode #20 in a series examining modern CSS solutions to problems I've been solving over the last 13+ years of being a frontend developer_.
-
 Modern CSS gives us a range of properties to achieve custom select styles that have a near-identical initial appearance for single, multiple, and disabled `select` elements across the top browsers.
 
 A few properties and techniques our solution will use:

@@ -7,8 +7,6 @@ templateEngineOverride: njk, md
 date: 2020-04-18
 ---
 
-> _This is the fifth post in a series examining modern CSS solutions to problems I've been solving over the last 13+ years of being a frontend developer_.
-
 This tutorial will show how to use CSS grid layout for easy custom list styling in addition to:
 
 - Data attributes as the content of pseudo elements

@@ -7,8 +7,6 @@ templateEngineOverride: njk, md
 date: 2020-04-16
 ---
 
-> _This is the fourth post in a series examining modern CSS solutions to problems I've been solving over the last 13+ years of being a frontend developer_.
-
 "Back to top" links may not be in use often these days, but there are two modern CSS features that the technique demonstrates well:
 
 - `position: sticky`

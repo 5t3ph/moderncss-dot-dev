@@ -7,8 +7,6 @@ templateEngineOverride: njk, md
 date: 2020-04-09
 ---
 
-> _This is the first post in a series examining modern CSS solutions to problems I've been solving over the last 13+ years of being a frontend developer_.
-
 For many years, I constantly referred to [this article](https://matthewjamestaylor.com/bottom-footer) by Matthew James Taylor for a method to keep a webpage footer at the bottom of the page regardless of the main content length. This method relied on setting an explicit footer height, which is not scalable but a very good solution BF (Before Flexbox).
 
 If you mostly deal with SPA development, you may be confused about why this problem is still around, but it's still a possibility to find your footer floating up for:

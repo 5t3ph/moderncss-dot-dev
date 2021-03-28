@@ -7,8 +7,6 @@ templateEngineOverride: njk, md
 date: 2020-07-27
 ---
 
-> _This is the nineteenth post in a series examining modern CSS solutions to problems I've been solving over the last 13+ years of being a frontend developer_.
-
 We'll create custom, cross-browser, theme-able, scalable checkboxes in pure CSS with the following:
 
 - `currentColor` for theme-ability, including of the SVG

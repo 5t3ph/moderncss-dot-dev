@@ -7,8 +7,6 @@ templateEngineOverride: njk, md
 date: 2020-07-10
 ---
 
-> _This special Modern CSS Solutions episode is about a new project that will give you a chance to flex your CSS skills_.
-
 Dear CSS community:
 
 I invite you to participate in a new project where you have the opportunity to challenge both your CSS and web design skills while learning in public.

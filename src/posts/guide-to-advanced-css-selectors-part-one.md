@@ -7,8 +7,6 @@ templateEngineOverride: njk, md
 date: 2020-12-28
 ---
 
-> _This is episode #24 in a series examining modern CSS solutions to problems I've been solving over the last 13+ years of being a frontend developer_.
-
 Whether you choose to completely write your own CSS, or use a framework, or be required to build within a design system - understanding selectors, the cascade, and specificity are critical to developing CSS and modifying existing style rules.
 
 You're probably quite familiar with creating CSS selectors based on IDs, classes, and element types. And you've likely often used the humble space character to select descendants.
