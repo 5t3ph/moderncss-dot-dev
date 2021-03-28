@@ -2,7 +2,7 @@
 title: "CSS Button Styling Guide"
 topics: Accessibility,Buttons,Design,Flexbox
 episode: 9
-description: "This guide will explore the ins and outs of styling an accessible, extensible button appearance for both link and button..."
+description: "This guide will explore the ins and outs of styling an accessible, extensible button appearance for both link and button elements."
 templateEngineOverride: njk, md
 date: 2020-05-07
 ---

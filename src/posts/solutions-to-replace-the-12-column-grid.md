@@ -2,7 +2,7 @@
 title: "Solutions to Replace the 12-Column Grid"
 topics: Flexbox,Grid,Layout,Responsive Design
 episode: 8
-description: "Let's create simplified responsive grid systems using both CSS grid and flexbox and ditch the bulk of 12-column grid..."
+description: "Create simplified responsive grid systems using both CSS grid and flexbox. Using both, we'll create just two classes to handle from 1-4 columns of content that responsively resizes."
 templateEngineOverride: njk, md
 date: 2020-05-03
 ---

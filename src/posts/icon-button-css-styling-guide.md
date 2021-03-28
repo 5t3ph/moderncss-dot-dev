@@ -2,7 +2,7 @@
 title: "Icon Button CSS Styling Guide"
 topics: Accessibility,Buttons,Design,Flexbox
 episode: 10
-description: "This guide will build on the previous episode 'CSS Button Styling Guide' to explore the use case of icon buttons. We'll..."
+description: "This guide will build on the previous episode 'CSS Button Styling Guide' to explore the use case of icon buttons. We'll cover icon + text as well as icon-only buttons."
 templateEngineOverride: njk, md
 date: 2020-05-13
 ---

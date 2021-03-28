@@ -43,7 +43,6 @@ module.exports = function (eleventyConfig) {
     return slugify(str, {
       lower: true,
       strict: true,
-      replacement: "-",
       remove: /["]/g,
     });
   });

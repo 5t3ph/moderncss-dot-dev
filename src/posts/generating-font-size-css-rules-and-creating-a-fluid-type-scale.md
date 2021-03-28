@@ -2,7 +2,7 @@
 title: "Generating `font-size` CSS Rules and Creating a Fluid Type Scale"
 topics: Design,Responsive Design,Typography
 episode: 12
-description: "Let's take the mystery out of sizing type. Typography is both foundational to any stylesheet and the quickest way to..."
+description: "Let's take the mystery out of sizing type. Learn recommended units for `font-size`, how to generate ratio-based fluid sizes with Sass, and how to handle overflow."
 templateEngineOverride: njk, md
 date: 2020-05-28
 ---

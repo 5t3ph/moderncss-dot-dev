@@ -2,7 +2,7 @@
 title: "Guide to Advanced CSS Selectors - Part Two"
 topics: Design,Layout,Pseudo Elements,Selectors
 episode: 25
-description: "Continuing from part one, this episode will focus on the advanced CSS selectors categorized as pseudo classes and pseudo..."
+description: "Continuing from part one, this episode will focus on the advanced CSS selectors categorized as pseudo classes and pseudo elements and practical applications for each."
 templateEngineOverride: njk, md
 date: 2020-12-30
 ---

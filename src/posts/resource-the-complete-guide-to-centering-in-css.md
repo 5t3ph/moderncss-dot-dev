@@ -2,8 +2,7 @@
 title: "Resource: The Complete Guide to Centering in CSS"
 topics: Flexbox,Grid,Layout,Resources
 episode: 11
-description: "How could I write a series called  \"Modern CSS Solutions to old CSS problems \" without covering the classic question:
-..."
+description: 'This resource covers the classic CSS question: "How do I center a div?" You''ll learn a solution for every variation of how you may want to center something using grid, flexbox, and block element layout.'
 templateEngineOverride: njk, md
 date: 2020-05-17
 ---

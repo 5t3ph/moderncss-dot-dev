@@ -2,7 +2,7 @@
 title: 'Pure CSS Smooth-Scroll  "Back to Top "'
 topics: Animation,Design,Layout
 episode: 4
-description: ' "Back to top " links may not be in use often these days, but there are two modern CSS features that the technique...'
+description: '"Back to top" links may not be in use often these days, but there are two modern CSS features that the technique demonstrates well: `position: sticky` and `scroll-behavior: smooth`.'
 templateEngineOverride: njk, md
 date: 2020-04-16
 ---

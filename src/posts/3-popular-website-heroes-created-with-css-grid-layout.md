@@ -2,7 +2,7 @@
 title: "3 Popular Website Heroes Created With CSS Grid Layout"
 topics: Design,Grid,Images,Layout,Pseudo Elements,Responsive Design
 episode: 16
-description: "This episode explores creating website heroes; aka  'headers'; with one of my favorite ways to use CSS grid layout: by..."
+description: "This episode explores creating website heroes - aka  'headers' - by using CSS grid and a unique way to apply grid template areas that you can use to replace older methods that used absolute positioning."
 templateEngineOverride: njk, md
 date: 2020-07-02
 ---

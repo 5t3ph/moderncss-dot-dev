@@ -2,7 +2,7 @@
 title: "Keep the Footer at the Bottom: Flexbox vs. Grid"
 topics: Flexbox,Grid,Layout
 episode: 1
-description: "For many years, I constantly referred to this article. If you mostly deal with SPA development, you may be confused..."
+description: "Floating footers can occur for many reasons, but modern CSS methods using either flexbox or CSS grid let us plan a future-proof solution for any size layout."
 templateEngineOverride: njk, md
 date: 2020-04-09
 ---

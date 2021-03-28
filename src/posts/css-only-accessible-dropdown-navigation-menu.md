@@ -2,7 +2,7 @@
 title: "CSS-Only Accessible Dropdown Navigation Menu"
 topics: Accessibility,Animation,Grid,Responsive Design,Selectors
 episode: 7
-description: "This technique explores using: Animation with CSS `transition` and `transform`; Using the `:focus-within` pseudo-class;..."
+description: "This technique explores using: animation with CSS `transition` and `transform`, using the `:focus-within` pseudo-class, CSS grid, and accessibility considerations for dropdown menus."
 templateEngineOverride: njk, md
 date: 2020-04-23
 ---

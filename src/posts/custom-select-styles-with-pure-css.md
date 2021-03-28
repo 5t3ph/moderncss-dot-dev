@@ -2,7 +2,7 @@
 title: "Custom Select Styles with Pure CSS"
 topics: Accessibility,Custom Properties,Forms,Grid,Pseudo Elements,Selectors
 episode: 20
-description: "Modern CSS gives us a range of properties to achieve custom select styles that have a near-identical initial appearance..."
+description: "Modern CSS gives us a range of properties to achieve custom select styles that have a near-identical initial appearance. This solution uses CSS grid, `clip-path`, and CSS custom properties."
 templateEngineOverride: njk, md
 date: 2020-08-15
 ---

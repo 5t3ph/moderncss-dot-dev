@@ -2,7 +2,7 @@
 title: "CSS-Only Full-Width Responsive Images 2 Ways"
 topics: Design,Images,Layout,Responsive Design
 episode: 3
-description: "In the not to distant past when jQuery was King of the Mountain and CSS3 was still worth being designated as such, the..."
+description: "Let's look at how to use `background-size` and `object-fit` for similar full-width image effects, and learn when to select one over the other."
 templateEngineOverride: njk, md
 date: 2020-04-14
 ---

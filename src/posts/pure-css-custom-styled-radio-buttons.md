@@ -2,7 +2,7 @@
 title: "Pure CSS Custom Styled Radio Buttons"
 topics: Accessibility,Custom Properties,Forms,Grid,Pseudo Elements,Selectors
 episode: 18
-description: "Using a combination of the following properties, we can create custom, cross-browser, theme-able, scalable radio buttons..."
+description: "Learn to create custom, cross-browser, theme-able, scalable radio buttons in pure CSS and ensuring styles remain accessible across states."
 templateEngineOverride: njk, md
 date: 2020-07-14
 ---

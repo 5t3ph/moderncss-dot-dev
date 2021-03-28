@@ -2,7 +2,7 @@
 title: "The 3 CSS Methods for Adding Element Borders"
 topics: Design,Layout
 episode: 23
-description: "When it comes to CSS, sometimes a `border` is not really a `border`. In this episode, we'll cover the differences..."
+description: "In CSS, sometimes a `border` is not really a `border`. In this episode, we'll cover the differences between `border`, `outline`, and `box-shadow` and when to choose each."
 templateEngineOverride: njk, md
 date: 2020-12-11
 ---

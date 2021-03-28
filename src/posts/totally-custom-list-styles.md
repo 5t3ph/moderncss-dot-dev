@@ -2,7 +2,7 @@
 title: "Totally Custom List Styles"
 topics: Custom Properties,Design,Pseudo Elements,Responsive Design,Selectors
 episode: 5
-description: "This tutorial will show how to use CSS grid layout for easy custom list styling in addition to: Data attributes as the..."
+description: "This tutorial will show how to use CSS grid layout for easy custom list styling. We'll cover CSS counters, CSS custom properties, and responsive multi-column lists, as well as the new `::marker` pseudo selector."
 templateEngineOverride: njk, md
 date: 2020-04-18
 ---

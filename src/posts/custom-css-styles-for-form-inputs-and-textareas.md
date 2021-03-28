@@ -2,7 +2,7 @@
 title: "Custom CSS Styles for Form Inputs and Textareas"
 topics: Accessibility,Custom Properties,Forms,Selectors
 episode: 21
-description: "We're going to create custom form input and textarea styles that have a near-identical appearance across the top..."
+description: "Create custom form input and textarea styles that have a near-identical appearance across the top browsers, and ensure all states meet contrast requirements."
 templateEngineOverride: njk, md
 date: 2020-08-31
 ---

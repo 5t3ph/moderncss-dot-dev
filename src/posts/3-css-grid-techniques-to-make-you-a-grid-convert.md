@@ -2,7 +2,7 @@
 title: "3 CSS Grid Techniques to Make You a Grid Convert"
 topics: Custom Properties,Grid,Layout,Responsive Design
 episode: 15
-description: "CSS grid layout can feel daunting. In fact, I avoided it for several years and was a diehard flexbox fan. Then I found..."
+description: "Learn three powerful techniques for using grid that don't involve counting columns, including changing the default axis, centering, and responsive layout without media queries."
 templateEngineOverride: njk, md
 date: 2020-06-27
 ---

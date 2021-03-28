@@ -2,8 +2,7 @@
 title: "Pure CSS Custom Checkbox Style"
 topics: Accessibility,Custom Properties,Forms,Grid,Pseudo Elements,Selectors
 episode: 19
-description: "We'll create custom, cross-browser, theme-able, scalable checkboxes in pure CSS with the following:
-; `currentColor` for..."
+description: "We'll create custom, cross-browser, theme-able, scalable checkboxes in pure CSS. We'll use `currentColor`, the `em` unit, SVG, and CSS grid layout."
 templateEngineOverride: njk, md
 date: 2020-07-27
 ---

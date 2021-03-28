@@ -2,7 +2,7 @@
 title: "Expanded Use of `box-shadow` and `border-radius`"
 topics: Design
 episode: 14
-description: "This episode will explore expanded usage of `box-shadow` and `border-radius` and conclude with a landing page demo using..."
+description: "This episode will explore expanded usage of `box-shadow` and `border-radius` and conclude with a landing page demo using these properties to enhance the image presentation."
 templateEngineOverride: njk, md
 date: 2020-06-21
 ---

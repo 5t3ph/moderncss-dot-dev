@@ -2,7 +2,7 @@
 title: "Announcing Style Stage: A Community CSS Showcase"
 topics: Design,Layout,Responsive Design,Resources
 episode: 17
-description: "Dear CSS community: I invite you to participate in a new project where you have the opportunity to challenge both your..."
+description: "Learn about Style Stage - an opportunity to challenge both your CSS and web design skills while learning in public. A CSS playground open to contributors of all skill levels!"
 templateEngineOverride: njk, md
 date: 2020-07-10
 ---

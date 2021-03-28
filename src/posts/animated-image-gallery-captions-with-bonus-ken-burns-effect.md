@@ -2,7 +2,7 @@
 title: "Animated Image Gallery Captions with Bonus Ken Burns Effect"
 topics: Animation,Design,Grid,Images,Responsive Design
 episode: 6
-description: "This technique explores using: `object-fit` for responsive image scaling; A CSS Grid  'hack' for upgrading from position..."
+description: "This technique explores using: `object-fit` for responsive image scaling; a CSS Grid  'hack' for upgrading from position absolute, and CSS transforms for animated effects."
 templateEngineOverride: njk, md
 date: 2020-04-21
 ---

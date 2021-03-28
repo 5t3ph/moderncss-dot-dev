@@ -2,7 +2,7 @@
 title: "Container Query Solutions with CSS Grid and Flexbox"
 topics: Container Queries,Grid,Flexbox,Custom Properties,Responsive Design
 episode: 13
-description: "True container queries are a much asked for CSS feature that would be a complement to media queries but be placed on..."
+description: "Using grid and flexbox, we can create styles that respond to container and content widths and overcome some of the pain points that container queries are proposed to resolve."
 templateEngineOverride: njk, md
 date: 2020-06-11
 ---

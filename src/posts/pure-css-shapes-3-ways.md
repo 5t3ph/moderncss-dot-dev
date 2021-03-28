@@ -2,7 +2,7 @@
 title: "Pure CSS Shapes 3 Ways"
 topics: Design,Pseudo Elements
 episode: 22
-description: "Modern CSS; and modern browser support; provides us three excellent methods to create pure, basic CSS shapes. In this..."
+description: "Modern CSS and modern browser support provides us three excellent methods to create pure, basic CSS shapes. We'll look at making CSS triangles with borders, linear gradients, and `clip-path`."
 templateEngineOverride: njk, md
 date: 2020-11-15
 ---
