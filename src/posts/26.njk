@@ -1,0 +1,665 @@
+---
+title: "Developing For Imperfect: Future Proofing CSS Styles"
+topics: Accessibility,Design,Flexbox,Grid,Images,Layout,Responsive Design,Typography
+episode: 26
+description: "How do we plan future-proof styles in a world with an infinite degree of device and user ability variance? Let's explore how things can break and how modern CSS provides solutions."
+templateEngineOverride: njk, md
+date: 2021-03-28
+hideTeaser: true
+---
+
+{% set imgBase = site.url + "/img/posts/26/" %}
+
+How do we plan future-proof styles in a world with an infinite degree of device and user ability variance? Let's explore how things can break and how modern CSS provides solutions.
+
+This episode will cover handling for:
+
+- variable content length and overflow
+- unpredictable media sizes
+- internationalization
+- accessibility-related user settings
+
+{% carbonAd %}
+
+We'll explore creating a robust comment thread component. Here's our starting point - an exact mimic of the layout you received from design, good job!
+
+{% set demoTitle = "Initial Comment Thread" %}
+{% set css %}
+.comment-list {
+  list-style: none;
+  padding: 0.5rem;
+  margin: 0;
+  display: grid;
+  grid-gap: 1.5rem;
+}
+
+.comment .comment-list {
+  grid-column-start: 2;
+  grid-column-end: -1;
+  padding: 0;
+}
+
+.comment {
+  display: grid;
+  grid-template-columns: 64px 1fr;
+  grid-gap: 1rem;
+}
+
+.comment-body {
+  display: grid;
+  grid-gap: .5rem;
+  color: #444;
+}
+
+.comment-meta {
+  color: #767676;
+  font-size: .875rem;
+}
+
+.comment-body a {
+  color: inherit;
+}
+
+.comment-meta a {
+  color: mediumvioletred;
+}
+{% endset %}
+{% set cssDisplay %}
+{{- css -}}
+{% endset %}
+{% set html -%}
+<ul class="comment-list">
+  <li class="comment">
+    <span class="comment-avatar"><img alt="@baywriter avatar" src="{{ imgBase }}avatar1.png" /></span>
+    <div class="comment-body">
+      <small class="comment-meta"><a href="#">@baywriter</a> <em>15 mins ago</em></small>
+      <p>Lemon drops danish soufflé gummies dragée apple pie. Pudding gummi bears gingerbread cotton candy toffee. Caramels halvah sweet roll lollipop chocolate.</p>
+    </div>
+  </li>
+  <li class="comment">
+    <span class="comment-avatar"><img alt="@michelle avatar" src="{{ imgBase }}avatar2.png" /></span>
+    <div class="comment-body">
+      <small class="comment-meta"><a href="#">@michelle</a> <em>1 hour ago</em></small>
+      <p>Lemon drops danish soufflé gummies dragée apple pie. Pudding gummi bears gingerbread cotton candy toffee. Caramels halvah sweet roll lollipop chocolate.</p>
+    </div>
+    <ul class="comment-list">
+      <li class="comment">
+        <span class="comment-avatar"><img alt="@claudia87 avatar" src="{{ imgBase }}avatar3.png" /></span>
+        <div class="comment-body">
+          <small class="comment-meta"><a href="#">@claudia87</a> <em>October 31, 2021 at 6:54 PM</em></small>
+          <p>Lemon drops danish soufflé gummies dragée apple pie. Pudding gummi bears gingerbread cotton candy toffee. Caramels halvah sweet roll lollipop chocolate.</p>
+        </div>
+      </li>
+    </ul>
+  </li>
+</ul>
+{% endset %}
+{% include "snippet.njk" %}
+
+But if you resize it, you'll already notice a few problems, particularly with overflow.
+
+<small><em>Avatar illustrations are part of the [Women Power](https://blush.design/collections/women-power) collection on Blush by Sara Pelaez</em>.</small>
+
+
+## Responsive Planning
+
+When you can't precisely plan around content, plan for flexibility. Rather than setting absolutes, we can use CSS functions to choose the best value relative to the current context.
+
+In our `.comment` styles, we set a precise pixel value for the avatar. Instead, we can use the CSS function `min` to select the _minimum computed value_ between a list of options.
+
+{% set demoTitle = "Updated Avatar Grid Column" %}
+{% set open = 'open' %}
+{% set css %}
+.comment-list {
+  list-style: none;
+  padding: 0.5rem;
+  margin: 0;
+  display: grid;
+  grid-gap: 1.5rem;
+}
+
+.comment .comment-list {
+  grid-column-start: 2;
+  grid-column-end: -1;
+  padding: 0;
+}
+
+.comment {
+  display: grid;
+  grid-template-columns: min(64px, 15%) 1fr;
+  grid-gap: 1rem;
+}
+
+.comment-body {
+  display: grid;
+  grid-gap: .5rem;
+  color: #444;
+}
+
+.comment-meta {
+  color: #767676;
+  font-size: .875rem;
+}
+
+.comment-body a {
+  color: inherit;
+}
+
+.comment-meta a {
+  color: mediumvioletred;
+}
+{% endset %}
+{% set lineHighlight = '/2/1' %}
+{% set cssDisplay %}
+.comment {
+  grid-template-columns: 64px 1fr;
+  grid-template-columns: min(64px, 15%) 1fr;
+}
+{% endset %}
+{% include "snippet.njk" %}
+
+In this case, the impact is that the avatar will never exceed `64px` for larger viewports. And for smaller viewports _or_ within narrower containers, it will be computed as `15%` of the total comment width.
+
+As this example shows, sometimes we can turn over layout choices to the browser to make contextually versus define precise values within media queries.
+
+{% teaser %}
+
+## Always Expect More
+
+Whether characters or elements, always expect more than the original design has planned.
+
+Our avatar update has already improved things. But we're still viewing the component with "happy path" content from our designer that doesn't reflect real-world data. Notably, the user names and comment lengths are relatively short.
+
+Let's update our demo data to have a bit more variance and "real" avatars:
+
+{% set cssDisplay = false %}
+{% set html -%}
+<ul class="comment-list">
+  <li class="comment">
+    <span class="comment-avatar"><img alt="@baywriter_cactusmom avatar" src="{{ imgBase }}avatarr1.jpeg" /></span>
+    <div class="comment-body">
+      <small class="comment-meta"><a href="#">@baywriter_cactusmom</a> <em>15 mins ago</em></small>
+      <p>Podcasting operational change management inside of workflows to establish a framework. Taking seamless key performance indicators offline to maximise the long tail.</p>
+    </div>
+  </li>
+  <li class="comment">
+    <span class="comment-avatar"><img alt="@michelle_n_catz@superremail.co.uk avatar" src="{{ imgBase }}avatarr2.jpeg" /></span>
+    <div class="comment-body">
+      <small class="comment-meta"><a href="#">@michelle_n_catz@superremail.co.uk</a> <em>1 hour ago</em></small>
+      <p>Leverage agile frameworks to provide a robust synopsis for high level overviews. Iterative approaches to corporate strategy foster collaborative thinking to further the overall value proposition. Organically grow the holistic world view of disruptive innovation via workplace diversity and empowerment.</p>
+      <p>Have you seen <a href="https://moderncss.dev/3-css-grid-techniques-to-make-you-a-grid-convert/">https://moderncss.dev/3-css-grid-techniques-to-make-you-a-grid-convert/</a>? Bring to the table win-win survival strategies to ensure proactive domination. At the end of the day, going forward, a new normal that has evolved from generation X is on the runway heading towards a streamlined cloud solution.</p>
+    </div>
+    <ul class="comment-list">
+      <li class="comment">
+        <span class="comment-avatar"><img alt="@claudia87_author avatar" src="{{ imgBase }}avatarr3.jpeg" /></span>
+        <div class="comment-body">
+          <small class="comment-meta"><a href="#">@claudia87_author</a> <em>October 31, 2021 at 6:54 PM</em></small>
+          <p>Capitalize on low hanging fruit to identify a ballpark value added activity to beta test. Override the digital divide with additional clickthroughs from DevOps.</p>
+          <p>Nanotechnology immersion along the information highway will close the loop on focusing solely on the bottom line.</p>
+        </div>
+      </li>
+    </ul>
+  </li>
+</ul>
+{% endset %}
+{% include "snippet.njk" %}
+
+Not as pretty as our mockup mimic 😊
+
+Now, if you've been following along and testing our component via resizing, you'll see we have the possibility of content overflow.
+
+Let's resolve it first for the `.comment-meta`, which is the `small` tag containing the username and date.
+
+We will update the layout method to allow the username and date to line up on wider viewports and stack on smaller viewports. Simple flex behavior allows this since child elements will be their max-width when there's room and flow to a new row when the containing element reduces below that max-width.
+
+{% set demoTitle = "Update Comment Meta Layout" %}
+{% set css %}
+.comment-list {
+  list-style: none;
+  padding: 0.5rem;
+  margin: 0;
+  display: grid;
+  grid-gap: 1.5rem;
+}
+
+.comment .comment-list {
+  grid-column-start: 2;
+  grid-column-end: -1;
+  padding: 0;
+}
+
+.comment {
+  display: grid;
+  grid-template-columns: min(64px, 15%) 1fr;
+  grid-gap: 1rem;
+}
+
+.comment-body {
+  display: grid;
+  grid-gap: .5rem;
+  color: #444;
+}
+
+.comment-meta {
+  color: #767676;
+  font-size: .875rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.comment-body a {
+  color: inherit;
+}
+
+.comment-meta a {
+  color: mediumvioletred;
+}
+{% endset %}
+{% set lineHighlight = ' ' %}
+{% set cssDisplay %}
+.comment-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+{% endset %}
+{% include "snippet.njk" %}
+
+While [flexbox `gap` support](https://caniuse.com/flexbox-gap) is gaining, in this case, the degraded behavior is simply very slightly closer elements, so it isn't too detrimental not to provide a fallback.
+
+Go ahead and test this version and see how the dates bump to a new line when there isn't enough space for their full width.
+
+### Preventing Content Overflow 
+
+In the demo data, the longer email in the second comment eventually causes overflow scroll on smaller viewports. So does the extended URL in the comment body.
+
+The fix could be scoped to only the link elements if we'd like. However, due to the nature of a comment thread, it seems to make sense to be extra-preventative about overflow content in this context So we'll apply two properties to the top-level `.comment` in order to cascade to all the content within.
+
+{% set demoTitle = "Preventing Content Overflow" %}
+{% set css %}
+.comment-list {
+  list-style: none;
+  padding: 0.5rem;
+  margin: 0;
+  display: grid;
+  grid-gap: 1.5rem;
+}
+
+.comment .comment-list {
+  grid-column-start: 2;
+  grid-column-end: -1;
+  padding: 0;
+}
+
+.comment {
+  display: grid;
+  grid-template-columns: min(64px, 15%) 1fr;
+  grid-gap: 1rem;
+  word-break: break-word;
+  hyphens: auto;
+}
+
+.comment-body {
+  display: grid;
+  grid-gap: .5rem;
+  color: #444;
+}
+
+.comment-meta {
+  color: #767676;
+  font-size: .875rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.comment-body a {
+  color: inherit;
+  hyphens: none;
+}
+
+.comment-meta a {
+  color: mediumvioletred;
+}
+{% endset %}
+{% set lineHighlight = ' ' %}
+{% set cssDisplay %}
+.comment {
+  /* Help prevent overflow of long words/names/URLs */
+  word-break: break-word;
+  /* Optional, not supported for all languages */
+  hyphens: auto;
+}
+
+.comment a {
+  /* Remove from links to prevent perceiving false hyphens */
+  hyphens: none;
+}
+{% endset %}
+{% include "snippet.njk" %}
+
+Notice we removed the possibility of `hyphens` from links. In this case, the full links are visible like in our example, and someone tries to write it down or read it aloud. 
+
+> CSS-inserted hyphens are not included if a user copies the text. As noted, `hyphens` are also not consistently available for all languages in all browsers. You can [review `hyphens` support on MDN](https://developer.mozilla.org/en-US/docs/Web/CSS/hyphens#browser_compatibility).
+
+With `word-break: break-word`, any text string _may_ be broken onto a new line once the containing element doesn't have room for its full-width. When `hyphens` are supported, the bonus effect is reducing a "ragged edge" from odd spaces caused by broken words.
+
+Optionally, you may want to update links to use `word-break: break-all;` to prevent an empty space if the browser decides to move the link to a new line before applying the break. You can see our current solution on smaller viewports currently leaves a space before the long exposed link.
+
+Try out resizing the component now, and perhaps even pop open dev tools to inspect and toggle on and off these properties to see the difference in their effects.
+
+{% newsletterPromo %}
+
+## Handling Variable Media Dimensions
+
+Now let's deal with those avatars.
+
+First, we set `border-radius` to create a circle appearance. Then we ensure the image fills the grid column with `width: 100%`. Following that, we turn the image into its own container and allow the image content to fill but not exceed the `img` dimensions with `object-fit: cover`. We end the rule with a [cutting-edge property of `aspect-ratio`](https://caniuse.com/mdn-css_properties_aspect-ratio) to ensure a perfect square.
+
+{% set demoTitle = "Updated Avatar Dimensions" %}
+{% set css %}
+.comment-list {
+  list-style: none;
+  padding: 0.5rem;
+  margin: 0;
+  display: grid;
+  grid-gap: 1.5rem;
+}
+
+.comment .comment-list {
+  grid-column-start: 2;
+  grid-column-end: -1;
+  padding: 0;
+}
+
+.comment {
+  display: grid;
+  grid-template-columns: min(64px, 15%) 1fr;
+  grid-gap: 1rem;
+  word-break: break-word;
+  hyphens: auto;
+}
+
+.comment-body {
+  display: grid;
+  grid-gap: .5rem;
+  color: #444;
+}
+
+.comment-meta {
+  color: #767676;
+  font-size: .875rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.comment-body a {
+  color: inherit;
+  hyphens: none;
+}
+
+.comment-meta a {
+  color: mediumvioletred;
+}
+
+.comment-avatar img {
+  border-radius: 50%;
+  width: 100%;
+  object-fit: cover;
+  aspect-ratio: 1;
+}
+
+@supports not (aspect-ratio: 1) {
+  .comment-avatar {
+    position: relative;
+    height: 0;
+    padding-bottom: 100%;
+  }
+
+  .comment-avatar img {
+    position: absolute;
+    height: 100%;
+  }
+}
+{% endset %}
+{% set lineHighlight = ' ' %}
+{% set cssDisplay %}
+.comment img {
+  border-radius: 50%;
+  width: 100%;
+  object-fit: cover;
+  aspect-ratio: 1;
+}
+
+@supports not (aspect-ratio: 1) {
+  .comment-avatar {
+    position: relative;
+    height: 0;
+    padding-bottom: 100%;
+  }
+
+  .comment-avatar img {
+    position: absolute;
+    height: 100%;
+  }
+}
+{% endset %}
+{% include "snippet.njk" %}
+
+We follow that rule with a feature detection fallback rule - `@supports not (aspect-ratio: 1)` - for browsers that do _not_ support `aspect-ratio`. This fallback is an older technique that relies on padding to ensure a perfect square ratio of the image's parent and then ensures the `img` fills that area.
+
+> Previous Modern CSS tutorials have covered `object-fit`, such as [CSS-Only Full-Width Responsive Images 2 Ways](/css-only-full-width-responsive-images-2-ways/). You may also enjoy this [3 min video demonstrating `object-fit`](https://egghead.io/lessons/css-apply-aspect-ratio-sizing-to-images-with-css-object-fit).
+
+## Breaking Behavior To Test
+
+We've covered the scenarios we could detect fairly easily by resizing our browser/the component container. And adding more real-world data helped us define better avatar styles.
+
+There are a few more items we need to explicitly test for: internationalization (i18n) and a few relevant WCAG success criteria for accessibility.
+
+> **Terminology check**: WCAG stands for the "[Web Content Accessibility Guidelines](https://www.w3.org/WAI/standards-guidelines/wcag/)," a set of standards intended to help create more accessible and inclusive experiences. _[Success Criteria](https://www.w3.org/WAI/WCAG22/Understanding/understanding-techniques)_ are guidance that is broadly applicable to current and future web technologies in order to assist in creating experiences that are accessible.
+
+### Internationalization (i18n)
+
+Yes, the comments are silly nonsense (courtesy of [cupcake ipsum](http://www.cupcakeipsum.com/) and [corporate ipsum](https://www.cipsum.com/)). However, for something like a comment thread component that's purpose is to intake and display user-submitted content, it's a great idea to stress-test by trialing some translations.
+
+The first comment is German, the second is Estonian, and the third is Arabic.
+
+{% set cssDisplay = false %}
+{% set html -%}
+<ul class="comment-list">
+  <li lang="de" class="comment">
+    <span class="comment-avatar"><img alt="@baywriter_cactusmom avatar" src="{{ imgBase }}avatarr1.jpeg" /></span>
+    <div class="comment-body">
+      <small class="comment-meta"><a href="#">@baywriter_cactusmom</a> <em>Vor 15 Minuten</em></small>
+      <p>Podcasting des operativen Änderungsmanagements innerhalb von Workflows, um ein Framework zu erstellen. Schalten Sie nahtlose Leistungsindikatoren offline, um den Long Tail zu maximieren.</p>
+    </div>
+  </li>
+  <li lang="et" class="comment">
+    <span class="comment-avatar"><img alt="@michelle_n_catz@superremail.co.uk avatar" src="{{ imgBase }}avatarr2.jpeg" /></span>
+    <div class="comment-body">
+      <small class="comment-meta"><a href="#">@michelle_n_catz@superremail.co.uk</a> <em>1 tund tagasi</em></small>
+      <p>Kasutage agaraid raamistikke, et pakkuda põhjalikku ülevaadet kõrgetasemeliste ülevaadete jaoks. Iteratiivsed lähenemised ettevõtte strateegiale soodustavad koostöömõtlemist, et edendada üldist väärtuspakkumist.</p>
+      <p>Kasvata orgaaniliselt terviklikku maailmavaadet häirivast innovatsioonist töökoha mitmekesisuse ja mõjuvõimu suurendamise kaudu.</p>
+    </div>
+    <ul class="comment-list">
+      <li lang="ar" dir="rtl" class="comment">
+        <span class="comment-avatar"><img alt="@claudia87_author avatar" src="{{ imgBase }}avatarr3.jpeg" /></span>
+        <div class="comment-body">
+          <small class="comment-meta"><a href="#">@claudia87_author</a> <em>31 أكتوبر 2021 الساعة 6:54 مساءً</em></small>
+          <p>سيؤدي الانغماس في تقنية النانو على طول طريق المعلومات السريع إلى إغلاق الحلقة حول التركيز فقط على المحصلة النهائية</p>
+        </div>
+      </li>
+    </ul>
+  </li>
+</ul>
+{% endset %}
+{% include "snippet.njk" %}
+
+Thanks to our previous work on handling overflow, our comment thread is gracefully handling the change in content languages.
+
+On the third one that is in Arabic, the browser is handling the content direction switch due to placing the attribute `dir="rtl"` on the `.comment` list element. Interestingly, the browser intelligently switches the order of the `grid-template-columns` without our needing to do anything extra. Flexbox will also flip according to this attribute. Older styles that use floats would not flip and would require an additional override.
+
+Since I am not an RTL (right-to-left) styling expert, I will point you to this fantastic resource if you would like to [learn more about RTL styling](https://rtlstyling.com/posts/rtl-styling/).
+
+### WCAG Success Criterion 1.4.10 - Reflow
+
+Reflow is the term for supporting desktop zoom up to 400%. On a 1280px wide resolution at 400%, the viewport content is equivalent to 320 CSS pixels wide.
+
+Zooming on a desktop eventually triggers what we usually think of as "responsive design" behavior. In fact, if you are using media queries or other viewport-based layout methods, you will see those begin to take hold as you zoom in.
+
+The trouble with handling this success criterion is usually two-fold:
+- there is no `zoom` media query to adjust for any issues
+- the aspect ratio of a desktop using zoom is different than the mobile portrait mode we usually plan responsive design around
+
+The aspect ratio difference, in particular, can cause issues with overlap. It also means solutions that rely on only viewport units or percentages appear either too large or too small within a zoom context.
+
+However, viewport units used in combination with other units can actually help solve zoomed layout issues as well and gap-fill the problem of not having a dedicated `zoom` media query.
+
+If we zoom our component to 400%, the avatar column begins to grow a bit large within that context. We'd like it to take up a relatively similar size column as we perceive it at standard zoom.
+
+Recall that we originally applied `min` to the avatar's grid column, which was intended to resize the avatar for smaller containers and viewports via a percentage width. Fortunately, the `min` function can take more than two values!
+
+Now, this type of fix can take some trial and error, but to my eye, adding `10vw` as an additional value provided the desired adjustment. It also slightly reduced the avatar for true mobile viewports but was a worthwhile trade-off.
+
+The benefit of retaining the percentage width is that our component continues to be responsive to its parent container as well. If we removed it, we would not see a reduction until the viewport units began to take effect, which may objectively be too late.
+
+{% set demoTitle = "Update Column Minimum Allowed Widths" %}
+{% set html -%}
+<ul class="comment-list">
+  <li class="comment">
+    <span class="comment-avatar"><img alt="@baywriter_cactusmom avatar" src="{{ imgBase }}avatarr1.jpeg" /></span>
+    <div class="comment-body">
+      <small class="comment-meta"><a href="#">@baywriter_cactusmom</a> <em>15 mins ago</em></small>
+      <p>Podcasting operational change management inside of workflows to establish a framework. Taking seamless key performance indicators offline to maximise the long tail.</p>
+    </div>
+  </li>
+  <li class="comment">
+    <span class="comment-avatar"><img alt="@michelle_n_catz@superremail.co.uk avatar" src="{{ imgBase }}avatarr2.jpeg" /></span>
+    <div class="comment-body">
+      <small class="comment-meta"><a href="#">@michelle_n_catz@superremail.co.uk</a> <em>1 hour ago</em></small>
+      <p>Leverage agile frameworks to provide a robust synopsis for high level overviews. Iterative approaches to corporate strategy foster collaborative thinking to further the overall value proposition. Organically grow the holistic world view of disruptive innovation via workplace diversity and empowerment.</p>
+      <p>Have you seen <a href="https://moderncss.dev/3-css-grid-techniques-to-make-you-a-grid-convert/">https://moderncss.dev/3-css-grid-techniques-to-make-you-a-grid-convert/</a>? Bring to the table win-win survival strategies to ensure proactive domination. At the end of the day, going forward, a new normal that has evolved from generation X is on the runway heading towards a streamlined cloud solution.</p>
+    </div>
+    <ul class="comment-list">
+      <li class="comment">
+        <span class="comment-avatar"><img alt="@claudia87_author avatar" src="{{ imgBase }}avatarr3.jpeg" /></span>
+        <div class="comment-body">
+          <small class="comment-meta"><a href="#">@claudia87_author</a> <em>October 31, 2021 at 6:54 PM</em></small>
+          <p>Capitalize on low hanging fruit to identify a ballpark value added activity to beta test. Override the digital divide with additional clickthroughs from DevOps.</p>
+          <p>Nanotechnology immersion along the information highway will close the loop on focusing solely on the bottom line.</p>
+        </div>
+      </li>
+    </ul>
+  </li>
+</ul>
+{% endset %}
+{% set css %}
+.comment-list {
+  list-style: none;
+  padding: 0.5rem;
+  margin: 0;
+  display: grid;
+  grid-gap: 1.5rem;
+}
+
+.comment .comment-list {
+  grid-column-start: 2;
+  grid-column-end: -1;
+  padding: 0;
+}
+
+.comment {
+  display: grid;
+  grid-template-columns: min(64px, 15%, 10vw) 1fr;
+  grid-gap: 1rem;
+  word-break: break-word;
+  hyphens: auto;
+}
+
+.comment-body {
+  display: grid;
+  grid-gap: .5rem;
+  color: #444;
+}
+
+.comment-meta {
+  color: #767676;
+  font-size: .875rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.comment-body a {
+  color: inherit;
+  hyphens: none;
+}
+
+.comment-meta a {
+  color: mediumvioletred;
+}
+
+.comment-avatar img {
+  border-radius: 50%;
+  width: 100%;
+  object-fit: cover;
+  aspect-ratio: 1;
+}
+
+@supports not (aspect-ratio: 1) {
+  .comment-avatar {
+    position: relative;
+    height: 0;
+    padding-bottom: 100%;
+  }
+
+  .comment-avatar img {
+    position: absolute;
+    height: 100%;
+  }
+}
+{% endset %}
+{% set lineHighlight = '/2/1' %}
+{% set cssDisplay %}
+.comment {
+  grid-template-columns: min(64px, 15%) 1fr;
+  grid-template-columns: min(64px, 15%, 10vw) 1fr;
+}
+{% endset %}
+{% include "snippet.njk" %}
+
+If you are using a desktop browser, bump up your zoom to 400%. Then open dev tools (recommended not to place it as a sidebar for this test) and find this demo. Select one of the `.comment` list items and adjust the `10vw` by using your arrow keys to see when it "wins" versus the other values. Then, swap to a mobile emulator and view whether your adjustment positively or negatively impacted the avatar in that view.
+
+Resolving zoom layout issues takes some patience, but `min` is one of the best modern CSS tools I've found to assist with this challenge.
+
+### WCAG Success Criterion 1.4.12 - Text Spacing
+
+Another criterion you may not be aware of or already be testing for is _Text Spacing_.
+
+According to the [text spacing understanding documentation](https://www.w3.org/WAI/WCAG22/Understanding/text-spacing.html), your content should be flexible for user settings, including:
+
+- Line height (line spacing) to at least 1.5 times the font size
+- Spacing following paragraphs to at least 2 times the font size
+- Letter spacing (tracking) to at least 0.12 times the font size
+- Word spacing to at least 0.16 times the font size
+
+Luckily, there is a [text spacing bookmarklet](https://dylanb.github.io/bookmarklets.html) you can grab that will apply styles to test this criterion. 
+
+If you're unfamiliar with a bookmarklet, you can click the link and drag it to your bookmark bar. In this case, the bookmarklet contains a tiny script that will apply the text spacing styles to all elements on the page you're viewing to allow you to test this criterion.
+
+Applying the bookmarklet test to our comment thread component, we, fortunately, encounter no issues thanks to our previous efforts. 
+
+> You may have difficulties with this criterion if you try to define content boxes with absolute dimensions, or rely on CSS truncation methods, or force inline dimension styles with JavaScript. If the content is cut-off or overflows, you need to resolve it to meet this criterion.
+
+## Final Demo
+
+{% postToCodepen "Comment Thread Component", page.url, css, html %}
+
+You may choose the "Open in CodePen" option to generate a new CodePen that includes the final styles created for this component. Use it as an opportunity to better explore the various updates we applied, including:
+
+- responsive grid column sizing with `min`
+- flexbox for variable width content reflow
+- `word-break` and `hyphens` to handle content overflow
+- combining units within `min` to account for various viewport sizes as well as zoom

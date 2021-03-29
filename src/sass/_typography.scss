@@ -154,7 +154,7 @@ a:not([class*="button"]) {
     outline-offset: 0.15em;
   }
 
-  article & {
+  article > & {
     &,
     code {
       text-decoration-color: scale-color(tdbc-color("blue"), $lightness: -25%);
