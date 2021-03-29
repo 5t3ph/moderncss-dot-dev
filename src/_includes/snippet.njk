@@ -1,0 +1,11 @@
+{% if cssDisplay %}
+<details {{ open }}>
+  <summary>CSS for "{{ demoTitle }}"</summary>
+
+```css{{ lineHighlight }}
+{{- cssDisplay | safe }}
+```
+</details>
+{% endif %}
+
+{% codeDemo css, html %}

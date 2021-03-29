@@ -221,6 +221,7 @@ $tdbc-skew: 10deg;
 // stylelint-disable
 .tdbc-postpage .tdbc-card--ad {
   margin: 2rem auto;
+  min-height: 132px;
 
   &,
   .tdbc-card__content {

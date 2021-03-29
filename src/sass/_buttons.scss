@@ -96,6 +96,13 @@ button {
   }
 }
 
+article form {
+  + p,
+  + ul {
+    margin-top: 2rem;
+  }
+}
+
 .tdbc-button__icon,
 .tdbc-icon-button {
   display: inline-flex;
