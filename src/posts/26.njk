@@ -466,7 +466,80 @@ Yes, the comments are silly nonsense (courtesy of [cupcake ipsum](http://www.cup
 
 The first comment is German, the second is Estonian, and the third is Arabic.
 
-{% set cssDisplay = false %}
+{% set demoTitle = "RTL Text Styling" %}
+{% set css %}
+.comment-list {
+  list-style: none;
+  padding: 0.5rem;
+  margin: 0;
+  display: grid;
+  grid-gap: 1.5rem;
+}
+
+.comment .comment-list {
+  grid-column-start: 2;
+  grid-column-end: -1;
+  padding: 0;
+}
+
+.comment {
+  display: grid;
+  grid-template-columns: min(64px, 15%) 1fr;
+  grid-gap: 1rem;
+  word-break: break-word;
+  hyphens: auto;
+  text-align: start;
+}
+
+.comment-body {
+  display: grid;
+  grid-gap: .5rem;
+  color: #444;
+}
+
+.comment-meta {
+  color: #767676;
+  font-size: .875rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.comment-body a {
+  color: inherit;
+  hyphens: none;
+}
+
+.comment-meta a {
+  color: mediumvioletred;
+}
+
+.comment-avatar img {
+  border-radius: 50%;
+  width: 100%;
+  object-fit: cover;
+  aspect-ratio: 1;
+}
+
+@supports not (aspect-ratio: 1) {
+  .comment-avatar {
+    position: relative;
+    height: 0;
+    padding-bottom: 100%;
+  }
+
+  .comment-avatar img {
+    position: absolute;
+    height: 100%;
+  }
+}
+{% endset %}
+{% set lineHighlight = ' ' %}
+{% set cssDisplay %}
+.comment {
+  text-align: start;
+}
+{% endset %}
 {% set html -%}
 <ul class="comment-list">
   <li lang="de" class="comment">
@@ -499,7 +572,9 @@ The first comment is German, the second is Estonian, and the third is Arabic.
 
 Thanks to our previous work on handling overflow, our comment thread is gracefully handling the change in content languages.
 
-On the third one that is in Arabic, the browser is handling the content direction switch due to placing the attribute `dir="rtl"` on the `.comment` list element. Interestingly, the browser intelligently switches the order of the `grid-template-columns` without our needing to do anything extra. Flexbox will also flip according to this attribute. Older styles that use floats would not flip and would require an additional override.
+On the third one that is in Arabic, the browser is handling the content direction switch firstly due to placing the attribute `dir="rtl"` on the `.comment` list element. Interestingly, the browser intelligently switches the order of the `grid-template-columns` without our needing to do anything extra. Flexbox will also flip according to this attribute. Older styles that use floats would not flip and would require an additional override.
+
+We've defined just one extra property: `text-align: start`. This is called a _[logical property](https://rtlstyling.com/posts/rtl-styling#css-logical-properties)_ and in the case of RTL being defined it flips the text and becomes equivalent to `text-align: right`. While [support is still gaining for logical properties](https://caniuse.com/css-logical-props), you may need to include a fallback. Since we're using `grid-gap` for spacing throughout, no update is needed there. If we were using margins that were affected, we could again use logical properties to help do the conversion when needed.
 
 Since I am not an RTL (right-to-left) styling expert, I will point you to this fantastic resource if you would like to [learn more about RTL styling](https://rtlstyling.com/posts/rtl-styling/).
 
