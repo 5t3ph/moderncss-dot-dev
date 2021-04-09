@@ -1,0 +1,12 @@
+{% set open = 'open' %}
+{% set resize = false %}
+{% set placeCenter = true %}
+{% set demoTitle = "" %}
+{% set css %}
+{% endset %}
+{% set cssDisplay %}
+{{- css -}}
+{% endset %}
+{% set html -%}
+{% endset %}
+{% include "snippet.njk" %}

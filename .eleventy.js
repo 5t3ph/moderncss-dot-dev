@@ -21,6 +21,7 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy("./src/img");
   eleventyConfig.addPassthroughCopy("./src/favicon.png");
   eleventyConfig.addPassthroughCopy("./src/robots.txt");
+  eleventyConfig.addPassthroughCopy("./src/_redirects");
 
   eleventyConfig.addNunjucksAsyncFilter("jsmin", async (code, callback) => {
     try {
@@ -56,7 +57,7 @@ module.exports = function (eleventyConfig) {
     });
   });
 
-  eleventyConfig.addShortcode("codeDemo", function (css, html) {
+  eleventyConfig.addShortcode("codeDemo", function (css, html, resize, placeCenter) {
     if (!css) {
       return `
 <div class="tdbc-demo">
@@ -68,8 +69,10 @@ ${html}
 
     const hash = Math.floor(Math.random(100) * Math.floor(999));
 
-    const cssRE = new RegExp(/(?<=\.)([\w|-]+)(?=\s|,)/, "gm");
+    const cssRE = new RegExp(/(?<=\.)([\w|-]+)(?=\s|,|:)/, "gm");
     const cssCode = css.replace(cssRE, `$1-${hash}`);
+    const demoClass = resize == false ? " no-resize" : "";
+    const contentClass = placeCenter ? " tdbc-demo--place-center" : "";
 
     let htmlCode = html;
     css.match(cssRE).forEach((match) => {
@@ -81,8 +84,8 @@ ${html}
 
     return `
 <style>${cssCode}</style>
-<div class="tdbc-demo">
-<div class="tdbc-demo--content">
+<div class="tdbc-demo${demoClass}">
+<div class="tdbc-demo--content${contentClass}">
 ${htmlCode}
 </div>
 </div>`;
