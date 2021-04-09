@@ -35,7 +35,6 @@ details pre[class*="language-"] {
 
 .tdbc-demo {
   contain: content;
-  padding: 1.75rem 0;
   margin-bottom: 2rem;
 
   @media (max-width: 928px) {
@@ -46,21 +45,25 @@ details pre[class*="language-"] {
     background-color: tdbc-color("light");
   }
 
+  .tdbc-demo--place-center {
+    display: grid;
+    place-content: center;
+    min-height: 20vh;
+  }
+
   * {
-    font-size: unset;
+    max-height: unset;
     margin: 0;
     padding: unset;
-    font-family: system-ui, sans-serif;
     border: unset;
-    max-height: unset;
     border-radius: unset;
+    background-color: unset;
+    color: unset;
+    font-family: system-ui, sans-serif;
+    font-size: unset;
     line-height: 1.5;
-
-    & {
-      color: unset;
-      text-decoration-color: unset;
-      text-decoration-thickness: unset;
-    }
+    text-decoration-color: unset;
+    text-decoration-thickness: unset;
   }
 }
 
@@ -71,6 +74,7 @@ details pre[class*="language-"] {
     position: relative;
     resize: horizontal;
     overflow: auto;
+    padding: 1.75rem 0;
 
     &::before,
     &::after {
