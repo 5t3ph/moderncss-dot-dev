@@ -8,7 +8,7 @@ const markdownIt = require("markdown-it");
 const markdownItAnchor = require("markdown-it-anchor");
 const { reset } = require("./src/_includes/postToCodepen");
 
-const teaser = `<blockquote class="promo"><p><em>Hey there!</em> Early bird registration is available for my upcoming July workshop with Smashing Conference - <a href="https://smashingconf.com/online-workshops/workshops/stephanie-eckles">Level-Up With Modern CSS</a></p></blockquote>`;
+const teaser = `<blockquote class="promo"><p><em>Hey there!</em> Register for my CSS workshop in July with Smashing Conference: <a href="https://smashingconf.com/online-workshops/workshops/stephanie-eckles">Level-Up With Modern&nbsp;CSS</a></p></blockquote>`;
 
 module.exports = function (eleventyConfig) {
   eleventyConfig.addPlugin(syntaxHighlight);
