@@ -143,23 +143,23 @@ button:focus-visible {
 {% endset %}
 {% include "snippet.njk" %}
 
-Note that [`:focus-visible` support](https://caniuse.com/css-focus-visible) is still rolling out to all browsers, notably missing from Safari. If you would like to try using it, here is an example of including it as a progressive enhancement:
+Note that [`:focus-visible` support](https://caniuse.com/css-focus-visible) is still rolling out to all browsers, notably missing from Safari. If you would like to try using it, here is an example of including it as a progressive enhancement.
+
+We're taking advantage of the fact that a browser that doesn't understand `:focus-visible` will throw away the rule that removes the outline for `:focus`. Meaning, the first rule for `button:focus` will apply to browsers that don't support `:focus-visible`, and the second two rules will apply when `:focus-visible` is supported. Interestingly, the `:focus:not(:focus-visible)` gives a false impression that `:focus-visible` is working in Safari _and even_ Internet Explorer 11.
 
 ```css
-&:focus {
+button:focus {
   outline: max(1px, 0.1em) dashed currentColor;
   outline-offset: -0.25em;
 }
 
-@supports selector(:focus-visible) {
-  &:focus {
-    outline: none;
-  }
+button:focus:not(:focus-visible) {
+  outline: none;
+}
 
-  &:focus-visible {
-    outline: max(1px, 0.1em) dashed currentColor;
-    outline-offset: -0.25em;
-  }
+button:focus-visible {
+  outline: max(1px, 0.1em) dashed currentColor;
+  outline-offset: -0.25em;
 }
 ```
 
