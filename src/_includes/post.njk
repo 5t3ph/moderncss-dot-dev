@@ -2,10 +2,12 @@
 layout: base.njk
 ---
   {% include "nav.njk" %}
+  {% set dateLabel %}{% if updatedOn %}Updated on{% else %}Posted on{% endif %}{% endset %}
+  {% set dateValue %}{% if updatedOn %}{{ updatedOn | postDate }}{% else %}{{ page.date | postDate }}{% endif %}{% endset %}
   <header class="tdbc-hero tdbc-text-align-center">
     <div class="tdbc-container tdbc-content-maxlength">
       <h1 class="tdbc-ink--primary tdbc-mb-none tdbc-mlg">{{ title }}</h1>
-      <p class="tdbc-lead tdbc-ink--gray tdbc-mt-md"><span><span>Posted {{ date | postDate }}</span>
+      <p class="tdbc-lead tdbc-ink--gray tdbc-mt-md"><span><span>{{ dateLabel }}</em>: {{ dateValue }}</span>
       <small class="tdbc-row">
         Written by Stephanie Eckles <a href="https://twitter.com/5t3ph/" class="tdbc-icon-button" aria-label="Twitter">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 26 28" aria-hidden="true">

@@ -5,6 +5,7 @@ episode: 12
 description: "Let's take the mystery out of sizing type. Learn recommended units for `font-size`, how to generate ratio-based fluid sizes with Sass, and how to handle overflow."
 templateEngineOverride: njk, md
 date: 2020-05-28
+updatedOn: 2021-06-06
 ---
 
 Let's take the mystery out of sizing type. Typography is both foundational to any stylesheet and the quickest way to elevate an otherwise minimal layout from drab to fab. If you're looking for type design theory or how to select a font, that's outside the scope of this article. The goal for today is to give you a foundation for developing essential type styles in CSS, and terms to use if you wish to explore any topics deeper.
@@ -14,7 +15,7 @@ This episode covers:
 - recommended units for `font-size`
 - generating ratio-based `font-size` values with Sass
 - recommended properties to prevent overflow from long words/names/URLs
-- defining viewport-aware fluid type scale rules
+- defining viewport-aware fluid type scale rules with `clamp()`
 - additional recommendations for dealing with type
 
 {% carbonAd %}
@@ -39,7 +40,7 @@ The first upgrade is to forget about `px` when defining typography. It is not id
 
 Instead, it's recommended that your primary type scale values are set with `rem`.
 
-Unless a user changes it, or you define it differently with `font-size` on an `html` rule, the default `rem` value is 16px with the advantage of responding to changes in zoom level.
+Unless a user changes it, or you define it differently with `font-size` on an `html` rule, the default `rem` value is 16px with the advantage of responding to changes in operating system zoom level.
 
 In addition, the value of `rem` will not change no matter how deeply it is nested, which is largely what makes it the preferred value for typography sizing.
 
@@ -61,7 +62,7 @@ Percentages have nearly equivalent behavior to `em` but typically `em` is still 
 
 ### Calculating `px` to `rem`
 
-I used to work in marketing, so I can relate to those of you being given px-based design specs :)
+I've spent my career in marketing and working with design systems, so I can relate to those of you being given px-based design specs :)
 
 You can create calculations by assuming that `1rem` is `16px` - or use an [online calculator](http://pxtorem.com/) to do the work for you!
 
@@ -71,16 +72,13 @@ A solid starting point is to define:
 
 ```scss
 body {
-  font-size: 1rem;
   line-height: 1.5;
 }
 ```
 
-As mentioned in the type scale section, this ensures general typography elements like `<p>` and `<li>` are defaulted to at least `1rem` due to the CSS cascade. So, if you wanted to bump your base font size, this would be the location to do that, for example to `1.125rem` which would typically correspond to `18px`.
+Older recommendations may say to use `100%`, and this article previously recommended `1rem`. However, the only element the `body` can inherit from is `html` which is where the `rem` unit takes its value and so defining it here is redundant.
 
-Older recommendations may say `100%` vs. `1rem` - which in terms of the `body` element is equivalent since the only element the `body` can inherit from is `html` which is where the `rem` unit takes its value.
-
-In addition, for accessibility, it is recommended to have a minimum of 1.5 `line-height` for legibility. This can be affected by various factors, particularly font in use, but as a baseline it is
+So, we'll only add one rule which is for accessibility. It is recommended to have a minimum of 1.5 `line-height` for legibility. This can be affected by various factors, particularly font in use, but is the recommended starting value.
 
 ### Preventing Text Overflow
 
@@ -239,17 +237,17 @@ This is one reason techniques for "fluid type" have come into existence.
 
 Fluid type means defining the `font-size` value in a way that responds to the viewport size, resulting in a "fluid" reduction of size, particularly for larger type.
 
-There is a singular up and coming property that will handle this exceptionally well: `clamp`.
+There is a singular modern CSS property that will handle this exceptionally well: `clamp`.
 
-However, at the time of writing, the two properties it essentially uses under the hood have better support, particularly for mobile device browsers.
+The `clamp()` function takes three values. Using it, we can set a minimum allowed font size value, a scaling value, and a max allowed value. This effectively creates a range for each `font-size` to transition between, and it will work thanks to viewport units.
 
-Those properties are `min` and `max` which we can use simultaneously to achieve the result of `clamp` - and I look forward to updating this method in the near future! You can [learn about `clamp` from CSS-Tricks](https://css-tricks.com/simplified-fluid-typography/).
+> [Learn more about `clamp()` on MDN](<https://developer.mozilla.org/en-US/docs/Web/CSS/clamp()>), and [check browser support](https://caniuse.com/css-math-functions) (currently 90.84%)
 
-We'll leave our existing loop in place because we still want the computed ratio value. And, the `font-size` we've set will become the fallback for browsers that don't yet understand `min`/`max`.
+We'll leave our existing loop in place because we still want the computed ratio value. And, the `font-size` we've set will become the fallback for browsers that don't yet understand `clamp()`.
 
 But - we have to do more math 😊
 
-In order to correctly perform the math, we need to do a bit of a hack (thanks, Hugo at [CSS-Tricks](https://css-tricks.com/snippets/sass/strip-unit-function/)!) to remove the unit from our `$level-size` value:
+In order to correctly perform the math, we need to do a bit of a hack (thanks, Kitty at [CSS-Tricks](https://css-tricks.com/snippets/sass/strip-unit-function/)!) to remove the unit from our `$level-size` value:
 
 ```scss
 // Remove unit for calculations
@@ -285,21 +283,11 @@ Let's add one more guardrail to prevent this issue. We'll double-check the resul
 $fluid-min: if($fluid-min > 1, $fluid-min, 1);
 ```
 
-If we stopped here and used just `min()` we would miss out on the fluid scaling because the browser would always use the `$fluid-min` value:
+We're missing one value which I have taken to calling the "scaler" - as in, the value that causes the fluid scaling to occur. It needs to be a value that by it's nature will change in order to trigger the transition between our min and max values.
 
-```scss
-font-size: min(#{$fluid-min}, #{$level-size)};
-```
+So, we'll be incorporating viewport units - specifically `vw`, or "viewport width". When the viewport width changes, then this value will also update it's computed value. When it approaches our minimum value, it won't shrink further, and the true in the opposite direction for our max value. This creates the "fluid" type sizing effect.
 
-Instead, we need to nest the `max()` function, but we're missing one value which I have taken to calling the "scaler" - as in, the value that causes the fluid scaling to occur.
-
-I'd like to pause to acknowledge that `min()` and `max()` are a little bit mind-bending to understand.
-
-For `max()`, MDN says:
-
-> The `max()` function takes one or more comma-separated expressions as its parameter, with the largest (most positive) expression value used as the value of the property to which it is assigned.
-
-What this means to our fluid typography is that we can integrate viewport units into a size option, and as long as the computed viewport-unit-based `font-size` is larger, it will be selected by `max()`. Combining this with `min()` to set an upper limit of the `$level-size`, this creates the fluid effect.
+In order to retain accessible sizing via zooming, we'll also add `1rem` alongside our `vw` value. This helps alleviate (but not entirely rule out) side effects of using viewport units only. This is because as was mentioned earlier, the `rem` unit will scale with the user's zoom level as set via either their operating system _or_ with in-browser zoom. To meet [WCAG Success Criterion 1.4.4: Resize text](https://www.w3.org/WAI/WCAG21/Understanding/resize-text.html), a user must be able to increase font-size by up to 200%.
 
 Let's create our scaler value:
 
@@ -311,11 +299,14 @@ The logic applied here is to get the difference between the upper and lower limi
 
 Altogether, our fluid type `font-size` rule becomes:
 
+<!-- prettier-ignore -->
 ```scss
-font-size: unquote("min(max(#{$fluid-min}rem, #{$fluid-scaler}), #{$level-size})");
+font-size: clamp(
+        #{$fluid-min}rem,
+        #{$fluid-scaler} + 1rem,
+        #{$level-size}
+      );
 ```
-
-_Unfortunately with Sass, we have to use the `unquote` function due to built-in Sass min/max functions incorrectly assuming the intent is to select the min value during compilation versus output the CSS definition using min/max_.
 
 ## In Closing...
 
