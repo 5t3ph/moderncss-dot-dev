@@ -23,11 +23,7 @@ layout: base.njk
     <article class="tdbc-mx-auto">
     <span class="halfway"></span>
     <blockquote><p><em>This is episode #{{ episode }} in a series examining modern CSS solutions to problems I've been solving over the last 14+ years of being a frontend developer</em>.</p></blockquote>
-    {% if not hideTeaser %}
-    {{ content | addTeaser | safe }}
-    {% else %}
     {{ content | safe }}
-    {% endif %}
     </article>
     <div class="tdbc-row tdbc-mt-md">
     <a href="https://twitter.com/intent/tweet?original_referer={{ page.url | url | absoluteUrl(site.url) }}&text={{ title | encodeTweet }}&tw_p=tweetbutton&url={{ page.url | url | absoluteUrl(site.url) }}" class="tdbc-button tdbc-button-outlined tdbc-button--small">Tweet this article</a>

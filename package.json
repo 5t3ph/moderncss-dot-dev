@@ -29,25 +29,25 @@
   "devDependencies": {
     "@11ty/eleventy": "^0.12.1",
     "@11ty/eleventy-plugin-rss": "^1.1.1",
-    "@11ty/eleventy-plugin-syntaxhighlight": "^3.1.0",
-    "autoprefixer": "^10.2.5",
-    "cssnano": "^4.1.10",
-    "dotenv": "^8.2.0",
-    "markdown-it": "^12.0.4",
-    "markdown-it-anchor": "^7.1.0",
+    "@11ty/eleventy-plugin-syntaxhighlight": "^3.0.6",
+    "autoprefixer": "^10.2.6",
+    "cssnano": "^5.0.6",
+    "dotenv": "^10.0.0",
+    "markdown-it": "^12.1.0",
+    "markdown-it-anchor": "^8.1.0",
     "npm-run-all": "^4.1.5",
-    "object-merge-advanced": "^12.0.8",
-    "postcss": "^8.2.8",
+    "object-merge-advanced": "^12.1.0",
+    "postcss": "^8.3.5",
     "postcss-cli": "^8.3.1",
-    "puppeteer": "^8.0.0",
-    "sass": "^1.32.8",
-    "stylelint": "^13.12.0",
+    "puppeteer": "^10.1.0",
+    "sass": "^1.35.1",
+    "stylelint": "^13.13.1",
     "stylelint-config-prettier": "^8.0.2",
-    "stylelint-config-standard": "^21.0.0",
+    "stylelint-config-standard": "^22.0.0",
     "stylelint-order": "^4.1.0",
     "stylelint-scss": "^3.19.0",
     "stylelint-selector-bem-pattern": "^2.1.0",
-    "terser": "^5.6.1"
+    "terser": "^5.7.1"
   },
   "browserslist": [
     "defaults",
@@ -55,8 +55,8 @@
     "last 2 versions"
   ],
   "dependencies": {
-    "chrome-aws-lambda": "^8.0.0",
-    "luxon": "^1.26.0",
-    "puppeteer-core": "^8.0.0"
+    "chrome-aws-lambda": "^10.0.0",
+    "luxon": "^1.27.0",
+    "puppeteer-core": "^10.1.0"
   }
 }
