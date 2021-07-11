@@ -294,7 +294,7 @@ The fix could be scoped to only the link elements if we'd like. However, due to 
   display: grid;
   grid-template-columns: min(64px, 15%) 1fr;
   grid-gap: 1rem;
-  word-break: break-word;
+  overflow-wrap: break-word;
   hyphens: auto;
 }
 
@@ -325,7 +325,7 @@ The fix could be scoped to only the link elements if we'd like. However, due to 
 {% set cssDisplay %}
 .comment {
   /* Help prevent overflow of long words/names/URLs */
-  word-break: break-word;
+  overflow-wrap: break-word;
   /* Optional, not supported for all languages */
   hyphens: auto;
 }
@@ -341,9 +341,9 @@ Notice we removed the possibility of `hyphens` from links. In this case, the ful
 
 > CSS-inserted hyphens are not included if a user copies the text. As noted, `hyphens` are also not consistently available for all languages in all browsers. You can [review `hyphens` support on MDN](https://developer.mozilla.org/en-US/docs/Web/CSS/hyphens#browser_compatibility).
 
-With `word-break: break-word`, any text string _may_ be broken onto a new line once the containing element doesn't have room for its full-width. When `hyphens` are supported, the bonus effect is reducing a "ragged edge" from odd spaces caused by broken words.
+With `overflow-wrap: break-word`, any text string _may_ be broken onto a new line once the containing element doesn't have room for its full-width. When `hyphens` are supported, the bonus effect is reducing a "ragged edge" from odd spaces caused by broken words.
 
-Optionally, you may want to update links to use `word-break: break-all;` to prevent an empty space if the browser decides to move the link to a new line before applying the break. You can see our current solution on smaller viewports currently leaves a space before the long exposed link.
+Optionally, you may want to update links to use `overflow-wrap: anywhere;` to prevent an empty space if the browser decides to move the link to a new line before applying the break. You can see our current solution on smaller viewports currently leaves a space before the long exposed link.
 
 Try out resizing the component now, and perhaps even pop open dev tools to inspect and toggle on and off these properties to see the difference in their effects.
 
@@ -375,7 +375,7 @@ First, we set `border-radius` to create a circle appearance. Then we ensure the 
   display: grid;
   grid-template-columns: min(64px, 15%) 1fr;
   grid-gap: 1rem;
-  word-break: break-word;
+  overflow-wrap: break-word;
   hyphens: auto;
 }
 
@@ -484,7 +484,7 @@ The first comment is German, the second is Estonian, and the third is Arabic.
   display: grid;
   grid-template-columns: min(64px, 15%) 1fr;
   grid-gap: 1rem;
-  word-break: break-word;
+  overflow-wrap: break-word;
   hyphens: auto;
   text-align: start;
 }
@@ -647,7 +647,7 @@ The benefit of retaining the percentage width is that our component continues to
   display: grid;
   grid-template-columns: min(64px, 15%, 10vw) 1fr;
   grid-gap: 1rem;
-  word-break: break-word;
+  overflow-wrap: break-word;
   hyphens: auto;
 }
 
@@ -734,5 +734,5 @@ You may choose the "Open in CodePen" option to generate a new CodePen that inclu
 
 - responsive grid column sizing with `min`
 - flexbox for variable width content reflow
-- `word-break` and `hyphens` to handle content overflow
+- `overflow-wrap` and `hyphens` to handle content overflow
 - combining units within `min` to account for various viewport sizes as well as zoom

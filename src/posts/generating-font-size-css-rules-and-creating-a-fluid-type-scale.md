@@ -96,16 +96,16 @@ h2,
 h3,
 h4 {
   // Help prevent overflow of long words/names/URLs
-  word-break: break-word;
+  overflow-wrap: break-word;
 
   // Optional, not supported for all languages
   hyphens: auto;
 }
 ```
 
-As of testing for this episode, `word-break: break-word;` seemed sufficient, whereas looking back on articles over the past few years seem to recommend more properties for the same effect.
+As of testing for this episode, `overflow-wrap: break-word;` seemed sufficient, whereas looking back on articles over the past few years seem to recommend more properties for the same effect.
 
-The `hyphens` property is still [lacking in support](https://developer.mozilla.org/en-US/docs/Web/CSS/hyphens#Browser_compatibility), particularly when you may be dealing with multi-language content. However, it gracefully falls back to simply no hyphenation in which case `word-break` will still help. More testing may be required for certain types of content where long words are the norm, ex. scientific/medical content.
+The `hyphens` property is still [lacking in support](https://developer.mozilla.org/en-US/docs/Web/CSS/hyphens#Browser_compatibility), particularly when you may be dealing with multi-language content. However, it gracefully falls back to simply no hyphenation in which case `overflow-wrap` will still help. More testing may be required for certain types of content where long words are the norm, ex. scientific/medical content.
 
 [This CSS-Tricks article](https://css-tricks.com/snippets/css/prevent-long-urls-from-breaking-out-of-container/) covers additional properties in-depth if you do find these two properties aren't quite cutting it.
 
