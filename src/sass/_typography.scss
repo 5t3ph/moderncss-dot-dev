@@ -46,6 +46,8 @@ h1 {
     "m subtitle";
   line-height: 0.8;
   justify-content: center;
+  grid-auto-columns: min-content min(60vw, 16ch);
+  margin-left: auto;
 }
 
 h1 .tdbc-logo-m {

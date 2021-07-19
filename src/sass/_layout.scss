@@ -93,7 +93,7 @@ article {
   justify-items: center;
   padding-left: 0;
   grid-gap: 2em;
-  grid-template-columns: repeat(auto-fit, minmax(30ch, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   list-style: none;
 
   @media (min-width: 700px) and (max-width: 1446px) {

@@ -29,23 +29,14 @@ layout: base.njk
       {% if loop.index0 === 0 %}
         {% upcomingTopic post.data.episode %}
       {% endif %}
-      {% if loop.index0 === 1 %}
-        <li class="tdbc-card tdbc-card--text">
-          <div class="tdbc-card__content tdbc-text-align-center tdbc-my-auto">
-            <a href="https://smashingconf.com/online-workshops/workshops/stephanie-eckles" class="tdbc-ink--secondary tdbc-card__title">CSS Workshop</a>
-            <p>Early bird registration now available for my workshop coming this July - <strong>Level-Up With Modern CSS</strong> - with Smashing Conference!</p>
-            <a href="https://smashingconf.com/online-workshops/workshops/stephanie-eckles">Register Today</a>
-          </div>
-        </li>
-      {% endif %}
-      {% if loop.index0 === 3 %}
+      {% if loop.index0 === 4 %}
       <li class="tdbc-card tdbc-card--teaser tdbc-card--ad">
         <div class="tdbc-card__content tdbc-text-align-center">
           <script async type="text/javascript" src="//cdn.carbonads.com/carbon.js?serve=CE7I52QE&placement=moderncssdev" id="_carbonads_js"></script>
         </div>
       </li>
       {% endif %}
-      {% if loop.index0 === 7 %}
+      {% if loop.index0 === 8 %}
         <li class="tdbc-card tdbc-card--text">
           <div class="tdbc-card__content tdbc-text-align-center tdbc-my-auto">
             <a href="https://smolcss.dev" class="tdbc-ink--secondary tdbc-card__title">SmolCSS</a>
@@ -54,7 +45,7 @@ layout: base.njk
           </div>
         </li>
       {% endif %}
-      {% if loop.index0 === 9 %}
+      {% if loop.index0 === 12 %}
         <li class="tdbc-card tdbc-card--text">
           <div class="tdbc-card__content tdbc-text-align-center tdbc-my-auto">
             <a href="/newsletter/" class="tdbc-ink--secondary tdbc-card__title">CSS Tips in Your Inbox</a>
@@ -63,10 +54,7 @@ layout: base.njk
           </div>
         </li>
       {% endif %}
-      {% if loop.index0 === 16 %}
-        {% review 0 %}
-      {% endif %}
-      {% if loop.index0 === 11 %}
+      {% if loop.index0 === 13 %}
         <li class="tdbc-card tdbc-card--text">
           <div class="tdbc-card__content tdbc-text-align-center tdbc-my-auto">
             <a href="https://www.buymeacoffee.com/moderncss" class="tdbc-ink--secondary tdbc-card__title">Support this Series</a>
@@ -74,6 +62,9 @@ layout: base.njk
             <a class="tdbc-button tdbc-button-outlined tdbc-button-outlined--light tdbc-button--small" target="_blank" rel="noopener" href="https://www.buymeacoffee.com/moderncss"><span class="tdbc-button__icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 36"><g fill="none" fill-rule="evenodd"><path fill="#FF9100" d="M11.835 7.655l-8.74-.052 4.292 27.113h10.456l4.292-27.113z"/><path fill="#FD0" d="M11.835 7.655l-8.74-.052 4.292 27.113h8.272L19.95 7.603z"/><path fill="#FFF" d="M.599 7.603h22.55v-2.5H.6z"/><path stroke="#000" stroke-width="1.17" d="M.599 7.603h22.55v-2.5H.6z"/><path fill="#FFF" d="M18.78 1.04H4.813l-1.64 3.75H20.419z"/><g stroke-width="1.17"><path stroke="#050505" d="M18.78 1.04H4.813l-1.64 3.75H20.419z"/><path stroke="#000" d="M11.835 7.655l-10.3-.052 4.292 27.113h12.016l4.292-27.113z"/></g><path fill="#FFF" d="M22.447 15.26H1.146l1.922 10.783 8.728-.094 8.728.094z"/><path stroke="#000" stroke-width="1.17" d="M22.447 15.26H1.146l1.922 10.783 8.728-.094 8.728.094z"/></g></svg></span> Buy me a coffee</a>
           </div>
         </li>
+      {% endif %}
+      {% if loop.index0 === 17 %}
+        {% review 0 %}
       {% endif %}
       <li class="tdbc-card tdbc-episode index{{ loop.index0 + 1 }}">
         <div class="tdbc-card__content" data-episode="{{ post.data.episode }}">
