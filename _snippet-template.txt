@@ -1,3 +1,6 @@
+{% carbonAd %}
+{% newsletterPromo %}
+
 {% set open = 'open' %}
 {% set resize = false %}
 {% set placeCenter = true %}
