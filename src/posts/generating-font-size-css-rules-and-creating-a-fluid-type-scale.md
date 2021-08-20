@@ -64,7 +64,7 @@ Percentages have nearly equivalent behavior to `em` but typically `em` is still 
 
 I've spent my career in marketing and working with design systems, so I can relate to those of you being given px-based design specs :)
 
-You can create calculations by assuming that `1rem` is `16px` - or use an [online calculator](http://pxtorem.com/) to do the work for you!
+You can create calculations by assuming that `1rem` is `16px` - or use an [online calculator](https://borderleft.com/toolbox/rem/) to do the work for you!
 
 ## Baseline Type Styles
 
