@@ -8,15 +8,13 @@ const markdownIt = require("markdown-it");
 const markdownItAnchor = require("markdown-it-anchor");
 const { reset } = require("./src/_includes/postToCodepen");
 
-const teaser = `<blockquote class="promo"><p><em>Hey there!</em> Register for my CSS workshop in July with Smashing Conference: <a href="https://smashingconf.com/online-workshops/workshops/stephanie-eckles">Level-Up With Modern&nbsp;CSS</a></p></blockquote>`;
+const teaser = `<blockquote class="promo"><p><em>Hey there!</em> Register for my CSS workshop in October with Smashing Conference: <a href="https://smashingconf.com/online-workshops/workshops/stephanie-eckles">Level-Up With Modern&nbsp;CSS</a></p></blockquote>`;
 
 module.exports = function (eleventyConfig) {
   eleventyConfig.addPlugin(syntaxHighlight);
   eleventyConfig.addPlugin(pluginRss);
 
   eleventyConfig.addWatchTarget("./src/sass/");
-
-  eleventyConfig.addPassthroughCopy("./src/css");
   eleventyConfig.addPassthroughCopy("./src/fonts");
   eleventyConfig.addPassthroughCopy("./src/img");
   eleventyConfig.addPassthroughCopy("./src/favicon.png");

@@ -1,8 +1,8 @@
 {
   "name": "moderncss-dot-dev",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "",
-  "main": "index.js",
+  "main": "index.html",
   "scripts": {
     "watch:sass": "sass  --no-source-map --watch src/sass:public/css",
     "watch:eleventy": "eleventy --serve --quiet",
@@ -10,10 +10,9 @@
     "build:eleventy": "eleventy",
     "postbuild": "postcss public/css/*.css -u autoprefixer cssnano -r --no-map",
     "start": "ELEVENTY_ENV=dev npm-run-all build:sass --parallel watch:*",
-    "build": "ELEVENTY_ENV=prod npm-run-all build:sass build:eleventy screenshot",
+    "build": "ELEVENTY_ENV=prod npm-run-all build:sass build:eleventy",
     "lint": "stylelint 'src/sass/**/*.scss' 'src/sass/**/**/*.scss' 'src/sass/**/**/**/*.scss'",
-    "lint:fix": "stylelint --fix 'src/sass/**/*.scss' 'src/sass/**/**/*.scss' 'src/sass/**/**/**/*.scss'",
-    "screenshot": "node functions/images.js"
+    "lint:fix": "stylelint --fix 'src/sass/**/*.scss' 'src/sass/**/**/*.scss' 'src/sass/**/**/**/*.scss'"
   },
   "repository": {
     "type": "git",
@@ -30,30 +29,25 @@
     "@11ty/eleventy": "^0.12.1",
     "@11ty/eleventy-plugin-rss": "^1.1.1",
     "@11ty/eleventy-plugin-syntaxhighlight": "^3.1.2",
-    "autoprefixer": "^10.3.1",
-    "cssnano": "^5.0.7",
+    "autoprefixer": "^10.3.3",
+    "cssnano": "^5.0.8",
     "dotenv": "^10.0.0",
     "markdown-it": "^12.2.0",
-    "markdown-it-anchor": "^8.1.2",
+    "markdown-it-anchor": "^8.3.0",
     "npm-run-all": "^4.1.5",
     "object-merge-advanced": "^12.1.0",
     "postcss": "^8.3.6",
     "postcss-cli": "^8.3.1",
     "puppeteer": "^10.2.0",
-    "sass": "^1.37.5",
+    "sass": "^1.39.0",
     "stylelint": "^13.13.1",
     "stylelint-config-prettier": "^8.0.2",
     "stylelint-config-standard": "^22.0.0",
     "stylelint-order": "^4.1.0",
     "stylelint-scss": "^3.20.1",
     "stylelint-selector-bem-pattern": "^2.1.1",
-    "terser": "^5.7.1"
+    "terser": "^5.7.2"
   },
-  "browserslist": [
-    "defaults",
-    "not dead",
-    "last 2 versions"
-  ],
   "dependencies": {
     "chrome-aws-lambda": "^10.1.0",
     "luxon": "^2.0.2",
