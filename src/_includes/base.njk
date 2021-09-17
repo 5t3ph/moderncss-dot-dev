@@ -64,7 +64,7 @@
     <meta name="twitter:image" content="{{pageSocialImg}}" />
     <link rel="alternate" type="application/rss+xml" title="RSS Feed for ModernCSS.dev" href="/feed/" />
   </head>
-  <body class="tdbc-page-{{ page.fileSlug }}">
+  <body class="tdbc-page-{{ page.fileSlug }} {{ "tdbc-landing-page" if landingPage }}">
   {{ content | safe }}
   {% if layoutName != 'topics' and not landingPage %}{% include "blm.njk" %}{% endif %}
     <footer id="site-footer" class="tdbc-background--secondary">

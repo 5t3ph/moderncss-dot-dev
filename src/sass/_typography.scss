@@ -257,3 +257,13 @@ blockquote {
     margin-bottom: 0;
   }
 }
+
+.tdbc-office-hours {
+  li {
+    font-size: 1.5rem;
+  }
+
+  ::marker {
+    color: $tdbc-color-primary;
+  }
+}

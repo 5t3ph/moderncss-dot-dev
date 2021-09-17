@@ -117,7 +117,7 @@ article {
   padding-bottom: 10vh;
   text-align: center;
 
-  .tdbc-page-newsletter & {
+  .tdbc-landing-page & {
     min-height: auto;
     padding-top: 5vh;
     padding-bottom: 5vh;
@@ -178,11 +178,9 @@ hr {
 }
 
 // stylelint-disable selector-max-type
-.tdbc-page-newsletter,
-.tdbc-page-success,
-.tdbc-page-confirmation {
+.tdbc-landing-page {
   h2 {
-    max-width: 15ch;
+    max-width: 20ch;
   }
 
   > footer {
