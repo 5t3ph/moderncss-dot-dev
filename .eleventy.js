@@ -123,7 +123,8 @@ ${htmlCode}
   });
 
   eleventyConfig.addShortcode("teaser", () => {
-    return teaser;
+    return "";
+    // return teaser;
   });
 
   eleventyConfig.addShortcode("newsletterPromo", () => {
