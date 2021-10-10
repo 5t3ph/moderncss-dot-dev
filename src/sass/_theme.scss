@@ -1,0 +1,14 @@
+@use "color-tokens" as *;
+
+:root {
+  @include color-tokens();
+
+  --gradient: linear-gradient(
+    var(--gradient-angle, 35deg),
+    var(--color-secondary) 10%,
+    var(--color-yellow) 25%,
+    var(--color-green) 50%,
+    var(--color-blue) 75%,
+    var(--color-primary) 90%
+  );
+}

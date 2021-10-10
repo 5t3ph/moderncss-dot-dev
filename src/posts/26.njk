@@ -30,7 +30,7 @@ We'll explore creating a robust comment thread component. Here's our starting po
   padding: 0.5rem;
   margin: 0;
   display: grid;
-  grid-gap: 1.5rem;
+  gap: 1.5rem;
 }
 
 .comment .comment-list {
@@ -42,12 +42,12 @@ We'll explore creating a robust comment thread component. Here's our starting po
 .comment {
   display: grid;
   grid-template-columns: 64px 1fr;
-  grid-gap: 1rem;
+  gap: 1rem;
 }
 
 .comment-body {
   display: grid;
-  grid-gap: .5rem;
+  gap: .5rem;
   color: #444;
 }
 
@@ -115,7 +115,7 @@ In our `.comment` styles, we set a precise pixel value for the avatar. Instead, 
   padding: 0.5rem;
   margin: 0;
   display: grid;
-  grid-gap: 1.5rem;
+  gap: 1.5rem;
 }
 
 .comment .comment-list {
@@ -127,12 +127,12 @@ In our `.comment` styles, we set a precise pixel value for the avatar. Instead, 
 .comment {
   display: grid;
   grid-template-columns: min(64px, 15%) 1fr;
-  grid-gap: 1rem;
+  gap: 1rem;
 }
 
 .comment-body {
   display: grid;
-  grid-gap: .5rem;
+  gap: .5rem;
   color: #444;
 }
 
@@ -217,7 +217,7 @@ We will update the layout method to allow the username and date to line up on wi
   padding: 0.5rem;
   margin: 0;
   display: grid;
-  grid-gap: 1.5rem;
+  gap: 1.5rem;
 }
 
 .comment .comment-list {
@@ -229,12 +229,12 @@ We will update the layout method to allow the username and date to line up on wi
 .comment {
   display: grid;
   grid-template-columns: min(64px, 15%) 1fr;
-  grid-gap: 1rem;
+  gap: 1rem;
 }
 
 .comment-body {
   display: grid;
-  grid-gap: .5rem;
+  gap: .5rem;
   color: #444;
 }
 
@@ -281,7 +281,7 @@ The fix could be scoped to only the link elements if we'd like. However, due to 
   padding: 0.5rem;
   margin: 0;
   display: grid;
-  grid-gap: 1.5rem;
+  gap: 1.5rem;
 }
 
 .comment .comment-list {
@@ -293,14 +293,14 @@ The fix could be scoped to only the link elements if we'd like. However, due to 
 .comment {
   display: grid;
   grid-template-columns: min(64px, 15%) 1fr;
-  grid-gap: 1rem;
+  gap: 1rem;
   overflow-wrap: break-word;
   hyphens: auto;
 }
 
 .comment-body {
   display: grid;
-  grid-gap: .5rem;
+  gap: .5rem;
   color: #444;
 }
 
@@ -362,7 +362,7 @@ First, we set `border-radius` to create a circle appearance. Then we ensure the 
   padding: 0.5rem;
   margin: 0;
   display: grid;
-  grid-gap: 1.5rem;
+  gap: 1.5rem;
 }
 
 .comment .comment-list {
@@ -374,14 +374,14 @@ First, we set `border-radius` to create a circle appearance. Then we ensure the 
 .comment {
   display: grid;
   grid-template-columns: min(64px, 15%) 1fr;
-  grid-gap: 1rem;
+  gap: 1rem;
   overflow-wrap: break-word;
   hyphens: auto;
 }
 
 .comment-body {
   display: grid;
-  grid-gap: .5rem;
+  gap: .5rem;
   color: #444;
 }
 
@@ -471,7 +471,7 @@ The first comment is German, the second is Estonian, and the third is Arabic.
   padding: 0.5rem;
   margin: 0;
   display: grid;
-  grid-gap: 1.5rem;
+  gap: 1.5rem;
 }
 
 .comment .comment-list {
@@ -483,7 +483,7 @@ The first comment is German, the second is Estonian, and the third is Arabic.
 .comment {
   display: grid;
   grid-template-columns: min(64px, 15%) 1fr;
-  grid-gap: 1rem;
+  gap: 1rem;
   overflow-wrap: break-word;
   hyphens: auto;
   text-align: start;
@@ -491,7 +491,7 @@ The first comment is German, the second is Estonian, and the third is Arabic.
 
 .comment-body {
   display: grid;
-  grid-gap: .5rem;
+  gap: .5rem;
   color: #444;
 }
 
@@ -572,7 +572,7 @@ Thanks to our previous work on handling overflow, our comment thread is graceful
 
 On the third one that is in Arabic, the browser is handling the content direction switch firstly due to placing the attribute `dir="rtl"` on the `.comment` list element. Interestingly, the browser intelligently switches the order of the `grid-template-columns` without our needing to do anything extra. Flexbox will also flip according to this attribute. Older styles that use floats would not flip and would require an additional override.
 
-We've defined just one extra property: `text-align: start`. This is called a _[logical property](https://rtlstyling.com/posts/rtl-styling#css-logical-properties)_ and in the case of RTL being defined it flips the text and becomes equivalent to `text-align: right`. While [support is still gaining for logical properties](https://caniuse.com/css-logical-props), you may need to include a fallback. Since we're using `grid-gap` for spacing throughout, no update is needed there. If we were using margins that were affected, we could again use logical properties to help do the conversion when needed.
+We've defined just one extra property: `text-align: start`. This is called a _[logical property](https://rtlstyling.com/posts/rtl-styling#css-logical-properties)_ and in the case of RTL being defined it flips the text and becomes equivalent to `text-align: right`. While [support is still gaining for logical properties](https://caniuse.com/css-logical-props), you may need to include a fallback. Since we're using `gap` for spacing throughout, no update is needed there. If we were using margins that were affected, we could again use logical properties to help do the conversion when needed.
 
 Since I am not an RTL (right-to-left) styling expert, I will point you to this fantastic resource if you would like to [learn more about RTL styling](https://rtlstyling.com/posts/rtl-styling/).
 
@@ -634,7 +634,7 @@ The benefit of retaining the percentage width is that our component continues to
   padding: 0.5rem;
   margin: 0;
   display: grid;
-  grid-gap: 1.5rem;
+  gap: 1.5rem;
 }
 
 .comment .comment-list {
@@ -646,14 +646,14 @@ The benefit of retaining the percentage width is that our component continues to
 .comment {
   display: grid;
   grid-template-columns: min(64px, 15%, 10vw) 1fr;
-  grid-gap: 1rem;
+  gap: 1rem;
   overflow-wrap: break-word;
   hyphens: auto;
 }
 
 .comment-body {
   display: grid;
-  grid-gap: .5rem;
+  gap: .5rem;
   color: #444;
 }
 

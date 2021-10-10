@@ -1,13 +1,13 @@
 // @import "theme";
 
 main ol:first-of-type {
-  color: color("blue");
+  color: var(--color-blue);
 
   li {
     font-size: 1.5rem;
 
     a {
-      color: color("gray");
+      // color: color("gray");
     }
 
     + li {
@@ -19,12 +19,12 @@ main ol:first-of-type {
 .demo {
   min-height: 30vh;
   margin-bottom: 2rem;
-  border: 2px dashed color("blue");
+  border: 2px dashed var(--color-blue);
   border-radius: 8px;
-  font-size: $h3-font-size;
+  // font-size: $h3-font-size;
 
   > * {
-    outline: 1px dotted color("yellow");
+    outline: 1px dotted var(--color-yellow);
   }
 }
 

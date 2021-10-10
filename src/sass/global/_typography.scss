@@ -9,110 +9,108 @@
     position: absolute;
     padding: 70%;
     transform: rotate(45deg) translateX(-20%);
-    background-color: color("background-alt");
+    background-color: var(--color-background-alt);
   }
 }
 
 $typography-variants: h1, h2, h3, h4;
 
-@each $type in $typography-variants {
-  #{$type},
-  .#{$type} {
-    margin-bottom: 0.65em;
-    font-weight: $strong-font-weight;
-    line-height: 1.15;
-  }
+:is(#{$typography-variants}) {
+  margin-bottom: 0.65em;
+  // font-weight: $strong-font-weight;
+  line-height: 1.15;
 }
 
 h1 {
-  font-family: $headline-font-family;
-  font-size: $h1-font-size;
-  font-size: clamp(1.75rem, 1rem + 5vw, #{$h1-font-size});
+  // font-family: $headline-font-family;
+  // font-size: $h1-font-size;
+  // font-size: clamp(1.75rem, 1rem + 5vw, #{$h1-font-size});
   font-weight: 800;
   letter-spacing: 0.04em;
   line-height: 1.1;
 
   &.mlg {
-    font-size: clamp(1.75rem, 1rem + 5vw, #{$h1-font-size});
+    // font-size: clamp(1.75rem, 1rem + 5vw, #{$h1-font-size});
   }
 }
 
-.hero--home h1 {
-  display: grid;
-  grid-template-areas:
-    "m title"
-    "m subtitle";
-  grid-auto-columns: min-content min(60vw, 16ch);
-  justify-content: center;
-  margin-left: auto;
-  line-height: 0.8;
-}
+// REDO to make translation friendly
+// .hero--home h1 {
+//   display: grid;
+//   grid-template-areas:
+//     "m title"
+//     "m subtitle";
+//   grid-auto-columns: min-content min(60vw, 16ch);
+//   justify-content: center;
+//   margin-left: auto;
+//   line-height: 0.8;
+// }
 
-h1 .logo-m {
-  grid-area: m;
-  padding-bottom: 0.1em;
-  font-size: 2em;
-  line-height: 0.7;
-}
+// h1 .logo-m {
+//   grid-area: m;
+//   padding-bottom: 0.1em;
+//   font-size: 2em;
+//   line-height: 0.7;
+// }
 
-@supports (background-clip: text) or (-webkit-background-clip: text) {
-  h1 .logo-m {
-    background: linear-gradient(
-      30deg,
-      color("secondary") 30%,
-      color("primary") 70%
-    );
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent !important;
-  }
-}
+// @supports (background-clip: text) or (-webkit-background-clip: text) {
+//   h1 .logo-m {
+//     background: linear-gradient(
+//       30deg,
+//       var(--color-secondary) 30%,
+//       var(--color-primary) 70%
+//     );
+//     -webkit-background-clip: text;
+//     background-clip: text;
+//     color: transparent !important;
+//   }
+// }
 
-h2 {
-  font-size: $h2-font-size;
-  font-size: clamp(1.75rem, 1rem + 4vw, #{$h2-font-size});
-}
+// h2 {
+//   font-size: $h2-font-size;
+//   font-size: clamp(1.75rem, 1rem + 4vw, #{$h2-font-size});
+// }
 
 article > h2 {
-  color: color("secondary");
+  color: var(--color-secondary);
 }
 
-h3,
-.h3 {
-  font-size: clamp(1.55rem, 1rem + 2.5vw, #{$h3-font-size});
-}
+// h3,
+// .h3 {
+//   font-size: clamp(1.55rem, 1rem + 2.5vw, #{$h3-font-size});
+// }
 
 .hero .h3 {
   margin-left: 0.15em;
-  font-size: clamp(1.125rem, 1rem + 2.5vw, #{$h3-font-size});
+  // font-size: clamp(1.125rem, 1rem + 2.5vw, #{$h3-font-size});
   letter-spacing: 0.05em;
 }
 
 article > h3 {
-  color: color("primary");
+  color: var(--color-primary);
 }
 
-h4 {
-  color: $color-gray;
-  font-size: $h4-font-size;
-}
+// h4 {
+//   color: $color-gray;
+//   font-size: $h4-font-size;
+// }
 
-h1 em {
-  display: block;
-  padding-bottom: 1em;
-  font-weight: 600;
-  letter-spacing: 0.02em;
-}
+// h1 em {
+//   display: block;
+//   padding-bottom: 1em;
+//   font-weight: 600;
+//   letter-spacing: 0.02em;
+// }
 
-p,
-li {
-  font-size: 1.25rem;
-  line-height: 1.6;
-}
+// p,
+// li {
+//   font-size: 1.25rem;
+//   line-height: 1.6;
+// }
 
-p {
-  margin: 0 0 1rem;
-}
+// p {
+//   margin: 0 0 1rem;
+// }
 
 article * {
   + h2 {
@@ -136,33 +134,21 @@ article * {
   }
 }
 
-strong {
-  color: scale-color(color("gray"), $lightness: -8%);
-  font-weight: $strong-font-weight;
+// strong {
+//   color: scale-color(color("gray"), $lightness: -8%);
+//   font-weight: $strong-font-weight;
+// }
+
+code:not([class*="language"]) {
+  display: inline-block;
+  padding: 0 0.15em;
+  color: var(--color-secondary);
+  font-family: Consolas, Monaco, "Andale Mono", "Ubuntu Mono", monospace;
+  font-size: 0.85em;
 }
 
 a:not([class*="button"]) {
-  color: color("blue");
-  text-underline-offset: 0.06em;
-  text-decoration-skip-ink: auto;
-
-  &:focus {
-    outline: 1px solid currentColor;
-    outline-offset: 0.15em;
-  }
-
-  article > & {
-    &,
-    code {
-      text-decoration-color: scale-color(color("blue"), $lightness: -25%);
-      text-decoration-thickness: 0.15rem;
-    }
-
-    &:visited {
-      color: color("primary");
-      text-decoration-color: color("primary");
-    }
-  }
+  color: var(--color-blue);
 
   code {
     padding: 0;
@@ -172,17 +158,9 @@ a:not([class*="button"]) {
   }
 }
 
-code:not([class*="language"]) {
-  display: inline-block;
-  padding: 0 0.15em;
-  color: color("secondary");
-  font-family: Consolas, Monaco, "Andale Mono", "Ubuntu Mono", monospace;
-  font-size: 0.85em;
-}
-
 .lead {
   margin-bottom: 1em;
-  font-size: #{$lead-font-size};
+  // font-size: #{$lead-font-size};
   letter-spacing: 0.01em;
   line-height: 1.3;
 }
@@ -193,30 +171,30 @@ code:not([class*="language"]) {
   grid-template-columns: 8vw auto 8vw;
   align-items: center;
   justify-content: center;
+  gap: 0.5em;
   letter-spacing: 0.03em;
   text-align: center;
-  grid-gap: 0.5em;
 
   &::before,
   &::after {
     content: "";
     width: 100%;
     height: 1px;
-    background: $gradient;
+    background: var(--gradient);
   }
 }
 
 blockquote {
   margin: 3rem 0;
   padding: 0.5rem 1.5rem;
-  color: color("gray");
+  // color: color("gray");
   letter-spacing: 0.02em;
   line-height: 1.2;
 
   &:first-child {
     max-width: 60ch;
     margin: 0 auto 3rem;
-    color: color("primary");
+    color: var(--color-primary);
     text-align: center;
   }
 
@@ -227,7 +205,7 @@ blockquote {
     border-width: 0;
     border-left-width: 2px;
     border-style: solid;
-    border-image: $gradient 1;
+    border-image: var(--gradient) 1;
 
     em {
       color: #fff;
@@ -243,7 +221,7 @@ blockquote {
       text-align: center;
 
       a {
-        color: color("secondary");
+        color: var(--color-secondary);
       }
     }
   }
@@ -259,6 +237,6 @@ blockquote {
   }
 
   ::marker {
-    color: $color-primary;
+    color: var(--color-primary);
   }
 }

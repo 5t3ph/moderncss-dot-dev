@@ -36,7 +36,8 @@ The first wraps the `input` within the `label`. This implicitly associates the l
 The second is to have the `input` and `label` be siblings and use the `for` attribute set to the value of the radio's `id` to create the association.
 
 ```html
-<input type="radio" name="radio" id="radio1" /> <label for="radio1">Radio label text</label>
+<input type="radio" name="radio" id="radio1" />
+<label for="radio1">Radio label text</label>
 ```
 
 Our technique will work with either setup, although we're going to select the wrapping label method to prevent including an extra div.
@@ -121,7 +122,7 @@ Our label uses the class of `.radio`. The base styles we'll include here are the
 
 We're using an abnormally large `font-size` just to emphasize the visual changes for purposes of the tutorial demo.
 
-Our label is also the layout container for our design, and we're going to set it up to use CSS grid layout to take advantage of `grid-gap`.
+Our label is also the layout container for our design, and we're going to set it up to use CSS grid layout to take advantage of `gap`.
 
 ```scss
 .radio {
@@ -129,7 +130,7 @@ Our label is also the layout container for our design, and we're going to set it
 
   display: grid;
   grid-template-columns: min-content auto;
-  grid-gap: 0.5em;
+  gap: 0.5em;
 }
 ```
 

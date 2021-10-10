@@ -4,13 +4,14 @@
   "description": "",
   "main": "index.html",
   "scripts": {
+    "tokens": "npx a11y-color-tokens --outputDirPath='src/sass' --colorTokensPath='_color-tokens.js' --no-compatibilityDocs",
     "watch:sass": "sass  --no-source-map --watch src/sass:public/css",
     "watch:eleventy": "eleventy --serve --quiet",
     "build:sass": "sass  --no-source-map src/sass:public/css",
     "build:eleventy": "eleventy",
-    "postbuild": "postcss public/css/*.css -u autoprefixer cssnano -r --no-map",
-    "start": "ELEVENTY_ENV=dev npm-run-all build:sass --parallel watch:*",
-    "build": "ELEVENTY_ENV=prod npm-run-all build:sass build:eleventy",
+    "postbuild": "postcss public/css/*.css -u postcss-logical autoprefixer cssnano -r --no-map",
+    "start": "ELEVENTY_ENV=dev npm-run-all tokens build:sass --parallel watch:*",
+    "build": "ELEVENTY_ENV=prod npm-run-all tokens build:sass build:eleventy",
     "lint": "stylelint 'src/sass/**/*.scss' 'src/sass/**/**/*.scss' 'src/sass/**/**/**/*.scss'",
     "lint:fix": "stylelint --fix 'src/sass/**/*.scss' 'src/sass/**/**/*.scss' 'src/sass/**/**/**/*.scss'"
   },
@@ -45,11 +46,14 @@
     "stylelint-config-standard": "^22.0.0",
     "stylelint-order": "^4.1.0",
     "stylelint-scss": "^3.21.0",
-    "stylelint-selector-bem-pattern": "^2.1.1",
     "terser": "^5.9.0"
   },
   "browserslist": [
     "> 0.5%",
     "not IE 11"
-  ]
+  ],
+  "dependencies": {
+    "a11y-color-tokens": "^0.5.0",
+    "postcss-logical": "^5.0.0"
+  }
 }

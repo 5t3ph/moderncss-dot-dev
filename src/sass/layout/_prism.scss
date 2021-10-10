@@ -7,7 +7,7 @@
 code[class*="language-"],
 pre[class*="language-"] {
   background: none;
-  color: color("gray");
+  // color: color("gray");
   font-family: Consolas, Monaco, "Andale Mono", "Ubuntu Mono", monospace;
   line-height: 1.5;
   text-align: left;
@@ -30,7 +30,7 @@ pre[class*="language-"] {
 
 :not(pre) > code[class*="language-"],
 pre[class*="language-"] {
-  background: color("background-alt");
+  background: var(--color-background-alt);
 }
 
 /* Inline code */
@@ -48,7 +48,7 @@ pre[class*="language-"] {
 }
 
 .token.punctuation {
-  color: color("gray");
+  // color: color("gray");
 }
 
 .token.property,
@@ -56,12 +56,12 @@ pre[class*="language-"] {
 .token.constant,
 .token.symbol,
 .token.deleted {
-  color: color("blue");
+  color: var(--color-blue);
 }
 
 .token.boolean,
 .token.number {
-  color: color("green");
+  color: var(--color-green);
 }
 
 .token.selector,
@@ -70,7 +70,7 @@ pre[class*="language-"] {
 .token.char,
 .token.builtin,
 .token.inserted {
-  color: color("primary");
+  color: var(--color-primary);
 }
 
 .token.operator,
@@ -80,25 +80,25 @@ pre[class*="language-"] {
 .language-scss .token.string,
 .style .token.string,
 .token.variable {
-  color: color("secondary");
+  color: var(--color-secondary);
 }
 
 .token.function {
-  color: color("green");
+  color: var(--color-green);
 }
 
 .token.atrule,
 .token.attr-value {
-  color: scale-color(color("primary"), $lightness: 50%);
+  color: var(--color-on-primary);
 }
 
 .token.keyword {
-  color: color("blue");
+  color: var(--color-blue);
 }
 
 .token.regex,
 .token.important {
-  color: color("yellow");
+  color: var(--color-yellow);
 }
 
 .token.important,

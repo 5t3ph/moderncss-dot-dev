@@ -19,7 +19,7 @@ Spoiler, here's a tweet with all of them. Keep reading to learn a bit more!
 
 ## 1: Switch the Grid Flow Axis
 
-I first desired this behavior when I wanted X-axis alignment of variable width items, and also desired to leverage `grid-gap`.
+I first desired this behavior when I wanted X-axis alignment of variable width items, and also desired to leverage `gap`.
 
 ### The Code
 
@@ -84,7 +84,10 @@ Anytime you want to center something vertically and horizontally.
 }
 
 .grid-columns {
-  grid-template-columns: repeat(auto-fit, minmax(var(--grid-col-breakpoint), 1fr));
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(var(--grid-col-breakpoint), 1fr)
+  );
 }
 ```
 

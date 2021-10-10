@@ -82,7 +82,7 @@ Updating our `.grid` solution to handle for defining a max number of 3 `.column`
 
 ```css
 &.col-3 {
-  grid-gap: $col_gap;
+  gap: $col_gap;
   grid-template-columns: repeat(3, 1fr);
 }
 ```

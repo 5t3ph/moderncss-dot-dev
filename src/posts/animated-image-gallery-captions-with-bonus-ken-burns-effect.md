@@ -54,7 +54,7 @@ Since we've used a list, we need to remove default list styles, and we will also
   margin: 0;
   padding: 0;
   display: grid;
-  grid-gap: 2rem;
+  gap: 2rem;
   grid-template-columns: repeat(auto-fit, minmax(20ch, 1fr));
   width: 100%;
   max-width: calc(40ch * 3 + 6rem);

@@ -99,13 +99,13 @@ Our label uses the class of `.checkbox`. The base styles we'll include here are 
 
 We're using an abnormally large `font-size` just to emphasize the visual changes for purposes of the tutorial demo.
 
-Our label is also the layout container for our design, and we're going to set it up to use CSS grid layout to take advantage of grid-gap.
+Our label is also the layout container for our design, and we're going to set it up to use CSS grid layout to take advantage of gap.
 
 ```scss
 .checkbox {
   display: grid;
   grid-template-columns: min-content auto;
-  grid-gap: 0.5em;
+  gap: 0.5em;
   font-size: 2rem;
   color: var(--color);
 }
