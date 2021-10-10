@@ -1,13 +1,13 @@
 // @import "theme";
 
 main ol:first-of-type {
-  color: tdbc-color("blue");
+  color: color("blue");
 
   li {
     font-size: 1.5rem;
 
     a {
-      color: tdbc-color("gray");
+      color: color("gray");
     }
 
     + li {
@@ -19,12 +19,12 @@ main ol:first-of-type {
 .demo {
   min-height: 30vh;
   margin-bottom: 2rem;
-  border: 2px dashed tdbc-color("blue");
+  border: 2px dashed color("blue");
   border-radius: 8px;
-  font-size: $tdbc-h3-font-size;
+  font-size: $h3-font-size;
 
   > * {
-    outline: 1px dotted tdbc-color("yellow");
+    outline: 1px dotted color("yellow");
   }
 }
 
@@ -92,9 +92,9 @@ main ol:first-of-type {
 
 .gridafc {
   display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(10ch, 1fr));
   margin: 0;
   padding: 0;
-  grid-template-columns: repeat(auto-fit, minmax(10ch, 1fr));
   list-style: none;
 
   &--fw {

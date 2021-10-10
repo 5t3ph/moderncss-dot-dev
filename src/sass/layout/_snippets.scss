@@ -1,51 +1,49 @@
-// stylelint-disable selector-max-type
 details {
   margin-top: 2rem;
 }
 
 summary,
 details pre[class*="language-"],
-.tdbc-demo {
-  border: 1px solid tdbc-color("text");
+.demo {
+  border: 1px solid color("text");
 }
 
 summary {
   position: relative;
   padding: 0.5em;
-  // font-size: $tdbc-lead-font-size;
+  background-color: color("text");
+  color: color("background");
   font-size: 1.15rem;
   cursor: pointer;
-  background-color: tdbc-color("text");
-  color: tdbc-color("background");
 
   &:focus {
-    outline: 2px solid transparent;
-    box-shadow: inset 0 0 0 2px tdbc-color("background"), 0 0 0 2px tdbc-color("text");
     border-radius: 0.15em;
+    outline: 2px solid transparent;
+    box-shadow: inset 0 0 0 2px color("background"), 0 0 0 2px color("text");
   }
 }
 
 details pre[class*="language-"] {
   margin: 0;
-  border-radius: 0;
-  border-top: 0;
   padding-top: 1rem;
   padding-bottom: 1rem;
+  border-top: 0;
+  border-radius: 0;
 }
 
-.tdbc-demo {
-  contain: content;
+.demo {
   margin-bottom: 2rem;
+  contain: content;
 
   @media (max-width: 928px) {
     max-width: calc(100vw - 2rem);
   }
 
-  .tdbc-demo--content {
-    background-color: tdbc-color("light");
+  .demo--content {
+    background-color: color("light");
   }
 
-  .tdbc-demo--place-center {
+  .demo--place-center {
     display: grid;
     place-content: center;
     min-height: 20vh;
@@ -70,19 +68,19 @@ details pre[class*="language-"] {
 // Seeking a pointer because @supports for `resize`
 // returns false positive on iOS
 @media (any-hover: hover) and (any-pointer: fine) {
-  .tdbc-demo:not(.no-resize) {
+  .demo:not(.no-resize) {
     position: relative;
-    resize: horizontal;
-    overflow: auto;
     padding: 1.75rem 0;
+    overflow: auto;
+    resize: horizontal;
 
     &::before,
     &::after {
       position: absolute;
+      color: color("light");
       font-size: 1rem;
-      line-height: 0;
       letter-spacing: 0.03em;
-      color: tdbc-color("light");
+      line-height: 0;
     }
 
     &::after {
@@ -100,7 +98,7 @@ details pre[class*="language-"] {
 }
 
 @media not all and (min-resolution: 0.001dpcm) {
-  .tdbc-demo {
+  .demo {
     resize: none;
 
     &::after {
@@ -114,9 +112,9 @@ del.highlight-line-remove {
 }
 
 ins.highlight-line-add {
-  background-color: #10441e;
-  border-left: 4px solid #24c350;
   padding: 0.08em 0.25em 0.2em 0;
+  border-left: 4px solid #24c350;
+  background-color: #10441e;
   color: #fff;
   text-decoration: none;
 }

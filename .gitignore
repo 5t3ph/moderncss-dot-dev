@@ -3,10 +3,8 @@ node_modules
 
 # build artefacts
 public
-src/css
 functions/*.json
 functions/*.html
-temp.md
 .vscode
 
 # secrets and errors

@@ -1,6 +1,7 @@
 /*
 Credit to Andy Bell's Modern CSS Reset
 @link https://piccalil.li/blog/a-modern-css-reset/
+
 🟣 = additions by Stephanie Eckles 
 Twitter/Github/Codepen: @5t3ph
 */
@@ -27,9 +28,11 @@ dd {
 }
 
 /* Remove list styles on ul, ol elements with a list role, 
-which suggests default styling will be removed */
-ul[role="list"],
-ol[role="list"] {
+which suggests default styling will be removed 
+
+🟣 Selector updated to reduce specificity
+*/
+:where(ul, ol):where([role="list"]) {
   margin: 0;
   padding: 0;
   list-style: none;
@@ -43,10 +46,11 @@ html:focus-within {
 /* Set core body defaults */
 body {
   min-height: 100vh;
-  line-height: 1.5;
-  text-rendering: optimizeSpeed;
+
   /* 🟣 Set base font-family */
   font-family: system-ui, sans-serif;
+  line-height: 1.5;
+  text-rendering: optimizeSpeed;
 }
 
 /* A elements that don't have a class get default styles */
@@ -54,11 +58,6 @@ a:not([class]) {
   /* 🟣 Relatively sized thickness and offset */
   text-decoration-thickness: max(0.08em, 1px);
   text-underline-offset: 0.15em;
-}
-
-// REMOVE LATER
-a {
-  color: hsl(260, 80%, 65%);
 }
 
 /* Make images easier to work with */
@@ -79,18 +78,19 @@ img[width] {
 svg {
   /* Inherit from text color */
   fill: currentColor;
+
   /* Allow click events to "fall through" */
   pointer-events: none;
 }
 
 /* 🟣 Scroll margin allowance above anchor links */
-[id] {
+:target {
   scroll-margin-top: 2rem;
 }
 
 /* 🟣 Scroll margin allowance below focused elements 
 to ensure they are clearly in view */
-*:focus {
+:focus {
   scroll-margin-bottom: 8vh;
 }
 

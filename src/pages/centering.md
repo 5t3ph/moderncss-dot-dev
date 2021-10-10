@@ -7,7 +7,7 @@ layout: demo.njk
 date: "2020-05-17"
 ---
 
-<p class="tdbc-h3 tdbc-text-align-center tdbc-ink--primary">Get ready to learn how to approach the age old question faced by many a CSS practitioner:<br/> "How do I center a div?"</p>
+<p class="h3 text-align-center ink--primary">Get ready to learn how to approach the age old question faced by many a CSS practitioner:<br/> "How do I center a div?"</p>
 
 ## Use Cases Covered
 
@@ -26,8 +26,8 @@ date: "2020-05-17"
    - [X Centering for Block Elements](#x-centering-for-block-elements)
    - [X Centering for Dynamically Positioned Elements](#x-centering-for-dynamically-positioned-elements)
 
-<div class="tdbc-card tdbc-card--teaser tdbc-card--ad">
-	<div class="tdbc-card__content">
+<div class="card card--teaser card--ad">
+	<div class="card__content">
 		<script async type="text/javascript" src="//cdn.carbonads.com/carbon.js?serve=CE7I52QE&placement=moderncssdev" id="_carbonads_js"></script>
 	</div>
 </div>
@@ -348,8 +348,8 @@ margin-right: auto;
 For the demo, I've also set a `max-width` since by default block elements take up the full-width of their container, which visually opposes the centering.
 
 <div class="demo">
-	<div class="tdbc-mx-auto max">I am centered horizontally!</div>
-	<div class="tdbc-mx-auto max">Me too!</div>
+	<div class="mx-auto max">I am centered horizontally!</div>
+	<div class="mx-auto max">Me too!</div>
 </div>
 
 ### X Centering for Dynamically Positioned Elements
