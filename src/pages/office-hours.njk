@@ -1,0 +1,60 @@
+---
+title: "Office Hours on Twitch"
+description: "Bring me your layout issues and questions, I'll help you learn both CSS and how to get there with semantic HTML."
+templateEngineOverride: njk, md
+permalink: "/office-hours/"
+date: 2021-09-16
+layout: page.njk
+landingPage: true
+---
+
+<p class="tdbc-lead">Bring me your layout issues and questions, I'll help you learn both CSS and how to get there with semantic HTML.</p>
+
+<a href="https://twitch.tv/5t3phDev" class="tdbc-button">Join on Twitch</a>
+
+## Upcoming Office Hours
+
+<button id="convert-time" class="tdbc-button tdbc-button-outlined tdbc-button-outlined--light tdbc-button--small">Convert to local time</button>
+
+{% if collections.upcomingOfficeHours.length %}
+<ul class="tdbc-office-hours">
+{% for event in collections.upcomingOfficeHours %}
+<li><time datetime="{{ event.datetime }}">{{ event.dateDisplay }}</time></li>
+{% endfor %}
+</ul>
+{% else %}
+<p><em>No upcoming times scheduled - stay tuned!</em></p>
+{% endif %}
+
+{% teaser %}
+
+## Submit a Topic
+
+Not able to attend live? Submit your question or topic request and it may be covered if time allows.
+
+<form name="office-hours" action="/thanks" class="form" method="POST" netlify-honeypot="bot-field" data-netlify="true">
+	<p hidden>
+		<label>Don’t fill this out if you're human: <input name="bot-field" /></label>
+	</p>
+  <div class="tdbc-form-group">
+    <label for="name">First Name / Twitch username</label>
+    <input type="text" id="name" name="name" class="form-field">
+  </div>
+  <div class="tdbc-form-group">
+    <label for="email">Details of your question or request</label>
+    <textarea required id="request" name="request" class="form-field" rows="5"></textarea>
+  </div>
+  <button class="tdbc-button" type="submit">Send</button>
+</form>
+
+<script>
+  function convertTime() {
+    const timeNodes = document.querySelectorAll('time')
+    timeNodes.forEach(node => {
+      const date = new Date(node.dateTime)
+      const newLocaleString = date.toLocaleString([],{timeStyle:"long", dateStyle: "medium"})
+      node.innerHTML = newLocaleString;
+    })
+  }
+  document.querySelector('#convert-time').addEventListener('click', convertTime)
+</script>
