@@ -171,7 +171,7 @@ ${htmlCode}
     if (nextTopic !== undefined) {
       return `<li class="card card--teaser">
           <div class="card__content text-align-center">
-            <span class="lead my-auto">Upcoming Topic: <br/><span class="h3 ink--secondary">${nextTopic}</span></span>
+            <span class="lead my-auto">Upcoming Topic: <br/><span class="h3 color-secondary">${nextTopic}</span></span>
           </div>
         </li>`;
     }
@@ -191,9 +191,9 @@ ${htmlCode}
       return `<li class="card card--text">
           <blockquote class="card__content text-align-center">
             <img src="/img/avatars/${review.avatar}.jpg" alt="${review.name}" />
-            <p class="ink--secondary">${review.quote}</p>
+            <p class="color-secondary">${review.quote}</p>
             <footer>
-              <cite class"ink--gray">&mdash; <a href="${review.source}">${review.name}</a></cite>
+              <cite class"color-gray">&mdash; <a href="${review.source}">${review.name}</a></cite>
             </footer>
           </blockquote>
         </li>`;

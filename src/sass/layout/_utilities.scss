@@ -1,0 +1,80 @@
+.container {
+  width: min(var(--content-max, 120ch), 100% - 2rem);
+  margin-inline: auto;
+}
+
+.column-container {
+  --gap: 2rem;
+
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 25ch), 1fr));
+  gap: var(--gap);
+}
+
+.hero {
+  --padding: 10vh;
+  --min-height: 40vh;
+  --content-max: 70ch;
+
+  display: grid;
+  place-content: center;
+  min-height: var(--min-height);
+  padding-block: var(--padding);
+  text-align: center;
+
+  .landing-page & {
+    --padding: 5vh;
+    --min-height: unset;
+  }
+
+  .lead {
+    margin-top: 5vh;
+  }
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+// .series-container {
+//   margin-right: 8vw;
+//   margin-bottom: 10vh;
+//   margin-left: 8vw;
+// }
+
+// .flex-container {
+//   display: flex;
+//   flex-direction: column;
+// }
+
+.section {
+  margin-block: var(--section-margin, 8vh);
+  padding-block: var(--section-padding, 4vh);
+}
+
+.mx-auto {
+  margin-inline: auto;
+}
+
+.text-align-center {
+  text-align: center;
+}
+
+.gradient-border {
+  border-width: 0;
+  border-top-width: var(--gradient-width, 0.25rem);
+  border-style: solid;
+  border-image: linear-gradient(to right, var(--gradient)) 1;
+}
+
+$text-colors: "primary", "secondary", "gray"; // "light";
+
+@each $color in $text-colors {
+  .color-#{$color} {
+    color: var(--color-#{$color});
+  }
+}

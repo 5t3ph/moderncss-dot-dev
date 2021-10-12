@@ -84,7 +84,7 @@ An example of this being very useful is creating a consistent color palette usin
   <li class="color color3">Color 3</li>
 </ul>
 {% endset %}
-{% include "snippet.njk" %}
+{% include "partials/snippet.njk" %}
 
 ## `clamp()`
 
@@ -166,7 +166,7 @@ In this example, you could also swap to `100%` instead of `vw` to make the eleme
   <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Vero a quam labore inventore iste eligendi, quasi velit, qui repellendus voluptatem temporibus nisi. Pariatur nesciunt at dolorum, cumque illum maiores animi?</p>
 </div>
 {% endset %}
-{% include "snippet.njk" %}
+{% include "partials/snippet.njk" %}
 
 > _Quick note_: The `ch` unit is equal to the width of the `0` character given all current `font` properties at the time it is applied. This makes it an excellent choice for approximating line length for a better reading experience, for example.
 
@@ -225,7 +225,7 @@ Consider the following example, where `min()` is used to ensure the image doesn'
   <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Vero a quam labore inventore iste eligendi, quasi velit.</p>
 </div>
 {% endset %}
-{% include "snippet.njk" %}
+{% include "partials/snippet.njk" %}
 
 ## `max()`
 

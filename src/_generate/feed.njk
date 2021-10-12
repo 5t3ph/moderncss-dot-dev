@@ -6,16 +6,16 @@ eleventyExcludeFromCollections: true
 <feed xmlns="http://www.w3.org/2005/Atom">
 	<title>Modern CSS Solutions for Old CSS Problems</title>
 	<subtitle>A series examining modern CSS solutions to problems Stephanie Eckles, a seasoned frontend developer, has been solving for 13+ years.</subtitle>
-	{% set absoluteUrl %}{{ '/feed/' | url | absoluteUrl(site.url) }}{% endset %}
+	{% set absoluteUrl %}{{ '/feed/' | url | absoluteUrl(meta.url) }}{% endset %}
 	<link href="{{ absoluteUrl }}" rel="self"/>
-	<link href="{{ site.url }}"/>
+	<link href="{{ meta.url }}"/>
 	<updated>{{ collections.sortByDate | getNewestCollectionItemDate | dateToRfc3339 }}</updated>
-	<id>{{ site.url }}</id>
+	<id>{{ meta.url }}</id>
 	<author>
 		<name>Stephanie Eckles</name>
 	</author>
 	{%- for post in collections.sortByDate %}
-	{% set absolutePostUrl %}{{ post.url | url | absoluteUrl(site.url) }}{% endset %}
+	{% set absolutePostUrl %}{{ post.url | url | absoluteUrl(meta.url) }}{% endset %}
 	<entry>
 		<title>{{ post.data.title  }}</title>
 		<link href="{{ absolutePostUrl }}"/>

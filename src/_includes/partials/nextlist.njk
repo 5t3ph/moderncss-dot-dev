@@ -1,0 +1,26 @@
+<aside aria-labelledby="next" class="section container gradient-border text-align-center">
+<h2 id="next" class="color-secondary">What to Read Next</h2>
+<a href="/" class="button">Browse the whole series</a>
+<ul role="list" class="column-container">
+  {%- for post in collections.posts | randomLimit(3, page.url) -%}
+    <li class="card">
+      <div class="card__content" data-episode="{{ post.data.episode }}">
+      <a href="{{ post.url }}" class="card__title {% peekaboo loop.index0 %}"><span>{{ post.data.title }}</span></a>
+        <p>{{ post.data.description }}</p>
+      </div>
+    </li>
+    {% if loop.index0 === 1 %}
+      <li class="card card--text">
+        <div class="card__content text-align-center my-auto">
+          <a href="https://smolcss.dev" class="color-secondary card__title">CSS Tips in Your Inbox</a>
+          <p>Join my newsletter for article updates, CSS tips, and front-end resources!</p>
+          <a class="button button-outlined button-outlined--light button--small" href="/newsletter/">Newsletter Signup</a>
+        </div>
+      </li>
+    {% endif %}
+    {# {% if loop.index0 === 1 %}
+      {% review 'random' %}
+    {% endif %} #}
+  {%- endfor -%}
+  </ul> 
+</aside>

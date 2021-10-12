@@ -22,13 +22,14 @@ summary {
     box-shadow: inset 0 0 0 2px var(--color-background),
       0 0 0 2px var(--color-on-background);
   }
+
+  &::marker {
+    color: inherit;
+  }
 }
 
 details pre[class*="language-"] {
   margin: 0;
-  padding-top: 1rem;
-  padding-bottom: 1rem;
-  border-top: 0;
   border-radius: 0;
 }
 
@@ -41,7 +42,7 @@ details pre[class*="language-"] {
   }
 
   .demo--content {
-    background-color: var(--color-on-background);
+    background-color: #fff;
   }
 
   .demo--place-center {

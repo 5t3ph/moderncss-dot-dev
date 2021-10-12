@@ -1,14 +1,13 @@
 ---
-description: 'A series examining modern CSS solutions to problems Stephanie Eckles (@5t3ph), a seasoned frontend developer, has been solving for 13+ years.'
-layout: base.njk
+layout: layouts/base
 ---
-  <header class="hero hero--home text-align-left">
-      <div class="container">
-        <h1 class="ink--primary mb-none"><span class="logo-m">M</span>odern CSS Solutions
-          <em class="h3 ink--secondary">for Old CSS Problems</em>
+  <header class="hero hero--home">
+      <div class="mx-auto">
+        <h1 class="color-primary" translate="no">Modern CSS Solutions
+          <em class="color-secondary">for Old CSS Problems</em>
         </h1>
         
-        <p class="lead ink--gray mt-md">
+        <p class="lead">
         <span class="row">
           <span>A series by <a href="https://thinkdobecreate.com/">Stephanie Eckles</a></span> <a href="https://twitter.com/5t3ph/" class="icon-button" aria-label="Twitter">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 26 28" aria-hidden="true">
@@ -20,61 +19,61 @@ layout: base.njk
         </span>
         </p>
 
-        <a href="/topics/" class="button mx-auto">Browse By Topic</a>
+        <a href="/topics/" class="button">Browse By Topic</a>
       </div>
   </header>
-  <main class="series-container"> 
-    <ul class="column-container">
+  <main class="container"> 
+    <ul role="list" class="column-container">
     {%- for post in collections.sortByDate -%}
-      {% if loop.index0 === 0 %}
+      {%- if loop.index0 === 0 %}
         {% upcomingTopic post.data.episode %}
-      {% endif %}
+      {% endif -%}
       {# {% if loop.index0 === 1 %}
         <li class="card card--text">
           <div class="card__content text-align-center my-auto">
-            <a href="https://smashingconf.com/online-workshops/workshops/stephanie-eckles-oct" class="ink--secondary card__title">CSS Workshop</a>
+            <a href="https://smashingconf.com/online-workshops/workshops/stephanie-eckles-oct" class="color-secondary card__title">CSS Workshop</a>
             <p>Registration now available for my workshop coming in October - <strong>Level-Up With Modern CSS</strong> - with Smashing Conference!</p>
             <a href="https://smashingconf.com/online-workshops/workshops/stephanie-eckles-oct">Register Today</a>
           </div>
         </li>
       {% endif %} #}
-      {% if loop.index0 === 5 %}
+      {%- if loop.index0 === 5 %}
       <li class="card card--teaser card--ad">
         <div class="card__content text-align-center">
           <script async type="text/javascript" src="//cdn.carbonads.com/carbon.js?serve=CE7I52QE&placement=moderncssdev" id="_carbonads_js"></script>
         </div>
       </li>
-      {% endif %}
-      {% if loop.index0 === 7 %}
+      {% endif -%}
+      {%- if loop.index0 === 7 %}
         <li class="card card--text">
           <div class="card__content text-align-center my-auto">
-            <a href="https://smolcss.dev" class="ink--secondary card__title">SmolCSS</a>
+            <a href="https://smolcss.dev" class="color-secondary card__title">SmolCSS</a>
             <p>Check out the ModernCSS companion site <strong>SmolCSS</strong> and demo minimal snippets for modern CSS layouts and components</p>
             <a href="https://smolcss.dev">Visit SmolCSS.dev</a>
           </div>
         </li>
-      {% endif %}
-      {% if loop.index0 === 12 %}
+      {% endif -%}
+      {%- if loop.index0 === 12 %}
         <li class="card card--text">
           <div class="card__content text-align-center my-auto">
-            <a href="/newsletter/" class="ink--secondary card__title">CSS Tips in Your Inbox</a>
+            <a href="/newsletter/" class="color-secondary card__title">CSS Tips in Your Inbox</a>
             <p>Join my newsletter for article updates, CSS tips, and front-end resources!</p>
             <a class="button button--small" href="/newsletter/">Newsletter Signup</a>
           </div>
         </li>
-      {% endif %}
-      {% if loop.index0 === 13 %}
+      {% endif -%}
+      {%- if loop.index0 === 13 %}
         <li class="card card--text">
           <div class="card__content text-align-center my-auto">
-            <a href="https://www.buymeacoffee.com/moderncss" class="ink--secondary card__title">Support this Series</a>
+            <a href="https://www.buymeacoffee.com/moderncss" class="color-secondary card__title">Support this Series</a>
             <p>Enjoying the series? I would appreciate a coffee to help me keep writing and coding!</p>
             <a class="button button-outlined button-outlined--light button--small" target="_blank" rel="noopener" href="https://www.buymeacoffee.com/moderncss"><span class="button__icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 36"><g fill="none" fill-rule="evenodd"><path fill="#FF9100" d="M11.835 7.655l-8.74-.052 4.292 27.113h10.456l4.292-27.113z"/><path fill="#FD0" d="M11.835 7.655l-8.74-.052 4.292 27.113h8.272L19.95 7.603z"/><path fill="#FFF" d="M.599 7.603h22.55v-2.5H.6z"/><path stroke="#000" stroke-width="1.17" d="M.599 7.603h22.55v-2.5H.6z"/><path fill="#FFF" d="M18.78 1.04H4.813l-1.64 3.75H20.419z"/><g stroke-width="1.17"><path stroke="#050505" d="M18.78 1.04H4.813l-1.64 3.75H20.419z"/><path stroke="#000" d="M11.835 7.655l-10.3-.052 4.292 27.113h12.016l4.292-27.113z"/></g><path fill="#FFF" d="M22.447 15.26H1.146l1.922 10.783 8.728-.094 8.728.094z"/><path stroke="#000" stroke-width="1.17" d="M22.447 15.26H1.146l1.922 10.783 8.728-.094 8.728.094z"/></g></svg></span> Buy me a coffee</a>
           </div>
         </li>
-      {% endif %}
-      {% if loop.index0 === 17 %}
+      {% endif -%}
+      {%- if loop.index0 === 17 %}
         {% review 0 %}
-      {% endif %}
+      {% endif -%}
       <li class="card episode index{{ loop.index0 + 1 }}">
         <div class="card__content" data-episode="{{ post.data.episode }}">
           <a href="{{ post.url }}" class="card__title"><span>{{ post.data.title }}</span></a>
@@ -85,13 +84,13 @@ layout: base.njk
     </ul> 
   </main>
 
-  <aside aria-labelledby="resources" class="mx-auto px text-align-center gradient-border">
-  <h2 id="resources" class="ink--secondary">Additional Resources</h2>
-  <ul class="column-container column-container--gap-lg">
+  <aside aria-labelledby="resources" class="container section mx-auto gradient-border">
+  <h2 id="resources" class="color-secondary text-align-center">Additional Resources</h2>
+  <ul role="list" class="column-container">
     <li class="flex-container">
       <h3>Frontend Development Videos</h3>
       <p>Learn more about various frontend development topics such as flexbox, grid, and Sass in 5 minutes or less. If you have 20 minutes available, you can create a whole landing page!</p>
-      <div class="row mt-auto">
+      <div class="row">
         <a href="https://egghead.io/playlists/create-a-landing-page-with-css-grid-and-flexbox-6048?af=2s65ms" class="button button--small">20 Min. Landing Page</a>
         <a href="https://egghead.io/instructors/stephanie-eckles?af=2s65ms"><small>View All Videos</small></a>
       </div>
@@ -99,7 +98,7 @@ layout: base.njk
     <li class="flex-container">
       <h3>Learn Web Development</h3>
       <p>Go from zero to website launch - no prior development experience required! Through this series of 4-14 minute videos, you will learn the essentials of web development.</p>
-      <div class="row mt-auto">
+      <div class="row">
         <a href="https://dev.to/5t3ph/learn-how-to-make-a-website-set-up-your-coding-environment-2oeo" class="button button--small">Start Now</a>
         <a href="https://learnfromsteph.dev"><small>Course Details</small></a>
       </div>
@@ -107,7 +106,7 @@ layout: base.njk
     <li class="flex-container">
       <h3>HTML / Sass Jumpstart</h3>
       <p>dart sass powered, includes stylelint and prettier, and autoprefix upon build. Develop script includes hot-reload via browsersync. Themeable and&nbsp;scalable.</p>
-      <div class="row mt-auto">
+      <div class="row">
         <a href="https://github.com/5t3ph/html-sass-jumpstart/generate" class="button button--small">Generate Repo</a>
         <a href="https://5t3ph.github.io/html-sass-jumpstart/"><small>View Docs</small></a>
       </div>
@@ -115,9 +114,8 @@ layout: base.njk
   </ul>
   </aside>
 {% set js %}
-  {% include "peekaboo.js" %}
+  {% include "src/js/peekaboo.js" %}
 {% endset %}
 <script>
   {{ js | jsmin | safe }}
 </script>
-    

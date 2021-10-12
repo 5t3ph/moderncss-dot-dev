@@ -3,11 +3,11 @@ title: "The Complete Guide to Centering in CSS"
 description: "Learn how to finally solve the mystery of centering in CSS using grid, flexbox, and classic block element layout."
 permalink: "/complete-guide-to-centering-in-css/"
 stylesheet: "centering"
-layout: demo.njk
+layout: layouts/demo
 date: "2020-05-17"
 ---
 
-<p class="h3 text-align-center ink--primary">Get ready to learn how to approach the age old question faced by many a CSS practitioner:<br/> "How do I center a div?"</p>
+<p class="h3 text-align-center color-primary">Get ready to learn how to approach the age old question faced by many a CSS practitioner:<br/> "How do I center a div?"</p>
 
 ## Use Cases Covered
 

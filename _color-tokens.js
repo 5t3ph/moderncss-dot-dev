@@ -10,10 +10,20 @@ module.exports = [
   {
     name: "background",
     color: "#27272c",
+    onColor: "#c5c5ce",
   },
   {
     name: "background-alt",
-    color: "#070708",
+    color: "#1e1c22",
+  },
+  {
+    name: "inverse",
+    color: "#f9f9f9",
+    onColor: false,
+  },
+  {
+    name: "gray",
+    color: "#777",
     onColor: false,
   },
   {

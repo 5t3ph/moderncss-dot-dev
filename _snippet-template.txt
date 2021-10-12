@@ -12,4 +12,4 @@
 {% endset %}
 {% set html -%}
 {% endset %}
-{% include "snippet.njk" %}
+{% include "partials/snippet.njk" %}

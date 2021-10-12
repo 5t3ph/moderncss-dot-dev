@@ -1,0 +1,18 @@
+---
+layout: layouts/base
+---
+<main class="container postpage" data-episode="{{ episode }}">
+  <article class="mx-auto">
+    <span class="halfway"></span>
+    <blockquote><p><em>This is episode #{{ episode }} in a series examining modern CSS solutions to problems I've been solving over the last 14+ years of being a frontend developer</em>.</p></blockquote>
+    {# {% if not hideTeaser %}
+    {{ content | addTeaser | safe }}
+    {% else %} #}
+    {{ content | safe }}
+    {# {% endif %} #}
+  </article>
+  
+  {% include "partials/tweetthis.njk" %}
+</main>
+
+{% include "partials/nextlist.njk" %}

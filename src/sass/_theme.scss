@@ -3,12 +3,10 @@
 :root {
   @include color-tokens();
 
-  --gradient: linear-gradient(
-    var(--gradient-angle, 35deg),
-    var(--color-secondary) 10%,
-    var(--color-yellow) 25%,
-    var(--color-green) 50%,
-    var(--color-blue) 75%,
-    var(--color-primary) 90%
-  );
+  --gradient: var(--color-secondary) 10%, var(--color-yellow) 25%,
+    var(--color-green) 50%, var(--color-blue) 75%, var(--color-primary) 90%;
+  --brand-font: "Kanit", serif;
+  --brand-font-weight: 800;
+  --brand-font-alt: "Baloo 2", system-ui, sans-serif;
+  --brand-font-alt-weight: normal;
 }

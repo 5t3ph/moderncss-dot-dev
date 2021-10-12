@@ -7,8 +7,8 @@
 code[class*="language-"],
 pre[class*="language-"] {
   background: none;
-  // color: color("gray");
   font-family: Consolas, Monaco, "Andale Mono", "Ubuntu Mono", monospace;
+  font-size: 1rem;
   line-height: 1.5;
   text-align: left;
   white-space: pre;
@@ -31,6 +31,11 @@ pre[class*="language-"] {
 :not(pre) > code[class*="language-"],
 pre[class*="language-"] {
   background: var(--color-background-alt);
+  background-image: linear-gradient(
+    8deg,
+    var(--color-background-alt),
+    var(--color-background)
+  );
 }
 
 /* Inline code */
@@ -89,7 +94,7 @@ pre[class*="language-"] {
 
 .token.atrule,
 .token.attr-value {
-  color: var(--color-on-primary);
+  color: var(--color-on-background-alt);
 }
 
 .token.keyword {
