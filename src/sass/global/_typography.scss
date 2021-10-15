@@ -102,12 +102,12 @@ article > * {
     margin-top: 1.15em;
   }
 
-  + h2 {
-    margin-top: 4rem;
-  }
+  + .heading-wrapper {
+    margin-top: 3rem;
 
-  + h3 {
-    margin-top: 2rem;
+    + * {
+      margin-top: 0;
+    }
   }
 }
 
@@ -120,12 +120,32 @@ article > ol {
   }
 }
 
-article > h2 {
-  color: var(--color-secondary);
+.heading-wrapper {
+  display: flex;
+  gap: 0.5em;
+
+  h2 {
+    color: var(--color-secondary);
+  }
+
+  h3 {
+    color: var(--color-primary);
+  }
 }
 
-article > h3 {
-  color: var(--color-primary);
+.anchor {
+  font-size: 1.5rem;
+  text-decoration: none;
+  opacity: 0.6;
+  order: -1;
+
+  [hidden] {
+    display: block;
+  }
+
+  &:hover {
+    opacity: 1;
+  }
 }
 
 ::marker {
@@ -136,18 +156,6 @@ article > h3 {
   background-color: var(--color-yellow);
   color: var(--color-background);
   -webkit-text-fill-color: var(--color-background);
-}
-
-.anchor {
-  margin-left: 0.25em;
-  font-size: 0.8em;
-  text-decoration: none;
-  opacity: 0.6;
-  vertical-align: top;
-
-  &:hover {
-    opacity: 1;
-  }
 }
 
 code:not([class*="language"]) {
