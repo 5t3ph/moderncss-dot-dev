@@ -9,7 +9,7 @@ $typography-variants: ".h2, .h3, h4";
 
 h1 {
   font-family: var(--brand-font);
-  font-size: clamp(1.75rem, 1rem + 5vw, 4rem);
+  font-size: clamp(2rem, 1rem + 5vw, 4rem);
   font-weight: var(--brand-font-weight);
   letter-spacing: 0.04em;
   line-height: 1.1;
@@ -28,13 +28,13 @@ h3,
 h2,
 .h2 {
   color: var(--color-secondary);
-  font-size: clamp(1.55rem, 1rem + 5vw, 3rem);
+  font-size: clamp(1.85rem, 1rem + 5vw, 3rem);
 }
 
 h3,
 .h3 {
   color: var(--color-primary);
-  font-size: clamp(1.35rem, 1rem + 2.5vw, 2.25rem);
+  font-size: clamp(1.55rem, 1rem + 3vw, 2.25rem);
 }
 
 h4 {
@@ -251,7 +251,7 @@ blockquote {
       --gradient-angle: 35deg;
       --bq-margin: 8vh;
 
-      margin-inline: -1rem;
+      margin-inline: 5vw;
       padding: 2rem 1.5rem;
       border-width: 8px;
       text-align: center;
