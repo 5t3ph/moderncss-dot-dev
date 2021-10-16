@@ -1,7 +1,6 @@
 ---
 layout: layouts/base
 ---
-{%- from 'macros/icon.njk' import icon -%}
   <header class="hero hero--home">
       <div class="mx-auto">
         <h1 class="color-primary" translate="no">Modern CSS Solutions
@@ -10,7 +9,7 @@ layout: layouts/base
         
         <p class="lead">
         <span class="row">
-          <span>A series by <a href="https://thinkdobecreate.com/">Stephanie Eckles</a></span> <a href="https://twitter.com/5t3ph/" class="icon-button" aria-label="Twitter">{{ icon( "twitter" ) }}</a>
+          <span>A series by <a href="https://thinkdobecreate.com/">Stephanie Eckles</a></span> <a href="https://twitter.com/5t3ph/" class="icon-button" aria-label="Twitter">{% icon "twitter" %}</a>
         </span>
         </p>
 
@@ -62,7 +61,7 @@ layout: layouts/base
           <div class="card__content text-align-center my-auto">
             <a href="https://www.buymeacoffee.com/moderncss" class="color-secondary card__title">Support this Series</a>
             <p>Enjoying the series? I would appreciate a coffee to help me keep writing and coding!</p>
-            <a class="button button-outlined button-outlined--light button--small" target="_blank" rel="noopener" href="https://www.buymeacoffee.com/moderncss">{{ icon( "buymeacoffee" ) }} Buy me a coffee</a>
+            <a class="button button-outlined button-outlined--light button--small" target="_blank" rel="noopener" href="https://www.buymeacoffee.com/moderncss">{% icon "twitter" %} Buy me a coffee</a>
           </div>
         </li>
       {% endif -%}

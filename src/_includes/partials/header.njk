@@ -1,4 +1,3 @@
-{%- from 'macros/icon.njk' import icon -%}
 {% include "partials/nav.njk" %}
 {%- set dateLabel %}{{ "Updated on" if updatedOn else "Posted on" }}{% endset -%}
 {%- set dateValue %}{{ updatedOn | postDate if updatedOn else page.date | postDate }}{% endset -%}
@@ -11,7 +10,7 @@
     {%- if layout == 'layouts/post' %}<span><span>{{ dateLabel }}</em>: {{ dateValue }}</span>{% endif -%}
     <small class="row">
       Written by Stephanie Eckles <a href="https://twitter.com/5t3ph/" class="icon-button" aria-label="Twitter">
-      {{ icon( "twitter" ) }}
+      {% icon "twitter" %}
     </a>
     </small></span></p>
     {% endif %}
