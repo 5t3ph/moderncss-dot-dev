@@ -1,0 +1,96 @@
+$button-colors: "secondary", "blue";
+
+.button {
+  --button-background: var(--color-primary);
+  --button-color: var(--color-on-primary);
+  --outline-color: transparent;
+
+  // Reset for links
+  text-decoration: none;
+
+  // Reset for buttons
+  padding: 0.55em 0.75em 0.5em;
+  border: 2px solid transparent;
+  font-family: var(--brand-font-alt);
+  font-weight: 500;
+  cursor: pointer;
+
+  // Display
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5em;
+
+  // Visual
+  border-radius: 0.5em;
+  background-color: var(--button-background);
+  color: var(--button-color);
+
+  // Size
+  min-width: 10ch;
+
+  // Text
+  text-align: center;
+  line-height: calc(2px + 2ex + 2px);
+
+  // Effects
+  transition: none 180ms ease-in-out;
+  transition-property: background-color, color, border-color;
+
+  &:hover,
+  &:active {
+    border-color: var(--button-hover-border-color, currentColor);
+    background-color: var(--button-color);
+    color: var(--button-background);
+  }
+
+  &:focus {
+    box-shadow: 0 0 0 max(0.15em, 2px)
+        var(--button-focus-inner, var(--button-color)),
+      0 0 0 max(0.3em, 2px) var(--button-focus-outer, var(--button-background));
+  }
+
+  @each $color in $button-colors {
+    &--#{$color} {
+      --button-background: var(--color-#{$color});
+      --button-color: var(--color-on-#{$color});
+    }
+  }
+
+  &-outlined {
+    --button-background: var(--color-background);
+    --button-color: var(--color-blue);
+    --button-hover-border-color: var(--color-blue);
+    --button-focus-inner: var(--color-background);
+    --button-focus-outer: var(--color-blue);
+
+    border-color: currentColor;
+
+    &--inherit {
+      --button-color: inherit;
+      --button-hover-border-color: inherit;
+      --button-focus-outer: currentColor;
+    }
+  }
+
+  &__icon {
+    flex-shrink: 0;
+    width: 1em;
+    height: 1em;
+  }
+
+  &-icon {
+    --button-background: transparent;
+    --button-color: currentColor;
+
+    width: 1.75em;
+    min-width: unset;
+    height: 1.75em;
+    padding: 0.15em;
+    border-radius: 50%;
+  }
+
+  &--small {
+    font-size: 1rem;
+  }
+}

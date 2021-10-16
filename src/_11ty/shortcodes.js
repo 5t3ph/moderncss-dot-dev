@@ -71,7 +71,7 @@ const review = (index) => {
 };
 
 const icon = (icon, size = "24") => {
-  return `<svg aria-hidden="true" focusable="false" width="${size}" height="${size}" fill="currentColor" class="icon"><use href="#icon-${icon}"></use></svg>`;
+  return `<svg aria-hidden="true" focusable="false" width="${size}" height="${size}" fill="currentColor" class="button__icon"><use href="#icon-${icon}"></use></svg>`;
 };
 
 module.exports = {

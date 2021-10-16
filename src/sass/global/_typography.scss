@@ -186,6 +186,7 @@ textarea {
 
 // stylelint-disable-next-line no-descending-specificity
 a:not([class*="button"]) {
+  border-radius: 0.15em;
   color: var(--color-blue);
 
   code {
