@@ -276,6 +276,15 @@ blockquote {
       }
     }
   }
+
+  cite {
+    color: var(--color-inverse);
+    font-size: 0.75em;
+
+    a:not([class]) {
+      color: inherit;
+    }
+  }
 }
 
 hr {

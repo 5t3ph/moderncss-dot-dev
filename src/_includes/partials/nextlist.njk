@@ -1,9 +1,11 @@
-<aside aria-labelledby="next" class="section container gradient-border text-align-center">
-<h2 id="next" class="color-secondary">What to Read Next</h2>
-<a href="/" class="button">Browse the whole series</a>
-<ul role="list" class="column-container">
+<aside aria-labelledby="next" class="section container gradient-border">
+<div class="text-align-center">
+  <h2 id="next" class="color-secondary">What to Read Next</h2>
+  <a href="/" class="button">Browse the whole series</a>
+</div>
+<ul role="list" class="column-container section" style="--section-padding: 0">
   {%- for post in collections.posts | randomLimit(3, page.url) -%}
-    <li class="card">
+    <li class="card card--episode">
       <div class="card__content" data-episode="{{ post.data.episode }}">
       <a href="{{ post.url }}" class="card__title {% peekaboo loop.index0 %}"><span>{{ post.data.title }}</span></a>
         <p>{{ post.data.description }}</p>

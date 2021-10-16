@@ -122,6 +122,10 @@ a.carbon-poweredby {
   .carbon-wrap {
     --carbon-direction: row;
   }
+
+  > .row {
+    margin-top: 4vh;
+  }
 }
 
 .landing-page {

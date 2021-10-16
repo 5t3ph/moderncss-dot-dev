@@ -61,7 +61,7 @@ const review = (index) => {
         <img src="/img/avatars/${review.avatar}.jpg" alt="${review.name}" />
         <p class="color-secondary">${review.quote}</p>
         <footer>
-          <cite class"color-gray">&mdash; <a href="${review.source}">${review.name}</a></cite>
+          <cite>&mdash; <a href="${review.source}">${review.name}</a></cite>
         </footer>
       </blockquote>
     </li>`;

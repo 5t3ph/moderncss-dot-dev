@@ -1,0 +1,145 @@
+.card {
+  --skew: -5deg;
+
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  padding: 3.5rem 2rem;
+
+  &::before,
+  &::after {
+    content: "";
+    z-index: -1;
+    position: absolute;
+    inset: 0;
+    transform: skewY(var(--skew));
+  }
+
+  &__content {
+    --gap: 1rem;
+
+    display: grid;
+    justify-items: center;
+    gap: var(--gap);
+
+    p {
+      font-size: 1.05rem;
+      line-height: 1.75;
+    }
+  }
+
+  &--teaser {
+    &::before {
+      border-radius: 0.25rem;
+      outline: 1px dashed var(--color-secondary);
+      outline-offset: -1px;
+    }
+
+    .card__content {
+      place-content: center;
+      height: 100%;
+    }
+  }
+
+  &--text,
+  &--episode {
+    &::before {
+      top: -1px;
+      height: calc(100% + 1px);
+      transition: transform 240ms ease-in;
+      border-radius: 0.25rem;
+      background-image: linear-gradient(35deg, var(--gradient));
+    }
+
+    &::after {
+      background-color: var(--color-background-alt);
+    }
+
+    &:focus-within,
+    &:hover {
+      &::before {
+        transform: skewY(-8deg) scale(1.03);
+      }
+    }
+
+    &:focus-within::after {
+      outline: 1px dotted;
+      outline-offset: -0.55rem;
+    }
+
+    :focus {
+      scroll-margin-bottom: 40vh;
+    }
+
+    a.card__title {
+      font-size: 1.35rem;
+      line-height: 1.15;
+      text-decoration: none;
+
+      &:not([class*="color"]) {
+        color: var(--color-primary);
+      }
+    }
+  }
+
+  &--episode {
+    --message: "Pick me!";
+
+    .card__title {
+      justify-self: start;
+
+      &.peekaboo {
+        &::before {
+          content: "✨ " var(--message);
+          position: absolute;
+          top: 1.85rem;
+          left: 2rem;
+          font-size: 0.75em;
+          text-transform: uppercase;
+          color: var(--color-inverse);
+          font-weight: normal;
+        }
+      }
+    }
+
+    &:nth-of-type(3) {
+      --message: "This is a great one!";
+    }
+
+    &:nth-of-type(4) {
+      --message: "You'll love this one!";
+    }
+
+    &:nth-of-type(5) {
+      --message: "Check this one out!";
+    }
+
+    .card__content {
+      a {
+        &::before {
+          content: "";
+          position: absolute;
+          inset: 0;
+        }
+
+        @supports selector(:focus-within) {
+          --outline-color: transparent;
+        }
+      }
+
+      &::before {
+        content: attr(data-episode);
+        position: absolute;
+        top: 0;
+        right: 1rem;
+        font-family: var(--brand-font-alt);
+        font-size: 2rem;
+        opacity: 0.65;
+      }
+    }
+  }
+
+  @media (min-width: 80ch) {
+    --skew: -8deg;
+  }
+}

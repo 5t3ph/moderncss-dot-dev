@@ -16,7 +16,7 @@ layout: layouts/base
         <a href="/topics/" class="button">Browse By Topic</a>
       </div>
   </header>
-  <main class="container"> 
+  <main aria-label="Articles Table of Contents" class="container"> 
     <ul role="list" class="column-container">
     {%- for post in collections.sortByDate -%}
       {%- if loop.index0 === 0 %}
@@ -68,7 +68,7 @@ layout: layouts/base
       {%- if loop.index0 === 17 %}
         {% review 0 %}
       {% endif -%}
-      <li class="card episode index{{ loop.index0 + 1 }}">
+      <li class="card card--episode index{{ loop.index0 + 1 }}">
         <div class="card__content" data-episode="{{ post.data.episode }}">
           <a href="{{ post.url }}" class="card__title"><span>{{ post.data.title }}</span></a>
           <p>{{ post.data.description | safe }}</p>
