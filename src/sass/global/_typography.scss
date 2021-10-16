@@ -1,4 +1,4 @@
-$typography-variants: h2, h3, h4;
+$typography-variants: ".h2, .h3, h4";
 
 :is(#{$typography-variants}) {
   margin-bottom: 0.65em;
@@ -27,12 +27,14 @@ h3,
 
 h2,
 .h2 {
+  color: var(--color-secondary);
   font-size: clamp(1.55rem, 1rem + 5vw, 3rem);
 }
 
 h3,
 .h3 {
-  font-size: clamp(1.35rem, 1rem + 2.5vw, 2.5rem);
+  color: var(--color-primary);
+  font-size: clamp(1.35rem, 1rem + 2.5vw, 2.25rem);
 }
 
 h4 {
@@ -102,12 +104,12 @@ article > * {
     margin-top: 1.15em;
   }
 
-  + .heading-wrapper {
-    margin-top: 3rem;
+  + .h2 {
+    margin-top: 2em;
+  }
 
-    + * {
-      margin-top: 0;
-    }
+  + .h3 {
+    margin-top: 1.5em;
   }
 }
 
@@ -122,19 +124,12 @@ article > ol {
 
 .heading-wrapper {
   display: flex;
-  gap: 0.5em;
-
-  h2 {
-    color: var(--color-secondary);
-  }
-
-  h3 {
-    color: var(--color-primary);
-  }
+  gap: 0.15em;
 }
 
 .anchor {
-  font-size: 1.5rem;
+  font-size: max(0.75em, 1.75rem);
+  line-height: 1;
   text-decoration: none;
   opacity: 0.6;
   order: -1;
