@@ -114,7 +114,7 @@ h4 {
 }
 
 article > * {
-  + *:not([class]) {
+  + *:not([class]):not(details) {
     margin-top: 1.15em;
   }
 
@@ -267,6 +267,7 @@ blockquote {
       --bq-margin: 8vh;
 
       width: min(40rem, 100%);
+      margin-inline: auto;
       padding: 2rem 1.5rem;
       border-width: 8px;
       text-align: center;

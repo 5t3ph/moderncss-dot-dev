@@ -24,6 +24,10 @@ footer {
   p {
     font-size: 0.9rem;
   }
+
+  .row {
+    --gap: 2rem 1rem;
+  }
 }
 
 article {
@@ -32,7 +36,9 @@ article {
   width: var(--width);
   max-width: 80ch;
 
-  > *:not(img):not(.cp_embed_wrapper):not(details):not(.demo):not(.carbon-ad) {
+  > *:not(img):not(details):not([class]),
+  > pre[class*="language"],
+  .heading-wrapper {
     width: min(100%, 50rem);
     margin-inline: auto;
   }
@@ -90,7 +96,6 @@ a.carbon-poweredby {
   color: var(--color-gray);
   font-size: 0.9rem;
   line-height: 1;
-  opacity: 0.7;
 }
 
 .postpage {

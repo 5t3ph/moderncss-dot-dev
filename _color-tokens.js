@@ -18,12 +18,12 @@ module.exports = [
   },
   {
     name: "inverse",
-    color: "#f9f9f9",
+    color: "#fff",
     onColor: false,
   },
   {
     name: "gray",
-    color: "#777",
+    color: "#8e8e8e",
     onColor: false,
   },
   {

@@ -41,6 +41,12 @@
     }
   }
 
+  &--text {
+    img {
+      border-radius: 50%;
+    }
+  }
+
   &--text,
   &--episode {
     &::before {
