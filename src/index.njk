@@ -32,9 +32,9 @@ layout: layouts/base
         </li>
       {% endif %} #}
       {%- if loop.index0 === 5 %}
-      <li class="card card--teaser card--ad">
+      <li class="card card--teaser">
         <div class="card__content text-align-center">
-          <script async type="text/javascript" src="//cdn.carbonads.com/carbon.js?serve=CE7I52QE&placement=moderncssdev" id="_carbonads_js"></script>
+          {% carbonAd %}
         </div>
       </li>
       {% endif -%}

@@ -171,12 +171,12 @@ textarea {
 
   &:focus {
     outline: var(--outline-size) var(--outline-style) var(--outline-color);
-    outline-offset: var(--outline-offset, --outline-size);
+    outline-offset: var(--outline-offset, var(--outline-size));
   }
 
   &:focus-visible {
     outline: var(--outline-size) var(--outline-style) var(--outline-color);
-    outline-offset: var(--outline-offset, --outline-size);
+    outline-offset: var(--outline-offset, var(--outline-size));
   }
 
   &:focus:not(:focus-visible) {

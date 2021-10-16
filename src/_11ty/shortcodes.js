@@ -7,11 +7,9 @@ const newsletterPromo = () => {
 };
 
 const carbonAd = () => {
-  return `<div class="card card--teaser card--ad">
-	<div class="card__content">
+  return `<div class="carbon-ad">
 		<script async type="text/javascript" src="//cdn.carbonads.com/carbon.js?serve=CE7I52QE&placement=moderncssdev" id="_carbonads_js"></script>
-	</div>
-</div>`;
+	</div>`;
 };
 
 const peekaboo = (index) => {
