@@ -1,0 +1,38 @@
+// stylelint-disable selector-max-type
+form {
+  display: grid;
+  justify-items: start;
+  margin-top: 2rem;
+  grid-gap: 1rem;
+}
+
+.form-group {
+  display: grid;
+  width: min(100%, 40ch);
+  grid-gap: 0.5em;
+
+  + .form-group,
+  + .button {
+    margin-top: 1rem;
+  }
+
+  label {
+    width: fit-content;
+    font-size: 1.35rem;
+    line-height: 1;
+  }
+
+  input,
+  textarea {
+    padding: 0 0.5em;
+    border: 2px solid;
+    border-radius: 4px;
+    background-color: var(--color-background-alt);
+    color: var(--color-on-background);
+    font: inherit;
+  }
+
+  input {
+    min-height: 35px;
+  }
+}

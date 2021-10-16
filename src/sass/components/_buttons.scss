@@ -40,8 +40,8 @@ $button-colors: "secondary", "blue";
   &:hover,
   &:active {
     border-color: var(--button-hover-border-color, currentColor);
-    background-color: var(--button-color);
-    color: var(--button-background);
+    background-color: var(--button-hover-background-color, var(--button-color));
+    color: var(--button-hover-color, var(--button-background));
   }
 
   &:focus {
@@ -66,9 +66,12 @@ $button-colors: "secondary", "blue";
 
     border-color: currentColor;
 
-    &--inherit {
-      --button-color: inherit;
-      --button-hover-border-color: inherit;
+    &--inverse {
+      --button-background: transparent;
+      --button-color: var(--color-inverse);
+      --button-hover-border-color: var(--color-inverse);
+      --button-hover-background-color: #{rgba(white, 0.2)};
+      --button-hover-color: currentColor;
       --button-focus-outer: currentColor;
     }
   }
@@ -81,7 +84,11 @@ $button-colors: "secondary", "blue";
 
   &-icon {
     --button-background: transparent;
-    --button-color: currentColor;
+    --button-color: var(--color-inverse);
+    --button-hover-border-color: var(--color-inverse);
+    --button-hover-background-color: #{rgba(white, 0.2)};
+    --button-hover-color: currentColor;
+    --button-focus-outer: currentColor;
 
     width: 1.75em;
     min-width: unset;

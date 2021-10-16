@@ -67,11 +67,8 @@
 
   {{ content | safe }}
 
-  {%- if page.fileSlug != "topics" and not landingPage %}{% include "partials/blm.njk" %}{% endif -%}
-
-    <footer id="site-footer" class="background--secondary">
-      <div class="container text-align-center">
-      <div class="row mx-auto">
+    <footer id="site-footer" class="background--secondary-alt">
+      <div class="row container text-align-center mx-auto">
         <p>
         <a href="/">ModernCSS.dev</a> 
         &copy; {% year %} <a href="https://thinkdobecreate.com">ThinkDoBeCreate - Stephanie&nbsp;Eckles</a>
@@ -96,9 +93,8 @@
         >
           {% icon "youtube" %}
         </a>
-        <a class="button button-outlined button-outlined--inherit button--small" target="_blank" rel="noopener" href="https://www.buymeacoffee.com/moderncss">{% icon "buymeacoffee" %} Buy me a coffee</a>
+        <a class="button button-outlined button-outlined--inverse button--small" target="_blank" rel="noopener" href="https://www.buymeacoffee.com/moderncss">{% icon "buymeacoffee" %} Buy me a coffee</a>
         </span>
-        </div>
       </div>
     </footer>
     {%- if page.url != '/' and not landingPage %}

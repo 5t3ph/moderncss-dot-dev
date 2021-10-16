@@ -14,8 +14,33 @@ body {
   color: var(--color-on-background);
 }
 
+main {
+  margin-block: 8vh;
+}
+
+footer {
+  padding-block: 0.5rem;
+
+  p {
+    font-size: 0.9rem;
+  }
+}
+
 article {
+  --width: auto;
+
+  width: var(--width);
   max-width: 80ch;
+
+  > *:not(img):not(.cp_embed_wrapper):not(details):not(.demo):not(.carbon-ad) {
+    width: min(100%, 50rem);
+    margin-inline: auto;
+  }
+
+  img {
+    max-height: 40vh;
+    margin-inline: auto;
+  }
 }
 
 .carbon-ad {

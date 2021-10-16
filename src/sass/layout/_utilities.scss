@@ -1,3 +1,5 @@
+@use "../color-tokens" as *;
+
 .container {
   width: min(var(--content-max, 120ch), 100% - 2rem);
   margin-inline: auto;
@@ -29,27 +31,41 @@
 
   .lead {
     margin-top: 5vh;
+
+    a {
+      color: inherit;
+    }
+
+    + .button {
+      margin-top: 3vh;
+    }
   }
 }
 
 .row {
+  --gap: 0.5rem;
+  --justify-content: center;
+
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
+  justify-content: var(--justify-content);
+  gap: var(--gap);
 }
 
-// .series-container {
-//   margin-right: 8vw;
-//   margin-bottom: 10vh;
-//   margin-left: 8vw;
-// }
+.flex-container {
+  --gap: 1rem;
 
-// .flex-container {
-//   display: flex;
-//   flex-direction: column;
-// }
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap);
+
+  .row {
+    --justify-content: flex-start;
+
+    margin-top: auto;
+  }
+}
 
 .section {
   margin-block: var(--section-margin, 8vh);
@@ -62,6 +78,12 @@
 
 .text-align-center {
   text-align: center;
+}
+
+.equalize-headings :is(h2, h3) {
+  display: flex;
+  align-items: center;
+  min-height: 2.5em;
 }
 
 .gradient-border {
@@ -77,4 +99,21 @@ $text-colors: "primary", "secondary", "gray"; // "light";
   .color-#{$color} {
     color: var(--color-#{$color});
   }
+}
+
+.background--secondary-alt {
+  background-color: scale-color($color-secondary, $lightness: -20%);
+  color: #fff;
+
+  a:not([class]) {
+    color: inherit;
+  }
+
+  .button-outlined {
+    --button-focus-inner: var(--color-secondary);
+  }
+}
+
+[hidden] {
+  display: none;
 }
