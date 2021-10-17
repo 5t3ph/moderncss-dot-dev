@@ -1,3 +1,4 @@
+// stylelint-disable max-nesting-depth, no-descending-specificity
 .card {
   --skew: -5deg;
 
@@ -47,47 +48,6 @@
     }
   }
 
-  &--text,
-  &--episode {
-    &::before {
-      top: -1px;
-      height: calc(100% + 1px);
-      transition: transform 240ms ease-in;
-      border-radius: 0.25rem;
-      background-image: linear-gradient(35deg, var(--gradient));
-    }
-
-    &::after {
-      background-color: var(--color-background-alt);
-    }
-
-    &:focus-within,
-    &:hover {
-      &::before {
-        transform: skewY(-8deg) scale(1.03);
-      }
-    }
-
-    &:focus-within::after {
-      outline: 1px dotted;
-      outline-offset: -0.55rem;
-    }
-
-    :focus {
-      scroll-margin-bottom: 40vh;
-    }
-
-    a.card__title {
-      font-size: 1.35rem;
-      line-height: 1.15;
-      text-decoration: none;
-
-      &:not([class*="color"]) {
-        color: var(--color-primary);
-      }
-    }
-  }
-
   &--episode {
     --message: "Pick me!";
 
@@ -100,10 +60,10 @@
           position: absolute;
           top: 1.85rem;
           left: 2rem;
-          font-size: 0.75em;
-          text-transform: uppercase;
           color: var(--color-inverse);
+          font-size: 0.75em;
           font-weight: normal;
+          text-transform: uppercase;
         }
       }
     }
@@ -141,6 +101,47 @@
         font-family: var(--brand-font-alt);
         font-size: 2rem;
         opacity: 0.65;
+      }
+    }
+  }
+
+  &--text,
+  &--episode {
+    &::before {
+      top: -1px;
+      height: calc(100% + 1px);
+      transition: transform 240ms ease-in;
+      border-radius: 0.25rem;
+      background-image: linear-gradient(35deg, var(--gradient));
+    }
+
+    &::after {
+      background-color: var(--color-background-alt);
+    }
+
+    &:focus-within,
+    &:hover {
+      &::before {
+        transform: skewY(-8deg) scale(1.03);
+      }
+    }
+
+    &:focus-within::after {
+      outline: 1px dotted;
+      outline-offset: -0.55rem;
+    }
+
+    :focus {
+      scroll-margin-bottom: 40vh;
+    }
+
+    a.card__title {
+      font-size: 1.35rem;
+      line-height: 1.15;
+      text-decoration: none;
+
+      &:not([class*="color"]) {
+        color: var(--color-primary);
       }
     }
   }

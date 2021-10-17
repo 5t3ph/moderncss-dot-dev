@@ -5,6 +5,7 @@ episode: 9
 description: "This guide will explore the ins and outs of styling an accessible, extensible button appearance for both link and button elements."
 templateEngineOverride: njk, md
 date: 2020-05-07
+popular: true
 ---
 
 This guide will explore the ins and outs of styling an accessible, extensible button appearance for both link and button elements.
@@ -37,7 +38,8 @@ Here's our baseline - native browser styles as rendered in Chrome, with the only
 The HTML if you're playing along at home is:
 
 ```html
-<a href="javascript:;">Button Link</a> <button type="button">Real Button</button>
+<a href="javascript:;">Button Link</a>
+<button type="button">Real Button</button>
 ```
 
 I've used the `javascript:;` string for the `href` value so that we could test states without triggering navigation. Similarly, since this button is not for a form submit, it needs the explicit type of `button` to prevent triggering a get request and page reload.

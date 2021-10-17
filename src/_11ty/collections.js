@@ -12,6 +12,12 @@ const allTopics = (collection) => {
     .filter((post) => post.data.topics);
 };
 
+const popularPosts = (collection) => {
+  return collection
+    .getFilteredByTag("posts")
+    .filter((post) => post.data.popular);
+};
+
 const upcomingOfficeHours = (collections) => {
   const allEvents = collections.getAll()[0].data.officeHours;
 
@@ -30,5 +36,6 @@ const upcomingOfficeHours = (collections) => {
 module.exports = {
   sortByDate,
   allTopics,
+  popularPosts,
   upcomingOfficeHours,
 };

@@ -5,6 +5,7 @@ episode: 2
 description: "Review solutions using both Flexbox and CSS grid and learn when you might choose one over the other."
 templateEngineOverride: njk, md
 date: 2020-04-09
+popular: true
 ---
 
 Once upon a time (approximately 2013), I wrote a jQuery plugin to calculate equal height columns. It ensured that the very specific scenario of a row with three columns would keep the content boxes equal height no matter the length of the content they contained. The dominant layout method at the time - floats - did not handle this problem.
