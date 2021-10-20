@@ -9,15 +9,17 @@ $color-secondary: #d367c1 !default;
 $color-on-secondary: #47143F !default;
 $color-background: #27272c !default;
 $color-on-background: #c5c5ce !default;
-$color-background-alt: #1e1c22 !default;
-$color-on-background-alt: #85838A !default;
+$color-background-alt: hsl(260, 10%, 12%) !default;
+$color-on-background-alt: hsl(257.1, 2.9%, 52.7%) !default;
+$color-background-alt-alpha: hsla(260, 10%, 12%, 0.75) !default;
+$color-on-background-alt-alpha: hsl(257.1, 2.9%, 52.7%) !default;
 $color-inverse: #fff !default;
 $color-gray: #8e8e8e !default;
 $color-yellow: #dedf40 !default;
 $color-green: #62cb5c !default;
 $color-blue: #00bbcb !default;
 
-$base-color-tokens: ("primary", "secondary", "background", "background-alt", "inverse", "gray", "yellow", "green", "blue");
+$base-color-tokens: ("primary", "secondary", "background", "background-alt", "background-alt-alpha", "inverse", "gray", "yellow", "green", "blue");
 
 $color-tokens: (
   "color-primary": $color-primary,
@@ -28,6 +30,8 @@ $color-tokens: (
   "color-on-background": $color-on-background,
   "color-background-alt": $color-background-alt,
   "color-on-background-alt": $color-on-background-alt,
+  "color-background-alt-alpha": $color-background-alt-alpha,
+  "color-on-background-alt-alpha": $color-on-background-alt-alpha,
   "color-inverse": $color-inverse,
   "color-gray": $color-gray,
   "color-yellow": $color-yellow,
@@ -44,6 +48,8 @@ $color-tokens: (
   --color-on-background: #{$color-on-background};
   --color-background-alt: #{$color-background-alt};
   --color-on-background-alt: #{$color-on-background-alt};
+  --color-background-alt-alpha: #{$color-background-alt-alpha};
+  --color-on-background-alt-alpha: #{$color-on-background-alt-alpha};
   --color-inverse: #{$color-inverse};
   --color-gray: #{$color-gray};
   --color-yellow: #{$color-yellow};

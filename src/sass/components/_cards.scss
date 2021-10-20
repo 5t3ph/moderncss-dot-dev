@@ -5,7 +5,7 @@
   display: flex;
   position: relative;
   flex-direction: column;
-  padding: 3.5rem 2rem;
+  padding: 4.5rem 2rem;
 
   &::before,
   &::after {
@@ -58,7 +58,7 @@
         &::before {
           content: "✨ " var(--message);
           position: absolute;
-          top: 1.85rem;
+          top: 3rem;
           left: 2rem;
           color: var(--color-inverse);
           font-size: 0.75em;
@@ -116,13 +116,18 @@
     }
 
     &::after {
-      background-color: var(--color-background-alt);
+      // background-color: var(--color-background-alt);
+      background-image: linear-gradient(
+        to bottom,
+        var(--color-background-alt-alpha),
+        var(--color-background-alt) 0.75rem
+      );
     }
 
     &:focus-within,
     &:hover {
       &::before {
-        transform: skewY(-8deg) scale(1.03);
+        transform: skewY(var(--skew)) scale(1.03);
       }
     }
 

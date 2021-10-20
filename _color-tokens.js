@@ -14,7 +14,11 @@ module.exports = [
   },
   {
     name: "background-alt",
-    color: "#1e1c22",
+    color: "hsl(260, 10%, 12%)",
+  },
+  {
+    name: "background-alt-alpha",
+    color: "hsla(260, 10%, 12%, 0.75)",
   },
   {
     name: "inverse",
