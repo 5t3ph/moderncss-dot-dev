@@ -39,9 +39,12 @@ $button-colors: "secondary", "blue";
 
   &:hover,
   &:active {
-    border-color: var(--button-hover-border-color, currentColor);
     background-color: var(--button-hover-background-color, var(--button-color));
     color: var(--button-hover-color, var(--button-background));
+
+    &:not(.button-outlined) {
+      border-color: var(--button-hover-border-color, currentColor);
+    }
   }
 
   &:focus {
@@ -58,19 +61,18 @@ $button-colors: "secondary", "blue";
   }
 
   &-outlined {
-    --button-background: var(--color-background);
+    --button-background: transparent;
     --button-color: var(--color-blue);
-    --button-hover-border-color: var(--color-blue);
+    --button-hover-color: var(--color-on-blue);
     --button-focus-inner: var(--color-background);
     --button-focus-outer: var(--color-blue);
 
-    border-color: currentColor;
+    border-color: var(--button-color);
 
     &--inverse {
       --button-background: transparent;
       --button-color: var(--color-inverse);
-      --button-hover-border-color: var(--color-inverse);
-      --button-hover-background-color: #{rgba(white, 0.2)};
+      --button-hover-background-color: #{rgba(white, 0.16)};
       --button-hover-color: currentColor;
       --button-focus-outer: currentColor;
     }
@@ -85,8 +87,7 @@ $button-colors: "secondary", "blue";
   &-icon {
     --button-background: transparent;
     --button-color: var(--color-inverse);
-    --button-hover-border-color: var(--color-inverse);
-    --button-hover-background-color: #{rgba(white, 0.2)};
+    --button-hover-background-color: #{rgba(white, 0.16)};
     --button-hover-color: currentColor;
     --button-focus-outer: currentColor;
 

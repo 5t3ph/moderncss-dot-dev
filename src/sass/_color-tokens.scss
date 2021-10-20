@@ -18,6 +18,7 @@ $color-gray: #8e8e8e !default;
 $color-yellow: #dedf40 !default;
 $color-green: #62cb5c !default;
 $color-blue: #00bbcb !default;
+$color-on-blue: #004A09 !default;
 
 $base-color-tokens: ("primary", "secondary", "background", "background-alt", "background-alt-alpha", "inverse", "gray", "yellow", "green", "blue");
 
@@ -36,7 +37,8 @@ $color-tokens: (
   "color-gray": $color-gray,
   "color-yellow": $color-yellow,
   "color-green": $color-green,
-  "color-blue": $color-blue
+  "color-blue": $color-blue,
+  "color-on-blue": $color-on-blue
 ) !default;
 
 @mixin color-tokens() {
@@ -55,4 +57,5 @@ $color-tokens: (
   --color-yellow: #{$color-yellow};
   --color-green: #{$color-green};
   --color-blue: #{$color-blue};
+  --color-on-blue: #{$color-on-blue};
 }

@@ -43,6 +43,5 @@ module.exports = [
   {
     name: "blue",
     color: "#00bbcb",
-    onColor: false,
   },
 ];
