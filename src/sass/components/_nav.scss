@@ -6,6 +6,7 @@
     );
   place-content: center;
   place-items: center;
+  font-size: 1rem;
   line-height: 1.2;
   text-align: center;
 
@@ -18,7 +19,7 @@
     &::before {
       top: -50%;
       padding: 140%;
-      transform: rotate(45deg) translateX(-45%);
+      transform: rotate(45deg) translateX(-46%);
       border: 2px solid var(--color-background-alt);
       background-image: linear-gradient(35deg, var(--gradient));
       background-size: 1000% 100%;

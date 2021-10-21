@@ -74,6 +74,40 @@ const icon = (icon, size = "24") => {
   return `<svg aria-hidden="true" focusable="false" width="${size}" height="${size}" fill="currentColor" class="button__icon"><use href="#icon-${icon}"></use></svg>`;
 };
 
+const codeDemo = (css, html, resize, placeCenter) => {
+  if (!css) {
+    return `
+<div class="demo">
+<div class="demo--content">
+${html}
+</div>
+</div>`;
+  }
+
+  const hash = Math.floor(Math.random(100) * Math.floor(999));
+
+  const cssRE = new RegExp(/(?<=\.)([\w|-]+)(?=\s|,|:)/, "gm");
+  const cssCode = css.replace(cssRE, `$1-${hash}`);
+  const demoClass = resize == false ? " no-resize" : "";
+  const contentClass = placeCenter ? " demo--place-center" : "";
+
+  let htmlCode = html;
+  css.match(cssRE).forEach((match) => {
+    // prettier-ignore
+    const htmlPattern = match.replace("-", "\\-");
+    const htmlRE = new RegExp(`(${htmlPattern})(?=\\s|")`, "gm");
+    htmlCode = htmlCode.replace(htmlRE, `${match}-${hash}`);
+  });
+
+  return `
+<style>${cssCode}</style>
+<div class="demo${demoClass}">
+<div class="demo--content${contentClass}">
+${htmlCode}
+</div>
+</div>`;
+};
+
 module.exports = {
   year,
   newsletterPromo,
@@ -85,4 +119,5 @@ module.exports = {
   upcomingTopic,
   review,
   icon,
+  codeDemo,
 };
