@@ -1,4 +1,4 @@
-{% include "partials/nav.njk" %}
+{%- if layout != 'layouts/social-template' %}{% include "partials/nav.njk" %}{% endif %}
 {%- set dateLabel %}{{ "Updated on" if updatedOn else "Posted on" }}{% endset -%}
 {%- set dateValue %}{{ updatedOn | postDate if updatedOn else page.date | postDate }}{% endset -%}
 
@@ -7,11 +7,11 @@
     <h1 class="color-primary">{{ title }}</h1>
     {% if not landingPage %}
     <p class="lead">
-    {%- if layout == 'layouts/post' %}<span><span>{{ dateLabel }}</em>: {{ dateValue }}</span>{% endif -%}
+    {%- if layout == 'layouts/post' or layout == 'layouts/social-template' %}<span><span class="postdate">{{ dateLabel }}</em>: {{ dateValue }}</span>{% endif -%}
     <small class="row">
-      Written by Stephanie Eckles <a href="https://twitter.com/5t3ph/" class="button button-icon" aria-label="Twitter">
-      {% icon "twitter" %}
-    </a>
+      <span class="byline">Written by Stephanie Eckles</span> {%- if layout != 'layouts/social-template' %}<a href="https://twitter.com/5t3ph/" class="button button-icon" aria-label="Twitter">
+      {% icon "twitter" %}</a>{% endif %}
+      {%- if layout == 'layouts/social-template' %}<strong class="color-secondary">ModernCSS.dev</strong>{% endif %}
     </small>
     </span></p>
     {% endif %}
