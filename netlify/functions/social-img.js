@@ -51,7 +51,12 @@ async function screenshot(slug, title, date) {
       postHero.remove();
     } else {
       if (h1) {
-        h1.innerHTML = title;
+        let postTitle = title.replace(
+          /((.*)\s(.*)\s(.*))$/g,
+          "$2&nbsp;$3&nbsp;$4"
+        );
+        postTitle = postTitle.replace(/"(.*)"/g, '\\"$1\\"');
+        h1.innerHTML = postTitle;
       }
 
       if (dateEl) {

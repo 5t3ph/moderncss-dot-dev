@@ -25,6 +25,10 @@ body {
   }
 }
 
+.hero:not(.hero--home) h1 {
+  font-size: 2.5rem;
+}
+
 .color-primary {
   color: var(--color-primary);
 }

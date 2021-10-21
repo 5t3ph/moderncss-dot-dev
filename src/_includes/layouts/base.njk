@@ -1,5 +1,5 @@
 {%- set pageTitle %}{{ title + " | " if title }}{{ meta.siteName }}{% endset -%}
-{%- set pageSocialImg %}{{ meta.url }}/img/{{ title | slug if title else "home" }}.png{% endset -%}
+{%- set pageSocialImg %}{{ meta.url }}/social-img/{{ "post" if title else "home" }}/{{ title if title else meta.siteName }}/{{ page.date | postDate }}{% endset -%}
 <!DOCTYPE html>
 <html lang="en">
   <head>
