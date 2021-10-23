@@ -144,7 +144,7 @@ a.carbon-poweredby {
 }
 
 .cp_embed_wrapper {
-  height: 60vh;
+  height: max(60vh, 20rem);
   margin: 2rem 0;
 
   iframe {

@@ -6,6 +6,7 @@ module.exports = [
   {
     name: "secondary",
     color: "#d367c1",
+    onColor: false,
   },
   {
     name: "background",
@@ -15,10 +16,12 @@ module.exports = [
   {
     name: "background-alt",
     color: "hsl(260, 10%, 12%)",
+    onColor: false,
   },
   {
     name: "background-alt-alpha",
     color: "hsla(260, 10%, 12%, 0.75)",
+    onColor: false,
   },
   {
     name: "inverse",

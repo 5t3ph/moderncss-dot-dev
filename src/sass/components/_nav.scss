@@ -1,9 +1,6 @@
 .nav {
   display: grid;
-  grid-template-columns: minmax(min-content, max-content) 8rem minmax(
-      min-content,
-      max-content
-    );
+  grid-template-columns: auto 8rem auto;
   place-content: center;
   place-items: center;
   font-size: 1rem;
@@ -11,10 +8,11 @@
   text-align: center;
 
   .logo-m {
-    color: var(--color-background-alt);
+    color: var(--color-inverse);
     font-size: 3rem;
     line-height: 1;
     text-decoration: none;
+    -webkit-text-fill-color: var(--color-background-alt);
 
     &::before {
       top: -50%;
@@ -49,6 +47,7 @@
   0% {
     background-position: 0%;
   }
+
   100% {
     background-position: 100%;
   }

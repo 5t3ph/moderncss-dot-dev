@@ -6,13 +6,10 @@
 $color-primary: #ab79d6 !default;
 $color-on-primary: #351D4A !default;
 $color-secondary: #d367c1 !default;
-$color-on-secondary: #47143F !default;
 $color-background: #27272c !default;
 $color-on-background: #c5c5ce !default;
 $color-background-alt: hsl(260, 10%, 12%) !default;
-$color-on-background-alt: hsl(257.1, 2.9%, 52.7%) !default;
 $color-background-alt-alpha: hsla(260, 10%, 12%, 0.75) !default;
-$color-on-background-alt-alpha: hsl(257.1, 2.9%, 52.7%) !default;
 $color-inverse: #fff !default;
 $color-gray: #8e8e8e !default;
 $color-yellow: #dedf40 !default;
@@ -26,13 +23,10 @@ $color-tokens: (
   "color-primary": $color-primary,
   "color-on-primary": $color-on-primary,
   "color-secondary": $color-secondary,
-  "color-on-secondary": $color-on-secondary,
   "color-background": $color-background,
   "color-on-background": $color-on-background,
   "color-background-alt": $color-background-alt,
-  "color-on-background-alt": $color-on-background-alt,
   "color-background-alt-alpha": $color-background-alt-alpha,
-  "color-on-background-alt-alpha": $color-on-background-alt-alpha,
   "color-inverse": $color-inverse,
   "color-gray": $color-gray,
   "color-yellow": $color-yellow,
@@ -45,13 +39,10 @@ $color-tokens: (
   --color-primary: #{$color-primary};
   --color-on-primary: #{$color-on-primary};
   --color-secondary: #{$color-secondary};
-  --color-on-secondary: #{$color-on-secondary};
   --color-background: #{$color-background};
   --color-on-background: #{$color-on-background};
   --color-background-alt: #{$color-background-alt};
-  --color-on-background-alt: #{$color-on-background-alt};
   --color-background-alt-alpha: #{$color-background-alt-alpha};
-  --color-on-background-alt-alpha: #{$color-on-background-alt-alpha};
   --color-inverse: #{$color-inverse};
   --color-gray: #{$color-gray};
   --color-yellow: #{$color-yellow};

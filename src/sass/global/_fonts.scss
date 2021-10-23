@@ -19,8 +19,9 @@
 @font-face {
   font-family: "Baloo 2";
   font-style: normal;
-  font-weight: 500;
+  font-weight: var(--brand-font-alt-weight-bold);
   src: local("Baloo 2 Medium"), local("Baloo-2-Medium"),
-    url("../fonts/baloo-2-v1-latin-500.woff2") format("woff2");
+    url("../fonts/baloo-2-v1-latin-var(--brand-font-alt-weight-bold).woff2")
+      format("woff2");
   font-display: swap;
 }

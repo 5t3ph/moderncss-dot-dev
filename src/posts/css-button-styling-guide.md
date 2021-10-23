@@ -27,8 +27,6 @@ But... we took button styling too far, and somewhere along the way completely lo
 
 We'll look at what properties are required to visually create a button appearance for both `a` and `button`, and additional details required to ensure they are created and used accessibly.
 
----
-
 ## Reset Default Styles
 
 Here's our baseline - native browser styles as rendered in Chrome, with the only changes so far being the link is inheriting the custom font set on the body, and I've bumped the `font-size` as well:

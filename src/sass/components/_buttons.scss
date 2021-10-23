@@ -1,41 +1,55 @@
 $button-colors: "secondary", "blue";
 
+@mixin buttonInverse() {
+  --button-background: transparent;
+  --button-color: var(--color-inverse);
+  --button-hover-background-color: #{rgba(white, 0.16)};
+  --button-hover-color: currentColor;
+  --button-focus-outer: currentColor;
+}
+
 .button {
   --button-background: var(--color-primary);
   --button-color: var(--color-on-primary);
   --outline-color: transparent;
 
-  // Reset for links
-  text-decoration: none;
-
-  // Reset for buttons
-  padding: 0.55em 0.75em 0.5em;
-  border: 2px solid transparent;
-  font-family: var(--brand-font-alt);
-  font-weight: 500;
-  cursor: pointer;
-
   // Display
   display: inline-flex;
   align-items: center;
   justify-content: center;
+
+  // Size
+  min-width: 10ch;
+
+  // Reset for buttons
+  padding: 0.55em 0.75em 0.5em;
   gap: 0.5em;
+
+  // Effects
+  transition: none 180ms ease-in-out;
+  transition-property: background-color, color, border-color;
+  border: 2px solid transparent;
 
   // Visual
   border-radius: 0.5em;
   background-color: var(--button-background);
   color: var(--button-color);
-
-  // Size
-  min-width: 10ch;
+  font-family: var(--brand-font-alt);
+  font-weight: var(--brand-font-alt-weight-bold);
+  line-height: calc(2px + 2ex + 2px);
 
   // Text
   text-align: center;
-  line-height: calc(2px + 2ex + 2px);
 
-  // Effects
-  transition: none 180ms ease-in-out;
-  transition-property: background-color, color, border-color;
+  // Reset for links
+  text-decoration: none;
+  cursor: pointer;
+
+  &:focus {
+    box-shadow: 0 0 0 max(0.15em, 2px)
+        var(--button-focus-inner, var(--button-color)),
+      0 0 0 max(0.3em, 2px) var(--button-focus-outer, var(--button-background));
+  }
 
   &:hover,
   &:active {
@@ -45,12 +59,6 @@ $button-colors: "secondary", "blue";
     &:not(.button-outlined) {
       border-color: var(--button-hover-border-color, currentColor);
     }
-  }
-
-  &:focus {
-    box-shadow: 0 0 0 max(0.15em, 2px)
-        var(--button-focus-inner, var(--button-color)),
-      0 0 0 max(0.3em, 2px) var(--button-focus-outer, var(--button-background));
   }
 
   @each $color in $button-colors {
@@ -70,11 +78,7 @@ $button-colors: "secondary", "blue";
     border-color: var(--button-color);
 
     &--inverse {
-      --button-background: transparent;
-      --button-color: var(--color-inverse);
-      --button-hover-background-color: #{rgba(white, 0.16)};
-      --button-hover-color: currentColor;
-      --button-focus-outer: currentColor;
+      @include buttonInverse();
     }
   }
 
@@ -85,11 +89,7 @@ $button-colors: "secondary", "blue";
   }
 
   &-icon {
-    --button-background: transparent;
-    --button-color: var(--color-inverse);
-    --button-hover-background-color: #{rgba(white, 0.16)};
-    --button-hover-color: currentColor;
-    --button-focus-outer: currentColor;
+    @include buttonInverse();
 
     width: 1.75em;
     min-width: unset;

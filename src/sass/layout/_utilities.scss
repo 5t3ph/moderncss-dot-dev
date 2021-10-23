@@ -93,7 +93,7 @@
   border-image: linear-gradient(to right, var(--gradient)) 1;
 }
 
-$text-colors: "primary", "secondary", "gray"; // "light";
+$text-colors: "primary", "secondary", "gray";
 
 @each $color in $text-colors {
   .color-#{$color} {
