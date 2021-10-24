@@ -19,7 +19,7 @@ Using a combination of the following properties, we can create custom, accessibl
 
 **Head's up**: A lot of these styles overlap with the episode on [custom checkbox styles](https://moderncss.dev/pure-css-custom-checkbox-style) which you might be interested in reading next!
 
-{# {% carbonAd %} #}
+{% carbonAd %}
 
 > **Now available**: my egghead video course [Accessible Cross-Browser CSS Form Styling](https://5t3ph.dev/a11y-forms). You'll learn to take the techniques described in this tutorial to the next level by creating a themable form design system to extend across your projects.
 
@@ -218,6 +218,7 @@ To accomplish this, we only need to set `appearance: none`. This removes nearly 
   gap: 0.5em;
 }
 .form-control input {
+  -webkit-appearance: none;
   appearance: none;
   background-color: #fff;
   margin: 0;
@@ -225,6 +226,8 @@ To accomplish this, we only need to set `appearance: none`. This removes nearly 
 {% endset %}
 {% set cssDisplay %}
 input[type="radio"] {
+  /* Add if not using autoprefixer */
+  -webkit-appearance: none;
   appearance: none;
   /* For iOS < 15 to remove gradient background */
   background-color: #fff;
@@ -269,6 +272,7 @@ We use `em` for the `width`, `height`, and `border-width` value to maintain the 
   margin-top: 1em;
 }
 .form-control input {
+  -webkit-appearance: none;
   appearance: none;
   background-color: #fff;
   margin: 0;
@@ -338,6 +342,7 @@ On our input, we'll use `transform` to nudge the element up. This is a bit of a 
   margin-top: 1em;
 }
 .form-control input {
+  -webkit-appearance: none;
   appearance: none;
   background-color: #fff;
   margin: 0;
@@ -435,6 +440,7 @@ Finally, when the `input` is `:checked`, we make it visible with `scale(1)` with
   margin-top: 1em;
 }
 .form-control input {
+  -webkit-appearance: none;
   appearance: none;
   background-color: #fff;
   margin: 0;
@@ -523,6 +529,7 @@ Due to the style stacking order, our `box-shadow` that we've themed for use in r
   margin-top: 1em;
 }
 .form-control input {
+  -webkit-appearance: none;
   appearance: none;
   background-color: #fff;
   margin: 0;
@@ -562,7 +569,9 @@ input[type="radio"]::before {
 
 ### Step 5: The `:focus` State
 
-Depending on your browser, you may already be seeing some kind of a focus style provided as an `outline`. We'll add just a tiny bit of customization to make it match our input's color, and provide some space from the input by using `outline-offset`.
+Depending on your browser, you may already be seeing some kind of a focus style provided as an `outline`. We'll add just a tiny bit of customization to make it match our input's color, and provide some space from the input by using `outline-offset`. 
+
+This is a simplification from the earlier version of this tutorial which used `box-shadow`. Now, evergreen browsers all support `outline` which follows `border-radius`, removing an excuse not to just use the `outline`!
 
 > Remember: `:focus` is a temporary state, but it's very important that it is highly visible to ensure the accessibility of your form controls and other interactive elements.
 
@@ -595,6 +604,7 @@ Depending on your browser, you may already be seeing some kind of a focus style 
   margin-top: 1em;
 }
 .form-control input {
+  -webkit-appearance: none;
   appearance: none;
   background-color: #fff;
   margin: 0;
@@ -680,6 +690,7 @@ We'll test for focus by adding a rule for `:focus-within` on the label (`.form-c
   color: var(--form-control-color);
 }
 .form-control input {
+  -webkit-appearance: none;
   appearance: none;
   background-color: #fff;
   margin: 0;
