@@ -52,18 +52,18 @@ details pre[class*="language-"] {
   }
 
   * {
-    max-height: unset;
+    max-height: initial;
     margin: 0;
-    padding: unset;
-    border: unset;
-    border-radius: unset;
-    background-color: unset;
-    color: unset;
+    padding: initial;
+    border: initial;
+    border-radius: initial;
+    background-color: initial;
+    color: initial;
     font-family: system-ui, sans-serif;
-    font-size: unset;
+    font-size: initial;
     line-height: 1.5;
-    text-decoration-color: unset;
-    text-decoration-thickness: unset;
+    text-decoration-color: initial;
+    text-decoration-thickness: initial;
   }
 }
 
@@ -113,7 +113,9 @@ del.highlight-line-remove {
   opacity: 0.8;
 }
 
-ins.highlight-line-add {
+ins.highlight-line-add,
+mark.highlight-line-active {
+  margin-left: -4px;
   padding: 0.08em 0.25em 0.2em 0;
   border-left: 4px solid #24c350;
   background-color: #10441e;

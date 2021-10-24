@@ -179,8 +179,8 @@ code:not([class*="language"]) {
 
 a:not(.demo *),
 button:not(.demo *),
-input,
-textarea {
+input:not(.demo *),
+textarea:not(.demo *) {
   --outline-size: max(2px, 0.08em);
   --outline-style: solid;
   --outline-color: currentColor;
