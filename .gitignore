@@ -3,10 +3,8 @@ node_modules
 
 # build artefacts
 public
-src/css
 functions/*.json
 functions/*.html
-temp.md
 .vscode
 
 # secrets and errors
@@ -16,3 +14,6 @@ temp.md
 # macOS related files
 .DS_Store
 
+
+# Local Netlify folder
+.netlify

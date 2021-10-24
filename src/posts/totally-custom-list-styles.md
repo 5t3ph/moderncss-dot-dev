@@ -49,11 +49,11 @@ ul {
   padding: 0;
   list-style: none;
   display: grid;
-  grid-gap: 1rem;
+  gap: 1rem;
 }
 ```
 
-The `grid-gap` benefit is adding space between `li`, taking the place of an older method such as `li + li { margin-top: ... }`.
+The `gap` benefit is adding space between `li`, taking the place of an older method such as `li + li { margin-top: ... }`.
 
 Next, we'll prepare the list items:
 
@@ -61,14 +61,14 @@ Next, we'll prepare the list items:
 li {
   display: grid;
   grid-template-columns: 0 1fr;
-  grid-gap: 1.75em;
+  gap: 1.75em;
   align-items: start;
   font-size: 1.5rem;
   line-height: 1.25;
 }
 ```
 
-We've also set list items up to use grid. And we've upgraded an older "hack" of using `padding-left` to leave space for an absolute positioned pseduo element with a combo of a `0` width first column and `grid-gap`. We'll see how that works in a moment. Then we use `align-items: start` instead of the default of `stretch`, and apply some type styling.
+We've also set list items up to use grid. And we've upgraded an older "hack" of using `padding-left` to leave space for an absolute positioned pseduo element with a combo of a `0` width first column and `gap`. We'll see how that works in a moment. Then we use `align-items: start` instead of the default of `stretch`, and apply some type styling.
 
 ## UL: Data attributes for emoji bullets
 
@@ -79,7 +79,9 @@ First, let's update the `ul` HTML:
 ```html
 <ul role="list">
   <li data-icon="🦄">Unordered list item</li>
-  <li data-icon="🌈">Cake ice cream sweet sesame snaps dragée cupcake wafer cookie</li>
+  <li data-icon="🌈">
+    Cake ice cream sweet sesame snaps dragée cupcake wafer cookie
+  </li>
   <li data-icon="😎">Unordered list item</li>
 </ul>
 ```
@@ -90,7 +92,7 @@ And to apply the emojis as bullets, we use a pretty magical technique where data
 ul li::before {
   content: attr(data-icon);
   /* Make slightly larger than the li font-size
-  but smaller than the li grid-gap */
+  but smaller than the li gap */
   font-size: 1.25em;
 }
 ```
@@ -99,7 +101,7 @@ Here's the result, with the `::before` element inspected to help illustrate how 
 
 ![ul styled list elements](https://dev-to-uploads.s3.amazonaws.com/i/lr1hu2lcffytfcb9d0vk.png)
 
-The emoji still is allowed to take up width to be visible, but effectively sits in the grid-gap. You can experiment with setting the first `li` grid column to `auto` which will cause grid-gap to fully be applied between the emoji column and the list text column.
+The emoji still is allowed to take up width to be visible, but effectively sits in the gap. You can experiment with setting the first `li` grid column to `auto` which will cause gap to fully be applied between the emoji column and the list text column.
 
 ## OL: CSS counters and CSS custom variables
 
@@ -166,7 +168,9 @@ It will appear the same until we add inline styles to the second and third `li` 
 ```html
 <ol role="list">
   <li>Ordered list item</li>
-  <li style="--li-bg: darkcyan">Cake ice cream sweet sesame snaps dragée cupcake wafer cookie</li>
+  <li style="--li-bg: darkcyan">
+    Cake ice cream sweet sesame snaps dragée cupcake wafer cookie
+  </li>
   <li style="--li-bg: navy">Ordered list item</li>
 </ol>
 ```
@@ -189,7 +193,7 @@ ul {
   display: grid;
   /* adjust the `min` value to your context */
   grid-template-columns: repeat(auto-fill, minmax(22ch, 1fr));
-  grid-gap: 1rem;
+  gap: 1rem;
 }
 ```
 
@@ -235,7 +239,7 @@ ul li::marker {
 }
 ```
 
-Then remove the no longer needed grid properties from the `li` and add back in some `padding` to replace the removed `grid-gap`:
+Then remove the no longer needed grid properties from the `li` and add back in some `padding` to replace the removed `gap`:
 
 ```css
 li {

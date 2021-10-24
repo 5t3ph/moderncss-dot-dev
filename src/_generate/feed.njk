@@ -1,0 +1,27 @@
+---
+permalink: feed/feed.xml
+eleventyExcludeFromCollections: true
+---
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+	<title>{{ meta.siteName }}</title>
+	<subtitle>{{ description }}</subtitle>
+	{% set absoluteUrl %}{{ '/feed/' | url | absoluteUrl(meta.url) }}{% endset %}
+	<link href="{{ absoluteUrl }}" rel="self"/>
+	<link href="{{ meta.url }}"/>
+	<updated>{{ collections.sortByDate | getNewestCollectionItemDate | dateToRfc3339 }}</updated>
+	<id>{{ meta.url }}</id>
+	<author>
+		<name>Stephanie Eckles</name>
+	</author>
+	{%- for post in collections.sortByDate %}
+	{% set absolutePostUrl %}{{ post.url | url | absoluteUrl(meta.url) }}{% endset %}
+	<entry>
+		<title>{{ post.data.title  }}</title>
+		<link href="{{ absolutePostUrl }}"/>
+		<updated>{{ post.data.date | dateToRfc3339 }}</updated>
+		<id>{{ absolutePostUrl }}</id>
+		<content type="html">{{ post.templateContent | htmlToAbsoluteUrls(absolutePostUrl) }}</content>
+	</entry>
+	{%- endfor %}
+</feed>

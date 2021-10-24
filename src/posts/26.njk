@@ -8,7 +8,7 @@ date: 2021-03-28
 hideTeaser: true
 ---
 
-{% set imgBase = site.url + "/img/posts/26/" %}
+{% set imgBase = meta.url + "/img/posts/26/" %}
 
 How do we plan future-proof styles in a world with an infinite degree of device and user ability variance? Let's explore how things can break and how modern CSS provides solutions.
 
@@ -30,7 +30,7 @@ We'll explore creating a robust comment thread component. Here's our starting po
   padding: 0.5rem;
   margin: 0;
   display: grid;
-  grid-gap: 1.5rem;
+  gap: 1.5rem;
 }
 
 .comment .comment-list {
@@ -42,12 +42,12 @@ We'll explore creating a robust comment thread component. Here's our starting po
 .comment {
   display: grid;
   grid-template-columns: 64px 1fr;
-  grid-gap: 1rem;
+  gap: 1rem;
 }
 
 .comment-body {
   display: grid;
-  grid-gap: .5rem;
+  gap: .5rem;
   color: #444;
 }
 
@@ -94,7 +94,7 @@ We'll explore creating a robust comment thread component. Here's our starting po
   </li>
 </ul>
 {% endset %}
-{% include "snippet.njk" %}
+{% include "partials/snippet.njk" %}
 
 But if you resize it, you'll already notice a few problems, particularly with overflow.
 
@@ -115,7 +115,7 @@ In our `.comment` styles, we set a precise pixel value for the avatar. Instead, 
   padding: 0.5rem;
   margin: 0;
   display: grid;
-  grid-gap: 1.5rem;
+  gap: 1.5rem;
 }
 
 .comment .comment-list {
@@ -127,12 +127,12 @@ In our `.comment` styles, we set a precise pixel value for the avatar. Instead, 
 .comment {
   display: grid;
   grid-template-columns: min(64px, 15%) 1fr;
-  grid-gap: 1rem;
+  gap: 1rem;
 }
 
 .comment-body {
   display: grid;
-  grid-gap: .5rem;
+  gap: .5rem;
   color: #444;
 }
 
@@ -156,7 +156,7 @@ In our `.comment` styles, we set a precise pixel value for the avatar. Instead, 
   grid-template-columns: min(64px, 15%) 1fr;
 }
 {% endset %}
-{% include "snippet.njk" %}
+{% include "partials/snippet.njk" %}
 
 In this case, the impact is that the avatar will never exceed `64px` for larger viewports. And for smaller viewports _or_ within narrower containers, it will be computed as `15%` of the total comment width.
 
@@ -200,7 +200,7 @@ Let's update our demo data to have a bit more variance and "real" avatars:
   </li>
 </ul>
 {% endset %}
-{% include "snippet.njk" %}
+{% include "partials/snippet.njk" %}
 
 Not as pretty as our mockup mimic 😊
 
@@ -217,7 +217,7 @@ We will update the layout method to allow the username and date to line up on wi
   padding: 0.5rem;
   margin: 0;
   display: grid;
-  grid-gap: 1.5rem;
+  gap: 1.5rem;
 }
 
 .comment .comment-list {
@@ -229,12 +229,12 @@ We will update the layout method to allow the username and date to line up on wi
 .comment {
   display: grid;
   grid-template-columns: min(64px, 15%) 1fr;
-  grid-gap: 1rem;
+  gap: 1rem;
 }
 
 .comment-body {
   display: grid;
-  grid-gap: .5rem;
+  gap: .5rem;
   color: #444;
 }
 
@@ -262,7 +262,7 @@ We will update the layout method to allow the username and date to line up on wi
   gap: 0.5rem;
 }
 {% endset %}
-{% include "snippet.njk" %}
+{% include "partials/snippet.njk" %}
 
 While [flexbox `gap` support](https://caniuse.com/flexbox-gap) is gaining, in this case, the degraded behavior is simply very slightly closer elements, so it isn't too detrimental not to provide a fallback.
 
@@ -281,7 +281,7 @@ The fix could be scoped to only the link elements if we'd like. However, due to 
   padding: 0.5rem;
   margin: 0;
   display: grid;
-  grid-gap: 1.5rem;
+  gap: 1.5rem;
 }
 
 .comment .comment-list {
@@ -293,14 +293,14 @@ The fix could be scoped to only the link elements if we'd like. However, due to 
 .comment {
   display: grid;
   grid-template-columns: min(64px, 15%) 1fr;
-  grid-gap: 1rem;
+  gap: 1rem;
   overflow-wrap: break-word;
   hyphens: auto;
 }
 
 .comment-body {
   display: grid;
-  grid-gap: .5rem;
+  gap: .5rem;
   color: #444;
 }
 
@@ -335,7 +335,7 @@ The fix could be scoped to only the link elements if we'd like. However, due to 
   hyphens: none;
 }
 {% endset %}
-{% include "snippet.njk" %}
+{% include "partials/snippet.njk" %}
 
 Notice we removed the possibility of `hyphens` from links. In this case, the full links are visible like in our example, and someone tries to write it down or read it aloud. 
 
@@ -362,7 +362,7 @@ First, we set `border-radius` to create a circle appearance. Then we ensure the 
   padding: 0.5rem;
   margin: 0;
   display: grid;
-  grid-gap: 1.5rem;
+  gap: 1.5rem;
 }
 
 .comment .comment-list {
@@ -374,14 +374,14 @@ First, we set `border-radius` to create a circle appearance. Then we ensure the 
 .comment {
   display: grid;
   grid-template-columns: min(64px, 15%) 1fr;
-  grid-gap: 1rem;
+  gap: 1rem;
   overflow-wrap: break-word;
   hyphens: auto;
 }
 
 .comment-body {
   display: grid;
-  grid-gap: .5rem;
+  gap: .5rem;
   color: #444;
 }
 
@@ -444,7 +444,7 @@ First, we set `border-radius` to create a circle appearance. Then we ensure the 
   }
 }
 {% endset %}
-{% include "snippet.njk" %}
+{% include "partials/snippet.njk" %}
 
 We follow that rule with a feature detection fallback rule - `@supports not (aspect-ratio: 1)` - for browsers that do _not_ support `aspect-ratio`. This fallback is an older technique that relies on padding to ensure a perfect square ratio of the image's parent and then ensures the `img` fills that area.
 
@@ -471,7 +471,7 @@ The first comment is German, the second is Estonian, and the third is Arabic.
   padding: 0.5rem;
   margin: 0;
   display: grid;
-  grid-gap: 1.5rem;
+  gap: 1.5rem;
 }
 
 .comment .comment-list {
@@ -483,7 +483,7 @@ The first comment is German, the second is Estonian, and the third is Arabic.
 .comment {
   display: grid;
   grid-template-columns: min(64px, 15%) 1fr;
-  grid-gap: 1rem;
+  gap: 1rem;
   overflow-wrap: break-word;
   hyphens: auto;
   text-align: start;
@@ -491,7 +491,7 @@ The first comment is German, the second is Estonian, and the third is Arabic.
 
 .comment-body {
   display: grid;
-  grid-gap: .5rem;
+  gap: .5rem;
   color: #444;
 }
 
@@ -566,13 +566,13 @@ The first comment is German, the second is Estonian, and the third is Arabic.
   </li>
 </ul>
 {% endset %}
-{% include "snippet.njk" %}
+{% include "partials/snippet.njk" %}
 
 Thanks to our previous work on handling overflow, our comment thread is gracefully handling the change in content languages.
 
 On the third one that is in Arabic, the browser is handling the content direction switch firstly due to placing the attribute `dir="rtl"` on the `.comment` list element. Interestingly, the browser intelligently switches the order of the `grid-template-columns` without our needing to do anything extra. Flexbox will also flip according to this attribute. Older styles that use floats would not flip and would require an additional override.
 
-We've defined just one extra property: `text-align: start`. This is called a _[logical property](https://rtlstyling.com/posts/rtl-styling#css-logical-properties)_ and in the case of RTL being defined it flips the text and becomes equivalent to `text-align: right`. While [support is still gaining for logical properties](https://caniuse.com/css-logical-props), you may need to include a fallback. Since we're using `grid-gap` for spacing throughout, no update is needed there. If we were using margins that were affected, we could again use logical properties to help do the conversion when needed.
+We've defined just one extra property: `text-align: start`. This is called a _[logical property](https://rtlstyling.com/posts/rtl-styling#css-logical-properties)_ and in the case of RTL being defined it flips the text and becomes equivalent to `text-align: right`. While [support is still gaining for logical properties](https://caniuse.com/css-logical-props), you may need to include a fallback. Since we're using `gap` for spacing throughout, no update is needed there. If we were using margins that were affected, we could again use logical properties to help do the conversion when needed.
 
 Since I am not an RTL (right-to-left) styling expert, I will point you to this fantastic resource if you would like to [learn more about RTL styling](https://rtlstyling.com/posts/rtl-styling/).
 
@@ -634,7 +634,7 @@ The benefit of retaining the percentage width is that our component continues to
   padding: 0.5rem;
   margin: 0;
   display: grid;
-  grid-gap: 1.5rem;
+  gap: 1.5rem;
 }
 
 .comment .comment-list {
@@ -646,14 +646,14 @@ The benefit of retaining the percentage width is that our component continues to
 .comment {
   display: grid;
   grid-template-columns: min(64px, 15%, 10vw) 1fr;
-  grid-gap: 1rem;
+  gap: 1rem;
   overflow-wrap: break-word;
   hyphens: auto;
 }
 
 .comment-body {
   display: grid;
-  grid-gap: .5rem;
+  gap: .5rem;
   color: #444;
 }
 
@@ -701,7 +701,7 @@ The benefit of retaining the percentage width is that our component continues to
   grid-template-columns: min(64px, 15%, 10vw) 1fr;
 }
 {% endset %}
-{% include "snippet.njk" %}
+{% include "partials/snippet.njk" %}
 
 If you are using a desktop browser, bump up your zoom to 400%. Then open dev tools (recommended not to place it as a sidebar for this test) and find this demo. Select one of the `.comment` list items and adjust the `10vw` by using your arrow keys to see when it "wins" versus the other values. Then, swap to a mobile emulator and view whether your adjustment positively or negatively impacted the avatar in that view.
 

@@ -1,0 +1,12 @@
+---
+layout: layouts/base
+---
+<main class="container postpage">
+  <article class="mx-auto">
+    {{ content | safe }}
+  </article>
+
+  {% include "partials/tweetthis.njk" %}
+</main>
+
+{% include "partials/nextlist.njk" %}

@@ -34,14 +34,14 @@ Grid excels at grids, as the name would imply. Here, the terms "column" and "row
 
 In particular are the following useful features:
 
-- `grid-gap` - defines equal space between grid items, whether columns or rows
+- `gap` - defines equal space between grid items, whether columns or rows
 - `repeat()` - quickly define rules for every row or column, or a set number of rows or columns
 - `fr` unit - the available "fraction" of space that is left to distribute to that column or row
 - `minmax()` - define a minimum and maximum accepted column width or row height
 
 ### `.grid-wrap`
 
-First, we create a wrapping class. This is only to apply the equivalent of our `grid-gap` value as padding and is totally optional. You may want this because the `grid-gap` property does not apply the gap spacing to the outside of the grid. Perhaps padding is already applied to your containing element which may be the `body`, or you may actually want your grid columns to touch edge-to-edge of the viewport.
+First, we create a wrapping class. This is only to apply the equivalent of our `gap` value as padding and is totally optional. You may want this because the `gap` property does not apply the gap spacing to the outside of the grid. Perhaps padding is already applied to your containing element which may be the `body`, or you may actually want your grid columns to touch edge-to-edge of the viewport.
 
 ```scss
 $gridGap: 2rem;
@@ -63,7 +63,7 @@ $minColWidth: 15rem;
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax($minColWidth, 1fr));
-  grid-gap: 2rem;
+  gap: 2rem;
 
   & + .grid {
     margin-top: $gridGap;
@@ -213,7 +213,7 @@ Here it is - but you're responsible for placing items on it how you'd like which
 .grid {
   display: grid;
   grid-template-columns: repeat(12, 1fr);
-  grid-gap: 2rem;
+  gap: 2rem;
 }
 ```
 
@@ -222,7 +222,7 @@ Alternatively, create just a handful of targeted classes to more clearly define 
 ```scss
 .grid {
   display: grid;
-  grid-gap: 2rem;
+  gap: 2rem;
 
   &--2cols {
     grid-template-columns: repeat(2, 1fr);

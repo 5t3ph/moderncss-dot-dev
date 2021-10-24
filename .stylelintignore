@@ -1,8 +1,1 @@
-**/node_modules
-_reset.scss
-_typography.scss
-_prism.scss
-public/
-src/css/
-functions/template.html
-*.md
+/public/css/*

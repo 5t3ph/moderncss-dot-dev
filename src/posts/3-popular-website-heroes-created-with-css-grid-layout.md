@@ -388,7 +388,7 @@ Next, it's time to define the grid columns. We'll use my favorite technique whic
 .hero__wrapper {
   // ...existing styles
   grid-template-columns: repeat(auto-fit, minmax(30ch, auto));
-  grid-gap: 2rem;
+  gap: 2rem;
 }
 ```
 

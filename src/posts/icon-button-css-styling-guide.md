@@ -157,8 +157,8 @@ First, let's create our new class. Due to [the "C" in CSS](https://dev.to/5t3ph/
 .icon-button {
   width: 2.5rem;
   height: 2.5rem;
-  border-radius: 50%;
   padding: 0.35em;
+  border-radius: 50%;
 
   &__icon {
     width: 100%;
@@ -186,9 +186,9 @@ It's not quite what we want, but we can fix it by adjusting the following proper
 
   // Find these styles and update, not duplicate:
   &:not(.icon-button) {
-    padding: 0.25em 0.75em;
     min-width: 10ch;
     min-height: 44px;
+    padding: 0.25em 0.75em;
   }
 }
 ```

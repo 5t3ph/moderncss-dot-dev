@@ -1,0 +1,23 @@
+---
+title: "404: Content Not Found"
+layout: layouts/page
+permalink: "404.html"
+landingPage: true
+templateEngineOverride: njk
+eleventyExcludeFromCollections: true
+---
+
+<p class="h2">Try one of these popular posts</p>
+
+<ul role="list" class="column-container section">
+  {% for post in collections.popularPosts %}
+  <li class="card card--episode index{{ loop.index0 + 1 }}">
+    <div class="card__content" data-episode="{{ post.data.episode }}">
+      <a href="{{ post.url }}" class="card__title"
+        ><span>{{ post.data.title }}</span></a
+      >
+      <p>{{ post.data.description | safe }}</p>
+    </div>
+  </li>
+  {% endfor %}
+</ul>

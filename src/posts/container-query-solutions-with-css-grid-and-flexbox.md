@@ -86,7 +86,7 @@ We'll begin by creating the `.grid` class, setting the display, and adding a mod
 ```scss
 .grid {
   display: grid;
-  grid-gap: 1rem;
+  gap: 1rem;
 }
 ```
 
@@ -141,7 +141,9 @@ We can then add our `.grid` class to the `li` which is our "card" container, and
 ```html
 <li class="card grid" style="--grid-min: 15ch">
   <p>Jujubes soufflé cake tootsie roll sesame snaps cheesecake bonbon.</p>
-  <p>Halvah bear claw cheesecake. Icing lemon drops chupa chups pudding tiramisu.</p>
+  <p>
+    Halvah bear claw cheesecake. Icing lemon drops chupa chups pudding tiramisu.
+  </p>
 </li>
 ```
 
@@ -308,7 +310,9 @@ However, with the "gotcha" we just experienced, we will need to add a nested wra
 ```html
 <div class="flex" style="--flex-min: 18rem;">
   <p>Jujubes soufflé cake tootsie roll sesame snaps cheesecake bonbon.</p>
-  <p>Halvah bear claw cheesecake. Icing lemon drops chupa chups pudding tiramisu.</p>
+  <p>
+    Halvah bear claw cheesecake. Icing lemon drops chupa chups pudding tiramisu.
+  </p>
 </div>
 ```
 
@@ -400,11 +404,16 @@ To illustrate this, we can setup the following inside one of our existing "cards
 
 ```html
 <ul class="list-unstyled" style="--flex-min: 8rem;">
-  <li class="flex"><strong class="flex--auto">Ice Cream</strong> <span>Butter Pecan</span></li>
   <li class="flex">
-    <strong class="flex--auto">Musical Artist</strong> <span>Justin Timberlake</span>
+    <strong class="flex--auto">Ice Cream</strong> <span>Butter Pecan</span>
   </li>
-  <li class="flex"><strong class="flex--auto">Painter</strong> <span>Vincent Van Gogh</span></li>
+  <li class="flex">
+    <strong class="flex--auto">Musical Artist</strong>
+    <span>Justin Timberlake</span>
+  </li>
+  <li class="flex">
+    <strong class="flex--auto">Painter</strong> <span>Vincent Van Gogh</span>
+  </li>
 </ul>
 ```
 

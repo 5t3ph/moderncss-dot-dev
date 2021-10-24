@@ -1,0 +1,186 @@
+{%- set pageTitle %}{{ title + " | " if title }}{{ meta.siteName }}{% endset -%}
+{%- set pageSocialImg %}{{ meta.url }}/social-img/{{ "post" if title else "home" }}/{{ title if title else meta.siteName }}/{{ page.date | postDate }}{% endset -%}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content="eleventy" />
+    <title>{{ pageTitle }}</title>
+    <meta name="description" content="{{ description }}"/>
+    <link rel="author" href="{{ meta.url }}/humans.txt" />
+    <link
+      rel="icon"
+      href="{{ '/favicon.png' | url }}"
+    />
+    <link rel="preload" href="{{ '/fonts/baloo-2-v1-latin-500.woff2' | url }}" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="{{ '/fonts/baloo-2-v1-latin-regular.woff2' | url }}" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="{{ '/fonts/kanit-v5-latin-800.woff2' | url }}" as="font" type="font/woff2" crossorigin>
+    <link
+      href="{{ '/css/style.css' | url }}"
+      rel="stylesheet" 
+    />
+    {% if stylesheet %}
+    {% set css = '/css/' + stylesheet  + '.css' %}
+    <link
+      href="{{ css | url }}"
+      rel="stylesheet" 
+    />
+    {% endif %}
+    <link rel="preconnect" href="https://cdn.carbonads.com">
+    <link rel="dns-prefetch" href="https://cdn.carbonads.com">
+    <link rel="preconnect" href="https://srv.carbonads.net">
+    <link rel="dns-prefetch" href="https://srv.carbonads.net">
+    <link rel="preconnect" href="https://cdn4.buysellads.net">
+    <link rel="dns-prefetch" href="https://cdn4.buysellads.net">
+    <link rel="preconnect" href="https://static.codepen.io">
+    <link rel="dns-prefetch" href="https://static.codepen.io">
+    <link rel="preconnect" href="https://plausible.io">
+    <link rel="dns-prefetch" href="https://plausible.io">
+    {% if 'moderncss' in meta.url %}
+    <script async defer data-domain="moderncss.dev" src="https://plausible.io/js/plausible.outbound-links.js"></script>
+    <script>window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }</script>
+    {% endif %}
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:creator" content="@{{ meta.twitterUsername }}" />
+    <meta
+      name="twitter:title"
+      content="{{pageTitle}}"
+    />
+    <meta
+      name="twitter:description"
+      content="{{description}}"
+    />
+    <meta
+      name="og:title"
+      content="{{pageTitle}}"
+    />
+    <meta
+      name="og:description"
+      content="{{description}}"
+    />
+    <meta property="og:image" content="{{ pageSocialImg }}" />
+    <meta name="twitter:image" content="{{ pageSocialImg }}" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed for ModernCSS.dev" href="/feed/" />
+  </head>
+  <body class="page-{{ page.fileSlug }} {{ "landing-page" if landingPage }}">
+  {%- if page.url != '/' %}{% include "partials/header.njk" %}{% endif -%}
+
+  {{ content | safe }}
+
+    <footer id="site-footer" class="background--secondary-alt">
+      <div class="row container text-align-center mx-auto">
+        <p>
+        <a href="/">ModernCSS.dev</a> 
+        &copy; {% year %} <a href="https://thinkdobecreate.com">ThinkDoBeCreate - Stephanie&nbsp;Eckles</a>
+        </p>
+        <span class="row">
+        <a href="https://twitter.com/5t3ph/" class="button button-icon" aria-label="Twitter">
+          {% icon "twitter" %}
+        </a>
+        <a href="https://github.com/5t3ph/" class="button button-icon" aria-label="Github">
+          {% icon "github" %}
+        </a>
+        <a href="https://codepen.io/5t3ph/" class="button button-icon" aria-label="CodePen">
+          {% icon "codepen" %}
+        </a>
+        <a href="https://dev.to/5t3ph" class="button button-icon" aria-label="DEV">
+          {% icon "devto" %}
+        </a>
+        <a
+          href="https://www.youtube.com/channel/UC8qc2AyBbNmvgIky6236nHA"
+          class="button button-icon"
+          aria-label="YouTube"
+        >
+          {% icon "youtube" %}
+        </a>
+        <a class="button button-outlined button-outlined--inverse button--small" target="_blank" rel="noopener" href="https://www.buymeacoffee.com/moderncss">{% icon "buymeacoffee" %} Buy me a coffee</a>
+        </span>
+      </div>
+    </footer>
+    {%- if page.url != '/' and not landingPage %}
+    <script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+    {% endif -%}
+
+    {% if layout == 'layouts/post' %}
+    <script>
+    if ('IntersectionObserver' in window) {
+      const endPageObserver = new IntersectionObserver((entries) => {
+        if (entries[0].intersectionRatio <= 0) return;
+        endPageObserver.unobserve(entries[0].target);
+
+        let ttr = entries[0].time;
+        ttr = ttr / 1000;
+        ttr = Math.round(ttr / 60);
+
+        let bucket = '';
+        switch (true) {
+          case (ttr < 1):
+            bucket = '< 1';
+            break;
+          case (ttr >= 1 && ttr < 2):
+            bucket = '1-2';
+            break;
+          case (ttr >= 2 && ttr < 3):
+            bucket = '2-3';
+            break;
+          case (ttr >= 3 && ttr < 5):
+            bucket = '3-5';
+            break;
+          case (ttr >= 5 && ttr < 10):
+            bucket = '5-10';
+            break;
+          case (ttr >= 10 && ttr < 15):
+            bucket = '10-15';
+            break;
+          case (ttr >= 20 && ttr < 30):
+            bucket = '20-30';
+            break;
+          default:
+            bucket = '30+';
+            break;
+        }
+
+        {%- if 'moderncss' in meta.url %}
+        plausible('Time to Read', { props: { Bucket: bucket } });
+        {% endif %}
+      }, {
+        threshold: .1
+      });
+      endPageObserver.observe(document.querySelector('article > :last-child'));
+
+      const halfwaypointObserver = new IntersectionObserver((entries) => {
+        if (entries[0].intersectionRatio <= 0) return;
+        halfwaypointObserver.unobserve(entries[0].target);
+        {%- if 'moderncss' in meta.url %}
+        plausible('Halfway Point');
+        {% endif %}
+      });
+      halfwaypointObserver.observe(document.querySelector('.halfway'));
+    }
+    </script>
+    {% endif %}
+    {% if page.fileSlug == "topics" %}
+    <script>
+    const topicLinks = document.querySelectorAll('article a');
+    
+    topicLinks.forEach(function(link) {
+      link.addEventListener('click', function(e) {
+      {% if 'moderncss' in meta.url %}
+        e.preventDefault();
+        const topic = e.target.parentNode.parentNode.previousElementSibling.innerText.replace('#', '');
+        plausible('Choose Topic', {
+          props: { Article: link.innerText, Topic: topic },
+        });
+        setTimeout(function() {
+          window.location = link.href;
+        }, 150);
+      {% endif %}
+      })
+    });
+    </script>
+    {% endif %}
+
+    {% include "partials/svgsprite.svg" %}
+	</body>
+	</html>

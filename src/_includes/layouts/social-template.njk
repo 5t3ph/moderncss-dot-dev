@@ -1,0 +1,30 @@
+---
+title: Modern CSS Solutions
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ meta.siteName }}</title>
+  <link rel="preload" href="{{ '/fonts/kanit-v5-latin-800.woff2' | url }}" as="font" type="font/woff2" crossorigin>
+  <link
+      href="{{ '/css/social-template.css' | url }}"
+      rel="stylesheet" 
+    />
+</head>
+<body>
+  {% include "partials/header.njk" %}
+  <header class="hero hero--home" hidden>
+    <h1 class="color-primary" translate="no">Modern CSS Solutions
+      <em class="color-secondary">for Old CSS Problems</em>
+    </h1>
+    <p class="lead">
+      <span class="row">
+        <strong class="color-primary">ModernCSS.dev</strong>
+        <span><small>A series by Stephanie Eckles</small></span>
+      </span>
+    </p>
+  </header>
+</body>
+</html>

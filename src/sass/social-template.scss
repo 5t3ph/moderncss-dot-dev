@@ -1,0 +1,46 @@
+@use "theme";
+@use "global";
+
+body {
+  display: flex;
+  flex-direction: column;
+  border-width: 0;
+  border-top-width: 0.5rem;
+  border-style: solid;
+  border-image: linear-gradient(to right, var(--gradient)) 1;
+  background-color: var(--color-background);
+  color: var(--color-on-background);
+}
+
+.hero:not([hidden]) {
+  display: grid;
+  place-content: center;
+  height: calc(100vh - 0.5rem);
+  padding: 2rem;
+  text-align: center;
+
+  .lead {
+    grid-template-columns: 5rem auto 5rem;
+    margin-top: 8vh;
+  }
+}
+
+.hero:not(.hero--home) h1 {
+  font-size: 2.5rem;
+}
+
+.color-primary {
+  color: var(--color-primary);
+}
+
+.color-secondary {
+  color: var(--color-secondary);
+}
+
+.row {
+  display: block;
+
+  span {
+    display: block;
+  }
+}

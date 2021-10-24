@@ -1,0 +1,161 @@
+html,
+body {
+  overflow-x: hidden;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  border-width: 0;
+  border-top-width: 0.5rem;
+  border-style: solid;
+  border-image: linear-gradient(to right, var(--gradient)) 1;
+  background-color: var(--color-background);
+  color: var(--color-on-background);
+}
+
+main {
+  margin-block: 8vh;
+}
+
+footer {
+  padding-block: 0.5rem;
+
+  p {
+    font-size: 0.9rem;
+  }
+
+  .row {
+    --gap: 2rem 1rem;
+  }
+}
+
+article {
+  --width: auto;
+
+  width: var(--width);
+  max-width: 80ch;
+
+  > *:not(img):not(details):not([class]),
+  > pre[class*="language"],
+  .heading-wrapper {
+    width: min(100%, 50rem);
+    margin-inline: auto;
+  }
+
+  img {
+    max-height: 40vh;
+    margin-inline: auto;
+  }
+}
+
+.carbon-ad {
+  --outline-offset: 0.25rem;
+
+  min-height: 134px;
+
+  > [id] {
+    z-index: 1;
+    position: relative;
+
+    > span {
+      display: grid;
+      grid-template-areas: "ad";
+      font-size: 1rem;
+      line-height: 1.15;
+
+      > * {
+        grid-area: ad;
+      }
+    }
+  }
+
+  a {
+    text-decoration: none;
+  }
+}
+
+.carbon-wrap {
+  --carbon-direction: column;
+
+  display: flex;
+  flex-direction: var(--carbon-direction);
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+
+  > a:last-child {
+    flex: 1 0 15ch;
+    margin-block: 1rem;
+  }
+}
+
+a.carbon-poweredby {
+  place-self: end;
+  color: var(--color-gray);
+  font-size: 0.9rem;
+  line-height: 1;
+}
+
+.postpage {
+  position: relative;
+
+  &::before {
+    content: attr(data-episode);
+    z-index: -1;
+    position: absolute;
+    top: 0;
+    left: calc(50% - 20vw);
+    width: 1ch;
+    transform: translateX(-60%);
+    color: var(--color-background-alt-alpha);
+    font-family: var(--brand-font);
+    font-size: 30rem;
+    font-weight: var(--brand-font-weight);
+    line-height: 0.5;
+  }
+
+  .carbon-ad {
+    width: min(45ch, 100%);
+    margin: 5vh auto;
+    padding: 1rem;
+    border: 1px dashed var(--color-secondary);
+    border-radius: 0.5rem;
+  }
+
+  .carbon-wrap {
+    --carbon-direction: row;
+  }
+
+  > .row {
+    margin-top: 4vh;
+  }
+}
+
+.landing-page {
+  h2 {
+    max-width: 20ch;
+  }
+
+  > footer {
+    margin-top: auto;
+  }
+}
+
+.cp_embed_wrapper {
+  height: max(60vh, 20rem);
+  margin: 2rem 0;
+
+  iframe {
+    height: 100%;
+  }
+}
+
+.halfway {
+  position: absolute;
+  top: 50%;
+  width: 1px;
+  height: 1px;
+  pointer-events: none;
+}

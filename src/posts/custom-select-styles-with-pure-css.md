@@ -5,6 +5,7 @@ episode: 20
 description: "Modern CSS gives us a range of properties to achieve custom select styles that have a near-identical initial appearance. This solution uses CSS grid, `clip-path`, and CSS custom properties."
 templateEngineOverride: njk, md
 date: 2020-08-15
+popular: true
 ---
 
 Modern CSS gives us a range of properties to achieve custom select styles that have a near-identical initial appearance for single, multiple, and disabled `select` elements across the top browsers.
@@ -47,7 +48,9 @@ We'll focus on a single `<select>` to begin.
     <option value="Option 3">Option 3</option>
     <option value="Option 4">Option 4</option>
     <option value="Option 5">Option 5</option>
-    <option value="Option length">Option that has too long of a value to fit</option>
+    <option value="Option length">
+      Option that has too long of a value to fit
+    </option>
   </select>
 </div>
 ```
@@ -314,7 +317,9 @@ Selects come in a second flavor, which allows a user to select more than one opt
     <option value="Option 3">Option 3</option>
     <option value="Option 4">Option 4</option>
     <option value="Option 5">Option 5</option>
-    <option value="Option length">Option that has too long of a value to fit</option>
+    <option value="Option length">
+      Option that has too long of a value to fit
+    </option>
   </select>
   <span class="focus"></span>
 </div>

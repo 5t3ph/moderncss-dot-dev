@@ -1,0 +1,52 @@
+/* 🛑 STOP!
+  Do not change this file directly.
+  Modify colors in _color-tokens.js
+ */
+
+$color-primary: #ab79d6 !default;
+$color-on-primary: #351D4A !default;
+$color-secondary: #d367c1 !default;
+$color-background: #27272c !default;
+$color-on-background: #c5c5ce !default;
+$color-background-alt: hsl(260, 10%, 12%) !default;
+$color-background-alt-alpha: hsla(260, 10%, 12%, 0.75) !default;
+$color-inverse: #fff !default;
+$color-gray: #8e8e8e !default;
+$color-yellow: #dedf40 !default;
+$color-green: #62cb5c !default;
+$color-blue: #00bbcb !default;
+$color-on-blue: #004A09 !default;
+
+$base-color-tokens: ("primary", "secondary", "background", "background-alt", "background-alt-alpha", "inverse", "gray", "yellow", "green", "blue");
+
+$color-tokens: (
+  "color-primary": $color-primary,
+  "color-on-primary": $color-on-primary,
+  "color-secondary": $color-secondary,
+  "color-background": $color-background,
+  "color-on-background": $color-on-background,
+  "color-background-alt": $color-background-alt,
+  "color-background-alt-alpha": $color-background-alt-alpha,
+  "color-inverse": $color-inverse,
+  "color-gray": $color-gray,
+  "color-yellow": $color-yellow,
+  "color-green": $color-green,
+  "color-blue": $color-blue,
+  "color-on-blue": $color-on-blue
+) !default;
+
+@mixin color-tokens() {
+  --color-primary: #{$color-primary};
+  --color-on-primary: #{$color-on-primary};
+  --color-secondary: #{$color-secondary};
+  --color-background: #{$color-background};
+  --color-on-background: #{$color-on-background};
+  --color-background-alt: #{$color-background-alt};
+  --color-background-alt-alpha: #{$color-background-alt-alpha};
+  --color-inverse: #{$color-inverse};
+  --color-gray: #{$color-gray};
+  --color-yellow: #{$color-yellow};
+  --color-green: #{$color-green};
+  --color-blue: #{$color-blue};
+  --color-on-blue: #{$color-on-blue};
+}

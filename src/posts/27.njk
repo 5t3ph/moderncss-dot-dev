@@ -8,7 +8,7 @@ date: 2021-04-09
 hideTeaser: true
 ---
 
-{% set imgBase = site.url + "/img/posts/27/" %}
+{% set imgBase = meta.url + "/img/posts/27/" %}
 
 Accessibility is a critical skill for developers doing work at any point in the stack. For front-end tasks, modern CSS provides capabilities we can leverage to make layouts more accessibly inclusive for users of all abilities across any device.
 
@@ -41,7 +41,7 @@ Common accessibility barriers include:
 
 An all too common violation that I have done myself in the past is to remove `:focus` outlines on links, buttons, and other interactive controls. Without providing an alternative `:focus` style, this is immediately a violation of the [WCAG Success Criterion 2.4.11: Focus Appearance](https://www.w3.org/WAI/WCAG22/Understanding/focus-appearance-minimum.html).
 
-Frequently, the reason this is removed is due to feeling the native browser style is not attractive or doesn't fit in with the design choices of the site. But with modern CSS, we have a new property that can help make outlines more appealing.
+Frequently, the reason this is removed is due to feeling the native browser style is not attractive or doesn't fit in with the design choices of the meta. But with modern CSS, we have a new property that can help make outlines more appealing.
 
 Using `outline-offset`, we can provide a positive value to position the outline away from the element. For the offset, we'll use the `em` unit to position the outline relative to the element based on its `font-size`. 
 
@@ -75,7 +75,7 @@ button:focus {
 {% set html -%}
   <button type="button" class="outline-offset">Demo Button</button>
 {% endset %}
-{% include "snippet.njk" %}
+{% include "partials/snippet.njk" %}
 
 Alternatively, set `outline-offset` using a negative value to inset the outline from the element's perimeter.
 
@@ -103,7 +103,7 @@ button:focus {
   outline-offset: -0.25em;
 }
 {% endset %}
-{% include "snippet.njk" %}
+{% include "partials/snippet.njk" %}
 
 There is also a new pseudo-class that you can consider using in some circumstances. The `:focus-visible` pseudo-class will display an outline (or user-defined style) only when the device/browser (user agent) determines it needs to be visible. Typically this means it will appear for keyboard users upon `tab` key interaction but not for mouse users.
 
@@ -141,7 +141,7 @@ button:focus-visible {
   outline-offset: -0.25em;
 }
 {% endset %}
-{% include "snippet.njk" %}
+{% include "partials/snippet.njk" %}
 
 Note that [`:focus-visible` support](https://caniuse.com/css-focus-visible) is still rolling out to all browsers, notably missing from Safari. If you would like to try using it, here is an example of including it as a progressive enhancement.
 
@@ -185,7 +185,7 @@ If you are able, browse the following demo using your tab key and take notice of
 .source-order {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  grid-gap: 1rem;
+  gap: 1rem;
   list-style: none;
 }
 
@@ -250,7 +250,7 @@ If you are able, browse the following demo using your tab key and take notice of
 </ol>
 {% endset %}
 {% set cssDisplay = false %}
-{% include "snippet.njk" %}
+{% include "partials/snippet.njk" %}
 
 The goal of this section is more to provide awareness of this criterion when you consider how to solve layout challenges. Upcoming in CSS grid is a native "masonry" solution. Unfortunately, it may negatively impact the expected focus order. Similar issues can be created when assigning specific grid areas that don't match source order, as well as customizing item order in flexbox using the `order` property.
 
@@ -301,7 +301,7 @@ ul {
   <li><a href="">Link 8</a></li>
 </ul>
 {% endset %}
-{% include "snippet.njk" %}
+{% include "partials/snippet.njk" %}
 
 The caution here is to be mindful of the space necessary to accommodate the content. In a navigation scenario, content is usually fairly tightly controlled, so this can be a reasonable solution.
 
@@ -395,7 +395,7 @@ section + section {
   <h3>Section 3</h3>
 </section>
 {% endset %}
-{% include "snippet.njk" %}
+{% include "partials/snippet.njk" %}
 
 This technique can potentially be used if you encounter overlap from absolute positioned elements as well.
 
@@ -519,7 +519,7 @@ This demo includes a gently pulsing circle unless a user has selected reduced mo
 {% set html -%}
 <div class="prefers-reduced-motion"></div>
 {% endset %}
-{% include "snippet.njk" %}
+{% include "partials/snippet.njk" %}
 
 You can test results of this media feature query within Chrome/Edge by opening dev tools and selecting the kebab menu (3 vertical dots), then "More tools" and "Rendering". Then you can toggle settings in the section for "Emulate CSS media feature prefers-reduced motion".
 
@@ -609,7 +609,7 @@ Here's an example of using simple CSS shapes and gradients as icons, and ensurin
 <span class="icon filled"></span>
 <span class="icon gradient"></span>
 {% endset %}
-{% include "snippet.njk" %}
+{% include "partials/snippet.njk" %}
 
 Using Windows High Contrast Mode, a likely outcome based on defaults would be that the blue becomes white due to the `CanvasText` color keyword while the page background becomes black.
 

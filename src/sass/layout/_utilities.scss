@@ -1,0 +1,119 @@
+@use "../color-tokens" as *;
+
+.container {
+  width: min(var(--content-max, 120ch), 100% - 2rem);
+  margin-inline: auto;
+}
+
+.column-container {
+  --gap: 2rem;
+
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 25ch), 1fr));
+  gap: var(--gap);
+}
+
+.hero {
+  --padding: 10vh;
+  --min-height: 40vh;
+  --content-max: 70ch;
+
+  display: grid;
+  place-content: center;
+  min-height: var(--min-height);
+  padding-block: var(--padding);
+  text-align: center;
+
+  .landing-page & {
+    --padding: 5vh;
+    --min-height: unset;
+  }
+
+  .lead {
+    margin-top: 5vh;
+
+    a {
+      color: inherit;
+    }
+
+    + .button {
+      margin-top: 3vh;
+    }
+  }
+}
+
+.row {
+  --gap: 0.5rem;
+  --justify-content: center;
+
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: var(--justify-content);
+  gap: var(--gap);
+}
+
+.flex-container {
+  --gap: 1rem;
+
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap);
+
+  .row {
+    --justify-content: flex-start;
+
+    margin-top: auto;
+  }
+}
+
+.section {
+  margin-block: var(--section-margin, 8vh);
+  padding-block: var(--section-padding, 4vh);
+}
+
+.mx-auto {
+  margin-inline: auto;
+}
+
+.text-align-center {
+  text-align: center;
+}
+
+.equalize-headings :is(h2, h3) {
+  display: flex;
+  align-items: center;
+  min-height: 2.5em;
+}
+
+.gradient-border {
+  border-width: 0;
+  border-top-width: var(--gradient-width, 0.25rem);
+  border-style: solid;
+  border-image: linear-gradient(to right, var(--gradient)) 1;
+}
+
+$text-colors: "primary", "secondary", "gray";
+
+@each $color in $text-colors {
+  .color-#{$color} {
+    color: var(--color-#{$color});
+  }
+}
+
+.background--secondary-alt {
+  background-color: scale-color($color-secondary, $lightness: -20%);
+  color: #fff;
+
+  a:not([class]) {
+    color: inherit;
+  }
+
+  .button-outlined {
+    --button-focus-inner: var(--color-secondary);
+  }
+}
+
+[hidden] {
+  display: none;
+}

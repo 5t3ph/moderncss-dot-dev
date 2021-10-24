@@ -1,0 +1,124 @@
+details {
+  margin-top: 4rem;
+}
+
+summary,
+details pre[class*="language-"],
+.demo {
+  border: 1px solid var(--color-on-background);
+}
+
+summary {
+  position: relative;
+  padding: 0.5em;
+  background-color: var(--color-on-background);
+  color: var(--color-background);
+  font-size: 1.15rem;
+  cursor: pointer;
+
+  &:focus {
+    border-radius: 0.15em;
+    outline: 2px solid transparent;
+    box-shadow: inset 0 0 0 2px var(--color-background),
+      0 0 0 2px var(--color-on-background);
+  }
+
+  &::marker {
+    color: inherit;
+  }
+}
+
+details pre[class*="language-"] {
+  margin: 0;
+  border-radius: 0;
+}
+
+.demo {
+  margin-bottom: 4rem;
+  contain: content;
+
+  @media (max-width: 958px) {
+    max-width: calc(100vw - 2rem);
+  }
+
+  .demo--content {
+    background-color: #fff;
+  }
+
+  .demo--place-center {
+    display: grid;
+    place-content: center;
+    min-height: 20vh;
+  }
+
+  * {
+    max-height: initial;
+    margin: 0;
+    padding: initial;
+    border: initial;
+    border-radius: initial;
+    background-color: initial;
+    color: initial;
+    font-family: system-ui, sans-serif;
+    font-size: initial;
+    line-height: 1.5;
+    text-decoration-color: initial;
+    text-decoration-thickness: initial;
+  }
+}
+
+// Seeking a pointer because @supports for `resize`
+// returns false positive on iOS
+@media (any-hover: hover) and (any-pointer: fine) {
+  .demo:not(.no-resize) {
+    position: relative;
+    padding: 1.75rem 0;
+    overflow: auto;
+    resize: horizontal;
+
+    &::before,
+    &::after {
+      position: absolute;
+      color: var(--color-on-background);
+      font-size: 1rem;
+      letter-spacing: 0.03em;
+      line-height: 0;
+    }
+
+    &::after {
+      content: "Resize me!";
+      right: 0.85rem;
+      bottom: 0.75rem;
+    }
+
+    &::before {
+      content: attr(style);
+      top: 0.85rem;
+      left: 0.85rem;
+    }
+  }
+}
+
+@media not all and (min-resolution: 0.001dpcm) {
+  .demo {
+    resize: none;
+
+    &::after {
+      content: "";
+    }
+  }
+}
+
+del.highlight-line-remove {
+  opacity: 0.8;
+}
+
+ins.highlight-line-add,
+mark.highlight-line-active {
+  margin-left: -4px;
+  padding: 0.08em 0.25em 0.2em 0;
+  border-left: 4px solid #24c350;
+  background-color: #10441e;
+  color: #fff;
+  text-decoration: none;
+}

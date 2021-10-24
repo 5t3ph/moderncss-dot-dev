@@ -75,7 +75,7 @@ body {
   grid-template-rows: auto 1fr auto;
 }
 
-// Optional
+/* Optional */
 main {
   margin: 0 auto;
   max-width: 80ch;
