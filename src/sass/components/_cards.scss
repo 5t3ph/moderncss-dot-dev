@@ -12,7 +12,10 @@
     content: "";
     z-index: -1;
     position: absolute;
-    inset: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
     transform: skewY(var(--skew));
   }
 
@@ -30,6 +33,8 @@
   }
 
   &--teaser {
+    justify-content: center;
+
     &::before {
       border-radius: 0.25rem;
       outline: 1px dashed var(--color-secondary);
@@ -38,7 +43,6 @@
 
     .card__content {
       place-content: center;
-      height: 100%;
     }
   }
 
@@ -152,5 +156,11 @@
 
   @media (min-width: 80ch) {
     --skew: -8deg;
+  }
+
+  @media (max-width: 120ch) {
+    &--teaser:first-child {
+      grid-row-start: 2;
+    }
   }
 }
