@@ -62,11 +62,11 @@ async function screenshot(templateType, title, meta) {
       if (postMeta) {
         if (templateType == "post") {
           postMeta.innerHTML = `Posted on: ${meta}`;
-        } else {
+        } else if (templateType == "page") {
           postMeta.innerHTML = meta;
+        } else {
+          postMeta.remove();
         }
-      } else {
-        postMeta.remove();
       }
     }
   }, pageData);

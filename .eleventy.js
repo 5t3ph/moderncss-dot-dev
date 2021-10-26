@@ -27,7 +27,7 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy("./src/favicon.png");
   eleventyConfig.addPassthroughCopy("./src/robots.txt");
   eleventyConfig.addPassthroughCopy("./src/_redirects");
-  eleventyConfig.addPassthroughCopy("./src/_headers");
+  eleventyConfig.addPassthroughCopy("./_headers");
 
   // Collections: /src/_11ty/collections.js
   Object.keys(collections).forEach((collectionName) => {
