@@ -2,7 +2,7 @@ require("dotenv").config();
 const { builder } = require("@netlify/functions");
 const chromium = require("chrome-aws-lambda");
 
-async function screenshot(slug, title, date) {
+async function screenshot(templateType, title, meta) {
   // const baseURL = process.env.URL;
   const baseURL = "https://arch-redo--moderncss-dot-dev.netlify.app";
   const url = `${baseURL}/_social-template/`;
@@ -11,9 +11,9 @@ async function screenshot(slug, title, date) {
     encoding: "base64",
   };
   let pageData = {
-    slug,
+    templateType,
     title: decodeURIComponent(title),
-    date: decodeURIComponent(date),
+    meta: decodeURIComponent(meta),
   };
 
   const browser = await chromium.puppeteer.launch({
@@ -38,13 +38,13 @@ async function screenshot(slug, title, date) {
     deviceScaleFactor: 2,
   });
 
-  await page.evaluate(({ slug, title, date }) => {
+  await page.evaluate(({ templateType, title, meta }) => {
     const homeHero = document.querySelector(".hero--home");
     const postHero = document.querySelector(".hero:not(.hero--home)");
     const h1 = document.querySelector("h1");
-    const dateEl = document.querySelector(".postdate");
+    const postMeta = document.querySelector(".postmeta");
     // const byline = document.querySelector(".byline");
-    const isHome = slug === "home";
+    const isHome = templateType === "home";
 
     if (isHome) {
       homeHero.removeAttribute("hidden");
@@ -59,10 +59,14 @@ async function screenshot(slug, title, date) {
         h1.innerHTML = postTitle;
       }
 
-      if (dateEl) {
-        dateEl.innerHTML = `Posted on: ${date}`;
+      if (postMeta) {
+        if (templateType == "post") {
+          postMeta.innerHTML = `Posted on: ${meta}`;
+        } else {
+          postMeta.innerHTML = meta;
+        }
       } else {
-        dateEl.remove();
+        postMeta.remove();
       }
     }
   }, pageData);
@@ -76,10 +80,10 @@ async function screenshot(slug, title, date) {
 
 async function handler(event, _context) {
   let pathSplit = event.path.split("/").filter((entry) => !!entry);
-  let [_base, slug, title, date] = pathSplit;
+  let [_base, templateType, title, meta] = pathSplit;
 
   try {
-    let output = await screenshot(slug, title, date);
+    let output = await screenshot(templateType, title, meta);
 
     return {
       statusCode: 200,

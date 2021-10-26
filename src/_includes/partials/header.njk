@@ -6,8 +6,8 @@
   <div class="container">
     <h1 class="color-primary">{{ title }}</h1>
     {% if not landingPage %}
-    <p class="lead">
-    {%- if layout == 'layouts/post' or layout == 'layouts/social-template' %}<span><span class="postdate">{{ dateLabel }}</em>: {{ dateValue }}</span>{% endif -%}
+    <p class="lead"><span>
+    {%- if layout == 'layouts/post' or layout == 'layouts/social-template' %}<span class="postmeta"><em >{{ dateLabel }}</em>: {{ dateValue }}</span>{% endif -%}
     <small class="row">
       <span class="byline">Written by Stephanie Eckles</span> {%- if layout != 'layouts/social-template' %}<a href="https://twitter.com/5t3ph/" class="button button-icon" aria-label="Twitter">
       {% icon "twitter" %}</a>{% endif %}
