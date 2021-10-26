@@ -3,12 +3,12 @@ const { builder } = require("@netlify/functions");
 const chromium = require("chrome-aws-lambda");
 
 async function screenshot(templateType, title, meta) {
-  // const baseURL = process.env.URL;
-  const baseURL = "https://arch-redo--moderncss-dot-dev.netlify.app";
+  const baseURL = process.env.URL;
   const url = `${baseURL}/_social-template/`;
   let options = {
-    type: "png",
+    type: "jpeg",
     encoding: "base64",
+    quality: 80,
   };
   let pageData = {
     templateType,
@@ -26,7 +26,7 @@ async function screenshot(templateType, title, meta) {
   const page = await browser.newPage();
 
   await page.goto(url, {
-    waitUntil: ["load", "networkidle0"],
+    waitUntil: ["domcontentloaded"],
     timeout: 3000,
   });
 
@@ -43,7 +43,6 @@ async function screenshot(templateType, title, meta) {
     const postHero = document.querySelector(".hero:not(.hero--home)");
     const h1 = document.querySelector("h1");
     const postMeta = document.querySelector(".postmeta");
-    // const byline = document.querySelector(".byline");
     const isHome = templateType === "home";
 
     if (isHome) {
@@ -88,7 +87,7 @@ async function handler(event, _context) {
     return {
       statusCode: 200,
       headers: {
-        "content-type": `image/png`,
+        "content-type": `image/jpeg`,
       },
       body: output,
       isBase64Encoded: true,
