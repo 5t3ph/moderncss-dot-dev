@@ -45,14 +45,6 @@
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:creator" content="@{{ meta.twitterUsername }}" />
     <meta
-      name="twitter:title"
-      content="{{pageTitle}}"
-    />
-    <meta
-      name="twitter:description"
-      content="{{description}}"
-    />
-    <meta
       name="og:title"
       content="{{pageTitle}}"
     />
@@ -61,7 +53,6 @@
       content="{{description}}"
     />
     <meta property="og:image" content="{{ pageSocialImg }}" />
-    <meta name="twitter:image" content="{{ pageSocialImg }}" />
     <link rel="alternate" type="application/rss+xml" title="RSS Feed for ModernCSS.dev" href="/feed/" />
   </head>
   <body class="page-{{ page.fileSlug }} {{ "landing-page" if landingPage }}">

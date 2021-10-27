@@ -43,6 +43,7 @@ async function screenshot(templateType, title, meta) {
     const postHero = document.querySelector(".hero:not(.hero--home)");
     const h1 = document.querySelector("h1");
     const postMeta = document.querySelector(".postmeta");
+    const byline = document.querySelector(".byline");
     const isHome = templateType === "home";
 
     if (isHome) {
@@ -63,6 +64,7 @@ async function screenshot(templateType, title, meta) {
           postMeta.innerHTML = `Posted on: ${meta}`;
         } else if (templateType == "page") {
           postMeta.innerHTML = meta;
+          byline.remove();
         } else {
           postMeta.remove();
         }
