@@ -48,7 +48,7 @@ const randomLimit = (arr, limit, currPage) => {
   return pageArr.slice(0, limit);
 };
 
-const teaser = `<blockquote class="promo"><p><em>Hey there!</em> Register for my CSS workshop in October with Smashing Conferences: <a href="https://smashingconf.com/online-workshops/workshops/stephanie-eckles-oct">Level-Up With Modern&nbsp;CSS</a></p></blockquote>`;
+const teaser = `<blockquote class="promo"><p><em>Hey there!</em> You may also enjoy my end-of-year project celebrating web fundamentals: <a href="https://12daysofweb.dev"><strong>12DaysOfWeb.dev</strong></a></p></blockquote>`;
 
 const addTeaser = (content) => {
   const position = content.lastIndexOf("</p>", 5200);
