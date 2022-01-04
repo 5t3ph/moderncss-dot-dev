@@ -27,7 +27,7 @@ async function screenshot(templateType, title, meta) {
 
   await page.goto(url, {
     waitUntil: ["domcontentloaded"],
-    timeout: 3000,
+    timeout: 4000,
   });
 
   await page.evaluateHandle("document.fonts.ready");
