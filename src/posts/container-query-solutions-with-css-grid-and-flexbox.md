@@ -9,7 +9,7 @@ date: 2020-06-11
 
 True container queries are a much asked for CSS feature that would be a complement to media queries but be placed on container elements instead of the viewport.
 
-> **Experimental CSS container queries are here!** [Here's Miriam Suzanne's container queries proposal explainer](https://css.oddbird.net/rwd/query/explainer/) which has an experimental prototype in Chrome Canary. After you download Canary, visit `chrome://flags` to search for and enable container queries. Then you might like to look at this [collection of demos on CodePen](https://codepen.io/mirisuzanne/pen/gOgNQYm).
+> **Experimental CSS container queries are here!** [Here's Miriam Suzanne's container queries proposal explainer](https://css.oddbird.net/rwd/query/explainer/) which has an experimental prototype in Chrome Canary. After you download Canary, visit `chrome://flags` to search for and enable container queries. For more info, review my [primer on container queries](https://www.smashingmagazine.com/2021/05/complete-guide-css-container-queries/).
 
 Using grid and flexbox, we can create styles that respond to _container_ and _content_ widths and overcome some of the pain points that container queries are proposed to resolve.
 

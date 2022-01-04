@@ -1,0 +1,1040 @@
+---
+title: "Responsive Image Gallery With Animated Captions"
+topics: Animation,Design,Grid,Images,Responsive Design
+episode: 6
+description: "This technique explores using: `object-fit` for responsive image scaling,  `aspect-ratio` for consistent image sizes, a CSS Grid trick to replace absolute positioning, and CSS transforms for animated effects."
+templateEngineOverride: njk, md
+date: 2020-04-21
+updatedOn: 2022-01-03
+hideTeaser: true
+---
+
+<style>.demo .demo--content { background-color: transparent; padding: 1rem; }</style>
+
+Responsively resizing images is a common need, and modern CSS provides tools for ensuring a consistent `aspect-ratio` while not distorting the images. And grid gives us flexibility for a gallery layout as well as positioning multiple elements in a shared space.
+
+This responsive gallery technique explores using:
+
+- `object-fit` for responsive image scaling
+- `aspect-ratio` for consistent image sizes
+- A CSS Grid trick to replace absolute positioning
+- CSS transforms for animated effects
+- handling for touch devices
+- respecting reduced motion
+
+{% carbonAd %}
+
+## Gallery HTML
+
+Here is our initial HTML, which is an `ul` where each `li` contains a `figure` with the image and `figcaption`:
+
+```html
+<ul class="gallery" role="list">
+  <li>
+    <figure>
+      <img alt="" src="https://picsum.photos/550/300" />
+      <figcaption>Candy canes ice cream</figcaption>
+    </figure>
+  </li>
+  <li>
+    <figure>
+      <img alt="" src="https://picsum.photos/400" />
+      <figcaption>Ice cream biscuit</figcaption>
+    </figure>
+  </li>
+  <li>
+    <figure>
+      <img alt="" src="https://picsum.photos/600/450" />
+      <figcaption>Cream biscuit marzipan</figcaption>
+    </figure>
+  </li>
+</ul>
+```
+
+> What's that `role="list"` doing there? It [ensures assistive technology still interprets the element as a list](https://www.scottohara.me/blog/2019/01/12/lists-and-safari.html) after we remove list styling with CSS.
+
+I've used different image sizes both to showcase how `object-fit` works in terms of fitting its container, and also to lessen the chance of duplicate images from the [picsum](https://picsum.photos/) service.
+
+Note that due to using a random image service, I haven't provided full `alt` descriptions or real `figcaption` text for these demo images. Ideally you should write `alt` that describes the image, and use `figcaption` to  provide context for the image as a figure. I recommend this resource to [learn more about the importance of writing `alt` and `figcaption`](https://thoughtbot.com/blog/alt-vs-figcaption).
+
+## Base Gallery Styles
+
+Since we've used a list, we need to remove default list styles, and we will also set the list up as a grid container. These initial styles achieve placing our list items in a row and ensures the images stay in their grid columns but does not resize them.
+
+{% set open = 'open' %}
+{% set demoTitle = "gallery class" %}
+{% set css %}
+.gallery {
+  list-style: none;
+  padding: 0;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(20ch, 1fr));
+  gap: 1rem;
+}
+
+.gallery img {
+  display: block;
+  width: 100%;
+}
+{% endset %}
+{% set cssDisplay %}
+{{- css -}}
+{% endset %}
+{% set html -%}
+<ul class="gallery" role="list">
+  <li>
+    <figure>
+      <img alt="" src="https://picsum.photos/550/300" />
+      <figcaption>Candy canes ice cream</figcaption>
+    </figure>
+  </li>
+  <li>
+    <figure>
+      <img alt="" src="https://picsum.photos/400" />
+      <figcaption>Ice cream biscuit</figcaption>
+    </figure>
+  </li>
+  <li>
+    <figure>
+      <img alt="" src="https://picsum.photos/600/450" />
+      <figcaption>Cream biscuit marzipan</figcaption>
+    </figure>
+  </li>
+</ul>
+{% endset %}
+{% include "partials/snippet.njk" %}
+
+## Gallery Card and Image Styles
+
+If you're like me and have tried to do this in years past, you probably threw your rollerball mouse across the room trying to figure out why `position: absolute` wasn't playing nicely with your jQuery animations.
+
+CSS Grid and CSS transforms are here to save the day! 🎉
+
+We're going to setup the `figure` to use grid display, and also define a custom property to hold the desired image height. And we'll give it a background in case the image is a little slow to load.
+
+{% set demoTitle = "Base figure display styles" %}
+{% set css %}
+.gallery {
+  list-style: none;
+  padding: 0;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(20ch, 1fr));
+  gap: 1rem;
+}
+
+.gallery img {
+  display: block;
+  width: 100%;
+}
+
+.gallery figure {
+  --gallery-height: 15rem;
+
+  /* reset figure default margin */
+  margin: 0;
+  height: var(--gallery-height);
+  background-color: hsl(200, 85%, 2%);
+}
+{% endset %}
+{% set cssDisplay %}
+.gallery figure {
+  --gallery-height: 15rem;
+
+  /* reset figure default margin */
+  margin: 0;
+  height: var(--gallery-height);
+  background-color: hsl(200, 85%, 2%);
+}
+{% endset %}
+{% include "partials/snippet.njk" %}
+
+Next, we apply `object-fit` to the image along with `width: 100%` and pull in the custom property for the height so that it scales to the size of the figure. The magic of `object-fit: cover` is that no distortion occurs.
+
+{% set demoTitle = "Image display styles" %}
+{% set css %}
+.gallery {
+  list-style: none;
+  padding: 0;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(20ch, 1fr));
+  gap: 1rem;
+}
+
+.gallery img {
+  display: block;
+  width: 100%;
+  object-fit: cover;
+  height: var(--gallery-height);
+}
+
+.gallery figure {
+  --gallery-height: 15rem;
+
+  /* reset figure default margin */
+  margin: 0;
+  height: var(--gallery-height);
+  background-color: hsl(200, 85%, 2%);
+}
+{% endset %}
+{% set lineHighlight = '/3-4' %}
+{% set cssDisplay %}
+.gallery img {
+  display: block;
+  width: 100%;
+  object-fit: cover;
+  height: var(--gallery-height);
+}
+{% endset %}
+{% include "partials/snippet.njk" %}
+
+If you resize the demo, you'll see that the img is now behaving much as if it were applied as a `background-image` and using `background-size: cover`. The `img` tag is acting like a container for it's own contents.
+
+> For a helpful intro to `object-fit` for responsive image scaling, check out [this earlier post from this series](/css-only-full-width-responsive-images-2-ways/). You might also like my [3-minute free egghead lesson on `object-fit`](https://5t3ph.dev/egobjfit).
+
+We can improve the image sizing by upgrading to using `aspect-ratio` when supported using the native CSS feature `@supports`. When it is supported, we'll drop the `height` and swap for defining the `aspect-ratio` to use. This allows us to have more consistently sized images across viewports.
+
+{% set demoTitle = "Use aspect-ratio with @supports" %}
+{% set css %}
+.gallery {
+  list-style: none;
+  padding: 0;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(20ch, 1fr));
+  gap: 1rem;
+}
+
+.gallery img {
+  display: block;
+  width: 100%;
+  object-fit: cover;
+  height: var(--gallery-height);
+}
+
+.gallery figure {
+  --gallery-height: 15rem;
+  --gallery-aspect-ratio: 4/3;
+
+  /* reset figure default margin */
+  margin: 0;
+  height: var(--gallery-height);
+  background-color: hsl(200, 85%, 2%);
+}
+
+@supports (aspect-ratio: 1) {
+  .gallery figure,
+  .gallery img {
+    aspect-ratio: var(--gallery-aspect-ratio);
+    /* Remove height to prevent distorting aspect-ratio */
+    height: auto;
+  }
+}
+{% endset %}
+{% set lineHighlight = ' ' %}
+{% set cssDisplay %}
+/* Add aspect-ratio custom property */
+.gallery figure {
+  --gallery-aspect-ratio: 4/3;
+}
+
+@supports (aspect-ratio: 1) {
+  .gallery figure,
+  .gallery img {
+    aspect-ratio: var(--gallery-aspect-ratio);
+    /* Remove height to prevent distorting aspect-ratio */
+    height: auto;
+  }
+}
+{% endset %}
+{% include "partials/snippet.njk" %}
+
+## Positioning the Caption
+
+Now at this point, the caption has flowed naturally according to DOM order below the image. This is also due to default CSS grid behavior because it's assumed that it should be in its own "cell" and by default grid items flow down the y-axis in rows.
+
+To resolve this, we create a named `grid-template-areas` for the `figure`, and assign both the `img` and `figcaption` to live there. Then, we'll use grid positioning to set `place-items: end` on the card to move the caption to the bottom right of the "cell".
+
+{% set demoTitle = "Styles to position the figcaption" %}
+{% set css %}
+.gallery {
+  list-style: none;
+  padding: 0;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(20ch, 1fr));
+  gap: 1rem;
+}
+
+.gallery img {
+  display: block;
+  width: 100%;
+  object-fit: cover;
+  height: var(--gallery-height);
+}
+
+.gallery figure {
+  --gallery-height: 15rem;
+  --gallery-aspect-ratio: 4/3;
+
+  /* reset figure default margin */
+  margin: 0;
+  height: var(--gallery-height);
+  background-color: hsl(200, 85%, 2%);
+
+  display: grid;
+  grid-template-areas: "card";
+  place-items: end;
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+
+@supports (aspect-ratio: 1) {
+  .gallery figure,
+  .gallery img {
+    aspect-ratio: var(--gallery-aspect-ratio);
+    /* Remove height to prevent distorting aspect-ratio */
+    height: auto;
+  }
+}
+
+.gallery figure > * {
+  grid-area: card;
+}
+
+.gallery figcaption {
+  transform: translateY(100%);
+}
+{% endset %}
+{% set lineHighlight = ' ' %}
+{% set cssDisplay %}
+.gallery figure {
+  /* ...existing styles */
+
+  display: grid;
+  grid-template-areas: "card";
+  place-items: end;
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+
+.gallery figure > * {
+  grid-area: card;
+}
+
+.gallery figcaption {
+  transform: translateY(100%);
+}
+{% endset %}
+{% include "partials/snippet.njk" %}
+
+You may notice the caption is also no longer visible, partly from adding `overflow: hidden` to the `figure`. Then to place the caption, we used CSS transforms to set the initial position outside the `figure`. A value of `100%` for translate will move the element `100%` relative to the axis it's placed on. So, `translateY(100%)` effectively moves the caption "down" out of the initial view.
+
+{% newsletterPromo %}
+
+## Animating the Caption
+
+Our animation will trigger on hover, and we want it to smoothly animate in and back out again. This requires setting up the `transition` property.
+
+We'll define that we expect a [transition](https://developer.mozilla.org/en-US/docs/Web/CSS/transition) on the `transform` property, and that the transition duration should be `800ms` and use the `ease-in` timing function.
+
+The `:hover` styles will actually be placed on the `figure` since it is the containing element, so we'll also add a `transform` definition that moves the caption back to it's inherent starting point by returning it to position `0` on the y-axis.
+
+{% set demoTitle = "Style and animate the figcaption" %}
+{% set css %}
+.gallery {
+  list-style: none;
+  padding: 0;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(20ch, 1fr));
+  gap: 1rem;
+}
+
+.gallery img {
+  display: block;
+  width: 100%;
+  object-fit: cover;
+  height: var(--gallery-height);
+}
+
+.gallery figure {
+  --gallery-height: 15rem;
+  --gallery-aspect-ratio: 4/3;
+
+  /* reset figure default margin */
+  margin: 0;
+  height: var(--gallery-height);
+  background-color: hsl(200, 85%, 2%);
+
+  display: grid;
+  grid-template-areas: "card";
+  place-items: end;
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+
+@supports (aspect-ratio: 1) {
+  .gallery figure,
+  .gallery img {
+    aspect-ratio: var(--gallery-aspect-ratio);
+    /* Remove height to prevent distorting aspect-ratio */
+    height: auto;
+  }
+}
+
+.gallery figure > * {
+  grid-area: card;
+}
+
+.gallery figcaption {
+  transform: translateY(100%);
+  transition: transform 800ms ease-in;
+
+  /* Visual styles for the caption */
+  padding: 0.25em 0.5em;
+  border-radius: 4px 0 0 0;
+  background-color: hsl(0 0% 100% / 87%);
+}
+
+.gallery figure:hover figcaption {
+  transform: translateY(0);
+}
+{% endset %}
+{% set lineHighlight = ' ' %}
+{% set cssDisplay %}
+.gallery figcaption {
+  transform: translateY(100%);
+  transition: transform 800ms ease-in;
+
+  /* Visual styles for the caption */
+  padding: 0.25em 0.5em;
+  border-radius: 4px 0 0 0;
+  background-color: hsl(0 0% 100% / 87%);
+}
+
+.gallery figure:hover figcaption {
+  transform: translateY(0);
+}
+{% endset %}
+{% include "partials/snippet.njk" %}
+
+And ta-da! We have a basic animated caption.
+
+## Ken Burns image effect
+
+You may not have known the name, but you've seen the effect: a slow, smooth pan and zoom combo of a still image, so named due to being popularized by documentary filmmaker [Ken Burns](https://en.wikipedia.org/wiki/Ken_Burns).
+
+Using the principles we've already covered with the `transition` and `tranform` properties, we can again combine them on the `img` to add this effect on hover as well.
+
+We add an additional value to `transform` to set the default `scale` to 0 since on hover we'll be scaling it up so we need to set the point it starts from. We're using a generous duration of `1200ms` for the transition to take place in order to create a smooth pan and zoom effect.
+
+```css
+.gallery img {
+  transform: scale(1) translate(0, 0);
+  transition: transform 1200ms ease-in;
+}
+```
+
+Next we add the `:hover` transition into the `figure` rule, adding both a bit more of a scale up for the zoom-in effect, in addition to pulling it back left on the x-axis to `-8%` and also a bit up on the y-axis with `-3%`. You can adjust the translate values to your taste.
+
+```css
+.gallery figure:hover img {
+  transform: scale(1.3) translate(-8%, -3%);
+}
+```
+
+There's one more thing, which is that we have set our transition durations with a `400ms` difference. We can add that value as a delay for the caption. Be aware that the delay applies prior to the transition on hover, and at the end of the transition out off-hover. Personally I like this effect since it means that in both directions the animations end together.
+
+```css/2
+.gallery figcaption {
+  /* update to add the 400ms delay */
+  transition: transform 800ms 400ms ease-in;
+}
+```
+
+Altogether, here is our gallery with the Ken Burns effect on the image and caption.
+
+{% set demoTitle = "Ken Burns style animated figures" %}
+{% set css %}
+.gallery {
+  list-style: none;
+  padding: 0;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(20ch, 1fr));
+  gap: 1rem;
+}
+
+.gallery img {
+  display: block;
+  width: 100%;
+  object-fit: cover;
+  height: var(--gallery-height);
+  transform: scale(1) translate(0, 0);
+  transition: transform 1200ms ease-in;
+}
+
+.gallery figure {
+  --gallery-height: 15rem;
+  --gallery-aspect-ratio: 4/3;
+
+  /* reset figure default margin */
+  margin: 0;
+  height: var(--gallery-height);
+  background-color: hsl(200, 85%, 2%);
+
+  display: grid;
+  grid-template-areas: "card";
+  place-items: end;
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+
+@supports (aspect-ratio: 1) {
+  .gallery figure,
+  .gallery img {
+    aspect-ratio: var(--gallery-aspect-ratio);
+    /* Remove height to prevent distorting aspect-ratio */
+    height: auto;
+  }
+}
+
+.gallery figure > * {
+  grid-area: card;
+}
+
+.gallery figcaption {
+  transform: translateY(100%);
+  transition: transform 800ms 400ms ease-in;
+
+  /* Visual styles for the caption */
+  padding: 0.25em 0.5em;
+  border-radius: 4px 0 0 0;
+  background-color: hsl(0 0% 100% / 87%);
+}
+
+.gallery figure:hover figcaption {
+  transform: translateY(0);
+}
+
+.gallery figure:hover img {
+  transform: scale(1.3) translate(-8%, -3%);
+}
+{% endset %}
+{% set lineHighlight = ' ' %}
+{% set cssDisplay %}
+.gallery img {
+  transform: scale(1) translate(0, 0);
+  transition: transform 1200ms ease-in;
+}
+
+.gallery figure:hover img {
+  transform: scale(1.3) translate(-8%, -3%);
+}
+
+.gallery figcaption {
+  /* added 400ms delay */
+  transition: transform 800ms 400ms ease-in;
+}
+{% endset %}
+{% include "partials/snippet.njk" %}
+
+## Don't forget about `:focus`
+
+Hover is fine for mouse-users, but what about those who for various reasons use primarily their keyboard to navigate?
+
+The `li` element isn't inherently a focusable element, so just adding `:focus` styles will not change behavior.
+
+We have two options:
+- If you plan to link the images anyway, wrap the `figure` with a link element and hook `:focus` styles to that
+- If a link isn't needed, apply `tabindex="0"` to each `figure` which will enable them as focusable elements
+
+We'll use the `tabindex` approach for this demo.
+
+```html
+<figure tabindex="0"></figure>
+```
+
+You can test this by tabbing and you will notice the standard focus halo outline.
+
+We'll customize the outline and also update the rules to apply the same `:hover` behavior on `:focus`.
+
+{% set demoTitle = "Reveal captions on figure:focus" %}
+{% set css %}
+.gallery {
+  list-style: none;
+  padding: 0;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(20ch, 1fr));
+  gap: 1rem;
+}
+
+.gallery img {
+  display: block;
+  width: 100%;
+  object-fit: cover;
+  height: var(--gallery-height);
+  transform: scale(1) translate(0, 0);
+  transition: transform 1200ms ease-in;
+}
+
+.gallery figure {
+  --gallery-height: 15rem;
+  --gallery-aspect-ratio: 4/3;
+
+  /* reset figure default margin */
+  margin: 0;
+  height: var(--gallery-height);
+  background-color: hsl(200, 85%, 2%);
+
+  display: grid;
+  grid-template-areas: "card";
+  place-items: end;
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+
+@supports (aspect-ratio: 1) {
+  .gallery figure,
+  .gallery img {
+    aspect-ratio: var(--gallery-aspect-ratio);
+    /* Remove height to prevent distorting aspect-ratio */
+    height: auto;
+  }
+}
+
+.gallery figure > * {
+  grid-area: card;
+}
+
+.gallery figcaption {
+  transform: translateY(100%);
+  transition: transform 800ms 400ms ease-in;
+
+  /* Visual styles for the caption */
+  padding: 0.25em 0.5em;
+  border-radius: 4px 0 0 0;
+  background-color: hsl(0 0% 100% / 87%);
+}
+
+.gallery figure:hover figcaption,
+.gallery figure:focus figcaption {
+  transform: translateY(0);
+}
+
+.gallery figure:hover img,
+.gallery figure:focus img {
+  transform: scale(1.3) translate(-8%, -3%);
+}
+
+.gallery figure:focus {
+  outline: 2px solid white;
+  outline-offset: 2px;
+}
+{% endset %}
+{% set lineHighlight = '/6,11' %}
+{% set cssDisplay %}
+.gallery figure:focus {
+  outline: 2px solid white;
+  outline-offset: 2px;
+}
+
+.gallery figure:hover figcaption,
+.gallery figure:focus figcaption {
+  transform: translateY(0);
+}
+
+.gallery figure:hover img,
+.gallery figure:focus img {
+  transform: scale(1.3) translate(-8%, -3%);
+}
+{% endset %}
+{% set html %}
+<ul class="gallery" role="list">
+  <li>
+    <figure tabindex="0">
+      <img alt="" src="https://picsum.photos/550" />
+      <figcaption>Candy canes ice cream</figcaption>
+    </figure>
+  </li>
+  <li>
+    <figure tabindex="0">
+      <img alt="" src="https://picsum.photos/400" />
+      <figcaption>Ice cream biscuit</figcaption>
+    </figure>
+  </li>
+  <li>
+    <figure tabindex="0">
+      <img alt="" src="https://picsum.photos/600" />
+      <figcaption>Cream biscuit marzipan</figcaption>
+    </figure>
+  </li>
+</ul>
+{% endset %}
+{% include "partials/snippet.njk" %}
+
+
+## Handling for touch devices
+
+We've made a large assumption so far which is that users interacting with our gallery have a hover capable device _and_ the motor abilities required to perform a "hover" on an element.
+
+While the current hover experience somewhat works on a touch device, if you upgrade the gallery to use links it's likely the caption wouldn't have time to show prior to the navigation event. So, let's instead change our strategy to only enable the animated links for hover-capable devices and set the default to display them.
+
+This is done with a media query combo to detect both hover and a "fine" pointing device which is likely to mean the user is primarily using a mouse, possibly a stylus.
+
+We'll remove the `transform` on the `figcaption` and instead only apply it if this media query combo is valid. If you're on a touch device you'll likely see the captions by default in this next demo, or you can emulate a mobile or touch device using your browser dev tools.
+
+{% set demoTitle = "Only animate captions for non-touch devices" %}
+{% set css %}
+.gallery {
+  list-style: none;
+  padding: 0;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(20ch, 1fr));
+  gap: 1rem;
+}
+
+.gallery img {
+  display: block;
+  width: 100%;
+  object-fit: cover;
+  height: var(--gallery-height);
+  transform: scale(1) translate(0, 0);
+  transition: transform 1200ms ease-in;
+}
+
+.gallery figure {
+  --gallery-height: 15rem;
+  --gallery-aspect-ratio: 4/3;
+
+  /* reset figure default margin */
+  margin: 0;
+  height: var(--gallery-height);
+  background-color: hsl(200, 85%, 2%);
+
+  display: grid;
+  grid-template-areas: "card";
+  place-items: end;
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+
+@supports (aspect-ratio: 1) {
+  .gallery figure,
+  .gallery img {
+    aspect-ratio: var(--gallery-aspect-ratio);
+    /* Remove height to prevent distorting aspect-ratio */
+    height: auto;
+  }
+}
+
+.gallery figure > * {
+  grid-area: card;
+}
+
+.gallery figcaption {
+  transition: transform 800ms 400ms ease-in;
+
+  /* Visual styles for the caption */
+  padding: 0.25em 0.5em;
+  border-radius: 4px 0 0 0;
+  background-color: hsl(0 0% 100% / 87%);
+  /* provide stacking context */
+  z-index: 1;
+}
+
+.gallery figure:hover figcaption,
+.gallery figure:focus figcaption {
+  transform: translateY(0);
+}
+
+.gallery figure:hover img,
+.gallery figure:focus img {
+  transform: scale(1.3) translate(-8%, -3%);
+}
+
+.gallery figure:focus {
+  outline: 2px solid white;
+  outline-offset: 2px;
+}
+
+@media (any-hover: hover) and (any-pointer: fine) {
+  .gallery figcaption {
+    transform: translateY(100%);
+  }
+}
+{% endset %}
+{% set lineHighlight = '//1' %}
+{% set cssDisplay %}
+.gallery figcaption {
+  transform: translateY(100%);
+  /* provide stacking context */
+  z-index: 1;
+}
+
+@media (any-hover: hover) and (any-pointer: fine) {
+  .gallery figcaption {
+    transform: translateY(100%);
+  }
+}
+{% endset %}
+{% include "partials/snippet.njk" %}
+
+
+## Respecting user motion preferences
+
+Some users may have a need for a "reduced motion" experience, which we can handle by way of a media query as well.
+
+The prefers-reduced-motion media query will let us remove the transition of the caption and image when the user has updated their system settings to request reduced motion. You can [learn more about this preference media query in my overview](https://12daysofweb.dev/2021/preference-queries/).
+
+When a reduced motion setting is true, we'll remove the associated `transition` and `transform` values. The result will be that the image does not have the Ken Burns effect and the caption appears instantly with no transition.
+
+{% set demoTitle = "Remove animation for prefers-reduced-motion" %}
+{% set css %}
+.gallery {
+  list-style: none;
+  padding: 0;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(20ch, 1fr));
+  gap: 1rem;
+}
+
+.gallery img {
+  display: block;
+  width: 100%;
+  object-fit: cover;
+  height: var(--gallery-height);
+  transform: scale(1) translate(0, 0);
+  transition: transform 1200ms ease-in;
+}
+
+.gallery figure {
+  --gallery-height: 15rem;
+  --gallery-aspect-ratio: 4/3;
+
+  /* reset figure default margin */
+  margin: 0;
+  height: var(--gallery-height);
+  background-color: hsl(200, 85%, 2%);
+
+  display: grid;
+  grid-template-areas: "card";
+  place-items: end;
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+
+@supports (aspect-ratio: 1) {
+  .gallery figure,
+  .gallery img {
+    aspect-ratio: var(--gallery-aspect-ratio);
+    /* Remove height to prevent distorting aspect-ratio */
+    height: auto;
+  }
+}
+
+.gallery figure > * {
+  grid-area: card;
+}
+
+.gallery figcaption {
+  transition: transform 800ms 400ms ease-in;
+
+  /* Visual styles for the caption */
+  padding: 0.25em 0.5em;
+  border-radius: 4px 0 0 0;
+  background-color: hsl(0 0% 100% / 87%);
+  /* provide stacking context */
+  z-index: 1;
+}
+
+.gallery figure:hover figcaption,
+.gallery figure:focus figcaption {
+  transform: translateY(0);
+}
+
+.gallery figure:hover img,
+.gallery figure:focus img {
+  transform: scale(1.3) translate(-8%, -3%);
+}
+
+.gallery figure:focus {
+  outline: 2px solid white;
+  outline-offset: 2px;
+}
+
+@media (any-hover: hover) and (any-pointer: fine) {
+  .gallery figcaption {
+    transform: translateY(100%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gallery * {
+    transition-duration: 0ms !important;
+  }
+
+  .gallery img {
+    transform: none !important;
+  }
+
+  .gallery figcaption {
+    transition-delay: 0ms;
+  }
+}
+{% endset %}
+{% set lineHighlight = ' ' %}
+{% set cssDisplay %}
+@media (prefers-reduced-motion: reduce) {
+  .gallery * {
+    transition-duration: 0ms !important;
+  }
+
+  .gallery img {
+    transform: none !important;
+  }
+
+  .gallery figcaption {
+    transition-delay: 0ms;
+  }
+}
+{% endset %}
+{% include "partials/snippet.njk" %}
+
+## Optional: Vignette
+
+Another hallmark of the Ken Burns style is a vignette - the soft black gradient on the borders of the image. We can accomplish this with an inset `box-shadow`. However, an inset `box-shadow` will not work on the image element directly, so instead we apply it on an `:after` pseudo element of the `figure`:
+
+The vignette is positioned by applying it to the single named `grid-area` and ensuring it has a `height` and `width` to take up the whole card in addition to relative positioning to stack it above the image.
+
+{% set demoTitle = "Vignette effect" %}
+{% set css %}
+.gallery {
+  list-style: none;
+  padding: 0;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(20ch, 1fr));
+  gap: 1rem;
+}
+
+.gallery img {
+  display: block;
+  width: 100%;
+  object-fit: cover;
+  height: var(--gallery-height);
+  transform: scale(1) translate(0, 0);
+  transition: transform 1200ms ease-in;
+}
+
+.gallery figure {
+  --gallery-height: 15rem;
+  --gallery-aspect-ratio: 4/3;
+
+  /* reset figure default margin */
+  margin: 0;
+  height: var(--gallery-height);
+  background-color: hsl(200, 85%, 2%);
+
+  display: grid;
+  grid-template-areas: "card";
+  place-items: end;
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+
+@supports (aspect-ratio: 1) {
+  .gallery figure,
+  .gallery img {
+    aspect-ratio: var(--gallery-aspect-ratio);
+    /* Remove height to prevent distorting aspect-ratio */
+    height: auto;
+  }
+}
+
+.gallery figure > * {
+  grid-area: card;
+}
+
+.gallery figcaption {
+  transition: transform 800ms 400ms ease-in;
+
+  /* Visual styles for the caption */
+  padding: 0.25em 0.5em;
+  border-radius: 4px 0 0 0;
+  background-color: hsl(0 0% 100% / 87%);
+  /* provide stacking context */
+  z-index: 1;
+}
+
+.gallery figure:hover figcaption,
+.gallery figure:focus figcaption {
+  transform: translateY(0);
+}
+
+.gallery figure:hover img,
+.gallery figure:focus img {
+  transform: scale(1.3) translate(-8%, -3%);
+}
+
+.gallery figure:focus {
+  outline: 2px solid white;
+  outline-offset: 2px;
+}
+
+@media (any-hover: hover) and (any-pointer: fine) {
+  .gallery figcaption {
+    transform: translateY(100%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gallery * {
+    transition-duration: 0ms !important;
+  }
+
+  .gallery img {
+    transform: none !important;
+  }
+
+  .gallery figcaption {
+    transition-delay: 0ms;
+  }
+}
+
+/* Vignette */
+.gallery figure::after {
+  content: "";
+  grid-area: card;
+  width: 100%;
+  height: 100%;
+  box-shadow: inset 0 0 2rem 1rem hsl(0 0% 0% / 65%);
+  position: relative;
+}
+{% endset %}
+{% set lineHighlight = ' ' %}
+{% set cssDisplay %}
+.gallery figure::after {
+  content: "";
+  grid-area: card;
+  width: 100%;
+  height: 100%;
+  box-shadow: inset 0 0 2rem 1rem hsl(0 0% 0% / 65%);
+  position: relative;
+}
+{% endset %}
+{% include "partials/snippet.njk" %}
+
+Choose the "Open in CodePen" option to generate a new CodePen that includes the final styles created for this component.
+
+{% postToCodepen title, page.url, css, html %}
+
+## Next steps: upgrade from a basic `img`
+
+In this simple gallery example, we just used a basic `img` element. If you'd like to learn how to use modern image formats and improve performance of your images, review my [guide to image display elements](https://12daysofweb.dev/2021/image-display-elements/).
