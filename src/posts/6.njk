@@ -684,7 +684,7 @@ We've made a large assumption so far which is that users interacting with our ga
 
 While the current hover experience somewhat works on a touch device, if you upgrade the gallery to use links it's likely the caption wouldn't have time to show prior to the navigation event. So, let's instead change our strategy to only enable the animated links for hover-capable devices and set the default to display them.
 
-This is done with a media query combo to detect both hover and a "fine" pointing device which is likely to mean the user is primarily using a mouse, possibly a stylus.
+This is done with a media query combo to detect both hover and a "fine" pointing device which is likely to mean the user is primarily using a mouse, possibly a stylus. The keyword here is "likely" as there are devices capable of touch sometimes, and more "fine" pointers other times. For more info to help you make an informed decision, check out this excellent [overview of interaction media features](https://css-tricks.com/interaction-media-features-and-their-potential-for-incorrect-assumptions/) from Patrick H. Lauke.
 
 We'll remove the `transform` on the `figcaption` and instead only apply it if this media query combo is valid. If you're on a touch device you'll likely see the captions by default in this next demo, or you can emulate a mobile or touch device using your browser dev tools.
 
