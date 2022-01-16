@@ -42,15 +42,14 @@
     <script async defer data-domain="moderncss.dev" src="https://plausible.io/js/plausible.outbound-links.js"></script>
     <script>window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }</script>
     {% endif %}
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:creator" content="@{{ meta.twitterUsername }}" />
+    <meta property="og:url" content="{{ page.url | url | absoluteUrl(meta.url) }}" />
     <meta property="og:title" content="{{pageTitle}}" />
-    <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="{{ meta.siteName }}" />
     <meta property="og:description" content="{{description}}" />
     <meta property="og:image" content="{{ pageSocialImg }}" />
-    <meta property="og:url" content="{{ page.url | url | absoluteUrl(meta.url) }}" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:site" content="@{{ meta.twitterUsername }}" />
-    <meta name="twitter:image" content="{{ pageSocialImg }}" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="{{ meta.siteName }}" />
     <link rel="canonical" href="{{ page.url | url | absoluteUrl(meta.url) }}">
     <link rel="alternate" type="application/rss+xml" title="RSS Feed for ModernCSS.dev" href="/feed/" />
   </head>
