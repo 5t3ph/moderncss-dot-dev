@@ -1,4 +1,3 @@
 User-agent: * 
 Disallow: /success/
 Disallow: /confirmation/
-Disallow: /_social-template/

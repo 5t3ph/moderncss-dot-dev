@@ -1,0 +1,23 @@
+---
+permalink: "./social/pages.json"
+permalinkBypassOutputDir: true
+eleventyExcludeFromCollections: true
+---
+[
+{%- for pages in collections.socialContent %}
+  {
+      "title":"{{ pages.data.title | addNbsp | safe }}",
+      "imgName":"{{ pages.data.title | slug }}",
+      "variables": {
+        {% if pages.data.layout == "layouts/post" %}
+        "postmeta": "{{ 'Updated on: ' + pages.data.updatedOn | postDate if pages.data.updatedOn else 'Posted on: ' + pages.date | postDate }}"
+        {%- else -%}
+        "postmeta": "{{ pages.data.description }}"
+        {%- endif -%}
+        {%- if pages.data.layout == "layouts/post" %},
+        "byline": "Written by Stephanie Eckles"
+        {% endif %}
+      }
+  }{% if loop.last == false %},{% endif -%}
+{% endfor %}
+]

@@ -12,7 +12,7 @@ body {
   color: var(--color-on-background);
 }
 
-.hero:not([hidden]) {
+.hero {
   display: grid;
   place-content: center;
   height: calc(100vh - 0.5rem);
@@ -22,10 +22,23 @@ body {
   .lead {
     grid-template-columns: 5rem auto 5rem;
     margin-top: 8vh;
+    font-size: 1.15rem;
+  }
+
+  .byline {
+    opacity: 0.8;
+  }
+
+  .byline,
+  .byline + strong {
+    display: block;
+    margin-top: 0.5rem;
   }
 }
 
-.hero:not(.hero--home) h1 {
+h1 {
+  font-family: var(--brand-font);
+  font-weight: var(--brand-font-weight);
   font-size: 2.5rem;
 }
 

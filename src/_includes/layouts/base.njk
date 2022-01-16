@@ -1,8 +1,6 @@
 {%- set pageTitle %}{{ title + " | " if title }}{{ meta.siteName }}{% endset -%}
-{%- set templateType %}{{ "post" if layout == "layouts/post" }}{{ "page" if layout == "layouts/page" }}{{ "home" if not page.fileSlug }}{% endset -%}
-{%- set ogTitle %}{{ title if title else meta.siteName }}{% endset -%}
-{%- set ogInfo %}{{ description if templateType == "page" else page.date | postDate }}{% endset -%}
-{%- set pageSocialImg %}{{ meta.url }}/social-img/{{ templateType }}/{{ ogTitle | urlencode }}/{{ ogInfo | urlencode }}{% endset -%}
+{%- set ogImgFilename %}{{ title | slug + ".png" if title else 'home.jpeg' }}{% endset -%}
+{%- set pageSocialImg %}{{ meta.url }}/img/social/{{ ogImgFilename }}{% endset -%}
 <!DOCTYPE html>
 <html lang="en">
   <head>

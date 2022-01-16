@@ -9,8 +9,10 @@ const pluginRss = require("@11ty/eleventy-plugin-rss");
 const markdownIt = require("markdown-it");
 const markdownItAnchor = require("markdown-it-anchor");
 const openInCodepen = require("@11tyrocks/eleventy-plugin-open-in-codepen");
+const socialImages = require("@11tyrocks/eleventy-plugin-social-images");
 
 module.exports = function (eleventyConfig) {
+  eleventyConfig.addPlugin(socialImages);
   eleventyConfig.addPlugin(syntaxHighlight);
   eleventyConfig.addPlugin(pluginRss);
   eleventyConfig.addPlugin(openInCodepen, {

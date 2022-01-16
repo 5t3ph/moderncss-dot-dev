@@ -33,9 +33,14 @@ const upcomingOfficeHours = (collections) => {
     });
 };
 
+const socialContent = (collections) => {
+  return collections.getAll().filter((i) => i.data.title);
+};
+
 module.exports = {
   sortByDate,
   allTopics,
   popularPosts,
   upcomingOfficeHours,
+  socialContent,
 };
