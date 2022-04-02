@@ -5,6 +5,7 @@ episode: 11
 description: 'This resource covers the classic CSS question: "How do I center a div?" You''ll learn a solution for every variation of how you may want to center something using grid, flexbox, and block element layout.'
 templateEngineOverride: njk, md
 date: 2020-05-17
+hideToc: true
 ---
 
 How could I write a series called "Modern CSS Solutions _to old CSS problems_" without covering the classic question:

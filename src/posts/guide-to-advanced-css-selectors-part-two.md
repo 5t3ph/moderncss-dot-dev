@@ -5,6 +5,7 @@ episode: 25
 description: "Continuing from part one, this episode will focus on the advanced CSS selectors categorized as pseudo classes and pseudo elements and practical applications for each."
 templateEngineOverride: njk, md
 date: 2020-12-30
+hideToc: true
 ---
 
 [Continuing from part one](https://moderncss.dev/guide-to-advanced-css-selectors-part-one/), this episode will focus on the advanced CSS selectors categorized as pseudo classes and pseudo elements and practical applications for each. We'll especially try to make sense of the syntax for `nth-child`.

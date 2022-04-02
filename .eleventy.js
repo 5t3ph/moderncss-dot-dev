@@ -10,8 +10,10 @@ const markdownIt = require("markdown-it");
 const markdownItAnchor = require("markdown-it-anchor");
 const openInCodepen = require("@11tyrocks/eleventy-plugin-open-in-codepen");
 const socialImages = require("@11tyrocks/eleventy-plugin-social-images");
+const pluginTOC = require("eleventy-plugin-toc");
 
 module.exports = function (eleventyConfig) {
+  eleventyConfig.addPlugin(pluginTOC, { tags: ["h2"] });
   eleventyConfig.addPlugin(socialImages);
   eleventyConfig.addPlugin(syntaxHighlight);
   eleventyConfig.addPlugin(pluginRss);

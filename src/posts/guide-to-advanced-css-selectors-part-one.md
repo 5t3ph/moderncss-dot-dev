@@ -5,6 +5,7 @@ episode: 24
 description: "Whether you choose to completely write your own CSS, or use a framework, understanding selectors, the cascade, and specificity are critical to developing CSS and modifying existing style rules."
 templateEngineOverride: njk, md
 date: 2020-12-28
+hideToc: true
 ---
 
 Whether you choose to completely write your own CSS, or use a framework, or be required to build within a design system - understanding selectors, the cascade, and specificity are critical to developing CSS and modifying existing style rules.

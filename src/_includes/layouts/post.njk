@@ -1,18 +1,44 @@
 ---
 layout: layouts/base
 ---
-<main class="container postpage" data-episode="{{ episode }}">
-  <article class="mx-auto">
-    <span class="halfway"></span>
-    <blockquote><p><em>This is episode #{{ episode }} in a series examining modern CSS solutions to problems I've been solving over the last 14+ years of being a frontend developer</em>.</p></blockquote>
-    {% if not hideTeaser %}
-    {{ content | addTeaser | safe }}
-    {% else %}
-    {{ content | safe }}
+
+<div class="post-wrapper">
+  <aside aria-label="Table of Contents">
+    <img src="/img/avatars/steph.jpg" alt="">
+    <p>This is <strong>episode #{{ episode }}</strong> in a series examining modern CSS solutions to problems Stephanie Eckles has been solving over the last 14+ years as a front-end dev.</p>
+
+    {% if not hideToc %}
+    <details id="toc" open>
+      <summary>Table of Contents</summary>
+      {{ content | toc | safe }}
+    </details>
+    <script>
+      const toc = document.getElementById('toc');
+      const updateToc = () => {
+        const windowWidth = window.innerWidth;
+        if (windowWidth < 1200) {
+          toc.removeAttribute('open');
+        } else {
+          toc.setAttribute('open', true);
+        }
+      };
+      window.addEventListener("resize", updateToc);
+      updateToc();
+    </script>
     {% endif %}
-  </article>
-  
-  {% include "partials/tweetthis.njk" %}
-</main>
+  </aside>
+  <main class="postpage" data-episode="{{ episode }}">
+    <article class="mx-auto">
+      <span class="halfway"></span>
+      {% if not hideTeaser %}
+      {{ content | addTeaser | safe }}
+      {% else %}
+      {{ content | safe }}
+      {% endif %}
+    </article>
+    
+    {% include "partials/tweetthis.njk" %}
+  </main>
+</div>
 
 {% include "partials/nextlist.njk" %}
