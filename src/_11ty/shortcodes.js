@@ -1,5 +1,3 @@
-const upcoming = require("../_data/upcoming");
-
 const year = () => `${new Date().getFullYear()}`;
 
 const newsletterPromo = () => {
@@ -30,21 +28,6 @@ const link = (link) => {
 
 const twitter = (tweetID) => {
   return `<a href="https://twitter.com/5t3ph/status/${tweetID}" class="button button--small">View tweet</a>`;
-};
-
-const upcomingTopic = (index) => {
-  const nextIndex = index + 1;
-  const nextTopic = upcoming[nextIndex];
-
-  if (nextTopic !== undefined) {
-    return `<li class="card card--teaser">
-      <div class="card__content text-align-center">
-        <span class="lead">Upcoming Topic: <br/><span class="color-secondary">${nextTopic}</span></span>
-      </div>
-    </li>`;
-  }
-
-  return "";
 };
 
 const review = (index) => {
@@ -116,7 +99,6 @@ module.exports = {
   codepen,
   link,
   twitter,
-  upcomingTopic,
   review,
   icon,
   codeDemo,

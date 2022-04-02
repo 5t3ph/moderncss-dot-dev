@@ -19,18 +19,6 @@ layout: layouts/base
   <main aria-label="Articles Table of Contents" class="container"> 
     <ul role="list" class="column-container">
     {%- for post in collections.sortByDate -%}
-      {%- if loop.index0 === 0 %}
-        {% upcomingTopic post.data.episode %}
-      {% endif -%}
-      {% if loop.index0 === 1 %}
-        <li class="card card--text">
-          <div class="card__content text-align-center my-auto">
-            <a href="https://12DaysOfWeb.dev" class="color-secondary card__title">12 Days of Web</a>
-            <p>Subscribe for daily emails or visit between December 13-24 for 12 new articles celebrating web fundamentals: HTML, CSS, and JavaScript.</p>
-            <a href="https://12DaysOfWeb.dev">Subscribe Today</a>
-          </div>
-        </li>
-      {% endif %}
       {%- if loop.index0 === 5 %}
       <li class="card card--teaser">
         <div class="card__content text-align-center">
@@ -98,11 +86,10 @@ layout: layouts/base
       </div>
     </li>
     <li class="flex-container">
-      <h3>HTML / Sass Jumpstart</h3>
-      <p>dart sass powered, includes stylelint and prettier, and autoprefix upon build. Develop script includes hot-reload via browsersync. Themeable and&nbsp;scalable.</p>
+      <h3>12 Days of Web</h3>
+      <p>Get caught up with all the native web has to offer with 12 articles celebrating web fundamentals: HTML, CSS, and JavaScript.</p>
       <div class="row">
-        <a href="https://github.com/5t3ph/html-sass-jumpstart/generate" class="button button--small">Generate Repo</a>
-        <a href="https://5t3ph.github.io/html-sass-jumpstart/"><small>View Docs</small></a>
+        <a href="https://12DaysOfWeb.dev"  class="button button--small">Read the series</a>
       </div>
     </li>
   </ul>
