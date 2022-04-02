@@ -14,16 +14,12 @@ layout: layouts/base
     </details>
     <script>
       const toc = document.getElementById('toc');
-      const updateToc = () => {
-        const windowWidth = window.innerWidth;
-        if (windowWidth < 1200) {
-          toc.removeAttribute('open');
-        } else {
-          toc.setAttribute('open', true);
-        }
-      };
-      window.addEventListener("resize", updateToc);
-      updateToc();
+      const windowWidth = window.innerWidth;
+      if (windowWidth < 1200) {
+        toc.removeAttribute('open');
+      } else {
+        toc.setAttribute('open', true);
+      }
     </script>
     {% endif %}
   </aside>
