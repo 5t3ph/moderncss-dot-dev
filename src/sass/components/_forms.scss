@@ -24,15 +24,54 @@ form {
 
   input,
   textarea {
+    --outline-color: var(--color-primary);
+
     padding: 0 0.5em;
     border: 2px solid;
     border-radius: 4px;
     background-color: var(--color-background-alt);
     color: var(--color-on-background);
     font: inherit;
+    width: 100%;
   }
 
   input {
     min-height: 35px;
+  }
+}
+
+.form-inline {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-end;
+  flex-wrap: wrap;
+
+  .form-group {
+    --modifier: calc(30ch - 100%);
+    flex-basis: calc(var(--modifier) * 999);
+    flex-grow: 1;
+    grid-template-areas: "group";
+
+    > * {
+      grid-area: group;
+    }
+
+    label {
+      padding-inline: 0.5em;
+      width: max-content;
+      align-self: start;
+      font-size: 0.9rem;
+      position: relative;
+      transform: translate(0.5rem, -50%);
+      background-image: linear-gradient(
+        to top,
+        var(--color-background-alt) 0 calc(50% - 2px),
+        var(--color-background) calc(50% - 2px)
+      );
+    }
+
+    + button {
+      margin-top: 0;
+    }
   }
 }

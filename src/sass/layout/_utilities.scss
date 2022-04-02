@@ -93,6 +93,37 @@
   border-image: linear-gradient(to right, var(--gradient)) 1;
 }
 
+.promo {
+  --gradient-angle: 35deg;
+
+  margin: 8vh 0;
+  width: min(40rem, 100%);
+  margin-inline: auto;
+  padding: 2rem 1.5rem;
+  text-align: center;
+  border-width: 8px;
+  border-style: solid;
+  border-image: linear-gradient(
+      var(--gradient-angle, to bottom),
+      var(--gradient)
+    )
+    1;
+
+  a {
+    color: var(--color-secondary);
+  }
+}
+
+.promo--centered {
+  display: grid;
+  justify-items: center;
+
+  p {
+    width: 100%;
+    max-width: 30ch;
+  }
+}
+
 $text-colors: "primary", "secondary", "gray";
 
 @each $color in $text-colors {

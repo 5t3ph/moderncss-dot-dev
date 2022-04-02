@@ -1,7 +1,20 @@
 const year = () => `${new Date().getFullYear()}`;
 
 const newsletterPromo = () => {
-  return `<blockquote class="promo"><p><strong>Would you like CSS tips in your inbox?</strong> <a href="/newsletter/">Join my newsletter</a> for article updates, CSS tips, and front-end resources!</p></blockquote>`;
+  return `<div class="promo promo--centered"><p><strong style="color: var(--color-blue);">Join my newsletter</strong> for article updates, CSS tips, and front-end resources!</p>
+  <form name="newsletter" action="/success" class="form" method="POST" netlify-honeypot="bot-field" data-netlify="true">
+    <p hidden>
+      <label>Don’t fill this out if you're human: <input name="bot-field" /></label>
+    </p>
+    <div class="form-inline">
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input required type="text" id="email" name="email" class="form-field">
+      </div>
+      <button class="button" type="submit">Sign Up</button>
+    </div>
+  </form>
+  </div>`;
 };
 
 const carbonAd = () => {

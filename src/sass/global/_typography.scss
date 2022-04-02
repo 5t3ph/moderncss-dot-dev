@@ -262,21 +262,6 @@ blockquote {
         var(--gradient)
       )
       1;
-
-    &.promo {
-      --gradient-angle: 35deg;
-      --bq-margin: 8vh;
-
-      width: min(40rem, 100%);
-      margin-inline: auto;
-      padding: 2rem 1.5rem;
-      border-width: 8px;
-      text-align: center;
-
-      a {
-        color: var(--color-secondary);
-      }
-    }
   }
 
   cite {
