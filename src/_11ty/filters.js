@@ -1,5 +1,6 @@
 const slugify = require("slugify");
 const { DateTime } = require("luxon");
+const { teaser } = require("./teaser");
 
 const slug = (str) => {
   return slugify(str, {
@@ -47,8 +48,6 @@ const randomLimit = (arr, limit, currPage) => {
   });
   return pageArr.slice(0, limit);
 };
-
-const teaser = `<blockquote class="promo"><p><em>Hey there!</em> You may also enjoy my end-of-year project celebrating web fundamentals: <a href="https://12daysofweb.dev"><strong>12DaysOfWeb.dev</strong></a></p></blockquote>`;
 
 const addTeaser = (content) => {
   const position = content.lastIndexOf("</p>", 5200);

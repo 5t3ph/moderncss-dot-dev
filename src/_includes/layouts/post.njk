@@ -26,7 +26,11 @@ layout: layouts/base
   <main class="postpage" data-episode="{{ episode }}">
     <article class="mx-auto">
       <span class="halfway"></span>
+      {% if not hideTeaser %}
+      {{ content | addTeaser | safe }}
+      {% else %}
       {{ content | safe }}
+      {% endif %}
     </article>
     
     {% include "partials/tweetthis.njk" %}

@@ -1,3 +1,7 @@
+const { teaser } = require("./teaser");
+
+const teaserPromo = () => teaser;
+
 const year = () => `${new Date().getFullYear()}`;
 
 const newsletterPromo = () => {
@@ -105,6 +109,7 @@ ${htmlCode}
 };
 
 module.exports = {
+  teaserPromo,
   year,
   newsletterPromo,
   carbonAd,
