@@ -76,6 +76,10 @@
   margin-inline: auto;
 }
 
+.mbs-medium {
+  margin-block-start: max(5vh, 3rem);
+}
+
 .text-align-center {
   text-align: center;
 }
@@ -97,7 +101,7 @@
   --gradient-angle: 35deg;
 
   margin: 8vh 0;
-  width: min(40rem, 100%);
+  width: min(var(--promo-width, 40rem), 100%);
   margin-inline: auto;
   padding: 2rem 1.5rem;
   text-align: center;
@@ -112,6 +116,14 @@
   a {
     color: var(--color-secondary);
   }
+
+  header + & {
+    margin-top: 0;
+  }
+}
+
+.promo--wide {
+  --promo-width: 80ch;
 }
 
 .promo--centered {
@@ -122,6 +134,16 @@
     width: 100%;
     max-width: 30ch;
   }
+}
+
+.pill {
+  font-size: 0.9em;
+  font-weight: bold;
+  line-height: 1;
+  border-radius: 100vmax;
+  color: var(--color-green);
+  border: 2px solid;
+  padding: 0.15em 0.5em;
 }
 
 $text-colors: "primary", "secondary", "gray";
