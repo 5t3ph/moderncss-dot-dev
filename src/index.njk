@@ -23,7 +23,7 @@ layout: layouts/base
   <main aria-label="Articles Table of Contents" class="container"> 
     <ul role="list" class="column-container">
     {%- for post in collections.sortByDate -%}
-      {% if loop.index0 === 1 %}
+      {# {% if loop.index0 === 1 %}
         <li class="card card--text">
           <div class="card__content text-align-center my-auto">
             <a href="https://smashingconf.com/online-workshops/workshops/stephanie-eckles-july/" class="color-secondary card__title">CSS Workshop</a>
@@ -31,7 +31,7 @@ layout: layouts/base
             <a href="https://smashingconf.com/online-workshops/workshops/stephanie-eckles-july/">Register Today</a>
           </div>
         </li>
-      {% endif %}
+      {% endif %} #}
       {%- if loop.index0 === 5 %}
       <li class="card card--teaser">
         <div class="card__content text-align-center">
