@@ -33,7 +33,7 @@ As the viewport resizes or a user visits on larger or smaller devices, the value
 
 We can extend the capabilities of `calc()` by passing in CSS custom properties.
 
-An example of this being very useful is creating a consistent color palette using `hsl()` (which stands for hue, saturation, and lightness). Given values for saturation, lightness, and a starting hue, we can calculate complementary values to build a full palette. Because of the commonality among the saturation and lightness values, the palette will feel cohesive.
+An example of this being very useful is creating a consistent color palette using `hsl()` (which stands for **h**ue, **s**aturation, and **l**ightness). Given values for saturation, lightness, and a starting hue, we can calculate complementary values to build a full palette. Because of the commonality among the saturation and lightness values, the palette will feel cohesive.
 
 {% set open = 'open' %}
 {% set resize = false %}
@@ -109,7 +109,7 @@ The example from SmolCSS uses the following padding definition, where the paddin
 }
 ```
 
-You may have realized this again removes some scenarios where you might have previously reached for media queries. Instead of micro-managing this spacing or worrying about strictly adhering to a pixel ramp (ex 8, 12, 24, 36), you can set up sensible guidelines for a responsive transition.
+You may have realized this again removes some scenarios where you might have previously reached for media queries. Instead of micro-managing this spacing or worrying about strictly adhering to a pixel ramp (ex: 8, 12, 24, 36), you can set up sensible guidelines for a responsive transition.
 
 The most significant benefit here versus media queries is that since this padding definition is element relative, it will be larger when the element has more space on the page and smaller if, for example, it's placed in a narrow column. This would take a lot of coordination with media-query-based utility classes!
 
@@ -246,7 +246,7 @@ On the taller viewports, `8vh` will be used, and on smaller or zoomed-in viewpor
 
 ### Prevent Browser Zoom on Inputs in iOS with `max()`
 
-Have you ever experienced forced browser zoom once you focused a form input on iOS? This consequence will happen for any input that has a font-size less than `16px`.
+Have you ever experienced forced browser zoom once you focused a form input on iOS? This consequence will happen for any input that has a `font-size` less than `16px`.
 
 Here's the fix, originally linked in [Modern CSS episode 21 about custom form input styles](/custom-css-styles-for-form-inputs-and-textareas/), with full credit to [Dan Burzo](https://dev.to/danburzo/css-micro-tip-make-mobile-safari-not-have-to-zoom-into-inputs-1fc1) for this simple solution:
 
@@ -279,7 +279,7 @@ a:focus {
 
 ### Accessible Target Sizes with `max()`
 
-The term "target size" comes from [WCAG Success Criterion (SC) 2.5.5](https://www.w3.org/WAI/WCAG22/Understanding/target-size-enhanced.html), where "target" refers to the area that will receive a pointer event (ex. mouse click or touch tap). In the upcoming WCAG 2.2, SC 2.5.5 is now the "Enhanced" version, which has a minimum size of `44px`.
+The term "target size" comes from [WCAG Success Criterion (SC) 2.5.5](https://www.w3.org/WAI/WCAG22/Understanding/target-size-enhanced.html), where "target" refers to the area that will receive a pointer event (ex: mouse click or touch tap). In the upcoming WCAG 2.2, SC 2.5.5 is now the "Enhanced" version, which has a minimum size of `44px`.
 
 For this guideline, consider buttons that only use icons or the avatar from our earlier example that links to a profile. Or perhaps a dual-action button where a dropdown arrow is a separate action from the primary button control.
 
