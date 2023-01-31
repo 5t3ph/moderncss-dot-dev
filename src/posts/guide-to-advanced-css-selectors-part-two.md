@@ -367,7 +367,7 @@ How many other examples can you find by inspecting [ModernCSS.dev](https://moder
 ## Additional Resources
 
 - [MDN Docs](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Selectors) on CSS selectors
-- [Selectors Explained](https://hugogiraudel.github.io/selectors-explained/) - enter any selector to learn what is being affected
+- [Selectors Explained](https://kittygiraudel.github.io/selectors-explained/) - enter any selector to learn what is being affected
 - [CSS specificity calculator by Polypane](https://polypane.app/css-specificity-calculator/) - discover the level of specificity of a selector
 - [CSS Diner](https://flukeout.github.io/) - a game to test your ability to create CSS selectors
 - [Style Stage](https://stylestage.dev) - a great place to practice your new selector knowledge is my other project, [Style Stage](https://stylestage.dev), which is a modern CSS showcase styled by community contributions. A limitation is the inability to add new classes or IDs, so you will need to exercise your selector abilities to successfully create your stylesheet submission!
