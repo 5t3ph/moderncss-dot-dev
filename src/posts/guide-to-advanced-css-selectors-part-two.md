@@ -319,7 +319,7 @@ We can retrieve the value of any attribute on the element to use in the `content
 }
 ```
 
-Here's a gist of [how to display element `id` and `class` values in pseudo elements](https://gist.github.com/5t3ph/d44a1677d68cf86eb0683d5050a84692) using this same idea. [You can also share the tweet with this tip >](https://twitter.com/5t3ph/status/1335566409355575297)
+Here's a gist of [how to display element `id` and `class` values in pseudo elements](https://gist.github.com/5t3ph/d44a1677d68cf86eb0683d5050a84692) using this same idea.
 
 #### Emphasize an Article Lead
 
@@ -359,10 +359,6 @@ To resolve, we can use the `::selection` pseudo element to supply a custom text 
 An up and coming pseudo element specifically for styling list bullets is `::marker`.
 
 For the browser support link and an example of how to use it, check out the section in my tutorial on [Totally Custom List Styles](https://moderncss.dev/totally-custom-list-styles/#upgrading-to-css-marker).
-
-#### Discover More Pseudo Element Uses on ModernCSS.dev
-
-How many other examples can you find by inspecting [ModernCSS.dev](https://moderncss.dev)? I'd love to hear what you find, what you've learned, and any other feedback! [Reach out to me on Twitter](https://twitter.com/5t3ph) or tag `@5t3ph` when you share this or other articles from ModernCSS.dev!
 
 ## Additional Resources
 

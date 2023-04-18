@@ -169,6 +169,8 @@ These are listed starting with `4` because `h4` should be the smallest - and clo
 
 Time to begin our loop and add the math.
 
+> Before I lose you, I want to let you know that in an updated tutorial we [use custom properties and no Sass](/container-query-units-and-fluid-typography/) to create this same result. Plus, we upgrade to using container query units for fluid typography that is independent of the viewport!
+
 First, we create a variable that we will update on each iteration of the loop. To start with, it uses the value of `$type-base-size`:
 
 ```scss
@@ -310,7 +312,9 @@ font-size: clamp(
 
 ## In Closing...
 
-If you really read this whole episode, thank you _so much_ for sticking with it. I look forward to your feedback, please reach out on [DEV](https://dev.to/5t3ph/generating-font-size-css-rules-and-creating-a-fluid-type-scale-2553) or [Twitter](https://twitter.com/5t3ph). Typography has so many angles and the "right way" is very project-dependent. It may be the set of properties with the most stakeholders and the most impact on any given layout.
+If you really read this whole episode, thank you _so much_ for sticking with it. Typography has so many angles and the "right way" is very project-dependent. It may be the set of properties with the most stakeholders and the most impact on any given layout.
+
+> Consider reviewing the upgraded solution that drops Sass to use custom properties, and uses [container query units for fluid typography](/container-query-units-and-fluid-typography/) that flows easily into multiple layout locations.
 
 ## Demo
 

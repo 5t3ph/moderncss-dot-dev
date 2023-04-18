@@ -9,8 +9,8 @@
     <p class="lead"><span>
     {%- if layout == 'layouts/post' or layout == 'layouts/social-template' %}<span class="postmeta" data-postmeta><em >{{ dateLabel }}</em>: {{ dateValue }}</span>{% endif -%}
     <small class="row">
-      <span class="byline" data-byline>Written by Stephanie Eckles</span> {%- if layout != 'layouts/social-template' %}<a href="https://twitter.com/5t3ph/" class="button button-icon" aria-label="Twitter">
-      {% icon "twitter" %}</a>{% endif %}
+      <span class="byline" data-byline>Written by Stephanie Eckles</span> {%- if layout != 'layouts/social-template' %}<a href="https://front-end.social/@5t3ph" class="button button-icon" aria-label="Follow 5t3ph on Mastodon">
+      {% icon "mastodon" %}</a>{% endif %}
       {%- if layout == 'layouts/social-template' %}<strong class="color-secondary">ModernCSS.dev</strong>{% endif %}
     </small>
     </span></p>

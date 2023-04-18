@@ -1,0 +1,756 @@
+---
+title: "Container Query Units and Fluid Typography"
+topics: Layout,Responsive Design,Typography,Container Queries,Custom Properties,Selectors
+episode: 30
+description: "To learn more about the behaviors of container query units, we'll explore three fluid typography techniques applied via a \"mixin\" using custom properties. These upgraded methods will produce truly responsive typography, regardless of context."
+templateEngineOverride: njk, md
+date: 2023-04-18
+---
+
+{% set text %}
+
+<p class="h1">The five boxing wizards jump quickly.</p>
+
+<p class="h2">The five boxing wizards jump quickly.</p>
+
+<p class="h3">The five boxing wizards jump quickly.</p>
+
+<p class="h4">The five boxing wizards jump quickly.</p>
+
+{% endset %}
+
+Fluid typography is the term for designing `font-size` rules that responsively adapt the size based on the amount of available inline space. Before the availability of container query units, techniques usually relied on the viewport width - `vw` - unit. The viewport method is excellent for main page type, such as article headlines. However, viewport-based fluid typography doesn't quite work for narrower spaces that flex independently of the viewport, such as a grid of cards.
+
+We'll explore three ways to create dynamic fluid typography rules by leveraging container query units and CSS custom properties. You'll learn more about:
+
+- creating mixins using custom properties
+- `max()`, `min()`, `calc()` and `clamp()`
+- container queries and units
+- `:is()` and `:where()`
+
+{% carbonAd %}
+
+Previously here on ModernCSS, I presented a method that relied on using Sass to perform some calculations and produce the rules to apply [viewport-based fluid typography](/generating-font-size-css-rules-and-creating-a-fluid-type-scale/). You may still be interested in some of the other information including tips on preventing text-overflow and a few other considerations for web typography.
+
+However, not only can we upgrade the solution presented previously by dropping Sass, but the final rules will be far more resilient and context-independent. 
+
+## Fluid Typography Basics with `clamp()`
+
+The standard viewport-based fluid typography relies on the `clamp()` function and the `vw` (viewport width) unit.
+
+The `clamp()` function is one of several handy [CSS math functions](/practical-uses-of-css-math-functions-calc-clamp-min-max/) and accepts three values: a minimum value, an ideal value, and a maximum value. The core idea of fluid typography is that the "ideal" value uses a dynamic unit - `vw` - in order to interpolate between the min and max. This effectively allows the font to resize along a preferred range.
+
+In the demo, the minimum allowed size is `1rem` and the maximum allowed size is `3rem`, where `4vw` allows interpolating along the range.
+
+{% set open = 'open' %}
+{% set resize = true %}
+{% set demoTitle = "Viewport-based fluid typography" %}
+{% set css %}
+.fluid-type {
+  font-size: clamp(1rem, 4vw + 1rem, 3rem);
+}
+{% endset %}
+{% set cssDisplay %}
+{{- css -}}
+{% endset %}
+{% set html -%}
+<p class="fluid-type">Viewport-based fluid typography.</p>
+{% endset %}
+{% include "partials/snippet.njk" %}
+
+> We'll talk more about that addition of `1rem +` shortly, but suffice it to say that it enables improved resizing when using display or text zoom, an important accessibility consideration.
+
+Now although that demo has a resize handle, you won't see any resizing of the font actually occur. That's because it's reliant on the width of your viewport, so you will need to resize your entire browser width to see a change. Already, we've demonstrated the problem with this technique!
+
+Due to this issue, a past remedy may have been to create component-specific styles that anticipate different viewport sizes and assign various font sizes within media queries. But now, with the availability of container queries, we can do better!
+
+## Quick Overview of Container Queries
+
+I've previously written both a [condensed tutorial on container queries](https://12daysofweb.dev/2021/container-queries/) and an [in-depth primer on container queries](https://www.smashingmagazine.com/2021/05/complete-guide-css-container-queries/).
+
+What you need to know to understand the examples in this tutorial is that container queries allow defining rules for elements to respond to their ancestor container's available space. This is different from media queries which can only be based on the viewport.
+
+> Technically this definition and the use in this tutorial is in consideration of container _size_ queries. The spec also includes _style_ queries for updating rules based on style features.
+
+The primary benefit of container queries is in creating more contextually appropriate layout rules that adapt to the true available space. With viewport media queries, rules are effectively orchestrated at the macro page level. But container queries allow responding to layout changes of micro elements and components as their context shifts through variable placement in page layouts.
+
+Container elements must be explicitly defined, which at the base level is done through the `container-type` property. For queries against available inline space, we use the value `inline-size`. Then, child elements of the container can query the container for its size with the `@container` rule and apply styles when that size condition is met.
+
+```css
+.container {
+  container-type: inline-size;
+}
+
+@container (inline-size > 300px) {
+  .container .child {
+    padding: 2rem;
+  }
+}
+```
+
+The use of the term "inline" rather than "width" is from the precedent set by [logical properties](https://ishadeed.com/article/css-logical-properties/), which have their orientation adjusted based on the writing mode: right to left (RTL), left to right (LTR), or vertical. Using "inline" refers to the horizontal dimension for the writing mode.
+
+As we build up the solutions, we'll learn more about working with containment.
+
+### Browser Support
+
+[Container size queries and units](https://caniuse.com/?search=container) are supported from Chromium 105, Safari 16, and Firefox 110.
+
+## Container Query Units 
+
+Officially, these are called "[container query length units](https://www.w3.org/TR/css-contain-3/#container-lengths)," and they are a measure of the size of a containing element.
+
+Just as `1vw` equals `1%` of the viewport width, so does `1cqi` equal `1%` of a container's inline size. We'll be using `cqi` for purposes of defining fluid typography since we want the size to be associated with the horizontal axis of the writing mode.
+
+Interestingly, the CSS working group resolved that all elements would default to style containment. This means that the use of a container unit will work even without an ancestor that has containment. Keep reading to learn about a quirk of this behavior.
+
+## Setup Custom Properties
+
+To begin our solutions, we'll set up some custom properties. This is because all of our rules will be designed to work with a sort of "mixin" rule that will intake the cascaded values from the custom properties. 
+
+I'm referring to it as a mixin since it will be a general rule that takes the custom properties, applies a function, and produces variable results based on the custom property values. For best results, we'll work with the cascade to more predictably inherit values. This means we'll assign our base custom property values first and the mixin rules later in the stylesheet order.
+
+The starting structure for our rules involves choosing explicit font sizes for headline levels 1-4, which are the main focus of our base rules. We'll create custom properties for them and explicitly assign them per headline level.
+
+```css
+:root {
+  --headline-1: 2.75rem;
+  --headline-2: 2.35rem;
+  --headline-3: 1.5rem;
+  --headline-4: 1.15rem;
+}
+
+h1,
+.h1 {
+  --font-size: var(--headline-1);
+
+  font-size: var(--headline-1);
+}
+
+h2,
+.h2 {
+  --font-size: var(--headline-2);
+
+  font-size: var(--headline-2);
+}
+
+h3,
+.h3 {
+  --font-size: var(--headline-3);
+
+  font-size: var(--headline-3);
+}
+
+h4,
+.h4 {
+  --font-size: var(--headline-4);
+
+  font-size: var(--headline-4);
+}
+```
+
+Note that each rule updates the `--font-size` custom property to associate it with the size for that level. That's important because it enables the mixin rules we'll be creating, which will be generalized to scale for each of the input properties. Without generalizing to a mixin, we would have to repeat the function from the mixin within each separate headline rule.
+
+> The other important part of this setup is defining a fallback `font-size`, which in this case means a static value that will work cross-browser in case a user's browser doesn't yet support container queries. This technique of defining a fallback for a more modern feature is called **progressive enhancement**.
+
+### Mixin Selector 
+
+So, what does this mixin actually look like? Well, the contents will be unique per each of our three solutions. However, the selector will be the same.
+
+We'll attach it to each heading element as well as the added heading classes and a utility class as well of `.fluid-type`. The utility class will allow using the mixin ad-hoc for type that may not be styled as a heading.
+
+```css
+:is(h1, .h1, h2, .h2, h3, .h3, h4, .h4, .fluid-type) {
+  font-size: /* unique per solution */
+
+  line-height: 1.1;
+  margin-block-end: 0.65em;
+}
+```
+
+> For other options to assign `line-height` that you may feel better fit your final fluid type solution, review my project [CSS Typography Line Height](https://css-typography-line-height.netlify.app/).
+
+Why use `:is()` for the selector? Two reasons:
+1. The more important reason is that it will raise the specificity of the entire rule to a class, which will make it more resilient to accidental overrides from inheritance, but it can also be matched or exceeded easily by later class-based or compound rules.
+2. The less important reason is to simplify the selector into a single-line list vs. a traditional comma-separated selector broken into multiple lines.
+
+> If you encounter issues with `:is()`, such as complexity creating overrides, or if you want the ability to override through inheritance, you can switch to `:where()`. Use of `:where()` lowers specificity to zero, meaning later rules that may be component or page specific will override it easily due to the cascade without having to match or exceed the specificity.
+
+Note that `:is()` computes to the highest specificity in the given selector list, which is why I mentioned this rule would have the specificity of a class. Based on your preference and whether the behavior of `:is()` or `:where()` is useful for your context, you can alternatively remove the wrapper and use a standard selector list without `:is()` or `:where()`.
+
+## Upgrade From `vw` to `cqi`
+
+The cornerstone of all of our methods will be upgrading from `vw` to `cqi` as our dynamic unit of choice to enable fluid typography.
+
+A starting rule to do this really is just a swap of those values.
+
+{% set demoTitle = "Fluid typography using cqi" %}
+{% set css %}
+.fluid-type {
+  font-size: clamp(1rem, 4cqi, 3rem);
+}
+{% endset %}
+{% set cssDisplay %}
+{{- css -}}
+{% endset %}
+{% set html -%}
+<p class="fluid-type">Viewport-based fluid typography.</p>
+{% endset %}
+{% include "partials/snippet.njk" %}
+
+But - wait a minute - it still isn't working on resize of the container. However, it is responding based on the viewport. What's going on?! 
+
+The container queries spec includes a provision that [every element defaults to a style container](https://www.w3.org/TR/css-contain-3/#container-queries), which is why the use of `cqi` already enables fluid resizing. But, since we didn't define a container for our demo, the measurement is still against the closest ancestor with containment applied.
+
+This site doesn't have containment applied on any ancestor of the demo, so the fallback behavior of container query units is to use the "[small viewport size for that axis](https://www.w3.org/TR/css-contain-3/#container-lengths)." This means for our rule where we are querying the "inline" axis, the viewport width is used as the measure.
+
+In order to produce the effect we're really after, which is to have the font size respond to the parent container, we need to assign containment.
+
+{% set demoTitle = "Container-based fluid typography" %}
+{% set css %}
+.container {
+  container-type: inline-size;
+}
+
+.fluid-type {
+  font-size: clamp(1rem, 4cqi, 3rem);
+}
+{% endset %}
+{% set cssDisplay %}
+{{- css -}}
+{% endset %}
+{% set html -%}
+<div class="container">
+  <p class="fluid-type">Viewport-based fluid typography.</p>
+</div>
+{% endset %}
+{% include "partials/snippet.njk" %}
+
+In this update, we put a parent div with the `container` class around the paragraph. Now the paragraph with the `fluid-type` class is responsively sizing according to the demo's inline size.
+
+> A key concept of container queries is that they respond to the nearest ancestor with containment. If you apply rules that use container query units and aren't seeing them respond as you expect, you may have to adjust the markup and add a rule to allow the elements to carry a container with them.
+
+### Container Units and Text Zoom Resizing
+
+For the example rule explaining viewport-based fluid type, I mentioned that the inclusion of `1rem` added to the `vw` value was important for text resizing. It's because viewport-based methods are prone to restricting the font size from growing until at least the 200% required by the Web Content Accessibility Guidelines (WCAG) [Success Criterion 1.4.4: Resize Text](https://www.w3.org/WAI/WCAG21/Understanding/resize-text).
+
+As [clarified by Eric Eggert](https://yatil.net/blog/resize-text-reflow), this rule means that the on-screen rendered pixel height of the text must eventually be able to resize up to 200% of its original height at normal (100%) zoom. That technically doesn't need to be reached by the time the browser or text zoom setting is set to 200%, so it's acceptable if it's reached by, say, 300% zoom.
+
+For viewport-based fluid methods, inclusion of a `rem` value helps prevent issues with the text resizing. Without it, zoom-based resizing with only `vw` is more likely to fail to increase or stall out on increasing until a very high zoom value.
+
+An interesting feature of swapping to use `cqi` instead of `vw` is that by its very nature it will continue to increase as long as the container inline size increases during zoom. This holds true both for browser/display zoom and text zoom applied at the OS level. In my testing, as long as `rem` is still used as the anchoring unit for the `font-size` definition, increases to 200% or more are more consistently achievable than `vw` methods.
+
+You should always test your fluid type rules in as many ways as you can to ensure zoom behavior works as expected. This means varying zoom levels with the type in multiple contexts such as a responsive grid of cards, in a medium-width article, a full width container, and a narrow sidebar.
+
+## Mixin 1: Dynamic Font Size Ranges With `clamp()`
+
+Our goal is to make a mixin function, so we need to manage a few more considerations than the more static rule created in the last section.
+
+Let's begin the rule by plugging in our `--font-size` custom property that was previously set up. We'll also enable a `--font-size-fluid` property with a default of `5cqi`. Like the size property, this would allow updating the target size per heading level, if desired.
+
+```css
+:is(h1, .h1, h2, .h2, h3, .h3, h4, .h4, .fluid-type) {
+  font-size: clamp(
+    /* TODO: define a minimum size */,
+    var(--font-size-fluid, 5cqi),
+    var(--font-size)
+  );
+}
+```
+
+The missing piece in our mixin function is a definition for the minimum size allowed within the range.
+
+One option is to assign a custom property to update per inherited rule like the other parts. But instead, let's see how we can make the value more dynamic.
+
+Within `clamp()`, we can perform additional math calculations, no wrapping `calc()` required! 
+
+This update says that the minimum allowed size should be 30% smaller than the `--font-size`. Due to the mathematical order of operations, the multiplication part of the equation is computed before the subtraction.
+
+```css
+:is(h1, .h1, h2, .h2, h3, .h3, h4, .h4, .fluid-type) {
+  font-size: clamp(
+    var(--font-size) - var(--font-size) * var(--font-size-diff, 0.3),
+    var(--font-size-fluid),
+    var(--font-size)
+  );
+}
+```
+
+We also slipped in one more custom property for `--font-size-diff` to enable customizing the percentage difference if needed. For example, very large font sizes might allow a greater reduction, such as `0.5`.
+
+This produces a very nice effect that is scalable across our heading level rules with just a few tweaks that take advantage of our additional custom properties. However, it is presently possible for the minimum size to shrink smaller than perhaps we'd like, and potentially smaller than the regular body copy.
+
+{% newsletterPromo %}
+
+Regular, unstyled text uses `1rem`, which is approximately `16px`, as a browser default when no zoom features are applied. We can ensure that the minimum is not less than `1rem` by comparing it to the result of the equation. 
+
+The CSS `max()` function accepts multiple values, and the larger computed size - the "max" value - will be used. Therefore, by passing it `1rem` and the equation, if the computed reduction of the `--font-size` would be less than `1rem`, the browser will use `1rem` instead.
+
+Here's our final mixin rule with the addition of `max()`.
+
+{% set demoTitle = "Mixin for dynamic font size ranges" %}
+{% set open = false %}
+{% set css %}
+.container {
+  container-type: inline-size;
+
+  --headline-1: 2.75rem;
+  --headline-2: 2.35rem;
+  --headline-3: 1.5rem;
+  --headline-4: 1.15rem;
+}
+
+.h1 {
+  --font-size: var(--headline-1);
+
+  font-size: var(--headline-1);
+}
+
+.h2 {
+  --font-size: var(--headline-2);
+  --font-size-fluid: 4.5cqi;
+
+  font-size: var(--headline-2);
+}
+
+.h3 {
+  --font-size: var(--headline-3);
+  --font-size-fluid: 4.25cqi;
+  --font-size-diff: 0.2;
+
+  font-size: var(--headline-3);
+}
+
+.h4 {
+  --font-size: var(--headline-4);
+  --font-size-fluid: 4cqi;
+  --font-size-diff: 0.2;
+
+  font-size: var(--headline-4);
+}
+
+.h1, .h2, .h3, .h4 {
+  font-size: clamp(
+    max(1rem, var(--font-size) - var(--font-size) * var(--font-size-diff, 0.3)),
+    var(--font-size-fluid, 5cqi),
+    var(--font-size)
+  );
+
+  line-height: 1.1;
+  margin-bottom: 0.65em;
+}
+{% endset %}
+{% set cssDisplay %}
+:root {
+  --headline-1: 2.75rem;
+  --headline-2: 2.35rem;
+  --headline-3: 1.5rem;
+  --headline-4: 1.15rem;
+}
+
+h1,
+.h1 {
+  --font-size: var(--headline-1);
+
+  font-size: var(--headline-1);
+}
+
+h2,
+.h2 {
+  --font-size: var(--headline-2);
+  --font-size-fluid: 4.5cqi;
+
+  font-size: var(--headline-2);
+}
+
+h3,
+.h3 {
+  --font-size: var(--headline-3);
+  --font-size-fluid: 4.25cqi;
+  --font-size-diff: 0.2;
+
+  font-size: var(--headline-3);
+}
+
+h4,
+.h4 {
+  --font-size: var(--headline-4);
+  --font-size-fluid: 4cqi;
+  --font-size-diff: 0.2;
+
+  font-size: var(--headline-4);
+}
+
+:is(h1, .h1, h2, .h2, h3, .h3, h4, .h4, .fluid-type) {
+  font-size: clamp(
+    max(1rem, var(--font-size) - var(--font-size) * var(--font-size-diff, 0.3)),
+    var(--font-size-fluid, 5cqi),
+    var(--font-size)
+  );
+}
+{% endset %}
+{% set html -%}
+<div class="container">
+  {{ text | safe }}
+</div>
+{% endset %}
+{% include "partials/snippet.njk" %}
+
+## Mixin 2: Grow From a Base Font Size with `calc()`
+
+In the first mixin, our use of `clamp()` allowed us to define a range for the font sizes. This is beneficial especially if you feel there needs to be a maximum for how large text can grow.
+
+Alternatively, if there doesn't strictly need to be an upper bound for your font sizes, we can simply allow the size to grow from a minimum base size.
+
+Instead of using our previously defined `--font-size`, we'll swap to defining base values. These are intended to be the smallest size we would allow, because our mixin will add on to the base.
+
+Here, we have listed and associated one base size per heading level, but you may prefer using semantic names like 'title', 'subtitle', 'caption', etc. Then those are assigned to the `--font-base-size` shared property for each heading rule, which will be passed into the mixin.
+
+```css
+:root {
+  --h1-base: 1.75rem;
+  --h2-base: 1.5rem;
+  --h3-base: 1.35rem;
+  --h4-base: 1.15rem;
+}
+
+h1,
+.h1 {
+  --font-size-base: var(--h1-base);
+}
+
+h2,
+.h2 {
+  --font-size-base: var(--h2-base);
+}
+
+h3,
+.h3 {
+  --font-size-base: var(--h3-base);
+}
+
+h4,
+.h4 {
+  --font-size-base: var(--h4-base);
+}
+```
+
+> You may want to retain the previous `--font-size` values to continue using as a fallback in case the fluid mixin isn't compatible with the user's browser.
+
+This mixin is quite a bit simplified from version one. Using `calc()`, we have a single equation where from the starting point of `--font-size-base` we are adding `--font-size-fluid`, which defaults to `3cqi`.
+
+```css
+:is(h1, .h1, h2, .h2, h3, .h3, h4, .h4, .fluid-type) {
+  font-size: calc(var(--font-size-base) + var(--font-size-fluid, 3cqi));
+}
+```
+
+{% set demoTitle = "Mixin for growth from a base size" %}
+{% set open = false %}
+{% set css %}
+.container {
+  container-type: inline-size;
+
+  --h1-base: 1.75rem;
+  --h2-base: 1.5rem;
+  --h3-base: 1.35rem;
+  --h4-base: 1.15rem;
+}
+
+h1,
+.h1 {
+  --font-size-base: var(--h1-base);
+}
+
+h2,
+.h2 {
+  --font-size-base: var(--h2-base);
+  --font-size-fluid: 2.5cqi;
+}
+
+h3,
+.h3 {
+  --font-size-base: var(--h3-base);
+  --font-size-fluid: 2.25cqi;
+}
+
+h4,
+.h4 {
+  --font-size-base: var(--h4-base);
+  --font-size-fluid: 2cqi;
+}
+
+.h1, .h2, .h3, .h4 {
+  font-size: calc(var(--font-size-base) + var(--font-size-fluid, 3cqi));
+  
+  line-height: 1.1;
+  margin-bottom: 0.65em;
+}
+{% endset %}
+{% set cssDisplay %}
+:root {
+  --h1-base: 1.75rem;
+  --h2-base: 1.5rem;
+  --h3-base: 1.35rem;
+  --h4-base: 1.15rem;
+}
+
+h1,
+.h1 {
+  --font-size-base: var(--h1-base);
+}
+
+h2,
+.h2 {
+  --font-size-base: var(--h2-base);
+  --font-size-fluid: 2.5cqi;
+}
+
+h3,
+.h3 {
+  --font-size-base: var(--h3-base);
+  --font-size-fluid: 2.25cqi;
+}
+
+h4,
+.h4 {
+  --font-size-base: var(--h4-base);
+  --font-size-fluid: 2cqi;
+}
+
+:is(h1, .h1, h2, .h2, h3, .h3, h4, .h4, .fluid-type) {
+  font-size: calc(var(--font-size-base) + var(--font-size-fluid, 3cqi));
+}
+{% endset %}
+{% set html -%}
+<div class="container">
+  {{ text | safe }}
+</div>
+{% endset %}
+{% include "partials/snippet.njk" %}
+
+Using this mixin, you'll likely want to use reduced fluid values compared to the first mixin. That's because the risk of the solution so far is that font sizes can, in theory, infinitely grow based on how much inline space is available. Practically speaking, this may not cause a significant issue unless you already have a very large font base that has the potential to spread across a large inline area. 
+
+If you do feel a maximum is eventually required, we can add one by wrapping the equation with the `min()` function and introducing a `--font-size-max` property.
+
+How does `min()` result in a maximum boundary? Because as the font-size grows, if the computed value tied to the `cqi` value would exceed the `--font-size-max`, that would result in `--font-size-max` being the "minimum" value between the options. In that way it effectively caps the growth.
+
+{% set demoTitle = "Mixin for growth until a max size" %}
+{% set open = 'open' %}
+{% set css %}
+.container {
+  container-type: inline-size;
+}
+
+.fluid-type {
+  --font-size-base: 1.35rem;
+  --font-size-max: 3rem;
+
+  font-size: min(var(--font-size-max), calc(var(--font-size-base) + var(--font-size-fluid, 3cqi)));
+
+  line-height: 1.2;
+  margin-bottom: 0.65em;
+}
+{% endset %}
+{% set cssDisplay %}
+.fluid-type {
+  font-size: min(var(--font-size-max), calc(var(--font-size-base) + var(--font-size-fluid, 3cqi)));
+}
+{% endset %}
+{% set html -%}
+<div class="container">
+  <p class="fluid-type">The five boxing wizards jump quickly.</p>
+  <p class="fluid-type" style="--font-size-base: 1.15rem; --font-size-max: 2.5rem; --font-size-fluid: 2.5cqi">The five boxing wizards jump quickly.</p>
+</div>
+{% endset %}
+{% include "partials/snippet.njk" %}
+
+Now, you could extend this solution and dynamically compute the max end of the range like we did for the minimum end of the range in the first mixin. That's the beauty of custom properties used with defaults - you can choose an initial method for the mixin, and accept an override, too!
+
+## Mixin 3: Generate Styles Using a Type Scale Ratio
+
+As noted in the intro, [fluid type has already been discussed](/generating-font-size-css-rules-and-creating-a-fluid-type-scale/) here on ModernCSS. In that tutorial, the key idea was building up font sizes according to a type scale ratio, and was computed with Sass.
+
+We can now take what we've learned in the other mixins and produce a comparable solution, but this time with only custom properties and CSS math functions, instead of relying on Sass!
+
+The idea of the ratio is to produce a collection of font sizes that feel harmonious as a group. A ratio also abstracts away the need to define individual, static font sizes since it's used to dynamically generate the sizes.
+
+This mixin will be very similar to the first mixin, with the difference being in how we compute the actual font size.
+
+Once again, we need to set up the custom properties for our base rules. We'll define a `--type-ratio` property, and have used a ["perfect fourth" ratio](https://typescale.com/) as a starting point.
+
+
+```css
+:root {
+  /* Perfect Fourth */
+  --type-ratio: 1.33;
+}
+```
+
+For our heading level rules, so far we have been treating level `1` as the largest size. In order for our upcoming math to work out in the mixin, we need to invert this idea.
+
+In this case, we are defining four levels of sizes, so we'll assign a `--size-level` in descending order, where level `4` will eventually be the largest size and `1` will be the smallest.
+
+```css
+h1,
+.h1 {
+  --size-level: 4;
+}
+
+h2,
+.h2 {
+  --size-level: 3;
+}
+
+h3,
+.h3 {
+  --size-level: 2;
+}
+
+h4,
+.h4 {
+  --size-level: 1;
+}
+```
+
+For this mixin, we first need to take these two custom properties and multiply them to compute the font size. That's why it was important that the largest size for `h1` would be set at level `4`, so that the result would be the largest font size. 
+
+Since both values are unitless, we will also multiply them against `1rem` so that the final value uses the `rem` unit.
+
+To help simplify the `font-size` definition, we'll do this initial calculation in a local variable called `--font-level-size`.
+
+```css
+:is(h1, .h1, h2, .h2, h3, .h3, h4, .h4, .fluid-type) {
+  --font-level-size: calc(var(--type-ratio) * var(--size-level) * 1rem);
+}
+```
+
+> PS - if you're not sure why we've been dealing in rems, check the [explanation of rem vs other units](/generating-font-size-css-rules-and-creating-a-fluid-type-scale/#selecting-a-unit-for-font-size) in the earlier article here on fluid type.
+
+The mixin then uses the method discussed in the first solution, but swapping to use `--font-level-size`. That also means re-using the `--font-size-fluid` and `--font-size-diff` properties.
+
+{% set demoTitle = "Mixin for generating font sizes from a type ratio" %}
+{% set open = false %}
+{% set css %}
+.container {
+  container-type: inline-size;
+
+  /* Perfect Fourth */
+  --type-ratio: 1.33;
+}
+
+.h1 {
+  --size-level: 4;
+}
+
+.h2 {
+  --size-level: 3;
+  --font-size-fluid: 4.5cqi;
+}
+
+.h3 {
+  --size-level: 2;
+  --font-size-fluid: 4.25cqi;
+  --font-size-diff: 0.2;
+}
+
+.h4 {
+  --size-level: 1;
+  --font-size-fluid: 4cqi;
+  --font-size-diff: 0.2;
+}
+
+.h1, .h2, .h3, .h4 {
+  --font-level-size: calc(var(--type-ratio) * var(--size-level) * 1rem);
+  font-size: clamp(
+    max(
+      1rem,
+      var(--font-level-size) - var(--font-level-size) *
+        var(--size-level-diff, 0.3)
+    ),
+    var(--font-size-fluid, 5cqi),
+    var(--font-level-size)
+  );
+
+  line-height: 1.1;
+  margin-bottom: 0.65em;
+}
+{% endset %}
+{% set cssDisplay %}
+:root {
+  /* Perfect Fourth */
+  --type-ratio: 1.33;
+}
+
+h1,
+.h1 {
+  --size-level: 4;
+}
+
+h2,
+.h2 {
+  --size-level: 3;
+  --font-size-fluid: 4.5cqi;
+}
+
+h3,
+.h3 {
+  --size-level: 2;
+  --font-size-fluid: 4.25cqi;
+  --font-size-diff: 0.2;
+}
+
+h4,
+.h4 {
+  --size-level: 1;
+  --font-size-fluid: 4cqi;
+  --font-size-diff: 0.2;
+}
+
+:is(h1, .h1, h2, .h2, h3, .h3, h4, .h4, .fluid-type) {
+  --font-level-size: calc(var(--type-ratio) * var(--size-level) * 1rem);
+
+  font-size: clamp(
+    max(
+      1rem,
+      var(--font-level-size) - var(--font-level-size) *
+        var(--size-level-diff, 0.3)
+    ),
+    var(--font-size-fluid, 5cqi),
+    var(--font-level-size)
+  );
+}
+{% endset %}
+{% set html -%}
+<div class="container">
+  {{ text | safe }}
+</div>
+{% endset %}
+{% include "partials/snippet.njk" %}
+
+
+
+> As a challenge to apply what you've learned, you could adapt the second mixin that grows from a base value to use type-ratio generated base values.
+
+## Tips on Using the Mixins
+
+Practically speaking, when using any of the mixins presented in this tutorial you will possibly want to create containers out of elements like `<article>` or create a utility class to apply containment. And, where containment is applied will be something to consider when you define markup for components like cards. Otherwise, as we learned, it may seem as though the viewport is being used to compute the font size rather than your intended context.
+
+While our mixin rules are being applied broadly to headlines, you may prefer to _only_ apply fluid type when a utility class is used. Or, you may determine a few variations that better fit your specific contexts and components, such as scales for articles, cards, forms, and tables.
+
+### Which One Should I Use?
+
+Since all the mixins use the container query unit of `cqi` to trigger expanding and shrinking of the font size, your context and preferences will be the deciding factors.
+
+Perhaps you feel expanding from a base is easier to reason about, or produces the results you're after more consistently for a particular component, so you use mixin number two. Or, maybe you like defining the ranges more precisely, or have been given those ranges in design specs, so mixin number one that uses `clamp()` better fits your style. And maybe you just prefer to leave the sizes up to math, so providing a type scale like mixin number three works best for you.
+
+## Additional Resources on Fluid Typography
+
+Fluid type is far from a new topic, and the methods presented here are not the only ways to accomplish it! I've learned a lot from the following resources, and I encourage you to continue researching to find the method that suits your preference or project best.
+
+**Most resources use viewport-based calculations** since container query units are a more recent addition to the web platform. As such, they may need adapted if you prefer basing the sizing on containers.
+
+- Skip any of the manual calculations and use values provided by [Utopia.fyi](https://utopia.fyi/type/calculator/) (currently viewport-based only)
+- A thorough [review of fluid typography with clamp()](https://www.smashingmagazine.com/2022/01/modern-fluid-typography-css-clamp/) by Adrian Bece
+- An alternative to the mixins here is this solution from Andy Bell for [custom property controlled fluid type sizing](https://archive.hankchizljaw.com/wrote/custom-property-controlled-fluid-type-sizing/)
+- Scott Kellum of Typetura presents this innovative method of [deriving font sizes using keyframe animation](https://css-tricks.com/intrinsic-typography-is-the-future-of-styling-text-on-the-web/) to do the interpolation
