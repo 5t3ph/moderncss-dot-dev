@@ -5,6 +5,7 @@ episode: 30
 description: "To learn more about the behaviors of container query units, we'll explore three fluid typography techniques applied via a \"mixin\" using custom properties. These upgraded methods will produce truly responsive typography, regardless of context."
 templateEngineOverride: njk, md
 date: 2023-04-18
+updatedOn: 2023-04-22
 ---
 
 {% set text %}
@@ -238,6 +239,8 @@ As [clarified by Eric Eggert](https://yatil.net/blog/resize-text-reflow), this r
 
 For viewport-based fluid methods, inclusion of a `rem` value helps prevent issues with the text resizing. Without it, zoom-based resizing with only `vw` is more likely to fail to increase or stall out on increasing until a very high zoom value.
 
+> PS - if you're not sure why we're dealing in rems, check the [explanation of rem vs other units](/generating-font-size-css-rules-and-creating-a-fluid-type-scale/#selecting-a-unit-for-font-size) in the earlier article here on fluid type.
+
 An interesting feature of swapping to use `cqi` instead of `vw` is that by its very nature it will continue to increase as long as the container inline size increases during zoom. This holds true both for browser/display zoom and text zoom applied at the OS level. In my testing, as long as `rem` is still used as the anchoring unit for the `font-size` definition, increases to 200% or more are more consistently achievable than `vw` methods.
 
 You should always test your fluid type rules in as many ways as you can to ensure zoom behavior works as expected. This means varying zoom levels with the type in multiple contexts such as a responsive grid of cards, in a medium-width article, a full width container, and a narrow sidebar.
@@ -270,7 +273,7 @@ This update says that the minimum allowed size should be 30% smaller than the `-
 :is(h1, .h1, h2, .h2, h3, .h3, h4, .h4, .fluid-type) {
   font-size: clamp(
     var(--font-size) - var(--font-size) * var(--font-size-diff, 0.3),
-    var(--font-size-fluid),
+    var(--font-size-fluid, 5cqi),
     var(--font-size)
   );
 }
@@ -298,6 +301,10 @@ Here's our final mixin rule with the addition of `max()`.
   --headline-2: 2.35rem;
   --headline-3: 1.5rem;
   --headline-4: 1.15rem;
+}
+
+:is(.h1, .h2, .h3, .h4 ) {
+  font-weight: 500;
 }
 
 .h1 {
@@ -396,6 +403,8 @@ h4,
 {% endset %}
 {% include "partials/snippet.njk" %}
 
+Later in mixin #3 we'll look at a way to smooth out the transition between sizes so that it occurs more in-sync.
+
 ## Mixin 2: Grow From a Base Font Size with `calc()`
 
 In the first mixin, our use of `clamp()` allowed us to define a range for the font sizes. This is beneficial especially if you feel there needs to be a maximum for how large text can grow.
@@ -457,24 +466,24 @@ This mixin is quite a bit simplified from version one. Using `calc()`, we have a
   --h4-base: 1.15rem;
 }
 
-h1,
+:is(.h1, .h2, .h3, .h4 ) {
+  font-weight: 500;
+}
+
 .h1 {
   --font-size-base: var(--h1-base);
 }
 
-h2,
 .h2 {
   --font-size-base: var(--h2-base);
   --font-size-fluid: 2.5cqi;
 }
 
-h3,
 .h3 {
   --font-size-base: var(--h3-base);
   --font-size-fluid: 2.25cqi;
 }
 
-h4,
 .h4 {
   --font-size-base: var(--h4-base);
   --font-size-fluid: 2cqi;
@@ -587,47 +596,72 @@ Once again, we need to set up the custom properties for our base rules. We'll de
 }
 ```
 
-For our heading level rules, so far we have been treating level `1` as the largest size. In order for our upcoming math to work out in the mixin, we need to invert this idea.
+In order for the ratio to be applied correctly, we need to compound the font sizes. This means given a base size, we'll multiply it by the ratio. Then we'll take the result and multiply it by the ratio again for the next size level, and so on.
 
-In this case, we are defining four levels of sizes, so we'll assign a `--size-level` in descending order, where level `4` will eventually be the largest size and `1` will be the smallest.
+In the former Sass solution, we took advantage of a loop to manage the compounding. But the translation to custom properties means we'll need to do this ahead of time, so we'll add the pre-computed sizes as additional global properties.
 
-```css
+Our "base" will be the size we plan to apply to the body text so that our smallest headline is at least the first multiple of our `--type-ratio` larger than that. In this case with the perfect fourth ratio, that makes `--font-size-4` equal `1.33rem`. Each successive level takes the previous `--font-size-[LEVEL]` result and compounds it by applying the `--type-ratio`.
+
+```css 
+:root {
+  /*  Body font size  */
+  --body-font-size: 1rem;
+
+  /* Compounded headlines sizes */
+  --font-size-4: calc(var(--body-font-size) * var(--type-ratio));
+  --font-size-3: calc(var(--font-size-4) * var(--type-ratio));
+  --font-size-2: calc(var(--font-size-3) * var(--type-ratio));
+  --font-size-1: calc(var(--font-size-2) * var(--type-ratio));
+}
+```
+
+Following that, we'll assign the sizes to each headline rule. Reminder that the `font-size` listed in these rules will be used as a fallback for browsers that do not yet support container queries and units.
+
+```css 
 h1,
 .h1 {
-  --size-level: 4;
+  --font-size: var(--font-size-1);
+  font-size: var(--font-size);
 }
 
 h2,
 .h2 {
-  --size-level: 3;
+  --font-size: var(--font-size-2);
+  font-size: var(--font-size);
 }
 
 h3,
 .h3 {
-  --size-level: 2;
+  --font-size: var(--font-size-3);
+  font-size: var(--font-size);
 }
 
 h4,
 .h4 {
-  --size-level: 1;
+  --font-size: var(--font-size-4);
+  font-size: var(--font-size);
 }
 ```
 
-For this mixin, we first need to take these two custom properties and multiply them to compute the font size. That's why it was important that the largest size for `h1` would be set at level `4`, so that the result would be the largest font size. 
-
-Since both values are unitless, we will also multiply them against `1rem` so that the final value uses the `rem` unit.
-
-To help simplify the `font-size` definition, we'll do this initial calculation in a local variable called `--font-level-size`.
+The mixin is a very similar calculation as the method discussed in the first solution. However, we'll compute the minimum size ahead of time. This is so that we can create a smoother transition for the group by adding the minimum + `1cqi` for the middle, ideal `clamp()` value. Since we're adding the container query unit onto the minimum, we're using a smaller value than the first mixin. Experiment and see how changing it to even a decimal value like `0.5cqi` affects the rate of change!
 
 ```css
 :is(h1, .h1, h2, .h2, h3, .h3, h4, .h4, .fluid-type) {
-  --font-level-size: calc(var(--type-ratio) * var(--size-level) * 1rem);
+  --_font-min: var(--font-size) - var(--font-size) * var(--font-size-diff, 0.3);
+
+  font-size: clamp(
+    max(var(--body-font-size), var(--_font-min)),
+    var(--_font-min) + 1cqi,
+    var(--font-size)
+  );
 }
 ```
 
-> PS - if you're not sure why we've been dealing in rems, check the [explanation of rem vs other units](/generating-font-size-css-rules-and-creating-a-fluid-type-scale/#selecting-a-unit-for-font-size) in the earlier article here on fluid type.
+Additionally, we kept our friend `max()` to ensure the minimum wasn't able to reduce below the `--body-font-size`.
 
-The mixin then uses the method discussed in the first solution, but swapping to use `--font-level-size`. That also means re-using the `--font-size-fluid` and `--font-size-diff` properties.
+> **Fun fact:** The `--_font-min` property doesn't need a `calc()` wrapper because at the point at which we create it as a custom property it's a simple list of values. When it gets used in `clamp()`, then the browser uses that context to actually do the calculation with the provided operators for the equation.
+
+Be sure to resize this as in a supporting browser, and also compare the transition to mixin #1.
 
 {% set demoTitle = "Mixin for generating font sizes from a type ratio" %}
 {% set open = false %}
@@ -637,39 +671,48 @@ The mixin then uses the method discussed in the first solution, but swapping to 
 
   /* Perfect Fourth */
   --type-ratio: 1.33;
+
+  /*  Body font size  */
+  --body-font-size: 1rem;
+
+  /* Compounded headlines sizes */
+  --font-size-4: calc(var(--body-font-size) * var(--type-ratio));
+  --font-size-3: calc(var(--font-size-4) * var(--type-ratio));
+  --font-size-2: calc(var(--font-size-3) * var(--type-ratio));
+  --font-size-1: calc(var(--font-size-2) * var(--type-ratio));
+}
+
+:is(.h1, .h2, .h3, .h4 ) {
+  font-weight: 500;
 }
 
 .h1 {
-  --size-level: 4;
+  --font-size: var(--font-size-1);
+  font-size: var(--font-size);
 }
 
 .h2 {
-  --size-level: 3;
-  --font-size-fluid: 4.5cqi;
+  --font-size: var(--font-size-2);
+  font-size: var(--font-size);
 }
 
 .h3 {
-  --size-level: 2;
-  --font-size-fluid: 4.25cqi;
-  --font-size-diff: 0.2;
+  --font-size: var(--font-size-3);
+  font-size: var(--font-size);
 }
 
 .h4 {
-  --size-level: 1;
-  --font-size-fluid: 4cqi;
-  --font-size-diff: 0.2;
+  --font-size: var(--font-size-4);
+  font-size: var(--font-size);
 }
 
 .h1, .h2, .h3, .h4 {
-  --font-level-size: calc(var(--type-ratio) * var(--size-level) * 1rem);
+   --_font-min: var(--font-size) - var(--font-size) * var(--font-size-diff, 0.3);
+
   font-size: clamp(
-    max(
-      1rem,
-      var(--font-level-size) - var(--font-level-size) *
-        var(--size-level-diff, 0.3)
-    ),
-    var(--font-size-fluid, 5cqi),
-    var(--font-level-size)
+    max(var(--body-font-size), var(--_font-min)),
+    var(--_font-min) + 1cqi,
+    var(--font-size)
   );
 
   line-height: 1.1;
@@ -680,55 +723,66 @@ The mixin then uses the method discussed in the first solution, but swapping to 
 :root {
   /* Perfect Fourth */
   --type-ratio: 1.33;
+
+  /*  Body font size  */
+  --body-font-size: 1rem;
+
+  /* Compounded headlines sizes */
+  --font-size-4: calc(var(--body-font-size) * var(--type-ratio));
+  --font-size-3: calc(var(--font-size-4) * var(--type-ratio));
+  --font-size-2: calc(var(--font-size-3) * var(--type-ratio));
+  --font-size-1: calc(var(--font-size-2) * var(--type-ratio));
 }
 
 h1,
 .h1 {
-  --size-level: 4;
+  --font-size: var(--font-size-1);
+  font-size: var(--font-size);
 }
 
 h2,
 .h2 {
-  --size-level: 3;
-  --font-size-fluid: 4.5cqi;
+  --font-size: var(--font-size-2);
+  font-size: var(--font-size);
 }
 
 h3,
 .h3 {
-  --size-level: 2;
-  --font-size-fluid: 4.25cqi;
-  --font-size-diff: 0.2;
+  --font-size: var(--font-size-3);
+  font-size: var(--font-size);
 }
 
 h4,
 .h4 {
-  --size-level: 1;
-  --font-size-fluid: 4cqi;
-  --font-size-diff: 0.2;
+  --font-size: var(--font-size-4);
+  font-size: var(--font-size);
 }
 
 :is(h1, .h1, h2, .h2, h3, .h3, h4, .h4, .fluid-type) {
-  --font-level-size: calc(var(--type-ratio) * var(--size-level) * 1rem);
+   --_font-min: var(--font-size) - var(--font-size) * var(--font-size-diff, 0.3);
 
   font-size: clamp(
-    max(
-      1rem,
-      var(--font-level-size) - var(--font-level-size) *
-        var(--size-level-diff, 0.3)
-    ),
-    var(--font-size-fluid, 5cqi),
-    var(--font-level-size)
+    max(var(--body-font-size), var(--_font-min)),
+    var(--_font-min) + 1cqi,
+    var(--font-size)
   );
 }
 {% endset %}
 {% set html -%}
 <div class="container">
   {{ text | safe }}
+  <p>Regular body copy size for a paragraph and non-headline text.
 </div>
 {% endset %}
 {% include "partials/snippet.njk" %}
 
+For best results, if you would like to change the `--font-size-diff` value, you'll likely want to change it as a global property. That's because changing it for individual levels will interfere with the ratio-based sizing.
 
+Additionally, you can try out increasing the base for the original calculation if you feel it's too close in size to the body copy. A quick way to do that is add it into the calculation for `--font-size-4`, such as:
+
+```css
+--font-size-4: calc((var(--body-font-size) + 0.25rem) * var(--type-ratio));
+```
 
 > As a challenge to apply what you've learned, you could adapt the second mixin that grows from a base value to use type-ratio generated base values.
 
@@ -746,7 +800,7 @@ Perhaps you feel expanding from a base is easier to reason about, or produces th
 
 ## Additional Resources on Fluid Typography
 
-Fluid type is far from a new topic, and the methods presented here are not the only ways to accomplish it! I've learned a lot from the following resources, and I encourage you to continue researching to find the method that suits your preference or project best.
+Fluid type is far from a new topic, and the methods presented here are not the only ways to accomplish it! I've learned a lot from the following resources, and I encourage you to continue researching to find the technique that suits your preference or project best.
 
 **Most resources use viewport-based calculations** since container query units are a more recent addition to the web platform. As such, they may need adapted if you prefer basing the sizing on containers.
 

@@ -5,7 +5,7 @@ episode: 12
 description: "Let's take the mystery out of sizing type. Learn recommended units for `font-size`, how to generate ratio-based fluid sizes with Sass, and how to handle overflow."
 templateEngineOverride: njk, md
 date: 2020-05-28
-updatedOn: 2021-06-06
+updatedOn: 2023-04-18
 ---
 
 Let's take the mystery out of sizing type. Typography is both foundational to any stylesheet and the quickest way to elevate an otherwise minimal layout from drab to fab. If you're looking for type design theory or how to select a font, that's outside the scope of this article. The goal for today is to give you a foundation for developing essential type styles in CSS, and terms to use if you wish to explore any topics deeper.
