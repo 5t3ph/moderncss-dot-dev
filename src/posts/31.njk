@@ -1,0 +1,284 @@
+---
+title: "Testing Feature Support for Modern CSS"
+topics: Resources,Selectors
+episode: 31
+description: "How do you know using a new CSS features is \"safe\" to use? Review how to find information on new features, test for support, determine when to use a feature, and manage support with fallbacks and build tools."
+templateEngineOverride: njk, md
+date: 2023-05-01
+---
+
+The pace of the CSS language can be challenging to keep up with! Browsers release features and fixes monthly, and the CSS Working Group is constantly working on specifications. So, how do you know using a new feature is "safe" to use? And what are the considerations around making that choice?
+
+Let's review how to:
+
+- find information on new features
+- test for support
+- determine when to use a feature
+- decide whether a fallback is needed
+- use build tools and polyfills
+
+{% carbonAd %}
+
+## Finding Out About New CSS Features
+
+Here is a list of ways you can find out about new and upcoming CSS features:
+
+- following the developer relations folks from various browser makers, like [Una Kravets](https://twitter.com/Una) and [Jen Simmons](https://front-end.social/@jensimmons)
+- reviewing and starring issues you're interested in being added to CSS in [the public GitHub](https://github.com/w3c/csswg-drafts)
+- subscribe to the CSS Working Group (CSSWG) blog feed
+- check the release notes and feature blogs from browser engines
+    - [Webkit](https://webkit.org/) (Safari)
+    - [Firefox](https://www.mozilla.org/en-US/firefox/releases/)
+    - [Chrome](https://developer.chrome.com/blog/)
+- consume materials from publications and individuals who focus a lot on CSS
+    - [CSS IRL](https://css-irl.info/) by Michelle Barker
+    - [Miriam Suzanne](https://www.miriamsuzanne.com/)
+    - [Bramus Van Damme](https://www.bram.us/)
+    - [Chen Hui Jing](https://chenhuijing.com/)
+    - [Andy Bell](https://piccalil.li/)
+    - [Kevin Powell](https://www.kevinpowell.co/)
+- subscribe to newsletters
+    - [Frontend Focus](https://frontendfoc.us/)
+    - [CSS Layout News](https://csslayout.news/)
+    - [The CodePen Spark](https://codepen.io/spark)
+    - [Smashing Magazine Newsletter](https://www.smashingmagazine.com/the-smashing-newsletter/)
+    - [CSS Weekly](https://css-weekly.com/)
+
+Additionally, browser makers have started an annual effort to improve the interoperability of the web, which means striving to make features work consistently cross-browser. You can review the list and progress on those efforts on the [Interop Dashboard](https://wpt.fyi/interop-2023).
+
+As you absorb all that's possible in CSS now, remember: it's not about learning everything right now; it's about being aware of what's possible to help you develop a solution when needed!
+
+## Testing for CSS Support
+
+Testing for CSS support - also called "feature detection" - can be done directly in your stylesheets using `@supports`.
+
+This at-rule allows testing:
+
+- properties
+- values
+- selectors
+
+Within `@supports`, the test condition will return positive if the browser understands the property and the value.
+
+```css
+@supports (accent-color: red) {
+  /* styles when accent-color is supported */
+}
+```
+
+You can also test for selectors such as `:is()`, `:where()`, `:focus-visible`, and more. When using the `selector` condition with a function like `:is()`, a value must also be provided to the selector.
+
+```css
+@supports selector(:is(a)) {
+  /* styles when :is() is supported */
+}
+```
+
+Like media queries, you can combine tests with `and` as well as `or`, and negate tests with `not`.
+
+```css
+@supports (leading-trim: both) or (text-box-trim: both) {
+  /* Styles when either property is supported */
+}
+
+@supports (transform: scale(1)) and (scroll-timeline-name: a) {
+  /* Styles when both properties are supported */
+}
+
+@supports not selector(:focus-visible) {
+  /* Styles when :focus-visible is not supported */
+}
+```
+
+### Limitations of `@supports`
+
+A significant limitation of `@supports` is that it currently cannot test for at-rules, meaning it cannot detect support of `@container` (container queries), `@layer` (cascade layers), and others. This lack of detection is problematic because at-rules typically greatly impact how you write and structure your CSS.
+
+Additionally, there can be issues testing for partial implementations.
+
+As an example of failure for partial implementations, a recent addition to CSS is the `:has()` selector. Unfortunately, the implementation at the time of writing in Firefox 112 may return a false positive when testing relational selectors with `:has()` like `li:has(+ )`. This is false because the partial implementation only supports more direct selectors like `li:has(a)`.
+
+```css
+/* This should fail in Firefox 112 */
+@supports selector(li:has(+ *)) {
+  /* It may not fail, so the body becomes red */
+  body {
+    background: red;
+  }
+
+  /* This rule does fail to apply */
+  li:has(+ *) {
+    background: green;
+  }
+}
+```
+
+> When using `@supports`, be sure to test the outcome in multiple browsers to ensure your styles apply with the result you intended.
+
+Also be aware that testing your condition with `@supports` requires `@supports` itself to be supported! In other words, check the support of the feature you're testing for _and_ `@supports` to ensure you're not creating a condition that wouldn't actually have the chance to fail due to `@supports` being ignored if it's unsupported.
+
+Don't miss the section on [alternate methods of CSS feature detection](#alternate-methods-of-css-feature-detection).
+
+{% newsletterPromo %}
+
+## Deciding on Using a New Feature
+
+The CSS language is growing because the web is complex, and our requirements are ever-changing. In addition, device proliferation and user needs drive a lot of change and improvements in the underlying browser engines.
+
+For example, it was thought that container queries would never be possible, but the availability of related features enabled their release to be cross-browser complete in February 2023.
+
+But when do you know it's the right time to start using a new feature? After all, while the browsers Chrome, Edge, and Firefox have been termed "evergreen" - meaning they can automatically update themselves - there's no guarantee that users will allow that update quickly, if at all. Safari can also update in a way decoupled from OS updates, but doing so is not actively pushed, and typically only advanced users will seek out the updates. As Eric Bailey wrote, [evergreen does not mean immediately available](https://css-tricks.com/evergreen-does-not-mean-immediately-available/).
+
+A popular resource to check for feature availability is [caniuse.com](https://caniuse.com/). It's a fantastic place to get an overview of when browser features are added and notes on partial implementations or known bugs. However, the percentage shown for support should be taken as one metric and used alongside your actual audience analytics.
+
+Depending on your location in the world, your industry, or your product's specific marketing, you may need to delay using a particular feature. Or, you might find positive signs that the majority of your audience would be able to see the latest and greatest!
+
+If you use VSCode, I also highly recommend [the webhint extension](https://marketplace.visualstudio.com/items?itemName=webhint.vscode-webhint) which alerts you when you are writing a feature that may not be well supported. This saves a trip out to caniuse, as it also gives you the list of where the feature isn't supported. With that information, you can decide whether you need to create a support solution as you write your styles. This also helps in reducing bugs from appearing later in browsers you may not have tested (although you should test as much as you can!).
+
+The impact of the feature you're looking to integrate also weighs heavily in this decision. For example, some modern CSS features are "nice to haves" that provide an updated experience that's great when they work but also don't necessarily cause an interruption in the user experience when they fail.
+
+Some examples of low-impact features include:
+
+- `accent-color` - change the color of native form elements, including checkboxes and radio buttons
+- `::marker` - apply [custom list bullet or numeral styling](http://localhost:8081/totally-custom-list-styles/#upgrading-to-css-marker) like changing the color
+- `overscroll-behavior` - prevent scroll chaining to the background page when the end of a scrollable container is reached
+- `scroll-margin` - able to add margin to the scroll position, useful for [anchor targets](https://smolcss.dev/#smol-article-anchors)
+- `text-underline-offset` - allows adjusting the distance between a text underline and the text
+
+Other features that impact layout structure, or are tied to providing a more accessible experience, may not be advised to use until you are confident in a high likelihood of support. As a quick measure, consider whether a user would be prevented in doing the tasks they need to do on your website if the modern feature fails.
+
+### Assigning Fallback Solutions
+
+Another way to reasonably use newer features is to include them alongside fallback solutions. A "fallback" is a solution that works well enough to retain a positive user experience when the ideal feature isn't supported.
+
+Fallbacks work for two reasons. First, because CSS fails silently - meaning it skips definitions it doesn't understand without breaking the whole stylesheet. Second, because of the "C" in CSS which is the cascade that uses the listed order of definitions as part of how the browser determines which definition to apply. The cascade rules say that - given equal specificity - the last-ordered definition that the browser understands will "win". 
+
+For example, `aspect-ratio` is an awesome feature that I enjoy using to create uniform-sized images within a grid of cards or an image gallery. A fallback may provide a height for the images so that at least they are constrained in the layout, even if the ideal `aspect-ratio` isn't used.
+
+The following example is from my resource SmolCSS and the "[Smol Aspect Ratio Gallery](https://smolcss.dev/#smol-aspect-ratio-gallery)" demo.
+
+First, we assume no support and give an explicit height. Then, using `@supports` to check for `aspect-ratio` support, we remove that explicit height and then use `aspect-ratio`.
+
+```css
+.smol-aspect-ratio-gallery li {
+  height: max(25vh, 15rem);
+}
+
+@supports (aspect-ratio: 1) {
+  .smol-aspect-ratio-gallery li {
+    aspect-ratio: var(--aspect-ratio);
+    height: auto;
+  }
+}
+```
+
+Often fallbacks can be a one-line alternative that uses an older syntax or method. These solutions are placed just before the ideal solution, which allows the modern solution to be used where supported. And when it's not supported, the last-ordered definition that is supported will be used, which we noted earlier was due to the cascade.
+
+In this example, our fallback uses the well supported `height` property with `100vh`. Then, we upgrade it to use the logical property of `block-size` with `100dvh`, where `dvb` is the "[dynamic viewport unit](https://12daysofweb.dev/2022/new-viewport-units/)" that is better suited for environments like iOS Safari.
+
+```css
+/* Fallback */
+height: 100vh;
+/* Ideal, modern version */
+block-size: 100dvb;
+```
+
+### Handling Prefixed Properties
+
+Sometimes, lack of support is due to one browser adopting a proprietary version of a property. When this happens, they typically use a "prefix". This is how we get properties such as `-webkit-background-clip`.
+
+A tricky part of working with prefixed properties is that sometimes other browsers enable them to work, but they remain prefixed due to a lack of official spec support. For some properties, they eventually get spec support, leading to browsers deprecating the prefixed version. And sometimes, one browser uses a prefixed version, and the others don't!
+
+Luckily, a tool exists to help manage prefixing properties. Autoprefixer is available as a PostCSS plugin (which we'll discuss later) and [as a web app](https://Autoprefixer.github.io/).
+
+For example, one of my favorite techniques for controlling width without affecting the display property is to use `width: fit-content`. For the best support, it needs to include prefixed versions. Rather than remembering that, I can either include Autoprefixer in my build process or use the Autoprefixer web app to get the rule:
+
+```css
+.example {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+}
+```
+
+You'll want to check [caniuse.com](https://caniuse.com/mdn-css_properties_width_fit-content) or the [browser compatibility](https://developer.mozilla.org/en-US/docs/Web/CSS/fit-content#browser_compatibility) section on MDN docs to be sure that a prefixed property you want to use has support cross-browser.
+
+## Alternate Methods of CSS Feature Detection
+
+Sometimes you may wish to detect features like at-rules which `@supports` is unable to do. Or, you need more precise detection for partial implementations.
+
+CSS at-rules are exposed as a web API that is consumable by JavaScript. This means you can check for support using JavaScript and then apply classes or other modifications to indicate to your styles that a feature is available.
+
+For example, you can check for support of cascade layers with the following:
+
+```js
+if (window.CSSLayerBlockRule) {
+  // Cascade layers are supported
+}
+```
+
+A web API function that works just like `@supports` is also available, which is `CSS.supports()`. This function accepts a value identical to what you would pass to the corresponding `@supports` block, including testing for selectors and the ability to combine or negate tests.
+
+```js
+if (CSS.supports('width: 1cqi')) {
+  // Container query units are supported
+}
+```
+
+When I was a young sprout coming up in web development, a popular solution for feature detection was [Modernizr](https://modernizr.com/). This was JavaScript that did feature tests and then added classes to the `<html>` element to indicate support or lack thereof. It was tremendously popular and even included in the official [HTML5 boilerplate](https://html5boilerplate.com/). But now, this solution is outdated, and I wouldn't recommend using it for new projects. This is because many of the tests likely aren't necessary for your audience anymore and because it hasn't been updated to include many of the very latest modern CSS features.
+
+However, I appreciate the ease of use of those support classes. They offload the effort of devising the right test for `@supports`, and can simplify creating selectors.
+
+I've created [SupportsCSS](https://supportscss.dev) as a feature detection solution that tests support of at-rules, selectors, and other features and applies classes to `<html>` with the results. The tiny script is also customizable so that it only tests for the features you care to include.
+
+Here's a summary of what SupportsCSS does:
+
+- Checks for selectors like `:has()`, properties like `text-box-trim`, features like relative color syntax, and at-rules like `@layer`
+- Allows adding custom tests
+- Exposes a results object to iterate over detected support, as well as individual results for quick conditional checks in JS
+
+Since the classes rely on JavaScript loading and succeeding, you will want to treat any styles based on the support classes as progressive enhancements. This is not too different from directly including `@supports` in your styles.
+
+However, if you have more critical styles and you *do* expect that *most* of your audience will have support, consider using a regular `@supports` block in your stylesheets. Then the styles are available as soon as your stylesheet is loaded.
+
+That said, you may like to review the test suite, which exposes the tests used for the features. You can copy any of the tests from the [SupportsCSS test suite](https://supportscss.dev/#test-suite) that use `CSS.supports` and use those within `@supports`.
+
+## Using Build Tools and Polyfills
+
+Using `@supports` and JavaScript-based detection either directly or via [SupportsCSS](https://supportscss.dev) only tells you if a feature is supported. You are responsible for providing the experience for supported and unsupported features.
+
+Let's review polyfills and build tools that help bridge the gap while features are gaining support.
+
+### Polyfills
+
+Sometimes, supporting a CSS feature is best done by including a polyfill. A polyfill is a script that enables a feature to work on an unsupported browser by creating a solution with other, better-supported features. Polyfills are used when a more simple fallback solution isn't possible or too complex to do manually.
+
+An example of a [polyfill is for container queries](https://github.com/GoogleChromeLabs/container-query-polyfill), which extends support clear back to Firefox 69, Chrome 79, Edge 79, and Safari 13.4. As with most polyfills, it has limitations and so doesn't provide full coverage of all the ways you may enact container query styles.
+
+Polyfills are a wonderfully helpful way to begin using "future CSS" today! Just be aware of their limitations. Additionally, polyfills may not keep up with syntax changes, leading to breaking a previously working implementation. You are responsible for keeping the polyfill version you include up-to-date.
+
+### Build Tools
+
+We briefly mentioned Autoprefixer, which is available as a web app or PostCSS plugin. But what is [PostCSS](https://postcss.org/)? Well, it's a tool you use alongside a build tool like Gulp, Grunt, or Webpack. Through the use of PostCSS plugins, various features become available.
+
+A popular PostCSS plugin is [postcss-preset-env](https://github.com/csstools/postcss-plugins/tree/main/plugin-packs/postcss-preset-env) which "allows you to use future CSS features today." It comes coupled with Autoprefixer. When using it, polyfills are added when needed, and additional plugins related to the features you're writing are applied.
+
+Several tools, like PostCSS, determine how to include feature support by using the `browserslist` entry in `package.json` or by including that information in the tool's configuration. Browserslist is a way of defining which browsers your application will support, which you can visualize and adjust using the [Browserslist web app](https://browsersl.ist/#q=%3E+0.2%25+and+not+dead).
+
+Besides polyfills, transpiling is another way build tools enable support of future CSS. Transpiling means rewriting the future version to a comparable but older and better-supported version. An example would be using the logical property `margin-inline: auto` would be transpiled to `margin-left: auto; margin-right: auto` if the browserslist targets didn't have full support. This allows writing your stylesheets with newer features, which over time your build tool will stop transpiling as support improves.
+
+Another option besides PostCSS that I've started using as my build tool of choice is LightningCSS. It includes Autoprefixer, minification, and transpiling of new CSS. I like it because it's a single package to include and replaces the individual includes I previously had for Autoprefixer and minification. In addition, I've found that I can use it to [replace Sass](https://thinkdobecreate.com/articles/is-it-time-to-replace-sass/) for my more simple projects since it enables nesting and still lets me organize my styles into separate files.
+
+## Additional Resources
+
+I encourage you to continue learning about this topic until you are comfortable with what it means to handle modern CSS support. It's fun to experiment and practice using modern CSS, but imperitive to consider what that means for your users.
+
+Here are a few other resources:
+
+- [Using feature queries](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Conditional_Rules/Using_Feature_Queries) from MDN
+- [Detecting CSS Selector Support with Javascript](https://matthiasott.com/notes/detecting-css-selector-support-with-javascript) by Matthias Ott
+- [Detecting CSS Selector Support](https://css-irl.info/detecting-css-selector-support/) by Michelle Barker
+- [A Guide to CSS SUpport in Browsers](https://www.smashingmagazine.com/2019/02/css-browser-support/) by Rachel Andrew
+- [How @supports Works](https://css-tricks.com/how-supports-works/) by Chris Coyier
+- ["Evergreen" Does Not Mean Immediately Available](https://css-tricks.com/evergreen-does-not-mean-immediately-available/) by Eric Bailey
+- Related topic: [A Guide to CSS Debugging](https://www.smashingmagazine.com/2021/10/guide-debugging-css/)
