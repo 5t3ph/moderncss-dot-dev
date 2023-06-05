@@ -5,7 +5,7 @@ episode: 30
 description: "To learn more about the behaviors of container query units, we'll explore three fluid typography techniques applied via a \"mixin\" using custom properties. These upgraded methods will produce truly responsive typography, regardless of context."
 templateEngineOverride: njk, md
 date: 2023-04-18
-updatedOn: 2023-04-22
+updatedOn: 2023-06-04
 ---
 
 {% set text %}
@@ -152,8 +152,6 @@ h4,
 
 Note that each rule updates the `--font-size` custom property to associate it with the size for that level. That's important because it enables the mixin rules we'll be creating, which will be generalized to scale for each of the input properties. Without generalizing to a mixin, we would have to repeat the function from the mixin within each separate headline rule.
 
-> The other important part of this setup is defining a fallback `font-size`, which in this case means a static value that will work cross-browser in case a user's browser doesn't yet support container queries. This technique of defining a fallback for a more modern feature is called **progressive enhancement**.
-
 ### Mixin Selector 
 
 So, what does this mixin actually look like? Well, the contents will be unique per each of our three solutions. However, the selector will be the same.
@@ -161,17 +159,32 @@ So, what does this mixin actually look like? Well, the contents will be unique p
 We'll attach it to each heading element as well as the added heading classes and a utility class as well of `.fluid-type`. The utility class will allow using the mixin ad-hoc for type that may not be styled as a heading.
 
 ```css
-:is(h1, .h1, h2, .h2, h3, .h3, h4, .h4, .fluid-type) {
-  font-size: /* unique per solution */
+@supports (font-size: 1cqi) {
+  :is(h1, .h1, h2, .h2, h3, .h3, h4, .h4, .fluid-type) {
+    font-size: /* unique per solution */
 
-  line-height: 1.1;
-  margin-block-end: 0.65em;
+    line-height: 1.1;
+    margin-block-end: 0.65em;
+  }
 }
 ```
 
 > For other options to assign `line-height` that you may feel better fit your final fluid type solution, review my project [CSS Typography Line Height](https://css-typography-line-height.netlify.app/).
 
-Why use `:is()` for the selector? Two reasons:
+### Why use `@supports`?
+
+Due to a quirk of how custom properties work, we'll need to be explicit about separating our fluid sizes that use container query units from a fallback size. Otherwise, if a browser encounters the mixin and doesn't understand the container query unit, it will throw out the custom property value. 
+
+The "quirk" is that it will then render the "initial" value of `1rem` instead of using a previously defined size for the element. The outcome is that all type will appear at `1rem`, removing any type size hierarchy from your application. That's why we need the explicit `@supports` check for whether the browser will understand the container query units before trying to apply the rule.
+
+To counter this behavior, you may assign a static value to the base headline rules, _or_ include a solution prior to the container queries mixin that uses viewport units. Either fallback should be placed prior to and outside of the `@supports` condition. 
+
+[One method](#cross-browser-fluid-type) is shown after the first mixin.
+
+### Why use `:is()` for the selector? 
+
+Two reasons:
+
 1. The more important reason is that it will raise the specificity of the entire rule to a class, which will make it more resilient to accidental overrides from inheritance, but it can also be matched or exceeded easily by later class-based or compound rules.
 2. The less important reason is to simplify the selector into a single-line list vs. a traditional comma-separated selector broken into multiple lines.
 
@@ -190,11 +203,19 @@ A starting rule to do this really is just a swap of those values.
 .fluid-type {
   font-size: clamp(1rem, 4cqi, 3rem);
 }
+
+.sorry { display: none; }
+@supports not (font-size: 1cqi) {
+  .sorry { display: block; font-weight: bold; margin-bottom: 2rem; color: firebrick; }
+}
 {% endset %}
 {% set cssDisplay %}
-{{- css -}}
+.fluid-type {
+  font-size: clamp(1rem, 4cqi, 3rem);
+}
 {% endset %}
 {% set html -%}
+<p class="sorry">Sorry, your browser doesn't support container query units! The demos will not be fluid.</p>
 <p class="fluid-type">Viewport-based fluid typography.</p>
 {% endset %}
 {% include "partials/snippet.njk" %}
@@ -209,6 +230,20 @@ In order to produce the effect we're really after, which is to have the font siz
 
 {% set demoTitle = "Container-based fluid typography" %}
 {% set css %}
+.ctr {
+  container-type: inline-size;
+}
+
+.fluid-type {
+  font-size: clamp(1rem, 4cqi, 3rem);
+}
+
+.sorry { display: none; }
+@supports not (font-size: 1cqi) {
+  .sorry { display: block; font-weight: bold; margin-bottom: 2rem; color: firebrick; }
+}
+{% endset %}
+{% set cssDisplay %}
 .container {
   container-type: inline-size;
 }
@@ -217,11 +252,9 @@ In order to produce the effect we're really after, which is to have the font siz
   font-size: clamp(1rem, 4cqi, 3rem);
 }
 {% endset %}
-{% set cssDisplay %}
-{{- css -}}
-{% endset %}
 {% set html -%}
-<div class="container">
+<p class="sorry">Sorry, your browser doesn't support container query units! The demos will not be fluid.</p>
+<div class="ctr">
   <p class="fluid-type">Viewport-based fluid typography.</p>
 </div>
 {% endset %}
@@ -252,14 +285,18 @@ Our goal is to make a mixin function, so we need to manage a few more considerat
 Let's begin the rule by plugging in our `--font-size` custom property that was previously set up. We'll also enable a `--font-size-fluid` property with a default of `5cqi`. Like the size property, this would allow updating the target size per heading level, if desired.
 
 ```css
-:is(h1, .h1, h2, .h2, h3, .h3, h4, .h4, .fluid-type) {
-  font-size: clamp(
-    /* TODO: define a minimum size */,
-    var(--font-size-fluid, 5cqi),
-    var(--font-size)
-  );
+@supports (font-size: 1cqi) {
+  :is(h1, .h1, h2, .h2, h3, .h3, h4, .h4, .fluid-type) {
+    font-size: clamp(
+      /* TODO: define a minimum size */,
+      var(--font-size-fluid, 5cqi),
+      var(--font-size)
+    );
+  }
 }
 ```
+
+> If you missed it, jump back to the explanation of [why we're using `@supports`](#why-use-supports).
 
 The missing piece in our mixin function is a definition for the minimum size allowed within the range.
 
@@ -270,12 +307,14 @@ Within `clamp()`, we can perform additional math calculations, no wrapping `calc
 This update says that the minimum allowed size should be 30% smaller than the `--font-size`. Due to the mathematical order of operations, the multiplication part of the equation is computed before the subtraction.
 
 ```css
-:is(h1, .h1, h2, .h2, h3, .h3, h4, .h4, .fluid-type) {
-  font-size: clamp(
-    var(--font-size) - var(--font-size) * var(--font-size-diff, 0.3),
-    var(--font-size-fluid, 5cqi),
-    var(--font-size)
-  );
+@supports (font-size: 1cqi) {
+  :is(h1, .h1, h2, .h2, h3, .h3, h4, .h4, .fluid-type) {
+    font-size: clamp(
+      var(--font-size) - var(--font-size) * var(--font-size-diff, 0.3),
+      var(--font-size-fluid, 5cqi),
+      var(--font-size)
+    );
+  }
 }
 ```
 
@@ -336,15 +375,17 @@ Here's our final mixin rule with the addition of `max()`.
   font-size: var(--headline-4);
 }
 
-.h1, .h2, .h3, .h4 {
-  font-size: clamp(
-    max(1rem, var(--font-size) - var(--font-size) * var(--font-size-diff, 0.3)),
-    var(--font-size-fluid, 5cqi),
-    var(--font-size)
-  );
+@supports (font-size: 1cqi) {
+  .h1, .h2, .h3, .h4 {
+    font-size: clamp(
+      max(1rem, var(--font-size) - var(--font-size) * var(--font-size-diff, 0.3)),
+      var(--font-size-fluid, 5cqi),
+      var(--font-size)
+    );
 
-  line-height: 1.1;
-  margin-bottom: 0.65em;
+    line-height: 1.1;
+    margin-bottom: 0.65em;
+  }
 }
 {% endset %}
 {% set cssDisplay %}
@@ -388,12 +429,14 @@ h4,
   font-size: var(--headline-4);
 }
 
-:is(h1, .h1, h2, .h2, h3, .h3, h4, .h4, .fluid-type) {
-  font-size: clamp(
-    max(1rem, var(--font-size) - var(--font-size) * var(--font-size-diff, 0.3)),
-    var(--font-size-fluid, 5cqi),
-    var(--font-size)
-  );
+@supports (font-size: 1cqi) {
+  :is(h1, .h1, h2, .h2, h3, .h3, h4, .h4, .fluid-type) {
+    font-size: clamp(
+      max(1rem, var(--font-size) - var(--font-size) * var(--font-size-diff, 0.3)),
+      var(--font-size-fluid, 5cqi),
+      var(--font-size)
+    );
+  }
 }
 {% endset %}
 {% set html -%}
@@ -404,6 +447,30 @@ h4,
 {% include "partials/snippet.njk" %}
 
 Later in mixin #3 we'll look at a way to smooth out the transition between sizes so that it occurs more in-sync.
+
+### Cross-Browser Fluid Type
+
+To alleviate the affects of the [custom properties quirk](#why-use-supports), an alternative option would be to define the mixin using `vw` and then override it within `@supports`. You will not achieve identical results since the `font-size` will be relative to the viewport instead of individual containers, but it also allows you to have some measure of fluid type. Be sure to test cross-browser and adjust as needed!
+
+```css
+/* Adjust element `--font-size-fluid` overrides to use `vw` */
+
+:is(h1, .h1, h2, .h2, h3, .h3, h4, .h4, .fluid-type) {
+  font-size: clamp(
+    var(--font-size) - var(--font-size) * var(--font-size-diff, 0.3),
+    var(--font-size-fluid, 3vw),
+    var(--font-size)
+  );
+}
+
+@supports (font-size: 1cqi) {
+  :is(h1, .h1, h2, .h2, h3, .h3, h4, .h4, .fluid-type) {
+    --font-size-fluid: 5cqi;
+  }
+
+  /* Add element `--font-size-fluid` overrides here that use `cqi` */
+}
+```
 
 ## Mixin 2: Grow From a Base Font Size with `calc()`
 
@@ -449,8 +516,10 @@ h4,
 This mixin is quite a bit simplified from version one. Using `calc()`, we have a single equation where from the starting point of `--font-size-base` we are adding `--font-size-fluid`, which defaults to `3cqi`.
 
 ```css
-:is(h1, .h1, h2, .h2, h3, .h3, h4, .h4, .fluid-type) {
-  font-size: calc(var(--font-size-base) + var(--font-size-fluid, 3cqi));
+@supports (font-size: 1cqi) {
+  :is(h1, .h1, h2, .h2, h3, .h3, h4, .h4, .fluid-type) {
+    font-size: calc(var(--font-size-base) + var(--font-size-fluid, 3cqi));
+  }
 }
 ```
 
@@ -472,28 +541,38 @@ This mixin is quite a bit simplified from version one. Using `calc()`, we have a
 
 .h1 {
   --font-size-base: var(--h1-base);
+
+  font-size: var(--h1-base);
 }
 
 .h2 {
   --font-size-base: var(--h2-base);
   --font-size-fluid: 2.5cqi;
+
+  font-size: var(--h2-base);
 }
 
 .h3 {
   --font-size-base: var(--h3-base);
   --font-size-fluid: 2.25cqi;
+
+  font-size: var(--h3-base);
 }
 
 .h4 {
   --font-size-base: var(--h4-base);
   --font-size-fluid: 2cqi;
+
+  font-size: var(--h4-base);
 }
 
-.h1, .h2, .h3, .h4 {
-  font-size: calc(var(--font-size-base) + var(--font-size-fluid, 3cqi));
-  
-  line-height: 1.1;
-  margin-bottom: 0.65em;
+@supports (font-size: 1cqi) {
+  .h1, .h2, .h3, .h4 {
+    font-size: calc(var(--font-size-base) + var(--font-size-fluid, 3cqi));
+    
+    line-height: 1.1;
+    margin-bottom: 0.65em;
+  }
 }
 {% endset %}
 {% set cssDisplay %}
@@ -507,28 +586,38 @@ This mixin is quite a bit simplified from version one. Using `calc()`, we have a
 h1,
 .h1 {
   --font-size-base: var(--h1-base);
+
+  font-size: var(--h1-base);
 }
 
 h2,
 .h2 {
   --font-size-base: var(--h2-base);
   --font-size-fluid: 2.5cqi;
+
+  font-size: var(--h2-base);
 }
 
 h3,
 .h3 {
   --font-size-base: var(--h3-base);
   --font-size-fluid: 2.25cqi;
+
+  font-size: var(--h3-base);
 }
 
 h4,
 .h4 {
   --font-size-base: var(--h4-base);
   --font-size-fluid: 2cqi;
+
+  font-size: var(--h4-base);
 }
 
-:is(h1, .h1, h2, .h2, h3, .h3, h4, .h4, .fluid-type) {
-  font-size: calc(var(--font-size-base) + var(--font-size-fluid, 3cqi));
+@supports (font-size: 1cqi) {
+  :is(h1, .h1, h2, .h2, h3, .h3, h4, .h4, .fluid-type) {
+    font-size: calc(var(--font-size-base) + var(--font-size-fluid, 3cqi));
+  }
 }
 {% endset %}
 {% set html -%}
@@ -551,25 +640,34 @@ How does `min()` result in a maximum boundary? Because as the font-size grows, i
   container-type: inline-size;
 }
 
+
 .fluid-type {
   --font-size-base: 1.35rem;
   --font-size-max: 3rem;
 
-  font-size: min(var(--font-size-max), calc(var(--font-size-base) + var(--font-size-fluid, 3cqi)));
+  font-size: min(var(--font-size-max), calc(var(--font-size-base) + var(--font-size-fluid, 3vw)));
 
   line-height: 1.2;
   margin-bottom: 0.65em;
 }
+
+@supports (font-size: 1cqi) {
+  .fluid-type {
+    --font-size-fluid: 3cqi;
+  }
+}
 {% endset %}
 {% set cssDisplay %}
-.fluid-type {
-  font-size: min(var(--font-size-max), calc(var(--font-size-base) + var(--font-size-fluid, 3cqi)));
+@supports (font-size: 1cqi) {
+  .fluid-type {
+    font-size: min(var(--font-size-max), calc(var(--font-size-base) + var(--font-size-fluid, 3cqi)));
+  }
 }
 {% endset %}
 {% set html -%}
 <div class="container">
   <p class="fluid-type">The five boxing wizards jump quickly.</p>
-  <p class="fluid-type" style="--font-size-base: 1.15rem; --font-size-max: 2.5rem; --font-size-fluid: 2.5cqi">The five boxing wizards jump quickly.</p>
+  <p class="fluid-type" style="--font-size-base: 1.15rem; --font-size-max: 2.5rem; --font-size-fluid: 2.5cqi;">The five boxing wizards jump quickly.</p>
 </div>
 {% endset %}
 {% include "partials/snippet.njk" %}
@@ -646,14 +744,16 @@ h4,
 The mixin is a very similar calculation as the method discussed in the first solution. However, we'll compute the minimum size ahead of time. This is so that we can create a smoother transition for the group by adding the minimum + `1cqi` for the middle, ideal `clamp()` value. Since we're adding the container query unit onto the minimum, we're using a smaller value than the first mixin. Experiment and see how changing it to even a decimal value like `0.5cqi` affects the rate of change!
 
 ```css
-:is(h1, .h1, h2, .h2, h3, .h3, h4, .h4, .fluid-type) {
-  --_font-min: var(--font-size) - var(--font-size) * var(--font-size-diff, 0.3);
+@supports (font-size: 1cqi) {
+  :is(h1, .h1, h2, .h2, h3, .h3, h4, .h4, .fluid-type) {
+    --_font-min: var(--font-size) - var(--font-size) * var(--font-size-diff, 0.3);
 
-  font-size: clamp(
-    max(var(--body-font-size), var(--_font-min)),
-    var(--_font-min) + 1cqi,
-    var(--font-size)
-  );
+    font-size: clamp(
+      max(var(--body-font-size), var(--_font-min)),
+      var(--_font-min) + 1cqi,
+      var(--font-size)
+    );
+  }
 }
 ```
 
@@ -706,17 +806,19 @@ Be sure to resize this as in a supporting browser, and also compare the transiti
   font-size: var(--font-size);
 }
 
-.h1, .h2, .h3, .h4 {
-   --_font-min: var(--font-size) - var(--font-size) * var(--font-size-diff, 0.3);
+@supports (font-size: 1cqi) {
+  .h1, .h2, .h3, .h4 {
+    --_font-min: var(--font-size) - var(--font-size) * var(--font-size-diff, 0.3);
 
-  font-size: clamp(
-    max(var(--body-font-size), var(--_font-min)),
-    var(--_font-min) + 1cqi,
-    var(--font-size)
-  );
+    font-size: clamp(
+      max(var(--body-font-size), var(--_font-min)),
+      var(--_font-min) + 1cqi,
+      var(--font-size)
+    );
 
-  line-height: 1.1;
-  margin-bottom: 0.65em;
+    line-height: 1.1;
+    margin-bottom: 0.65em;
+  }
 }
 {% endset %}
 {% set cssDisplay %}
@@ -758,14 +860,16 @@ h4,
   font-size: var(--font-size);
 }
 
-:is(h1, .h1, h2, .h2, h3, .h3, h4, .h4, .fluid-type) {
-   --_font-min: var(--font-size) - var(--font-size) * var(--font-size-diff, 0.3);
+@supports (font-size: 1cqi) {
+  :is(h1, .h1, h2, .h2, h3, .h3, h4, .h4, .fluid-type) {
+    --_font-min: var(--font-size) - var(--font-size) * var(--font-size-diff, 0.3);
 
-  font-size: clamp(
-    max(var(--body-font-size), var(--_font-min)),
-    var(--_font-min) + 1cqi,
-    var(--font-size)
-  );
+    font-size: clamp(
+      max(var(--body-font-size), var(--_font-min)),
+      var(--_font-min) + 1cqi,
+      var(--font-size)
+    );
+  }
 }
 {% endset %}
 {% set html -%}
