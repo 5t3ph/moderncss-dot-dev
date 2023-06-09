@@ -1,0 +1,25 @@
+<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect width="32" height="32" fill="#F5F5F5"/>
+<g id="Icons">
+<rect width="481" height="73" transform="translate(-134 -20)" fill="white"/>
+<g id="Frame 11">
+<g id="group">
+<g id="Mask group">
+<mask id="mask0_0_1" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="3" y="3" width="26" height="26">
+<g id="Group">
+<g id="Group_2">
+<path id="Vector" d="M23 13.3333C25.3932 13.3333 27.3333 11.3932 27.3333 8.99999C27.3333 6.60676 25.3932 4.66666 23 4.66666C20.6068 4.66666 18.6667 6.60676 18.6667 8.99999C18.6667 11.3932 20.6068 13.3333 23 13.3333Z" fill="#555555" stroke="white" stroke-width="2.66667"/>
+<path id="Vector_2" d="M23 27.3333C25.3932 27.3333 27.3333 25.3932 27.3333 23C27.3333 20.6068 25.3932 18.6667 23 18.6667C20.6068 18.6667 18.6667 20.6068 18.6667 23C18.6667 25.3932 20.6068 27.3333 23 27.3333Z" fill="#555555" stroke="white" stroke-width="2.66667"/>
+<path id="Vector_3" d="M9.00001 13.3333C11.3932 13.3333 13.3333 11.3932 13.3333 8.99999C13.3333 6.60676 11.3932 4.66666 9.00001 4.66666C6.60677 4.66666 4.66667 6.60676 4.66667 8.99999C4.66667 11.3932 6.60677 13.3333 9.00001 13.3333Z" fill="#555555" stroke="white" stroke-width="2.66667"/>
+<path id="Vector_4" d="M9.00001 27.3333C11.3932 27.3333 13.3333 25.3932 13.3333 23C13.3333 20.6068 11.3932 18.6667 9.00001 18.6667C6.60677 18.6667 4.66667 20.6068 4.66667 23C4.66667 25.3932 6.60677 27.3333 9.00001 27.3333Z" fill="#555555" stroke="white" stroke-width="2.66667"/>
+</g>
+</g>
+</mask>
+<g mask="url(#mask0_0_1)">
+<path id="Vector_5" d="M0 0H32V32H0V0Z" fill="#766C7A"/>
+</g>
+</g>
+</g>
+</g>
+</g>
+</svg>

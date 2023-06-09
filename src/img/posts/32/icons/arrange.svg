@@ -1,0 +1,20 @@
+<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect width="32" height="32" fill="#F5F5F5"/>
+<g id="Icons">
+<rect width="481" height="73" transform="translate(-79 -20)" fill="white"/>
+<g id="Frame 11">
+<g id="arrange">
+<g id="Mask group">
+<mask id="mask0_0_1" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="2" y="2" width="28" height="28">
+<g id="Group">
+<path id="Vector" d="M15.3333 13.3333V4H4V13.3333H15.3333ZM28 28V18.6667H16.6667V28H28ZM20.6667 4V13.3333H28V4H20.6667ZM4 18.6667V28H11.3333V18.6667H4Z" fill="#555555" stroke="white" stroke-width="2.66667" stroke-linejoin="round"/>
+</g>
+</mask>
+<g mask="url(#mask0_0_1)">
+<path id="Vector_2" d="M0 0H32V32H0V0Z" fill="#766C7A"/>
+</g>
+</g>
+</g>
+</g>
+</g>
+</svg>

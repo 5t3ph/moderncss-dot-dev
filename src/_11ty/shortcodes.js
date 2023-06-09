@@ -86,7 +86,7 @@ ${html}
 
   const hash = Math.floor(Math.random(100) * Math.floor(999));
 
-  const cssRE = new RegExp(/(?<=(?<!\d)\.)([\w|-]+)(?=\s|,|:)/, "gm");
+  const cssRE = new RegExp(/(?<=(?<!\d)\.)([\w|-]+)(?=\s|,|:|\))/, "gm");
   const cssCode = css.replace(cssRE, `$1-${hash}`);
   const demoClass = resize == false ? " no-resize" : "";
   const contentClass = placeCenter ? " demo--place-center" : "";
