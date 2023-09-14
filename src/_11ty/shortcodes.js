@@ -15,7 +15,7 @@ const newsletterPromo = () => {
         <label for="email">Email</label>
         <input required type="text" id="email" name="email" class="form-field">
       </div>
-      <button class="button" type="submit">Sign Up</button>
+      <button class="button" type="submit">Subscribe</button>
     </div>
   </form>
   </div>`;
