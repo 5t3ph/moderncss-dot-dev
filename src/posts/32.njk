@@ -5,6 +5,7 @@ episode: 32
 description: "Explore modern project architecture, theming, responsive layouts, and component design. Learn to improve code organization, dig into layout techniques, and review real-world, context-aware components that use cutting-edge CSS techniques."
 templateEngineOverride: njk, md
 date: 2023-06-09
+updatedOn: 2024-01-19
 ---
 
 {% set imgBase = meta.url + "/img/posts/32/" %}
@@ -56,24 +57,24 @@ You might also be less familiar with the `outline-offset` property, which define
 
 The last two additions to my reset involve improving the scroll position for targeted or focused elements.
 
-Using `scroll-padding` properties, you can adjust the scroll position in relation to elements. The "padding" space does not affect the layout, just the offset of the scroll position.
+Using `scroll-margin` properties, you can adjust the scroll position in relation to elements. The "margin" space does not affect the layout, just the offset of the scroll position.
 
-In this rule, the `:target` selector matches when an element is a target of an anchor link, also known as a "document fragment." The `scroll-padding-block-start` will allow for room between the target and the top of the viewport.
+In this rule, the `:target` selector matches when an element is a target of an anchor link, also known as a "document fragment." The `scroll-margin-block-start` will allow for room between the target and the top of the viewport.
 
 ```css
-/* Scroll padding allowance above anchor links */
+/* Scroll margin allowance above anchor links */
 :target {
-  scroll-padding-block-start: 2rem;
+  scroll-margin-block-start: 2rem;
 }
 ```
 
-The use of `scroll-padding-block-end` in this next rule allows for room between a focused element and the bottom of the viewport, which helps with tracking visible focus position.
+The use of `scroll-margin-block-end` in this next rule allows for room between a focused element and the bottom of the viewport, which helps with tracking visible focus position.
 
 ```css
-/* Scroll padding allowance below focused elements 
+/* Scroll margin allowance below focused elements 
   to ensure they are clearly in view */
 :focus {
-  scroll-padding-block-end: 8vh;
+  scroll-margin-block-end: 8vh;
 }
 ```
 
