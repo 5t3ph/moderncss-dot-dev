@@ -450,6 +450,9 @@ There is a limitation of six lines of wrapped text, so the technique is best use
   max-inline-size: 25ch;
   padding: 0.25em;
   border: 1px dashed gray;
+  font-family: "Baloo 2", system-ui;
+  overflow: auto;
+  resize: horizontal;
 }
 
 .demo-text:not(:first-child) {
@@ -479,9 +482,15 @@ The other value of `pretty` specifically addresses preventing orphans and can be
 }
 
 .text-balance, .non-text-balance {
-  max-inline-size: 35ch;
+  max-inline-size: 45ch;
   padding: 0.25em;
   border: 1px dashed gray;
+  overflow: auto;
+  resize: horizontal;
+}
+
+.demo-text {
+  font-family: "Baloo 2", system-ui;
 }
 
 .demo-text:not(:first-child) {
