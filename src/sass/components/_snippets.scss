@@ -51,7 +51,11 @@ details pre[class*="language-"] {
     min-height: 20vh;
   }
 
-  * {
+  .demo--padding {
+    padding: 1rem;
+  }
+
+  *:where(:not(progress)) {
     max-height: initial;
     margin: 0;
     padding: initial;

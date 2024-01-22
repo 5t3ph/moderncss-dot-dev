@@ -74,7 +74,7 @@ const icon = (icon, size = "24") => {
   return `<svg aria-hidden="true" focusable="false" width="${size}" height="${size}" fill="currentColor" class="button__icon"><use href="#icon-${icon}"></use></svg>`;
 };
 
-const codeDemo = (css, html, resize, placeCenter) => {
+const codeDemo = (css, html, resize, placeCenter, padding) => {
   if (!css) {
     return `
 <div class="demo">
@@ -90,6 +90,7 @@ ${html}
   const cssCode = css.replace(cssRE, `$1-${hash}`);
   const demoClass = resize == false ? " no-resize" : "";
   const contentClass = placeCenter ? " demo--place-center" : "";
+  const paddingClass = padding ? " demo--padding" : "";
 
   let htmlCode = html;
   css.match(cssRE).forEach((match) => {
@@ -102,7 +103,7 @@ ${html}
   return `
 <style>${cssCode}</style>
 <div class="demo${demoClass}">
-<div class="demo--content${contentClass}">
+<div class="demo--content${contentClass}${paddingClass}">
 ${htmlCode}
 </div>
 </div>`;
