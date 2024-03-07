@@ -71,7 +71,7 @@ As is included in all my tutorials as a modern best practice, we add the followi
 }
 ```
 
-Following that, we can begin the rule for the native `select` and apply the following to rest its appearance:
+Following that, we can begin the rule for the native `select` and apply the following to reset its appearance:
 
 ```scss
 select {
