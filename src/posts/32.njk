@@ -5,7 +5,7 @@ episode: 32
 description: "Explore modern project architecture, theming, responsive layouts, and component design. Learn to improve code organization, dig into layout techniques, and review real-world, context-aware components that use cutting-edge CSS techniques."
 templateEngineOverride: njk, md
 date: 2023-06-09
-updatedOn: 2024-01-19
+updatedOn: 2024-04-24
 ---
 
 {% set imgBase = meta.url + "/img/posts/32/" %}
@@ -57,24 +57,24 @@ You might also be less familiar with the `outline-offset` property, which define
 
 The last two additions to my reset involve improving the scroll position for targeted or focused elements.
 
-Using `scroll-margin` properties, you can adjust the scroll position in relation to elements. The "margin" space does not affect the layout, just the offset of the scroll position.
+Using `scroll-padding` properties, you can adjust the scroll position in relation to elements. The "padding" space does not affect the layout, just the offset of the scroll position.
 
-In this rule, the `:target` selector matches when an element is a target of an anchor link, also known as a "document fragment." The `scroll-margin-block-start` will allow for room between the target and the top of the viewport.
+In this rule, the `:target` selector matches when an element is a target of an anchor link, also known as a "document fragment." The `scroll-padding-block-start` will allow for room between the target and the top of the viewport.
 
 ```css
 /* Scroll margin allowance above anchor links */
 :target {
-  scroll-margin-block-start: 2rem;
+  scroll-padding-block-start: 2rem;
 }
 ```
 
-The use of `scroll-margin-block-end` in this next rule allows for room between a focused element and the bottom of the viewport, which helps with tracking visible focus position.
+The use of `scroll-padding-block-end` in this next rule allows for room between a focused element and the bottom of the viewport, which helps with tracking visible focus position.
 
 ```css
 /* Scroll margin allowance below focused elements 
   to ensure they are clearly in view */
 :focus {
-  scroll-margin-block-end: 8vh;
+  scroll-padding-block-end: 8vh;
 }
 ```
 
@@ -90,26 +90,18 @@ Native CSS nesting began to be supported in Chromium 112, Safari 16.5, and very 
 
 For those who have used a preprocessor like Sass or LESS, native nesting will be familiar, but it does have some unique rules.
 
-A nested rule must begin with a symbol, meaning you cannot use an element selector by itself. But the ampersand - `&` - character is also available and refers to the top-level selector, so that is one way to begin a nested selector. This condition may change as browser engineers and CSSWG members continue troubleshooting how to address [restrictions on nested rule selectors](https://www.w3.org/TR/css-nesting-1/#nesting).
+Any selector type is valid as a nested selector. The ampersand - `&` - character is also available and refers to the top-level selector, so that is one way to begin a nested selector. 
+
+Selectors such as `:is()` or `:where()` are useful in nested selectors. And standard class or attribute selection is also allowed, as well as the other combinators.
 
 ```css
-/* Not allowed */
 .my-element {
   a {
   }
-}
-
-/* Allowed */
-.my-element {
+  
   & a {
   }
-}
-```
 
-Alternatively, selectors such as `:is()` or `:where()` can begin a nested rule since they meet the “symbol” requirement. And standard class or attribute selection is also allowed, as well as the other combinators.
-
-```css
-.my-element {
   :is(a, button) {
   }
 
@@ -347,51 +339,30 @@ Since this solution uses CSS grid, the grid children are destined to stay in a g
 
 Sometimes in a grid with an odd number of children, you may want to allow them to expand and fill any leftover space. For that behavior, we switch our strategy to use flexbox.
 
-The flexbox grid utility shares two common features with the CSS grid utility: defining a minimum "column" size and the `gap` size. We can set up two global custom properties to keep those initial values in sync. We'll elevate those defaults to our `theme` layer.
+The flexbox grid utility shares two common features with the CSS grid utility: defining a minimum "column" size and the `gap` size. 
 
-```css
-@layer theme {
-  :root {
-    /* Layout default props */
-    --layout-column-min: 30ch;
-    --layout-gap: 3vmax;
-  }
-}
-```
+With CSS grid, the parent controls the child size. But with flexbox, the children control their sizing. Therefore, it's more safe to use a non-relative value for the column size, since using a font-relative unit like `ch` may change the outcome depending on the child's own `font-size`.
 
-Then in the grid utility and to kick off our flexbox utility, we’ll use those globals as the defaults for the local custom properties.
-
-```css
-@layer layout {
-  .layout-grid {
-    /* Replace previous values in the existing rule */
-    --layout-grid-min: var(--layout-column-min);
-    --layout-grid-gap: var(--layout-gap);
-  }
-
-  .flex-layout-grid {
-    --flex-grid-min: var(--layout-column-min);
-    --flex-grid-gap: var(--layout-gap);
-
-    gap: var(--flex-grid-gap);
-  }
-}
-```
-
-Beyond those custom properties, the base flexbox grid utility simply sets up the display and wrap properties. Wrapping is important so that elements can drop and create new rows as space decreases.
+Beyond the custom properties API, the base flexbox grid utility simply sets up the display and wrap properties. Wrapping is important so that elements can drop and create new rows as space decreases.
 
 ```css
 @layer layout {
   .flex-layout-grid {
-    /* ...custom properties and gap */
+    --flex-grid-min: 20rem;
+    --flex-grid-gap: 3vmax;
 
     display: flex;
     flex-wrap: wrap;
+    gap: var(--flex-grid-gap);
+    
+    > * {
+      flex: 1 1 var(--flex-grid-min);
+    }
   }
 }
 ```
 
-With CSS grid, the parent controls the child size. But with flexbox, the children control their sizing. Since our utility doesn't know what the flexbox children will be, we'll use the universal selector - `*` - to select all direct children to apply flexbox sizing. With the `flex` shorthand, we define that children can grow and shrink and set the `flex-basis` to the minimum value.
+Since our utility doesn't know what the flexbox children will be, we'll use the universal selector - `*` - to select all direct children to apply flexbox sizing. With the `flex` shorthand, we define that children can grow and shrink and set the `flex-basis` to the minimum value.
 
 ```css
 @layer layout {
@@ -407,15 +378,9 @@ As with the previous grid utility, this “min” value will cause elements to w
 
 {% set demoTitle = "CSS Flexbox Grid Layout" %}
 {% set css %}
-:root {
-  /* Layout default props */
-  --layout-column-min: 30ch;
-  --layout-gap: 3vmax;
-}
-
 .flex-layout-grid {
-  --flex-grid-min: var(--layout-column-min);
-  --flex-grid-gap: var(--layout-gap);
+  --flex-grid-min: 20rem;
+  --flex-grid-gap: 3vmax;
 
   display: flex;
   flex-wrap: wrap;
@@ -423,7 +388,7 @@ As with the previous grid utility, this “min” value will cause elements to w
 }
 
 .flex-layout-grid > * {
-  flex: 1 1 15ch;
+  flex: 1 1 var(--flex-grid-min);
 }
 
 .flex-layout-grid > span {
@@ -437,12 +402,13 @@ As with the previous grid utility, this “min” value will cause elements to w
 {% set cssDisplay %}
 @layer layout {
   .flex-layout-grid {
-    --flex-grid-min: var(--layout-column-min);
-    --flex-grid-gap: var(--layout-gap);
+    --flex-grid-min: 20rem;
+    --flex-grid-gap: 3vmax;
 
     display: flex;
     flex-wrap: wrap;
-
+    gap: var(--flex-grid-gap);
+    
     > * {
       flex: 1 1 var(--flex-grid-min);
     }
@@ -1132,7 +1098,7 @@ A neat thing about container queries is that all elements are style containers b
 
 > While this technique is more than sufficient for a single component, you may be interested in my article covering [three fluid typography techniques](https://moderncss.dev/container-query-units-and-fluid-typography/) applied via a “mixin” using custom properties.
 
-One last modern CSS feature we'll use to conclude our card styles is an experimental Chrome-only feature. Use of `text-wrap: balance` will evaluate a text block of up to four lines and "balance" it by inserting visual line breaks. This helps short passages of text, like headlines, have a more pleasing appearance. It's a great progressive enhancement because it looks great if it works and doesn't cause harm if it fails. However, balancing does not change an element's computed width, so a side-effect in some layouts may be an increase in unwanted space next to the text.
+One last modern CSS feature we'll use to conclude our card styles will upgrade the headings. Use of `text-wrap: balance` will evaluate a text block of up to six lines and "balance" it by inserting visual line breaks. This helps short passages of text, like headlines, have a more pleasing appearance. It's a great progressive enhancement because it looks great if it works and doesn't cause harm if it fails. However, balancing does not change an element's computed width, so a side-effect in some layouts may be an increase in unwanted space next to the text.
 
 ```css
 .card :is(h2, h3) {
@@ -2016,4 +1982,4 @@ Remember: there's no need to use everything new right away, but learning about w
 
 ---
 
-This material was originally presented at CSS Day 2023, and you may [review the slides](https://noti.st/st3ph/ea40FC/modern-css-for-dynamic-component-based-architecture).
+This material was originally presented at [CSS Day 2023](https://noti.st/st3ph/ea40FC/modern-css-for-dynamic-component-based-architecture) and updated for [Front-end Design Conference 2024](https://frontenddesignconference.com/2024/).
