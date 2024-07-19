@@ -531,19 +531,39 @@ This limitation on relative units or dynamic functions also means other custom p
 
 Finally, custom properties registered via `@property` are still locked into the rules of regular properties, such as that they cannot be used to enable variables in media or container query at-rules. For example, `@media (min-width: var(--mq-md))` would still be invalid.
 
+## Unsupported `initial-value` Can Crash the Page
+
+As of time of writing, using a property or function value that a browser may not support as part of the `initial-value` definition can cause the entire page to crash!
+
+Fortunately, we can use `@supports` to test for ultra-modern properties or features before we try to use them as the `initial-value`.
+
+```css
+@supports ([property|feature]) {
+  /* Feature is supported, use for initial-value */
+}
+
+@supports not ([property|feature]) {
+  /* Feature unsupported, use alternate for initial-value */
+}
+```
+
+There may still be some surprises where `@supports` reports true, but testing will reveal a crash or other error (ex. `currentColor` used with `color-mix()` in Safari). Be sure to test your solutions cross-browser!
+
+Learn more about ways to [test feature support for modern CSS](/testing-feature-support-for-modern-css/).
+
 ## Exceptions to Dynamic Limitations
 
 There are a few conditions which may feel like exceptions to the requirement of "computationally independent" values when used for the `initial-value`.
 
-First, `currentColor` is accepted even for super-dynamic definitions such as this one using `color-mix()`. Unlike a relative value such as `em` which requires computing `font-size` of ancestors to compute itself, the value of `currentColor` can be computed without depending on context.
+First, `currentColor` is accepted. Unlike a relative value such as `em` which requires computing `font-size` of ancestors to compute itself, the value of `currentColor` can be computed without depending on context.
 
 {% set placeCenter = true %}
-{% set demoTitle = "Use of currentColor and color-mix() as initial-value" %}
+{% set demoTitle = "Use of currentColor as initial-value" %}
 {% set css %}
 @property --border-color {
   syntax: "<color>";
   inherits: false;
-  initial-value: color-mix(in hsl, currentColor 25%, transparent);
+  initial-value: currentColor;
 }
 
 .demo h2 {
@@ -551,12 +571,16 @@ First, `currentColor` is accepted even for super-dynamic definitions such as thi
   border: 3px solid var(--border-color);
   padding: 1em;
 }
+
+.demo code {
+  color: mediumvioletred;
+}
 {% endset %}
 {% set cssDisplay %}
 @property --border-color {
   syntax: "<color>";
   inherits: false;
-  initial-value: color-mix(in hsl, currentColor 25%, transparent);
+  initial-value: currentColor;
 }
 
 h2 {
@@ -566,7 +590,7 @@ h2 {
 {% endset %}
 {% set html -%}
 <div class="demo">
-  <h2>My border is a semi-transparent blue</h2>
+  <h2>My border is set to <code>currentColor</code></h2>
 </div>
 {% endset %}
 {% include "partials/snippet.njk" %}
@@ -583,9 +607,6 @@ For a scenario such as fluid type, this provides a better fallback that keeps th
   inherits: true;
   initial-value: calc(18px + 1.5vi);
 }
-
-/* In practice, define your ideal sizing function
-using `clamp()` via an assignment on `:root` */
 
 .demo h2 {
   font-size: var(--heading-font-size);
