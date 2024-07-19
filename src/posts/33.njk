@@ -5,6 +5,7 @@ episode: 33
 description: "Review behaviors to be aware of regarding how the browser computes final custom property values. A misunderstanding of this process may lead to an unexpected or missing value and difficulty troubleshooting and resolving the issue."
 templateEngineOverride: njk, md
 date: 2023-09-14
+updatedOn: 2024-07-19
 ---
 
 {% set imgBase = meta.url + "/img/posts/33/" %}
@@ -17,6 +18,7 @@ To help you use custom properties confidently and troubleshoot efficiently, we�
 - the impact of “computed value time”
 - pitfalls around using custom properties with cutting-edge CSS
 - why inheritance should inform your custom property architecture
+- strategies to prevent invalid computed values
 
 {% carbonAd %}
 
@@ -311,8 +313,26 @@ If we lower the custom property calculation to be applied based on classes, then
 A few simple strategies to avoid custom property failure include:
 
 - Use a fallback value when defining a custom property, which is the second value that can be provided to the `var()` function, ex. `var(--my-property, 1px)`
-- Ensure fallback values within `var()` are of [the correct type](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Types) for the property
+- Ensure fallback values within `var()` are of [the correct type](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Types) for the property, or [define your own with `@property`](#provide-a-custom-initial-value-with-property)
 - If you’re using a polyfill for a new feature, check that it resolves usage in custom properties as you expect
 - Use `@supports` to ensure your intended modern CSS upgrade doesn’t break intended fallback rules in un-supporting browsers
 
 And as always - test your solutions in as many browsers and on as many devices as you can!
+
+## Provide a custom intial value with `@property`
+
+A cross-browser feature as of the release of Firefox 128 in July 2024 is a new at-rule - `@property` - which allows defining types for your custom properties.
+
+Helpfully, the `initial-value` parameter enables defining your own property-specific initial value which will be used in the event the computed value would otherwise be invalid!
+
+Given the following definition for our `--color-primary` custom property, if the computed value was invalid, the provided `initial-value` of `purple` would be used instead.
+
+```css
+@property --color-primary {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: purple;
+}
+```
+
+Learn more about how to use `@property` in the Modern CSS article "[Providing Type Definitions for CSS with @property](/providing-type-definitions-for-css-with-at-property/)."
