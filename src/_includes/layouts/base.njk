@@ -1,6 +1,6 @@
 {%- set pageTitle %}{{ title + " | " if title }}{{ meta.siteName }}{% endset -%}
-{# {%- set ogImgFilename %}{{ title | slug + ".png" if title else 'home.jpeg' }}{% endset -%} #}
-{# {%- set pageSocialImg %}{{ meta.url }}/img/social/{{ ogImgFilename }}{% endset -%} #}
+{%- set ogImgFilename %}{{ title | slug + ".png" if title else 'home.jpeg' }}{% endset -%}
+{%- set pageSocialImg %}{{ meta.url }}/img/social/{{ ogImgFilename }}{% endset -%}
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -47,7 +47,7 @@
     <meta property="og:url" content="{{ page.url | url | absoluteUrl(meta.url) }}" />
     <meta property="og:title" content="{{pageTitle}}" />
     <meta property="og:description" content="{{description}}" />
-    {# <meta property="og:image" content="{{ pageSocialImg }}" /> #}
+    <meta property="og:image" content="{{ pageSocialImg }}" />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="{{ meta.siteName }}" />
     <link rel="canonical" href="{{ page.url | url | absoluteUrl(meta.url) }}">

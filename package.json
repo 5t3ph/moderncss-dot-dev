@@ -31,7 +31,7 @@
     "@11ty/eleventy-plugin-rss": "^2.0.4",
     "@11ty/eleventy-plugin-syntaxhighlight": "^5.0.2",
     "@11tyrocks/eleventy-plugin-open-in-codepen": "^1.0.0",
-    "@11tyrocks/eleventy-plugin-social-images": "^1.0.0",
+    "@11tyrocks/eleventy-plugin-social-images": "^1.0.1",
     "a11y-color-tokens": "^0.7.0",
     "autoprefixer": "^10.4.21",
     "cssnano": "^7.1.1",
@@ -52,6 +52,6 @@
     "not dead"
   ],
   "dependencies": {
-    "puppeteer": "^24.15.0"
+    "puppeteer": "24.15.0"
   }
 }
