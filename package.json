@@ -4,7 +4,6 @@
   "description": "",
   "main": "index.html",
   "scripts": {
-    "social-images": "eleventy-social-images --siteName 'ModernCSS' --outputDir public --dataFile social/pages.json --imageDir img/social --templatePath social/template.html --stylesPath public/css/social-template.css",
     "tokens": "npx a11y-color-tokens --outputDirPath='src/sass' --colorTokensPath='_color-tokens.js' --no-compatibilityDocs",
     "watch:sass": "sass  --no-source-map --watch src/sass:public/css",
     "watch:eleventy": "eleventy --serve --quiet",
@@ -12,7 +11,7 @@
     "build:eleventy": "eleventy",
     "postbuild": "postcss public/css/*.css -u postcss-logical autoprefixer cssnano -r --no-map",
     "start": "npm-run-all tokens build:sass --parallel watch:*",
-    "build": "npm-run-all tokens build:sass build:eleventy social-images"
+    "build": "npm-run-all tokens build:sass build:eleventy"
   },
   "repository": {
     "type": "git",
@@ -49,8 +48,6 @@
     "not IE 11"
   ],
   "dependencies": {
-    "@11tyrocks/eleventy-plugin-social-images": "^0.4.1",
-    "@netlify/functions": "^4.2.5",
     "eleventy-plugin-toc": "^1.1.5"
   }
 }

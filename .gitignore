@@ -3,8 +3,6 @@ node_modules
 
 # build artefacts
 public
-social
-!src/img/social
 functions/*.json
 functions/*.html
 .vscode
