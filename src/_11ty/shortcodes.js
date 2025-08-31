@@ -6,18 +6,7 @@ const year = () => `${new Date().getFullYear()}`;
 
 const newsletterPromo = () => {
   return `<div class="promo promo--centered"><p><strong style="color: var(--color-blue);">Join my newsletter</strong> for article updates, CSS tips, and front-end resources!</p>
-  <form name="newsletter" action="/success" class="form" method="POST" netlify-honeypot="bot-field" data-netlify="true">
-    <p hidden>
-      <label>Don’t fill this out if you're human: <input name="bot-field" /></label>
-    </p>
-    <div class="form-inline">
-      <div class="form-group">
-        <label for="email">Email</label>
-        <input required type="text" id="email" name="email" class="form-field">
-      </div>
-      <button class="button" type="submit">Subscribe</button>
-    </div>
-  </form>
+  <script async data-uid="31fb09b748" src="https://moderncss.kit.com/31fb09b748/index.js"></script>
   </div>`;
 };
 
