@@ -6,7 +6,7 @@ eleventyExcludeFromCollections: true
 [
 {%- for pages in collections.socialContent %}
   {
-      "title":"{{ pages.data.title | safe }}",
+      "title":"{{ pages.data.title | addNbsp | safe }}",
       "imgName":"{{ pages.data.title | slug }}",
       "variables": {
         {% if pages.data.layout == "layouts/post" %}

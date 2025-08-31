@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.html",
   "scripts": {
+    "social-images": "eleventy-social-images --siteName 'ModernCSS' --outputDir public --dataFile social/pages.json --imageDir img/social --templatePath social/template.html --stylesPath public/css/social-template.css",
     "tokens": "npx a11y-color-tokens --outputDirPath='src/sass' --colorTokensPath='_color-tokens.js' --no-compatibilityDocs",
     "watch:sass": "sass  --no-source-map --watch src/sass:public/css",
     "watch:eleventy": "eleventy --serve --quiet",
@@ -11,7 +12,8 @@
     "build:eleventy": "eleventy",
     "postbuild": "postcss public/css/*.css -u postcss-logical autoprefixer cssnano -r --no-map",
     "start": "npm-run-all tokens build:sass --parallel watch:*",
-    "build": "npm-run-all tokens build:sass build:eleventy"
+    "build": "npm-run-all tokens build:sass build:eleventy social-images",
+    "build:local": "LOCAL_DEV=true npm run build"
   },
   "repository": {
     "type": "git",
@@ -29,10 +31,12 @@
     "@11ty/eleventy-plugin-rss": "^2.0.4",
     "@11ty/eleventy-plugin-syntaxhighlight": "^5.0.2",
     "@11tyrocks/eleventy-plugin-open-in-codepen": "^1.0.0",
+    "@11tyrocks/eleventy-plugin-social-images": "^1.0.0",
     "a11y-color-tokens": "^0.7.0",
     "autoprefixer": "^10.4.21",
     "cssnano": "^7.1.1",
     "dotenv": "^17.2.1",
+    "eleventy-plugin-toc": "^1.1.5",
     "luxon": "^3.7.1",
     "markdown-it": "^14.1.0",
     "markdown-it-anchor": "^9.2.0",
@@ -45,9 +49,9 @@
   },
   "browserslist": [
     "> 0.5%",
-    "not IE 11"
+    "not dead"
   ],
   "dependencies": {
-    "eleventy-plugin-toc": "^1.1.5"
+    "puppeteer": "^24.15.0"
   }
 }
